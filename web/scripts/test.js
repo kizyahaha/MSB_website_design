@@ -4,7 +4,7 @@ $.ajax({
     url: "/main/simple",
     dataType: 'text',
     success: function(data, textStatus, jqXHR) {
-        alert(data);
+        alert("success");
         return void 0;
     },
     error: function(jqXHR, textStatus, errorThrown) {
