@@ -12,8 +12,8 @@
 	<classpathentry kind="lib" path="lib/spring-context.jar"/>
 	<classpathentry kind="lib" path="lib/spring-core.jar"/>
 	<classpathentry kind="lib" path="lib/spring-expression.jar"/>
-	<classpathentry kind="lib" path="lib/spring-web.jar"/>
-	<classpathentry kind="lib" path="lib/spring-webmvc-portlet.jar"/>
+	<classpathentry kind="lib" path="lib/spring-web.jar" sourcepath="lib-sources/spring-web.zip"/>
+	<classpathentry kind="lib" path="lib/spring-webmvc-portlet.jar" sourcepath="lib-sources/spring-webmvc-portlet.zip"/>
 	<classpathentry kind="lib" path="lib/spring-webmvc.jar"/>
 	<classpathentry kind="lib" path="lib/urlrewritefilter.jar"/>
 	<classpathentry kind="output" path="bin"/>

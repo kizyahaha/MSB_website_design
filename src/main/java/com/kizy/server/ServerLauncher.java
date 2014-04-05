@@ -22,6 +22,7 @@ import org.eclipse.jetty.servlets.GzipFilter;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
 import com.kizy.filters.CharacterEncodingFilter;
@@ -93,6 +94,7 @@ public class ServerLauncher {
 
     private static void configureServlets(ServletHandler handler) {
         addServlet(handler, "main", EndpointFrameworkServlet.class, "/main/*");
+        addServlet(handler, "api", DispatcherServlet.class, "/api/*");
         addServlet(handler, ServletHandler.__DEFAULT_SERVLET, DefaultServlet.class, "/*");
     }
 

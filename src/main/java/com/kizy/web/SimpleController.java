@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/simple")
+@RequestMapping(value = "/simple", method = RequestMethod.GET)
 public class SimpleController {
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/hello")
     public ResponseEntity<String> sayHello() {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
         HttpHeaders header = new HttpHeaders();
         header.add("Content-Type", MediaType.TEXT_PLAIN.toString());
-        return new ResponseEntity<String>("HELLO!!!!", header, HttpStatus.OK);
+        return new ResponseEntity<String>("This is coming from a controller!", header, HttpStatus.OK);
     }
 }
