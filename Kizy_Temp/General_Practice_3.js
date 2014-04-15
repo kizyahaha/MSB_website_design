@@ -35,7 +35,7 @@ function get_current_date(){
 	document.getElementById("date_holder").innerHTML = date;
 }
 
-
+/*
 var count=60*60*2+5;
 var counter=setInterval(timer, 1000);
 function timer(){
@@ -47,13 +47,12 @@ function timer(){
   var hours = Math.floor(count/3600);
   var minutes = Math.floor((count-hours*3600)/60);
   var secs = count - hours*3600-minutes*60;
-  document.getElementById("countdown").innerHTML="Next Winner:\n"+hours+":"+minutes+":"+secs; // watch for spelling
+  document.getElementById("countdown").innerHTML="Next Winner:\n"+hours+":"+minutes+":"+secs;
 }
+*/
 
-
-window.onload=updateSizes;
+var bar = setInterval(function(){updateSizes()},500);
 function updateSizes(){
-	$('#content').css('height',$('#rant_bubble').height()+100);
+	$('#content').css('height',$('#rant_bubble').height()+150);
 	$('#section_1').css('height',$('#rant_bubble').height());
-	setInterval(function(){updateSizes()},500);
 }
