@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<title>MySoapBox</title>
+<link rel="stylesheet" type="text/css" href="MySoapBox_4.css">
+<script type="text/javascript" src="General_Practice_4.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+</head>
+
+<body>
+	<div id="banner">
+		<div id="banner-img-left">
+			<img src="SoapBox1.png" alt="MSB_logo" width="130">
+		</div>
+
+		<div id="banner-text-welcome">
+			<a href="MySoapBox_Test_4_tab1.html"><img src="MySoapBox_2.png" alt="MSB_welcome"></a>
+		</div>
+
+		<div id="banner-img-right">
+			<img src="SoapBox1.png" alt="MSB_logo" width="130">
+		</div>
+
+		<div id="audience-count">
+			<!--current audience: <span style="color:red"><script src="currentViewers.js"></script></span>-->
+			current audience: <span style="color:red"><div style="display:inline" id="num_audience"></div></span>
+		</div>
+
+		<div id="banner-links">
+			<ul>
+				<li><a href="FAQ.html">FAQ</a></li>
+				<li><a href="MSB_archives.html">Archives</a></li>
+				<li><a href="user_acct.html">Login/Sign Up</a></li>
+			</ul>
+		</div>
+	</div>
+
+
+
+	<div id="tabs"> 
+		<ul>
+			<li id="li_tab1" class="other_tab">
+				<a href="MySoapBox_Test_4_tab1.html">Daily</a>
+			</li>
+			<li id="li_tab2" class="other_tab">
+				<a href="MySoapBox_Test_4_tab2.html">Hourly</a>
+			</li>
+			<li id="li_tab3" class="other_tab">
+				<a href="MySoapBox_Test_4_tab3.html">Minutely</a>
+			</li>
+			<li id="li_tab4" class="current_tab">
+				<a href="MySoapBox_Test_4_tab4.html">My Rants</a>
+			</li>
+		</ul>
+	</div>
+	
+
+	<div id="tab4">
+		<div id="content">
+			<div id="section_1">
+				<div id="winner">
+					My Top Rant
+				</div>
+				<div id="rant_bubble">
+					<span><strong>Master_user</strong><span>'s rant
+					<br>
+					<script type="text/javascript">
+						var d=new Date()
+						var weekday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
+						var monthname=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
+						document.write(weekday[d.getDay()] + ", ")
+						document.write(monthname[d.getMonth()] + " ")
+						document.write(d.getDate() + ", ")
+						document.write(d.getFullYear())
+					</script>
+					<br><br>
+					Clippity cloppity, clippity cloppity, clippity cloppity, boo!							
+				</div>
+				<div id="triangle"></div>
+				<div id="stand-on-soapbox">
+					<img src="SoapBox2.png" alt="stand_on_box" style="height:150px;">
+				</div>
+				<div id="character">
+					<img src="mascot_2.png" alt="mega_phone" style="height:200px;">
+				</div>
+				<div id="countdown">Countdown</div>
+			</div>
+		</div>
+		<div id="contender_space">
+			<div id="contenders">
+				<p><br/>This area houses the list of contenders for the next title.  The reader can peruse rants by title and select the ones they want to read.
+				This area would also possibly house the power graph - a horizontally scrolling, scale adjustable bar graph showing the current power per rank.</p>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html> 
