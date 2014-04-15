@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<title>Practice</title>
+<link rel="stylesheet" type="text/css" href="General_Practice.css">
+<script type="text/javascript">
+	function tab(tab) {
+		document.getElementById('tab1').style.display = 'none';
+		document.getElementById('tab2').style.display = 'none';
+		document.getElementById('tab3').style.display = 'none';
+		document.getElementById('tab4').style.display = 'none';
+		/*document.getElementById('li_tab1').setAttribute("class", "");
+		document.getElementById('li_tab2').setAttribute("class", "");
+		document.getElementById('li_tab3').setAttribute("class", "");
+		document.getElementById('li_tab4').setAttribute("class", "");*/
+		document.getElementById('li_tab1').className = "other_tab";
+		document.getElementById('li_tab2').className = "other_tab";
+		document.getElementById('li_tab3').className = "other_tab";
+		document.getElementById('li_tab4').className = "other_tab";
+		document.getElementById(tab).style.display = 'block';
+		/*document.getElementById('li_'+tab).setAttribute("class", "active");*/
+		document.getElementById('li_'+tab).className = "current_tab";
+	}
+</script>
+</head>
+
+<body>
+
+<div id="tab_practice"> 
+<ul>
+	<li id="li_tab1" class="current_tab" onclick="tab('tab1')">
+		<a>Daily</a>
+	</li>
+	<li id="li_tab2" class="other_tab" onclick="tab('tab2')">
+		<a>Hourly</a>
+	</li>
+	<li id="li_tab3" class="other_tab" onclick="tab('tab3')">
+		<a>Minutely</a>
+	</li>
+	<li id="li_tab4" class="other_tab" onclick="tab('tab4')">
+		<a>My Rants</a>
+	</li>
+</ul>
+</div>
+
+<div id="content">
+	<div id="tab1">
+		<p>Jeremy is dumb.</p>
+	</div>
+	<div id="tab2" style="display: none;">
+		<p>Jeremy?  More like Jere-gay.</p>
+	</div>
+	<div id="tab3" style="display: none;">
+		<p>Jeremy likes ponies.</p>
+	</div>
+	<div id="tab4" style="display: none;">
+		<p>Clippity cloppity, clippity cloppity, clippity cloppity boo!</p>
+	</div>
+</div>
+
+<div id="color_bar"></div>
+
+</body>
+</html>

@@ -30,7 +30,7 @@ import com.kizy.server.prefs.ApplicationContext;
 
 public class ServerLauncher {
 
-    private static final int PORT = 9875;
+    private static final int PORT = 9876;
     private static final int MAX_THREADS = 100;
 
     private static final String URL_BASE = "";
