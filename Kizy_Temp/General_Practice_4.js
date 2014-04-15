@@ -5,7 +5,7 @@ function get_random_num(){
 	var n = Math.floor(Math.random()*101);
 	n+=950;
 	document.getElementById("num_audience").innerHTML = n;
-	var foo1 = setInterval(get_random_num,5000);
+	var foo1 = setTimeout(get_random_num,5000);
 }
 
 function get_current_date(){
@@ -37,7 +37,7 @@ function countdown(){
 	var minutely = document.getElementById("countdown_timer_minutely");
 	if (minutely)
 		minutely.innerHTML = "0:" + seconds;
-	var foo2 = setInterval(countdown,500);
+	var foo2 = setTimeout(countdown,500);
 }
 
 
@@ -53,5 +53,5 @@ window.onload = updateSizes;
 function updateSizes(){
 	$('#content').css('height',$('#rant_bubble').height()+150);
 	$('#section_1').css('height',$('#rant_bubble').height());
-	var foo3 = setInterval(updateSizes,500);
+	var foo3 = setTimeout(updateSizes,500);
 }

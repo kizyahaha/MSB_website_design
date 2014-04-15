@@ -41,16 +41,16 @@
 
 	<div id="tabs"> 
 		<ul>
-			<li id="li_tab1" class="current_tab" onclick="tab('tab1')">
+			<li id="li_tab1" class="current_tab">
 				<a href="MySoapBox_Test_4_tab1.html">Daily</a>
 			</li>
-			<li id="li_tab2" class="other_tab" onclick="tab('tab2')">
+			<li id="li_tab2" class="other_tab">
 				<a href="MySoapBox_Test_4_tab2.html">Hourly</a>
 			</li>
-			<li id="li_tab3" class="other_tab" onclick="tab('tab3')">
+			<li id="li_tab3" class="other_tab">
 				<a href="MySoapBox_Test_4_tab3.html">Minutely</a>
 			</li>
-			<li id="li_tab4" class="other_tab" onclick="tab('tab4')">
+			<li id="li_tab4" class="other_tab">
 				<a href="MySoapBox_Test_4_tab4.html">My Rants</a>
 			</li>
 		</ul>
@@ -141,15 +141,29 @@
 				<div id="character">
 					<img src="mascot_5.png" alt="mega_phone" style="height:200px;">
 				</div>
-				<div id="countdown">next winner in<p id="countdown_timer_daily"><script>countdown()</script></p></div>
+				<div id="countdown">Next winner in: <span style="color:white" id="countdown_timer_daily"><script>countdown()</script></span></div>
 			</div>
 		</div>
 		<div id="contender_space">
+			<div id="contender_title">Contenders for Tomorrow's Title</div>
 			<div id="contenders">
 				<p><br/>This area houses the list of contenders for the next title.  The reader can peruse rants by title and select the ones they want to read.
 				This area would also possibly house the power graph - a horizontally scrolling, scale adjustable bar graph showing the current power per rank.</p>
 			</div>
 		</div>
+	</div>
+	<div id="footer">
+		<ul>
+			<li>
+				<a href=#>Copyright</a>
+			</li>
+			<li>
+				<a href=#>Contact Us</a>
+			</li>
+			<li>
+				<a href=#>Terms of Use</a>
+			</li>
+		</ul>
 	</div>
 </body>
 
