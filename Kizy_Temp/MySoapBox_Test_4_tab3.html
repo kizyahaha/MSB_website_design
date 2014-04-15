@@ -25,7 +25,7 @@
 
 		<div id="audience-count">
 			<!--current audience: <span style="color:red"><script src="currentViewers.js"></script></span>-->
-			current audience: <span style="color:red"><div style="display:inline" id="num_audience"></div></span>
+			current audience: <span style="color:red"><div style="display:inline" id="num_audience"><script>get_random_num()</script></div></span>
 		</div>
 
 		<div id="banner-links">
@@ -103,15 +103,7 @@
 				<div id="rant_bubble">
 					<span><strong>Master_user</strong><span>'s rant
 					<br>
-					<script type="text/javascript">
-						var d=new Date()
-						var weekday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
-						var monthname=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-						document.write(weekday[d.getDay()] + ", ")
-						document.write(monthname[d.getMonth()] + " ")
-						document.write(d.getDate() + ", ")
-						document.write(d.getFullYear())
-					</script>
+					<div id="date_holder"><script>get_current_date()</script></div>
 					<br><br>
 					Jeremy likes ponies?  You mean, like, "My Little Pony" ponies?							
 				</div>
@@ -122,7 +114,7 @@
 				<div id="character">
 					<img src="mascot_3.png" alt="mega_phone" style="height:200px;">
 				</div>
-				<div id="countdown">Countdown</div>
+				<div id="countdown">next winner in<p id="countdown_timer_minutely"><script>countdown()</script></p></div>
 			</div>
 		</div>
 		<div id="contender_space">

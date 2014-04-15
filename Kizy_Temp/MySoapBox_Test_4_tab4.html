@@ -25,7 +25,7 @@
 
 		<div id="audience-count">
 			<!--current audience: <span style="color:red"><script src="currentViewers.js"></script></span>-->
-			current audience: <span style="color:red"><div style="display:inline" id="num_audience"></div></span>
+			current audience: <span style="color:red"><div style="display:inline" id="num_audience"><script>get_random_num()</script></div></span>
 		</div>
 
 		<div id="banner-links">
@@ -66,15 +66,7 @@
 				<div id="rant_bubble">
 					<span><strong>Master_user</strong><span>'s rant
 					<br>
-					<script type="text/javascript">
-						var d=new Date()
-						var weekday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday")
-						var monthname=new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec")
-						document.write(weekday[d.getDay()] + ", ")
-						document.write(monthname[d.getMonth()] + " ")
-						document.write(d.getDate() + ", ")
-						document.write(d.getFullYear())
-					</script>
+					<div id="date_holder"><script>get_current_date()</script></div>
 					<br><br>
 					Clippity cloppity, clippity cloppity, clippity cloppity, boo!							
 				</div>
@@ -85,13 +77,6 @@
 				<div id="character">
 					<img src="mascot_2.png" alt="mega_phone" style="height:200px;">
 				</div>
-				<div id="countdown">Countdown</div>
-			</div>
-		</div>
-		<div id="contender_space">
-			<div id="contenders">
-				<p><br/>This area houses the list of contenders for the next title.  The reader can peruse rants by title and select the ones they want to read.
-				This area would also possibly house the power graph - a horizontally scrolling, scale adjustable bar graph showing the current power per rank.</p>
 			</div>
 		</div>
 	</div>

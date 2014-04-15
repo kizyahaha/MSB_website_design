@@ -175,11 +175,13 @@ vertical-align:middle;
 }
 #countdown{
 	position:absolute;
-	top:10%;
-	left:10%;
+	top:30%;
+	right:78.5%;
 	color:white;
 	font-family:times new roman;
-	font-size:40px;	
+	font-size:30px;
+	text-align:center;
+	line-height:20%;
 }
 #contender_space{
 	position:relative;

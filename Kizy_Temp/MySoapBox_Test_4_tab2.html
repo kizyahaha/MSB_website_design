@@ -25,7 +25,7 @@
 
 		<div id="audience-count">
 			<!--current audience: <span style="color:red"><script src="currentViewers.js"></script></span>-->
-			current audience: <span style="color:red"><div style="display:inline" id="num_audience"></div></span>
+			current audience: <span style="color:red"><div style="display:inline" id="num_audience"><script>get_random_num()</script></div></span>
 		</div>
 
 		<div id="banner-links">
@@ -104,7 +104,7 @@
 				<div id="rant_bubble">
 					<span><strong>Master_user</strong><span>'s rant
 					<br>
-					<div id="date_holder"></div>
+					<div id="date_holder"><script>get_current_date()</script></div>
 					<br><br>
 					Jeremy?  More like Jere-gay, hehe!							
 				</div>
@@ -115,7 +115,7 @@
 				<div id="character">
 					<img src="mascot_4.png" alt="mega_phone" style="height:200px;">
 				</div>
-				<div id="countdown">Countdown</div>
+				<div id="countdown">next winner in<p id="countdown_timer_hourly"><script>countdown()</script></p></div>
 			</div>
 		</div>
 		<div id="contender_space">
