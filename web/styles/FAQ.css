@@ -1,0 +1,14 @@
+#FAQs{
+    left:5%;
+    right:5%;
+    position:absolute;
+    top:250px;
+}
+.question{
+    color:white;
+    font-family:lao ui
+}
+.answer{
+    color:rgb(52,52,52);
+    font-family:lao ui;
+}

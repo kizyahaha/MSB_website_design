@@ -1,0 +1,60 @@
+<!--
+This is where people go to log in.  They should be able to log in with various social network accounts like 
+Facebook, Twitter, etc.  Alternatively, they can also create a user account just for MSB.  Once they have an accout 
+they will be able to edit their messages/descriptions, vote for others, manage account info, etc.  The "login" text 
+should turn into "My account" text if they are logged in.
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Login_Page</title>
+
+<!-- internal style sheet -->
+<style>
+body{background-color:rgb(52,160,194)}
+</style>
+</head>
+
+<body>
+
+<div id="background" style="position:relative; left:0px; top:0px; width:100%; height:160px; background-color:rgb(52,52,52);"></div>
+<div id="left_img" style="position:absolute; left:10px; top:10px; height:200px;">
+	<img src="SoapBox2.jpg" alt="MSB_logo" width="130" height="130">
+</div>
+<div id="MSB" style="position:absolute; left:130px; top:0px; width:900px; text-align:left; padding-left:100px; color:white; font-size:85pt; font-family:boopee;">
+	My Soap Box
+</div>
+<div id="welcome" style="position:absolute; left:500px; top:120px; width:500px; text-align:center; color:white; font-size:20pt; font-family:boopee;">
+	A place to share your thoughts with the world
+</div>
+<div id="right_img" style="position:absolute; left:1030px; top:10px; height:200px;">
+	<img src="SoapBox2.jpg" alt="MSB_logo" width="130" height="130">
+</div>
+
+<div style="color:rgb(52,52,52); font-family:lao ui; width:250px; position:absolute; top:325px; left:250px;">
+<form>
+<strong>
+Username: <input type="text" name="username" action="login_info_holder.html" method="get" style="position:absolute; right:0px;">
+<br>
+Password: <input type="password" name="pwd" action="login_info_holder.html" method="get" style="position:absolute; right:0px;">
+<br>
+</strong>
+<br>
+<input type="checkbox" name="stay_signed_in" value="stay_signed_in">Stay signed in
+<input type="submit" value="Login" style="position:absolute; right:0px;">
+</form>
+</div>
+
+<div id="example_rant" style="position:absolute; left:650px; top:300px; width:300px; height:300px; text-align:center; font-family:lao ui; font-size:25px; color:white">
+	Not a member?
+	<br>
+	Not a problem.
+	<br>
+	<a href="sign_up_form.html" style="color:rgb(52,52,52); font-size:35px;">Sign up now for free!</a>
+</div>
+
+</body>
+
+</html> 

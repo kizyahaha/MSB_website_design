@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import com.google.common.base.Charsets;
+
 public class CharacterEncodingFilter implements Filter {
 
     @Override
@@ -24,7 +26,7 @@ public class CharacterEncodingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (request.getCharacterEncoding() == null) {
-            request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding(Charsets.UTF_8.name());
         }
         chain.doFilter(request, response);
     }

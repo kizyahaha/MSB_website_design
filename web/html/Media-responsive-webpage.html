@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" /> 
+	<title>Media Responsive Web page</title>
+	
+
+        <style  type="text/css">
+
+          #banner {
+             margin-left:auto; 
+             margin-right:auto; 
+             width:1000px;  
+          }
+
+          #banner img { 
+             max-width:1000px; 
+             max-height:300px; 
+          }
+ 
+          #main {
+            margin-left:auto;
+            margin-right:auto;
+            width:1000px; 
+          }    
+
+          #main-content {
+            padding:20px;
+            width:625px; 
+            float:left;
+          }  
+
+          #widget-container {
+            padding:15px;
+            width:280px; 
+            float:right;
+          }   
+
+          .widget-content {
+             margin:20px; 
+             padding:1px;
+             width:250px;
+             background-color:#DDDDDD; 
+          }    
+
+          .widget-title {
+             font-weight:bold;
+             padding:10px;
+             background-color:#EEEEEE;  
+          }    
+
+          .widget-text {
+             padding:10px;
+             background-color:#FCFCFC;   
+          }    
+
+          @media (min-width: 481px) and (max-width: 768px) {
+            #banner { width:740px; }
+            #banner img { max-width:740px; max-height:222px; }
+            #main { width:740px; }            
+            #main-content { width:450px; float:left; }
+            #widget-container { width:200px; float:right; }
+            .widget-content { width:160px; }
+          } 
+
+          @media (min-width: 321px) and (max-width: 480px) {
+            #banner { width:450px; }
+            #banner img { max-width:450px; max-height:135px; }
+            #main { width:450px; }            
+            #main-content { width:400px;}
+            #widget-container { width:400px; }
+            .widget-content { width:120px; margin:5px; float:left;}
+            .widget-text { display:none; } 
+          }
+
+          @media (max-width: 320px) {
+            #banner { width:275px; }
+            #banner img { max-width:275px; max-height:83px; }
+            #main { width:250px; }            
+            #main-content { width:250px;padding:0px;}
+            #widget-container { width:250px; padding:0px; }
+            .widget-content { width:250px; margin:5px;}
+            .widget-text { display:none; } 
+          }
+
+	</style>
+	
+</head>
+
+<body>
+<div id="banner"><img src="https://www.ibm.com/developerworks/mydeveloperworks/blogs/bobleah/resource/sky.gif"></div>
+<div id="main">
+ <div id="widget-container">
+  <div class="widget-content">
+   <div class="widget-title">
+         Proin eu magna a purus feugiat
+   </div>
+   <div class="widget-text">
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sem felis, rutrum sed sagittis non, 
+         suscipit quis mauris. Vivamus lobortis varius tempus. Etiam commodo sem quis enim bibendum bibendum. 
+         Aliquam eleifend, nisl eget faucibus hendrerit.
+   </div>
+  </div>  
+
+  <div class="widget-content">
+   <div class="widget-title">
+         Proin eu magna a purus feugiat
+   </div>
+   <div class="widget-text">
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sem felis, rutrum sed sagittis non, 
+         suscipit quis mauris. Vivamus lobortis varius tempus. Etiam commodo sem quis enim bibendum bibendum. 
+         Aliquam eleifend, nisl eget faucibus hendrerit.
+   </div>
+  </div>  
+
+  <div class="widget-content">
+   <div class="widget-title">
+         Proin eu magna a purus feugiat
+   </div>
+   <div class="widget-text">
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sem felis, rutrum sed sagittis non, 
+         suscipit quis mauris. Vivamus lobortis varius tempus. Etiam commodo sem quis enim bibendum bibendum. 
+         Aliquam eleifend, nisl eget faucibus hendrerit.
+   </div>
+  </div> 
+ </div>
+ <div id="main-content">
+      <p> 
+       Etiam at purus id ipsum sodales vehicula. Nam purus nunc, luctus ut laoreet et, pharetra eget est. Nulla 
+       nisi tellus, euismod vel hendrerit dignissim, egestas eget ante. Morbi pellentesque, tellus ut adipiscing 
+       vestibulum, purus orci gravida felis, sit amet rhoncus quam nulla non massa. Sed volutpat porttitor lectus 
+       accumsan hendrerit. Donec lectus urna, euismod ut accumsan ac, congue in risus. Fusce pretium arcu vel 
+       turpis adipiscing nec adipiscing lectus ultricies. Sed ultricies commodo tellus, lacinia iaculis velit 
+       hendrerit interdum. Nam congue ante sit amet tortor lobortis ac euismod magna fringilla. Curabitur semper 
+       nulla vel arcu blandit quis sagittis lectus feugiat. Sed vel ipsum in diam vulputate convallis sed ut tellus.
+      </p>
+      <p> 
+       Etiam at purus id ipsum sodales vehicula. Nam purus nunc, luctus ut laoreet et, pharetra eget est. Nulla 
+       nisi tellus, euismod vel hendrerit dignissim, egestas eget ante. Morbi pellentesque, tellus ut adipiscing 
+       vestibulum, purus orci gravida felis, sit amet rhoncus quam nulla non massa. Sed volutpat porttitor lectus 
+       accumsan hendrerit. Donec lectus urna, euismod ut accumsan ac, congue in risus. Fusce pretium arcu vel 
+       turpis adipiscing nec adipiscing lectus ultricies. Sed ultricies commodo tellus, lacinia iaculis velit 
+       hendrerit interdum. Nam congue ante sit amet tortor lobortis ac euismod magna fringilla. Curabitur semper 
+       nulla vel arcu blandit quis sagittis lectus feugiat. Sed vel ipsum in diam vulputate convallis sed ut tellus.
+      </p>
+      <p> 
+       Etiam at purus id ipsum sodales vehicula. Nam purus nunc, luctus ut laoreet et, pharetra eget est. Nulla 
+       nisi tellus, euismod vel hendrerit dignissim, egestas eget ante. Morbi pellentesque, tellus ut adipiscing 
+       vestibulum, purus orci gravida felis, sit amet rhoncus quam nulla non massa. Sed volutpat porttitor lectus 
+       accumsan hendrerit. Donec lectus urna, euismod ut accumsan ac, congue in risus. Fusce pretium arcu vel 
+       turpis adipiscing nec adipiscing lectus ultricies. Sed ultricies commodo tellus, lacinia iaculis velit 
+       hendrerit interdum. Nam congue ante sit amet tortor lobortis ac euismod magna fringilla. Curabitur semper 
+       nulla vel arcu blandit quis sagittis lectus feugiat. Sed vel ipsum in diam vulputate convallis sed ut tellus.
+      </p>
+      <p> 
+       Etiam at purus id ipsum sodales vehicula. Nam purus nunc, luctus ut laoreet et, pharetra eget est. Nulla 
+       nisi tellus, euismod vel hendrerit dignissim, egestas eget ante. Morbi pellentesque, tellus ut adipiscing 
+       vestibulum, purus orci gravida felis, sit amet rhoncus quam nulla non massa. Sed volutpat porttitor lectus 
+       accumsan hendrerit. Donec lectus urna, euismod ut accumsan ac, congue in risus. Fusce pretium arcu vel 
+       turpis adipiscing nec adipiscing lectus ultricies. Sed ultricies commodo tellus, lacinia iaculis velit 
+       hendrerit interdum. Nam congue ante sit amet tortor lobortis ac euismod magna fringilla. Curabitur semper 
+       nulla vel arcu blandit quis sagittis lectus feugiat. Sed vel ipsum in diam vulputate convallis sed ut tellus.
+      </p>
+      <p> 
+       Etiam at purus id ipsum sodales vehicula. Nam purus nunc, luctus ut laoreet et, pharetra eget est. Nulla 
+       nisi tellus, euismod vel hendrerit dignissim, egestas eget ante. Morbi pellentesque, tellus ut adipiscing 
+       vestibulum, purus orci gravida felis, sit amet rhoncus quam nulla non massa. Sed volutpat porttitor lectus 
+       accumsan hendrerit. Donec lectus urna, euismod ut accumsan ac, congue in risus. Fusce pretium arcu vel 
+       turpis adipiscing nec adipiscing lectus ultricies. Sed ultricies commodo tellus, lacinia iaculis velit 
+       hendrerit interdum. Nam congue ante sit amet tortor lobortis ac euismod magna fringilla. Curabitur semper 
+       nulla vel arcu blandit quis sagittis lectus feugiat. Sed vel ipsum in diam vulputate convallis sed ut tellus.
+      </p>
+ </div> 
+</div> 
+
+</body>
+</html>
