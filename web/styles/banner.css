@@ -1,0 +1,55 @@
+#banner_background{
+	position:relative;
+	height:200px;
+	background-color:rgb(52,52,52);
+	border-radius:20px;
+	width:100%;
+}
+#banner_text{
+	position:absolute;
+	top:10px;
+	left:50%;
+	margin-left:-340px;
+}
+#banner_background img{
+	border:none;
+}
+#banner_logo_left{
+	position:absolute;
+	left:10px;
+	top:10px;
+}
+#banner_logo_right{
+	position:absolute;
+	right:10px;
+	top:10px;
+}
+#banner_links ul {
+	list-style: none;
+	padding:0;
+	margin:0;
+}
+#banner_links{
+	right:20px;
+	position:absolute;
+	top:155px;
+	font-family:courier new;
+	font-size:18px;
+}
+#banner_links li{
+	display:inline;
+	padding:0 0 0 30px;
+}
+#banner_links li a{
+	color:white;
+}
+
+#audience_count{
+	font-family:courier new;
+	color:white;
+	font-size:18px;
+	position:absolute;
+	left:20px;
+	top:170px;
+	text-align:right;
+}

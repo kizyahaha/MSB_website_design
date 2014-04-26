@@ -1,0 +1,70 @@
+#rant_container{
+	position:relative;
+	top: 0px;
+	width:98%;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: rgb(12,120,154);
+	border-radius:20px;
+}
+#winner_title{
+	position:absolute;
+	top:10px;
+	left:300px;
+	right:20px;
+	font-family:lao ui;
+	color:white;
+	text-align:center;
+	font-weight:700;
+	font-size:20pt;
+}
+#rant_bubble{
+	text-align:left;
+	position:absolute;
+	top:50px;
+	left:300px;
+	right:20px;
+	max-height:450px;
+	min-height:150px;
+	background-color:rgb(215,226,229);
+	border-radius:50px;
+	border:solid 40px rgb(215,226,229);
+	overflow:auto;
+	font-family:times new roman;
+	font-size:18px;
+	color:rgb(52,52,52);
+	z-index:1;
+}
+#triangle {
+	position:absolute;
+	width: 0;
+	height: 0;
+	border-top: 40px solid transparent;
+	border-right: 90px solid rgb(215,226,229);
+	border-bottom: 60px solid transparent;
+	left:210px;
+	bottom:140px;
+}
+#character{
+	position:absolute;
+	bottom:50px;
+	left:30px;
+	z-index:1;
+}
+#soapbox{
+	position:absolute;
+	bottom:-35px;
+	left:40px;
+	z-index:1;
+}
+#countdown{
+	position:absolute;
+	bottom:25px;
+	left:300px;
+	right:0px;
+	color:rgb(52,52,52);
+	font-family:times new roman;
+	font-size:30px;
+	text-align:center;
+	line-height:20%;
+}
