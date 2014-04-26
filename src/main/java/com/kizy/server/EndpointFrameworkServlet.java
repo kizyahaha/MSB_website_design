@@ -1,7 +1,5 @@
 package com.kizy.server;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -11,20 +9,27 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.servlet.FrameworkServlet;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
-import com.google.common.io.Files;
 
 public class EndpointFrameworkServlet extends FrameworkServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final List<String> styles = ImmutableList.of("MySoapBox_4.css",
-                                                                "FAQ.css");
+    private static final List<String> styles = ImmutableList.of("banner.css",
+                                                                "tabs.css",
+                                                                "rant.css",
+                                                                "contenders.css",
+                                                                "power_graph.css",
+                                                                "footer.css",
+                                                                "main.css");
 
     private static final List<String> scripts = ImmutableList.of("jquery-1.11.0.min.js",
-                                                                 "General_Practice_4.js",
-                                                                 "randInterval.js");
+                                                                 "banner.js",
+                                                                 "tabs.js",
+                                                                 "rant.js",
+                                                                 "contenders.js",
+                                                                 "power_graph.js",
+                                                                 "footer.js");
 
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -40,19 +45,26 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         }
         out.println("</head>");
         out.println("<body>");
-        out.println(getContents("web/html/MySoapBox_Test_4_tab1.html"));
+        out.println(getBody());
         out.println("</body>");
         out.println("</html>");
+    }
+
+    private String getBody() {
+        return "<script>" +
+                 "var tab_num = 0;" +
+                 "create_banner();" +
+                 "create_tabs(tab_num);" +
+                 "create_rant(tab_num);" +
+                 "create_contender_space(tab_num);" +
+                 "create_footer();" +
+               "</script>";
     }
 
     @Override
     protected void configureAndRefreshWebApplicationContext(ConfigurableWebApplicationContext context) {
         context.setConfigLocations(new String[0]);
         super.configureAndRefreshWebApplicationContext(context);
-    }
-
-    private String getContents(String path) throws IOException {
-        return Files.toString(new File(path), Charsets.UTF_8);
     }
 
 }

@@ -1,4 +1,3 @@
-
 function create_contender_space(tab_num){
 	var contender_space = document.createElement('div');
 	contender_space.id = 'contender_space';
@@ -76,11 +75,11 @@ function get_contenders(tab_num){
 
 function create_vote_buttons(contender){
 	var up_button = document.createElement('img');
-	up_button.src = 'up_button_1.png';
+	up_button.src = 'images/up_button_1.png';
 	up_button.alt = 'upvote';
 	up_button.width = 20;
 	var down_button = document.createElement('img');
-	down_button.src = 'down_button_1.png';
+	down_button.src = 'images/down_button_1.png';
 	down_button.alt = 'downvote';
 	down_button.width = 20;
 	
@@ -98,17 +97,17 @@ function create_vote_buttons(contender){
 }
 
 function upvote_push(track_votes){
-	var initImg = "file:///C:/Users/kczaja/Documents/Sobox_docs/Pure_Javascript_Website/up_button_1.png";
-	var pushImg = "file:///C:/Users/kczaja/Documents/Sobox_docs/Pure_Javascript_Website/up_button_2.png";
+	var initImg = "images/up_button_1.png";
+	var pushImg = "images/up_button_2.png";
 	track_votes[0].src = (track_votes[0].src == initImg ? pushImg : initImg);
-	track_votes[1].src = "file:///C:/Users/kczaja/Documents/Sobox_docs/Pure_Javascript_Website/down_button_1.png";
+	track_votes[1].src = "images/down_button_1.png";
 }
 
 function downvote_push(track_votes){
-	var initImg = "file:///C:/Users/kczaja/Documents/Sobox_docs/Pure_Javascript_Website/down_button_1.png";
-	var pushImg = "file:///C:/Users/kczaja/Documents/Sobox_docs/Pure_Javascript_Website/down_button_2.png";
+	var initImg = "images/down_button_1.png";
+	var pushImg = "images/down_button_2.png";
 	track_votes[1].src = (track_votes[1].src == initImg ? pushImg : initImg);
-	track_votes[0].src = "file:///C:/Users/kczaja/Documents/Sobox_docs/Pure_Javascript_Website/up_button_1.png";
+	track_votes[0].src = "images/up_button_1.png";
 }
 
 function get_contender_info(contender , num){
@@ -165,7 +164,7 @@ function get_contender_rant(contender , num){
 	contender_rant.className = 'contender_rant_preview';
 	if (num%2 == 0){
 		thumbnail = document.createElement('img');
-		thumbnail.src = 'jeremy.png';
+		thumbnail.src = 'images/jeremy.png';
 		thumbnail.width=80;
 		contender_rant.appendChild(thumbnail);
 	}

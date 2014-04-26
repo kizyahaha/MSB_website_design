@@ -1,5 +1,3 @@
-
-
 function create_tabs(tab_num){
 	var tabs = document.createElement('ul');
 	tabs.id = 'tabs';
@@ -17,7 +15,7 @@ function create_daily(){
 	var daily = document.createElement('li');
 	daily.className = 'other_tab';
 	var king_crown_img = document.createElement('img');
-	king_crown_img.src = "king_crown_1.png";
+	king_crown_img.src = "images/king_crown_1.png";
 	king_crown_img.alt = 'king';
 	king_crown_img.width = 25;
 	daily.appendChild(king_crown_img);
@@ -33,7 +31,7 @@ function create_hourly(){
 	var hourly = document.createElement('li');
 	hourly.className = 'other_tab';
 	var queen_crown_img = document.createElement('img');
-	queen_crown_img.src = "queen_crown_1.png";
+	queen_crown_img.src = "images/queen_crown_1.png";
 	queen_crown_img.alt = 'queen';
 	queen_crown_img.width = 25;
 	hourly.appendChild(queen_crown_img);
@@ -51,7 +49,7 @@ function create_ten_minutely(){
 	ten_min.className = 'other_tab';
 	ten_min.id = 'ten_min';
 	var medal_img = document.createElement('img');
-	medal_img.src = "medal_1.png";
+	medal_img.src = "images/medal_1.png";
 	medal_img.alt = 'medal';
 	medal_img.width = 20;
 	ten_min.appendChild(medal_img);
@@ -67,7 +65,7 @@ function create_minutely(){
 	var minutely = document.createElement('li');
 	minutely.className = 'other_tab';
 	var star_img = document.createElement('img');
-	star_img.src = "star_1.png";
+	star_img.src = "images/star_1.png";
 	star_img.alt = 'star';
 	star_img.width = 20;
 	minutely.appendChild(star_img);

@@ -1,4 +1,3 @@
-
 //window.onload = create_banner;
 
 function create_banner(){
@@ -26,7 +25,7 @@ function create_banner_text(){
 	banner_text_link.href = 'daily.html';
 	var banner_text_img = document.createElement('img');
 	banner_text_img.alt = 'MSB';
-	banner_text_img.src = "MySoapBox_1.png";
+	banner_text_img.src = "images/MySoapBox_1.png";
 	banner_text_link.appendChild(banner_text_img);
 	document.getElementById('banner_background').appendChild(banner_text_link);
 }
@@ -34,7 +33,7 @@ function create_banner_text(){
 function create_banner_logos(){
 	/*var banner_logo = document.createElement('img');
 	banner_logo.alt = 'logo';
-	banner_logo.src = "SoapBox1.png";
+	banner_logo.src = "images/SoapBox1.png";
 	banner_logo.width=130;
 	banner_logo.id = 'banner_logo_left';
 	document.getElementById('banner_background').appendChild(banner_logo);
@@ -43,13 +42,13 @@ function create_banner_logos(){
 
 	var banner_logo_left = document.createElement('img');
 	banner_logo_left.alt = 'logo';
-	banner_logo_left.src = "SoapBox1.png";
+	banner_logo_left.src = "images/SoapBox1.png";
 	banner_logo_left.width=130;
 	banner_logo_left.id = 'banner_logo_left';
 	document.getElementById('banner_background').appendChild(banner_logo_left);
 	var banner_logo_right = document.createElement('img');
 	banner_logo_right.alt = 'logo';
-	banner_logo_right.src = "SoapBox1.png";
+	banner_logo_right.src = "images/SoapBox1.png";
 	banner_logo_right.width=130;
 	banner_logo_right.id = 'banner_logo_right';
 	document.getElementById('banner_background').appendChild(banner_logo_right);

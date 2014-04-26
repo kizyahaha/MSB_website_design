@@ -1,5 +1,3 @@
-
-
 function create_rant(tab_num){
 	create_rant_container();
 	create_winner_title();
@@ -38,7 +36,7 @@ function create_triangle(){
 function create_soapbox(){
 	var soapbox = document.createElement('img');
 	soapbox.id = "soapbox";
-	soapbox.src = 'SoapBox2.png';
+	soapbox.src = 'images/SoapBox2.png';
 	soapbox.alt = 'soapbox';
 	soapbox.height = 150;
 	document.getElementById('rant_container').appendChild(soapbox);
@@ -146,16 +144,16 @@ function get_character(tab_num){
 	var character = document.getElementById('character');
 	switch(tab_num){
 		case 0:
-			character.src = "character_1.png";
+			character.src = "images/character_1.png";
 			break;
 		case 1:
-			character.src = "character_2.png";
+			character.src = "images/character_2.png";
 			break;
 		case 2:
-			character.src = "character_3.png";
+			character.src = "images/character_3.png";
 			break;
 		case 3:
-			character.src = "character_4.png";
+			character.src = "images/character_4.png";
 			break;
 		default:
 			break;
