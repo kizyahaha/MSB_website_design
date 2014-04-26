@@ -5,6 +5,6 @@
 <urlrewrite>
     <rule>
         <from>^/$</from>
-        <to type="redirect">%{context-path}/main</to>
+        <to type="redirect">%{context-path}/main/daily</to>
     </rule>
 </urlrewrite>

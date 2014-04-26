@@ -11,7 +11,7 @@ function create_tabs(tab_num){
 
 function create_daily(){
 	var daily_link = document.createElement('a');
-	daily_link.href = 'daily.html';
+	daily_link.href = 'daily';
 	var daily = document.createElement('li');
 	daily.className = 'other_tab';
 	var king_crown_img = document.createElement('img');
@@ -27,7 +27,7 @@ function create_daily(){
 
 function create_hourly(){
 	var hourly_link = document.createElement('a');
-	hourly_link.href = 'hourly.html';
+	hourly_link.href = 'hourly';
 	var hourly = document.createElement('li');
 	hourly.className = 'other_tab';
 	var queen_crown_img = document.createElement('img');
@@ -44,7 +44,7 @@ function create_hourly(){
 
 function create_ten_minutely(){
 	var ten_min_link = document.createElement('a');
-	ten_min_link.href = 'ten_minutely.html';
+	ten_min_link.href = 'ten_minutely';
 	var ten_min = document.createElement('li');
 	ten_min.className = 'other_tab';
 	ten_min.id = 'ten_min';
@@ -61,7 +61,7 @@ function create_ten_minutely(){
 
 function create_minutely(){
 	var minutely_link = document.createElement('a');
-	minutely_link.href = 'minutely.html';
+	minutely_link.href = 'minutely';
 	var minutely = document.createElement('li');
 	minutely.className = 'other_tab';
 	var star_img = document.createElement('img');

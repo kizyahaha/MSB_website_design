@@ -1,6 +1,10 @@
 package com.kizy.server;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.servlet.FrameworkServlet;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
+import com.google.common.io.Files;
 
 public class EndpointFrameworkServlet extends FrameworkServlet {
 
@@ -33,7 +39,16 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
 
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String path = request.getPathInfo();
         PrintWriter out = response.getWriter();
+        if (path.indexOf('.') == -1) {
+            outputShim(out, path);
+        } else {
+            outputContents(request, path, out);
+        }
+    }
+
+    private void outputShim(PrintWriter out, String path) throws IOException {
         out.println("<html lang=\"en-US\">");
         out.println("<head>");
         out.println("<title>MySoapBox</title>");
@@ -45,14 +60,36 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         }
         out.println("</head>");
         out.println("<body>");
-        out.println(getBody());
+        out.println(getBodyShim(parseTabNumber(path)));
         out.println("</body>");
         out.println("</html>");
     }
 
-    private String getBody() {
+    private void outputContents(HttpServletRequest request, String path, PrintWriter out) throws IOException {
+        URL url = request.getServletContext().getResource(path);
+        File file;
+        try {
+            file = new File(url.toURI());
+        } catch (URISyntaxException e) {
+            file = new File(url.getPath());
+        }
+        out.println(Files.toString(file, Charsets.UTF_8));
+    }
+
+    private int parseTabNumber(String path) {
+        if (path == null) {
+            return 0;
+        }
+        Tab tab = Tab.fromName(path.substring(path.indexOf('/') + 1));
+        if (tab == null) {
+            return 0;
+        }
+        return tab.getTabNumber();
+    }
+
+    private String getBodyShim(int tabIndex) {
         return "<script>" +
-                 "var tab_num = 0;" +
+                 "var tab_num = " + tabIndex + ";" +
                  "create_banner();" +
                  "create_tabs(tab_num);" +
                  "create_rant(tab_num);" +
