@@ -97,16 +97,18 @@ function create_vote_buttons(contender){
 }
 
 function upvote_push(track_votes){
-	var initImg = "images/up_button_1.png";
-	var pushImg = "images/up_button_2.png";
-	track_votes[0].src = (track_votes[0].src == initImg ? pushImg : initImg);
+	var initImg = "up_button_1.png";
+	var pushImg = "up_button_2.png";
+	var currImg = track_votes[0].src.substring(track_votes[0].src.lastIndexOf('/') + 1);
+	track_votes[0].src = "images/" + (currImg == initImg ? pushImg : initImg);
 	track_votes[1].src = "images/down_button_1.png";
 }
 
 function downvote_push(track_votes){
-	var initImg = "images/down_button_1.png";
-	var pushImg = "images/down_button_2.png";
-	track_votes[1].src = (track_votes[1].src == initImg ? pushImg : initImg);
+	var initImg = "down_button_1.png";
+	var pushImg = "down_button_2.png";
+	var currImg = track_votes[1].src.substring(track_votes[1].src.lastIndexOf('/') + 1);
+	track_votes[1].src = "images/" + (currImg == initImg ? pushImg : initImg);
 	track_votes[0].src = "images/up_button_1.png";
 }
 
