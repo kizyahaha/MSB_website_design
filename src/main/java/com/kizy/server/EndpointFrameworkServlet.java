@@ -16,11 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.servlet.FrameworkServlet;
 
-import com.google.common.base.Charsets;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closeables;
-import com.google.common.io.Files;
 import com.kizy.web.WebResources;
 
 public class EndpointFrameworkServlet extends FrameworkServlet {
@@ -48,17 +46,19 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         String path = request.getPathInfo();
         String extension = WebResources.getExtension(path);
         if (extension.isEmpty()) {
-            PrintWriter out = response.getWriter();
-            outputShim(out, path);
-        } else if (WebResources.TEST_EXTENSIONS.contains(extension)) {
-            PrintWriter out = response.getWriter();
-            outputContents(request, path, out);
-        } else if (WebResources.IMAGE_EXTENSIONS.contains(extension)) {
-            outputImage(request, response, path);
+            outputShim(request, response, path);
+        } else if (isContent(extension)) {
+            outputContent(request, response, path);
         }
     }
 
-    private void outputShim(PrintWriter out, String path) throws IOException {
+    private static boolean isContent(String extension) {
+        return WebResources.TEST_EXTENSIONS.contains(extension) ||
+               WebResources.IMAGE_EXTENSIONS.contains(extension);
+    }
+
+    private static void outputShim(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
+        PrintWriter out = response.getWriter();
         out.println("<html lang=\"en-US\">");
         out.println("<head>");
         out.println("<title>MySoapBox</title>");
@@ -75,7 +75,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         out.println("</html>");
     }
 
-    private int parseTabNumber(String path) {
+    private static int parseTabNumber(String path) {
         if (path == null) {
             return 0;
         }
@@ -86,7 +86,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         return tab.getTabNumber();
     }
 
-    private String getBodyShim(int tabIndex) {
+    private static String getBodyShim(int tabIndex) {
         return "<script>" +
                  "var tab_num = " + tabIndex + ";" +
                  "create_banner();" +
@@ -97,12 +97,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                "</script>";
     }
 
-    private void outputContents(HttpServletRequest request, String path, PrintWriter out) throws IOException {
-        URL url = request.getServletContext().getResource(path);
-        out.println(Files.toString(getFile(url), Charsets.UTF_8));
-    }
-
-    private void outputImage(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
+    private static void outputContent(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
         ServletContext servletContext = request.getServletContext();
         response.setContentType(servletContext.getMimeType(path));
         FileInputStream in = new FileInputStream(getFile(servletContext.getResource(path)));
