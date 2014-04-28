@@ -84,8 +84,8 @@ function create_banner_links(){
 	a_2.href = '#';
 	a_2.textContent = 'Archives';
 	li_2.appendChild(a_2);
-	a_3.href = '#';
-	a_3.textContent = 'Login/Sign Up';
+	a_3.href = 'log_in_sign_up.html';
+	a_3.textContent = 'Log in/Sign up';
 	li_3.appendChild(a_3);
 	banner_links.appendChild(li_1);
 	banner_links.appendChild(li_2);

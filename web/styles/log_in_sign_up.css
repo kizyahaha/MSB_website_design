@@ -1,0 +1,48 @@
+#space{
+	position:relative;
+	width:100%;
+	height:500px;
+}
+
+#log_in{
+	position:absolute;
+	top:200px;
+	width:265px;
+	left:20%;
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	font-weight:700;
+	font-size:20px;
+}
+
+#username_input{
+	text-align:center;
+	float:right;
+	font-family:lao ui;
+	color:rgb(52,52,52);
+}
+#password_input{
+	text-align:center;
+	float:right;
+	font-family:lao ui;
+	color:rgb(52,52,52);
+}
+
+#log_in_button{
+	float:right;
+}
+
+#sign_up{
+	position:absolute;
+	top:175px;
+	width:265px;
+	right:20%;
+	font-family:lao ui;
+	color:white;
+	font-size:30px;
+	text-align:center;
+}
+
+#sign_up a{
+	color:rgb(52,52,52);
+}
