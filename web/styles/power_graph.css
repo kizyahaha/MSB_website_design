@@ -1,8 +1,8 @@
 #power_graph{
 	position:absolute;
 	bottom:70px;
-	width:70%;
-	left:17%;
+	left:100px;
+	right:50px;
 	height:200px;
 	border-bottom:solid 2px white;
 	border-left:solid 2px white;
