@@ -1,7 +1,8 @@
 
 
 function create_sign_up_form(){
-	jQuery('<div/>',{id: 'form_space'}).appendTo('body');
+	$('<div/>',{id: 'form_space'}).appendTo('body');
+	//jQuery('<form/>',{id: 'make_account'}).appendTo('#form_space');
 	jQuery('<table/>',{id: 'info_entry'}).appendTo('#form_space');
 	//create_name_entry();
 	//create_email_entry();
@@ -11,10 +12,10 @@ function create_sign_up_form(){
 	create_password_entry();
 	//create_password_confirm();
 	//create_profile_pic_entry();
-	create_submit();
+	create_submit_button();
 }
 
-function create_submit(){
+function create_submit_button(){
 	var submit_button = document.createElement('input');
 	submit_button.type = 'submit';
 	submit_button.value = 'Submit';
