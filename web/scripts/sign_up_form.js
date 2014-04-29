@@ -2,7 +2,7 @@
 
 function create_sign_up_form(){
 	$('<div/>',{id: 'form_space'}).appendTo('body');
-	$('<form/>',{id: 'sign_up_form'}).appendTo('#form_space');
+	$('<form/>',{name:'sign_up_form' , id: 'sign_up_form'}).appendTo('#form_space');
 	create_email_entry();
 	//create_DOB_entry(); //For filtering NSFW or maybe gifts/abilities on birthday
 	create_username_entry();
@@ -10,18 +10,27 @@ function create_sign_up_form(){
 	create_password_confirm();
 	//create_profile_pic_entry();
 	//create_captcha();
-	//create_terms_of_use();
+	create_terms_checkbox();
 	create_submit_button();
+}
+
+function create_terms_checkbox(){
+	$('<br/>').appendTo('#sign_up_form');
+	$('<input/>',{name:'terms_of_use' , type:'checkbox'}).appendTo('#sign_up_form');
+	$("#sign_up_form").append("<span class='checkbox_text'> I have read and agreed to the <a href='#'>Terms of Use </a></span>");
+	$('<div/>',{id: 'no_read_terms' , text:'*Please agree to the Terms of Use.'}).appendTo('#sign_up_form');
+	document.getElementById('no_read_terms').style.display = 'none';
+	$('<br/>').appendTo('#sign_up_form');
 }
 
 function create_submit_button(){
 	$('<br/>').appendTo('#sign_up_form');
-	$('<input/>',{id:'submit_button' , type:'submit' , value:'Submit'}).appendTo('#sign_up_form');
-	$('#submit_button').click( function(){submit();} );
+	$('<input/>',{id:'submit_button' , type:'button' , value:'Submit'}).appendTo('#sign_up_form');
+	$('#submit_button').click( function(){submit(this.form);} );
 }
 
-function submit(){
-	if (check_valid_input()){
+function submit(form){
+	if (check_valid_input(form)){
 		$.post( '/api/users/add' , $('#sign_up_form').serialize() );
 	}
 	/*
@@ -35,8 +44,8 @@ function submit(){
 
 function ask_visibility(str){
 	$('<input/>',{type:'checkbox'}).appendTo('#sign_up_form');
-	$('<span/>',{id: 'checkbox_label'}).appendTo('#sign_up_form');
-	document.getElementById('checkbox_label').textContent = 'Allow members to see my ' + str;
+	$('<span/>',{addClass: 'checkbox_text' , id:'checkbox_text'}).appendTo('#sign_up_form');
+	document.getElementById('checkbox_text').textContent = 'Allow members to see my ' + str;
 	$('<br/>').appendTo('#sign_up_form');
 }
 
@@ -69,31 +78,50 @@ function create_password_entry(){
 
 function create_password_confirm(){
 	$('<label/>',{id: 'password_confirm' , text: '*Confirm password:'}).appendTo('#sign_up_form');
-	$('<input/>',{addClass:'text_entry' , placeholder: 'retype password' , type:'password'}).appendTo('#sign_up_form');
+	$('<input/>',{name:'password_confirm' , addClass:'text_entry' , placeholder: 'retype password' , type:'password'}).appendTo('#sign_up_form');
 	$('<br/>').appendTo('#sign_up_form');
-	$('<div/>',{id: 'passwords_no_matchy' , text:"*These passwords don't match!"}).appendTo('#sign_up_form');
+	$('<div/>',{id: 'passwords_no_matchy' , text:"*These passwords don't match"}).appendTo('#sign_up_form');
 	document.getElementById('passwords_no_matchy').style.display = 'none';
 }
 
-function check_valid_input(){
-	//check_captcha();
-	//check_read_terms();
-	//check_password_strength();
-	check_password_match();
-	check_username_available();
-	return true;
+function check_valid_input(form){
+	//var captcha = check_captcha();
+	var read_terms = check_read_terms(form);
+	//var strength = check_password_strength();
+	var pwd_match = check_password_match(form);
+	//var name_avail = check_username_available();
+	if (pwd_match && read_terms){
+		//load some confirmation thank you/email sent page
+		return true;
+	}
+	alert('failure');
+	return false;
 }
 
 function check_username_available(){
+	document.getElementById('username_taken').style.display = 'none';
 	var unique = true;
 	if (!unique){
 		document.getElementById('username_taken').style.display = 'initial';
+		return false;
 	}
+	return true;
 }
 
-function check_password_match(){
-	var match = true;
-	if (!match){
+function check_password_match(form){
+	document.getElementById('passwords_no_matchy').style.display = 'none';
+	if (form.password.value != form.password_confirm.value){
 		document.getElementById('passwords_no_matchy').style.display = 'initial';
+		return false;
 	}
+	return true;
+}
+
+function check_read_terms(form){
+	document.getElementById('no_read_terms').style.display = 'none';
+	if (!form.terms_of_use.checked){
+		document.getElementById('no_read_terms').style.display = 'initial';
+		return false;
+	}
+	return true;
 }
