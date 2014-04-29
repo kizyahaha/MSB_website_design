@@ -24,9 +24,9 @@ public class UserController {
 	//  password = password
 	
 	@RequestMapping(value = "/add")
-	public void addUser(@RequestParam("username") String username, @RequestParam("password") String password) throws IOException {
-		if (!Strings.isNullOrEmpty(password) && !Strings.isNullOrEmpty(username)) {
-			Files.write(username + ", " + password, USERS_FILE, Charsets.UTF_8);
+	public void addUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email) throws IOException {
+		if (!Strings.isNullOrEmpty(password) && !Strings.isNullOrEmpty(username) && !Strings.isNullOrEmpty(email) ) {
+			Files.write(username + ", " + password + ", " + email, USERS_FILE, Charsets.UTF_8);
 		}
 	}
 
