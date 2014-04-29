@@ -16,9 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.servlet.FrameworkServlet;
 
+import com.google.common.base.Charsets;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closeables;
+import com.google.common.io.Files;
 import com.kizy.web.WebResources;
 
 public class EndpointFrameworkServlet extends FrameworkServlet {
@@ -31,7 +34,9 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                 "contenders.css",
                                                                 "power_graph.css",
                                                                 "footer.css",
-                                                                "main.css");
+                                                                "main.css",
+                                                                "log_in_sign_up.css",
+                                                                "sign_up_form.css");
 
     private static final List<String> scripts = ImmutableList.of("jquery-1.11.0.min.js",
                                                                  "banner.js",
@@ -39,15 +44,21 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                  "rant.js",
                                                                  "contenders.js",
                                                                  "power_graph.js",
-                                                                 "footer.js");
+                                                                 "footer.js",
+                                                                 "log_in_sign_up.js",
+                                                                 "sign_up_form.js");
 
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String path = request.getPathInfo();
         String extension = WebResources.getExtension(path);
         if (extension.isEmpty()) {
-            outputShim(request, response, path);
-        } else if (isContent(extension)) {
+            outputShim(request, response, path, null);
+        } else if (extension.equalsIgnoreCase("html")) {
+        	String body = Files.toString(new File("web/html" + path), Charsets.UTF_8);
+        	outputShim(request, response, path, body);
+        }
+        else if (isContent(extension)) {
             outputContent(request, response, path);
         }
     }
@@ -57,7 +68,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                WebResources.IMAGE_EXTENSIONS.contains(extension);
     }
 
-    private static void outputShim(HttpServletRequest request, HttpServletResponse response, String path) throws IOException {
+    private static void outputShim(HttpServletRequest request, HttpServletResponse response, String path, String body) throws IOException {
         PrintWriter out = response.getWriter();
         out.println("<html lang=\"en-US\">");
         out.println("<head>");
@@ -70,7 +81,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         }
         out.println("</head>");
         out.println("<body>");
-        out.println(getBodyShim(parseTabNumber(path)));
+        out.println(Strings.isNullOrEmpty(body) ? getBodyShim(parseTabNumber(path)) : body);
         out.println("</body>");
         out.println("</html>");
     }

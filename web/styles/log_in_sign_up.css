@@ -15,13 +15,7 @@
 	font-size:20px;
 }
 
-#username_input{
-	text-align:center;
-	float:right;
-	font-family:lao ui;
-	color:rgb(52,52,52);
-}
-#password_input{
+.text_input{
 	text-align:center;
 	float:right;
 	font-family:lao ui;

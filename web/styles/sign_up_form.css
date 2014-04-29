@@ -1,0 +1,32 @@
+#form_space{
+	position:relative;
+	width:100%;
+	margin-bottom:50px;
+	margin-top:50px;
+}
+
+#info_entry{
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	font-weight:700;
+	font-size:20px;
+	text-align:right;
+	margin:auto;
+}
+
+.text_input{
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	text-align:center;
+}
+
+.checkbox{
+	font-size:15px;
+	font-weight:100;
+	text-align:center;
+	border:solid black 2px;
+}
+
+.blank{
+	height:30px;
+}
