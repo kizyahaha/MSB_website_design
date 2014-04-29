@@ -2,8 +2,7 @@
 
 function create_sign_up_form(){
 	$('<div/>',{id: 'form_space'}).appendTo('body');
-	//jQuery('<form/>',{id: 'make_account'}).appendTo('#form_space');
-	jQuery('<table/>',{id: 'info_entry'}).appendTo('#form_space');
+	$('<form/>',{id: 'sign_up_form'}).appendTo('#form_space');
 	//create_name_entry();
 	//create_email_entry();
 	//create_DOB_entry();
@@ -16,33 +15,25 @@ function create_sign_up_form(){
 }
 
 function create_submit_button(){
-	var submit_button = document.createElement('input');
-	submit_button.type = 'submit';
-	submit_button.value = 'Submit';
-	submit_button.onclick = function(){submit();};
-	var row = document.createElement('tr');
-	var data = document.createElement('td');
-	data.colSpan = 4;
-	data.appendChild(submit_button);
-	row.appendChild(data);
-	document.getElementById('info_entry').appendChild(row);
+	$('<input/>',{id:'submit_button' , type:'submit' , value:'Submit'}).appendTo('#sign_up_form');
+	$('#submit_button').click( function(){submit();} );
 }
 
 function submit(){
-	$.ajax({
-		type: 'POST',
+	$.post( '/api/users/add' , $('#sign_up_form').serialize() );
+	/*
+    $.ajax({
+        type: 'POST',
 		url: '/api/users/add',
-		data: { 
-			'username': 'Bill',
-			'password': 'password'
-		}
-	});
+        data: $('#sign_up_form').serialize(),
+    });
+	*/
 }
 
 function add_blank(){
 	var row = document.createElement('tr');
 	row.className = 'blank';
-	document.getElementById('info_entry').appendChild(row);
+	document.getElementById('sign_up_form').appendChild(row);
 }
 
 function ask_visibility(str){
@@ -56,7 +47,7 @@ function ask_visibility(str){
 	data.appendChild(ask);
 	data.appendChild(text);
 	row.appendChild(data);
-	document.getElementById('info_entry').appendChild(row);
+	document.getElementById('sign_up_form').appendChild(row);
 }
 
 function create_name_entry(){
@@ -75,7 +66,7 @@ function create_name_entry(){
 	holder.appendChild(entry_field1);
 	holder.appendChild(last_name);
 	holder.appendChild(entry_field2);
-	document.getElementById('info_entry').appendChild(holder);
+	document.getElementById('sign_up_form').appendChild(holder);
 	ask_visibility('first name');
 	ask_visibility('last name');
 	add_blank();
@@ -92,7 +83,7 @@ function create_email_entry(){
 	entry_field.colSpan = 2;
 	holder.appendChild(text);
 	holder.appendChild(entry_field);
-	document.getElementById('info_entry').appendChild(holder);
+	document.getElementById('sign_up_form').appendChild(holder);
 	ask_visibility('e-mail');
 	add_blank();
 }
@@ -108,7 +99,7 @@ function create_DOB_entry(){
 	entry_field.colSpan = 2;
 	holder.appendChild(text);
 	holder.appendChild(entry_field);
-	document.getElementById('info_entry').appendChild(holder);
+	document.getElementById('sign_up_form').appendChild(holder);
 	ask_visibility('DOB');
 	add_blank();
 }
@@ -124,39 +115,21 @@ function create_locale_entry(){
 	entry_field.colSpan = 2;
 	holder.appendChild(text);
 	holder.appendChild(entry_field);
-	document.getElementById('info_entry').appendChild(holder);
+	document.getElementById('sign_up_form').appendChild(holder);
 	ask_visibility('location');
 	add_blank();
 }
 
 function create_username_entry(){
-	var holder = document.createElement('tr');
-	//var text = jQuery('<td/>' , {text:'Create username:'});
-	var text = document.createElement('td');
-	text.colSpan = 2;
-	text.textContent = 'Create username:';
-	//var entry_field = jQuery('<input/>' , {type:'text'});
-	var entry_field = document.createElement('input');
-	entry_field.type = 'text';
-	entry_field.className = 'text_input';
-	entry_field.colSpan = 2;
-	holder.appendChild(text);
-	holder.appendChild(entry_field);
-	document.getElementById('info_entry').appendChild(holder);
+	$('<label/>',{id: 'username_label' , text: 'Create username:'}).appendTo('#sign_up_form');
+	$('<input/>',{name:'username' , id: 'text_input' , placeholder: 'username' , type:'text' , autocomplete:'off'}).appendTo('#sign_up_form');
+	$('<br/>').appendTo('#sign_up_form');
 }
 
 function create_password_entry(){
-	var holder = document.createElement('tr');
-	var text = document.createElement('td');
-	text.colSpan = 2;
-	text.textContent = 'Create password:';
-	var entry_field = document.createElement('input');
-	entry_field.type = 'password';
-	entry_field.className = 'text_input';
-	entry_field.colSpan = 2;
-	holder.appendChild(text);
-	holder.appendChild(entry_field);
-	document.getElementById('info_entry').appendChild(holder);
+	$('<label/>',{id: 'password_label' , text: 'Create password:'}).appendTo('#sign_up_form');
+	$('<input/>',{name:'password' , id: 'text_input' , placeholder: 'password' , type:'password'}).appendTo('#sign_up_form');
+	$('<br/>').appendTo('#sign_up_form');
 }
 
 function create_password_confirm(){
@@ -170,45 +143,5 @@ function create_password_confirm(){
 	entry_field.colSpan = 2;
 	holder.appendChild(text);
 	holder.appendChild(entry_field);
-	document.getElementById('info_entry').appendChild(holder);
+	document.getElementById('sign_up_form').appendChild(holder);
 }
-
-
-
-/*
-<table align="center">
-	<tr>
-		<th colspan="3" style="font-size:18px;">Tomorrow's Leading Rants</th>
-	</tr>
-	<tr style="color:rgb(52,52,52);">
-		<th>Rank</th>
-		<th>User</th>
-		<th>Votes</th>
-	</tr>
-	<tr>
-		<td>1.</td>
-		<td>user123</td>
-		<td>1,213</td>
-	</tr>
-	<tr>
-		<td>2.</td>
-		<td>user456</td>
-		<td>1,108</td>
-	</tr>
-	<tr>
-		<td>3.</td>
-		<td>user789</td>
-		<td>987</td>
-	</tr>
-	<tr>
-		<td>4.</td>
-		<td>someUser</td>
-		<td>981</td>
-	</tr>
-	<tr>
-		<td>5.</td>
-		<td>aNoTh3r_Us3r</td>
-		<td>954</td>
-	</tr>
-</table>
-*/
