@@ -37,7 +37,8 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                 "main.css",
                                                                 "log_in_sign_up.css",
                                                                 "sign_up_form.css",
-                                                                "sign_up_success.css");
+                                                                "sign_up_success.css",
+                                                                "user_profile.css");
 
     private static final List<String> scripts = ImmutableList.of("jquery-1.11.0.min.js",
                                                                  "banner.js",
@@ -48,7 +49,8 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                  "footer.js",
                                                                  "log_in_sign_up.js",
                                                                  "sign_up_form.js",
-                                                                 "sign_up_success.js");
+                                                                 "sign_up_success.js",
+                                                                 "user_profile.js");
 
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {

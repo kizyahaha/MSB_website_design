@@ -1,0 +1,95 @@
+#user_banner{
+	position:relative;
+	margin-top:50px;
+	height:350px;
+	width:60%;
+	margin-left:auto;
+	margin-right:auto;
+	background-color:rgb(12,120,154);
+	border-radius:40px;
+	border:solid rgb(12,120,154) 10px;
+	
+	text-align:center;
+	font-family:lao ui;
+}
+#user_links{
+	position:absolute;
+	right:20px;
+	font-family:courier new;
+	font-size:18px;
+}
+#user_links li{
+	display:inline;
+	padding:0 0 0 30px;
+}
+#user_links a{
+	color:white;
+}
+#mail_icon{
+	position:relative;
+	top:4px;
+	right:8px;
+	width:20px;
+}
+
+
+
+#user_profile_pic{
+	display:block;
+	margin:0 auto;
+	border-radius:20px;
+	height:175px;
+}
+
+
+
+#profile_username{
+	width:100%;
+	color:white;
+	font-size:30px;
+}
+
+
+
+#member_date{
+	width:100%;
+	color:rgb(52,52,52);
+	font-size:15px;
+}
+
+
+
+#trophy_case{
+	position:relative;
+	top:-40px;
+}
+#trophy_case li{
+	display:inline;
+	padding:0 60px 0 60px;
+	font-size:35px;
+	font-weight:500;
+	color:rgb(52,52,52);
+}
+#trophy_case li img{
+	left:20px;
+}
+#user_king_crown{
+	position:relative;
+	top:10px;
+	width:60px;
+}
+#user_queen_crown{
+	position:relative;
+	top:5px;
+	width:60px;
+}
+#user_medal{
+	position:relative;
+	top:35px;
+	width:50px;
+}
+#user_star{
+	position:relative;
+	top:10px;
+	width:60px;
+}
