@@ -21,6 +21,8 @@ function create_terms_checkbox(){
 	$('<div/>',{id: 'no_read_terms' , text:'*Please agree to the Terms of Use.'}).appendTo('#sign_up_form');
 	document.getElementById('no_read_terms').style.display = 'none';
 	$('<br/>').appendTo('#sign_up_form');
+	$('<div/>',{id: 'sign_up_info_missing' , text:'*Please complete all required fields.'}).appendTo('#sign_up_form');
+	document.getElementById('sign_up_info_missing').style.display = 'none';
 }
 
 function create_submit_button(){
@@ -88,23 +90,28 @@ function create_password_confirm(){
 function check_valid_input(form){
 	//var captcha = check_captcha();
 	var read_terms = check_read_terms(form);
-	//var strength = check_password_strength();
+	//var strength = check_password_strength(form);
 	var pwd_match = check_password_match(form);
-	//var name_avail = check_username_available();
-	if (pwd_match && read_terms){
+	//var name_avail = check_username_available(form);
+	var all_filled = check_all_filled(form);
+	//var valid_email = check_email_validity(form);
+	if (pwd_match && read_terms && all_filled){
 		return true;
 	}
 	return false;
 }
 
-function check_username_available(){
-	document.getElementById('username_taken').style.display = 'none';
-	var unique = true;
-	if (!unique){
-		document.getElementById('username_taken').style.display = 'initial';
+function check_all_filled(form){
+	document.getElementById('sign_up_info_missing').style.display = 'none';
+	if (form.username.value.length == 0 
+	|| form.password.value.length == 0
+	|| form.password_confirm.value.length == 0
+	|| form.email.value.length == 0){
+		document.getElementById('sign_up_info_missing').style.display = 'initial';
 		return false;
 	}
 	return true;
+		
 }
 
 function check_password_match(form){
