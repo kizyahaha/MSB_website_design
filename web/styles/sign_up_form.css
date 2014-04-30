@@ -1,4 +1,4 @@
-#form_space{
+#sign_up_form_space{
 	position:relative;
 	width:100%;
 	margin-bottom:50px;
@@ -23,13 +23,13 @@
 	text-align:center;
 }
 
-label{
+#sign_up_form label{
 	display:inline-block;
 	width:190px;
     text-align: right;
 }
 
-div{
+#sign_up_form div{
 	font-family:lao ui;
 	color:red;
 	font-weight:300;

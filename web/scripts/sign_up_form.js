@@ -1,8 +1,8 @@
 
 
 function create_sign_up_form(){
-	$('<div/>',{id: 'form_space'}).appendTo('body');
-	$('<form/>',{name:'sign_up_form' , id: 'sign_up_form'}).appendTo('#form_space');
+	$('<div/>',{id: 'sign_up_form_space'}).appendTo('body');
+	$('<form/>',{name:'sign_up_form' , id: 'sign_up_form'}).appendTo('#sign_up_form_space');
 	create_email_entry();
 	//create_DOB_entry(); //For filtering NSFW or maybe gifts/abilities on birthday
 	create_username_entry();
@@ -17,7 +17,7 @@ function create_sign_up_form(){
 function create_terms_checkbox(){
 	$('<br/>').appendTo('#sign_up_form');
 	$('<input/>',{name:'terms_of_use' , type:'checkbox'}).appendTo('#sign_up_form');
-	$("#sign_up_form").append("<span class='checkbox_text'> I have read and agreed to the <a href='#'>Terms of Use </a></span>");
+	$("#sign_up_form").append("<span class='checkbox_text'> I have read and agree to the <a href='#'>Terms of Use </a></span>");
 	$('<div/>',{id: 'no_read_terms' , text:'*Please agree to the Terms of Use.'}).appendTo('#sign_up_form');
 	document.getElementById('no_read_terms').style.display = 'none';
 	$('<br/>').appendTo('#sign_up_form');
@@ -32,6 +32,7 @@ function create_submit_button(){
 function submit(form){
 	if (check_valid_input(form)){
 		$.post( '/api/users/add' , $('#sign_up_form').serialize() );
+		window.document.location.href = 'sign_up_success.html';
 	}
 	/*
     $.ajax({
@@ -91,10 +92,8 @@ function check_valid_input(form){
 	var pwd_match = check_password_match(form);
 	//var name_avail = check_username_available();
 	if (pwd_match && read_terms){
-		//load some confirmation thank you/email sent page
 		return true;
 	}
-	alert('failure');
 	return false;
 }
 
