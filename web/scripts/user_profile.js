@@ -1,7 +1,8 @@
 
 function create_user_profile(user_tab_num , user_id){
 	create_user_banner(user_id);
-	//create_user_tabs(user_id , user_tab_num);
+	create_user_tabs(user_tab_num);
+	create_user_tab_content(user_tab_num , user_id);
 }
 
 function create_user_banner(user_id){
@@ -40,10 +41,10 @@ function get_user_profile_pic(user_id){
 
 function create_profile_username(user_id){
 	$('#user_banner').append("<div id='profile_username'></div>");
-	$('#profile_username').text(get_username(user_id));
+	$('#profile_username').text(get_profile_username(user_id));
 }
 
-function get_username(user_id){
+function get_profile_username(user_id){
 	return 'Queen_of_Equestria';
 }
 

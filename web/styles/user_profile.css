@@ -1,8 +1,8 @@
 #user_banner{
 	position:relative;
 	margin-top:50px;
-	height:350px;
-	width:60%;
+	height:330px;
+	width:850px;
 	margin-left:auto;
 	margin-right:auto;
 	background-color:rgb(12,120,154);
@@ -61,14 +61,21 @@
 
 #trophy_case{
 	position:relative;
-	top:-40px;
+	top:-30px;
+	margin:0;
+	padding:0;
 }
 #trophy_case li{
 	display:inline;
-	padding:0 60px 0 60px;
 	font-size:35px;
 	font-weight:500;
 	color:rgb(52,52,52);
+}
+#queen_trophies{
+	padding:0 120px 0 120px;
+}
+#star_trophies{
+	padding:0 0 0 120px;
 }
 #trophy_case li img{
 	left:20px;
