@@ -6,25 +6,22 @@ function create_user_tabs(user_tab_num){
 	update_user_tabs(user_tab_num);
 }
 
-function create_my_rants(){
+function create_my_rants(user_id){
 	$('<li/>',{id:'my_rants'}).appendTo('#user_tabs');
-	//$('<a/>',{id: 'my_rants_link'}).appendTo('#my_rants');
 	$('#my_rants').text('My rants');
-	$('#my_rants').click(function(){create_user_tabs(0);});
+	$('#my_rants').click(function(){update_user_tabs(0); update_user_tab_content(0);});
 }
 
-function create_my_activity(){
+function create_my_activity(user_id){
 	$('<li/>',{id:'my_activity'}).appendTo('#user_tabs');
-	//$('<a/>',{id: 'my_activity_link'}).appendTo('#my_rants');
 	$('#my_activity').text('My activity');
-	$('#my_activity').click(function(){create_user_tabs(1);});
+	$('#my_activity').click(function(){update_user_tabs(1); update_user_tab_content(1);});
 }
 
-function create_my_items(){
+function create_my_items(user_id){
 	$('<li/>',{id:'my_items'}).appendTo('#user_tabs');
-	//$('<a/>',{id: 'my_items_link'}).appendTo('#my_rants');
 	$('#my_items').text('My items');
-	$('#my_items').click(function(){create_user_tabs(2);});
+	$('#my_items').click(function(){update_user_tabs(2); update_user_tab_content(2);});
 }
 
 function update_user_tabs(user_tab_num){

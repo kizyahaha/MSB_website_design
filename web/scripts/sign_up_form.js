@@ -54,7 +54,7 @@ function ask_visibility(str){
 
 function create_email_entry(){
 	$('<label/>',{id: 'email_label' , text: '*Enter e-mail:'}).appendTo('#sign_up_form');
-	$('<input/>',{name:'email' , addClass:'text_entry' , placeholder: 'email@email.com' , type:'text' , autocomplete:'on'}).appendTo('#sign_up_form');
+	$('<input/>',{name:'email' , addClass:'text_entry' , placeholder: 'email@email.com' , type:'email' , autocomplete:'on'}).appendTo('#sign_up_form');
 	$('<br/>').appendTo('#sign_up_form');
 }
 

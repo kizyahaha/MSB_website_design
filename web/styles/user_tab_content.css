@@ -8,3 +8,50 @@
 	background-color: rgb(12,120,154);
 	border-radius:20px;
 }
+#my_rant_sorts{
+	position:absolute;
+	width:100%;
+	text-align:center;
+	margin-top:10px;
+	height:40px;
+	font-family:lao ui;
+	font-weight:700;
+	color:white;
+	font-size:20px;
+}
+#my_rant_sorts form {
+	display:inline;
+	padding:0 30px 0 30px;
+}
+#my_rant_sorts select {
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	font-size:18px;
+}
+#my_rants_space{
+	position:absolute;
+	left:20px;
+	right:20px;
+	bottom:20px;
+	top:60px;
+	background-color: rgb(215,226,229);
+	border-radius:20px;
+}
+#my_activity_space{
+	position:absolute;
+	left:20px;
+	right:20px;
+	bottom:20px;
+	top:20px;
+	background-color: rgb(215,226,229);
+	border-radius:20px;
+}
+#my_items_space{
+	position:absolute;
+	left:20px;
+	right:20px;
+	bottom:20px;
+	top:20px;
+	background-color: rgb(215,226,229);
+	border-radius:20px;
+}

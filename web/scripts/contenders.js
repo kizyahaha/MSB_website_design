@@ -154,8 +154,8 @@ function get_contender_username(temp_row){
 	var username = document.createElement('td');
 	var username_link = document.createElement('a');
 	username_link.className = 'contender_username';
-	username_link.href = '#';
-	username_link.textContent = 'Master_User';
+	username_link.href = 'user_profile.html';
+	username_link.textContent = 'Queen_of_Equestria';
 	username.appendChild(username_link);
 	temp_row.appendChild(username);
 }
