@@ -6,6 +6,7 @@ function create_tabs(tab_num){
 	create_hourly();
 	create_ten_minutely();
 	create_minutely();
+	create_submit_rant_tab();
 	update_tabs(tab_num);
 }
 
@@ -78,4 +79,10 @@ function create_minutely(){
 function update_tabs(tab_num){
 	var tabs = document.getElementById('tabs');
 	tabs.children[tab_num].children[0].className = 'current_tab';
+}
+
+function create_submit_rant_tab(){
+	$('<a/>',{id:'submit_rant_link' , href:'submit_rant.html'}).appendTo('#tabs');
+	$('<li/>',{id:'submit_rant' , addClass:'other_tab'}).appendTo('#submit_rant_link');
+	$('#submit_rant').text('Create a rant!');
 }

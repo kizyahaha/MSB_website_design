@@ -50,6 +50,7 @@ function update_contender_title(tab_num){
 		default:
 			break;
 	}
+	$('#contender_title').append("<span style='color:rgb(52,52,52); font-size:18px;'><br/>(in no particular order)</span>");
 }
 
 function update_contenders(tab_num){

@@ -1,0 +1,96 @@
+#submit_rant_container{
+	position:relative;
+	margin-top:0px;
+	width:98%;
+	height:500px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: rgb(12,120,154);
+	border-radius:20px;
+}
+
+#title_for_submit{
+	position:absolute;
+	left:20px;
+	right:20px;
+	font-family:lao ui;
+	font-size:18px;
+	color:rgb(52,52,52);
+	font-weight:700;
+	margin-top:20px;
+}
+
+#rant_for_submit{
+	position:absolute;
+	left:20px;
+	right:20px;
+	font-family:lao ui;
+	font-size:18px;
+	color:rgb(52,52,52);
+	font-weight:700;
+	margin-top:100px;
+}
+
+#title_input{
+	font-family:lao ui;
+	font-size:18px;
+	color:rgb(52,52,52);
+	padding-left:10px;
+	padding-right:10px;
+	border:0;
+	width:100%;
+}
+
+#rant_input{
+	font-family:lao ui;
+	font-size:18px;
+	color:rgb(52,52,52);
+	padding-left:10px;
+	padding-right:10px;
+	border:0;
+	width:100%;
+}
+
+#title_missing{
+	font-family:lao ui;
+	font-size:16px;
+	color:red;
+	padding-left:10px;
+	padding-right:10px;
+	width:100%;
+}
+
+#rant_missing{
+	font-family:lao ui;
+	font-size:16px;
+	color:red;
+	padding-left:10px;
+	padding-right:10px;
+	width:100%;
+}
+
+#submit_rant_button{
+	position:relative;
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	font-weight:700;
+	font-size:15px;
+	text-align:center;
+	top:450px;
+	left:45%;
+}
+
+#rant_area{
+	position:relative;
+	width:100%;
+	height:320px;
+	overflow:auto;
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	font-size:18px;
+	font-weight:100;
+	background:white;
+	padding-left:10px;
+	padding-right:10px;
+}
+
