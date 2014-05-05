@@ -1,6 +1,5 @@
 package com.kizy.web;
 
-import java.io.File;
 import java.io.IOException;
 
 import org.springframework.stereotype.Controller;
@@ -8,25 +7,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
-import com.google.common.io.Files;
+import com.kizy.data.DatabaseUtils;
+import com.kizy.data.UserImpl;
 
 @Controller
 @RequestMapping(value = "/users", method = RequestMethod.POST)
 public class UserController {
-	
-	private static final String USERS_FILENAME = "data" + File.separator + "users.txt";
-	private static final File USERS_FILE = new File(USERS_FILENAME);
-	
+
 	// POST localhost:9876/api/users/add
 	//  username = Bill
 	//  password = password
-	
+
+	// TODO: figure out why request is sent to /api/users/users/add (jquery-1.11.1:9631 xhr.send)
 	@RequestMapping(value = "/add")
-	public void addUser(@RequestParam("username") String username, @RequestParam("password") String password, @RequestParam("email") String email) throws IOException {
+	public void addUser(@RequestParam("username") String username,
+	                    @RequestParam("password") String password,
+	                    @RequestParam("email") String email) throws IOException {
 		if (!Strings.isNullOrEmpty(password) && !Strings.isNullOrEmpty(username) && !Strings.isNullOrEmpty(email) ) {
-			Files.write(username + ", " + password + ", " + email, USERS_FILE, Charsets.UTF_8);
+			DatabaseUtils.write(new UserImpl(username, password, email));
 		}
 	}
 

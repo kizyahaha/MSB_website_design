@@ -57,8 +57,8 @@ function create_log_in_button(){
 
 function log_in(form){
 	if (check_correct_input(form)){
-		//$.post( '/api/users/login' , $('#log_in_form').serialize() );
-		window.document.location.href = 'daily.html';
+		$.post( '/api/login/login' , $('#log_in_form').serialize() );
+		//window.document.location.href = 'daily.html';
 		//var change_link = document.getElementById('banner_log_in_link');
 		//change_link.textContent = 'My profile';
 		//change_link.href = some user profile;
