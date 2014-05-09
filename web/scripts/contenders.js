@@ -29,7 +29,7 @@ function update_contender_space(tab_num){
 
 var num_contenders;
 function get_num_contenders(tab_num){
-	num_contenders = 10;
+	num_contenders = 15;
 }
 
 function update_contender_title(tab_num){

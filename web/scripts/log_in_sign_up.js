@@ -55,32 +55,41 @@ function create_log_in_button(){
 	$('#log_in_button').click( function(){log_in(this.form);} );
 }
 
-function log_in(form){
-	if (check_correct_input(form)){
-		$.post( '/api/login/login' , $('#log_in_form').serialize() );
-		//window.document.location.href = 'daily.html';
-		//var change_link = document.getElementById('banner_log_in_link');
-		//change_link.textContent = 'My profile';
-		//change_link.href = some user profile;
-	}
+function log_in(form){;
+	$.ajax({
+		type: 'POST',
+		url: '/api/login/login',
+		data: $('#log_in_form').serialize(),
+	});
+	setTimeout( function(){
+		if(check_for_cookie()){
+			window.document.location.href = 'daily.html';
+			//var change_link = document.getElementById('banner_log_in_link');
+			//change_link.textContent = 'My profile';
+			//change_link.href = some user profile;
+		}
+		else{
+			document.getElementById('log_in_error_message').style.display = 'initial';
+		}
+	},500);
+	
+	
 }
 
-function check_correct_input(form){
-	var name_exists = check_username_exists(form);
-	var pwd_correct = check_password_correct(form);
-	if (name_exists && pwd_correct){
-		return true;
+var logged_in_user = "";
+function check_for_cookie(){
+	var cookie_name = 'MY_SOAP_BOX_USERNAME';
+	var cookies = document.cookie.split(';');
+	var cookies_length = cookies.length;
+	for(var i=0; i<cookies_length; i++) {
+		var cookie = cookies[i].trim();
+		if (cookie.indexOf(cookie_name) == 0){
+			var temp = cookie.split("=");
+			logged_in_user = temp[1];
+			return true;
+		}
 	}
-	document.getElementById('log_in_error_message').style.display = 'initial';
 	return false;
-}
-
-function check_username_exists(){
-	return true;
-}
-
-function check_password_correct(){
-	return true;
 }
 
 function create_log_in_help(){

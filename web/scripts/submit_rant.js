@@ -17,8 +17,9 @@ function create_title_for_submit(){
 function create_rant_for_submit(){
 	$('#rant_submission_form').append("<div id='rant_for_submit'>Rant:<br/></div>");
 	//$('#rant_for_submit').append("<div id='rant_area' contenteditable='true'></div>");
-	$('<textarea/>',{id:'rant_input' , type:'text'}).appendTo('#rant_for_submit');
+	$('<textarea/>',{name:'rant_input' , id:'rant_input' , type:'text'}).appendTo('#rant_for_submit');
 	document.getElementById('rant_input').rows=12;
+	//CKEDITOR.replace('rant_input');
 	$('<div/>',{id: 'rant_missing' , text:"*Please provide some rant content"}).appendTo('#rant_for_submit');
 	document.getElementById('rant_missing').style.display = 'none';
 }

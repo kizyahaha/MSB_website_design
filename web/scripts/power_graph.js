@@ -34,27 +34,33 @@ function get_power_scale(tab_num){
 }
 
 function get_powers(tab_num){
+	$('<div/>',{id:'power_bars' , width:'100%' , height:'100%'}).appendTo('#power_graph');
+	var graph_width = Math.floor( $('#power_bars').width() );
+	var graph_height = Math.floor( $('#power_bars').height() );
+	var power_bar_width = Math.floor( graph_width*0.75 / num_contenders );
+	var bar_spacing = Math.floor( graph_width*0.25 / (num_contenders+1) );
+	var power_bar_height = Math.floor( graph_height*0.9 );
+	for (i=0 ; i<num_contenders ; i++){
+		var power_bar = document.createElement('div');
+		power_bar.className = 'power_bar';
+		var rank = i+1;
+		power_bar.title = 'rank:' + rank + ', power:' + power_bar_height;
+		power_bar.style.width = power_bar_width;
+		power_bar.style.height = power_bar_height;
+		power_bar_height = Math.floor( power_bar_height * 0.9 );
+		power_bar.style.left = bar_spacing*(i+1) + power_bar_width*i;
+		document.getElementById('power_bars').appendChild(power_bar);
+	}	
 }
-
-
-
-/*
-<div id="power_graph">
-	<div id="y_label">Power</div>
-	<div id="x_label">Rank</div>
-	<div id="max-power">10,000</div>
-	<div id="min-power">6,500</div>
-	<div class="power" id="power_1"></div>
-	<div class="power" id="power_2"></div>
-	<div class="power" id="power_3"></div>
-	<div class="power" id="power_4"></div>
-	<div class="power" id="power_5"></div>
-	<div class="power" id="power_6"></div>
-	<div class="rank" id="rank_1">1</div>
-	<div class="rank" id="rank_2">2</div>
-	<div class="rank" id="rank_3">3</div>
-	<div class="rank" id="rank_4">4</div>
-	<div class="rank" id="rank_5">5</div>
-	<div class="rank" id="rank_6">6</div>
-</div>
-*/
+window.onresize = resize_power_bars;
+function resize_power_bars(){
+	var graph_width = $('#power_bars').width();
+	var power_bar_width = graph_width*0.75 / num_contenders;
+	var bar_spacing = graph_width*0.25 / (num_contenders+1);
+	var power_bars = new Array();
+	var power_bars = document.getElementById('power_bars').children;
+	for (i=0 ; i<power_bars.length ; i++){
+		power_bars[i].style.width = power_bar_width;
+		power_bars[i].style.left = bar_spacing*(i+1) + power_bar_width*i;
+	}
+}
