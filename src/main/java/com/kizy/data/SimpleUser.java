@@ -1,12 +1,12 @@
 package com.kizy.data;
 
-public class UserImpl implements User {
+public class SimpleUser implements User {
 
     private final String username;
     private final String password;
     private final String email;
 
-    public UserImpl(String username, String password, String email) {
+    public SimpleUser(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -25,6 +25,11 @@ public class UserImpl implements User {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[SimpleUser - Username: {}, Email: {}, Password: {}]", username, email, password);
     }
 
 }

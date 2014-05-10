@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.common.base.Strings;
 import com.kizy.data.DatabaseUtils;
-import com.kizy.data.UserImpl;
+import com.kizy.data.SimpleUser;
 
 @Controller
 @RequestMapping(value = "/users", method = RequestMethod.POST)
@@ -25,7 +25,7 @@ public class UserController {
 	                    @RequestParam("password") String password,
 	                    @RequestParam("email") String email) throws IOException {
 		if (!Strings.isNullOrEmpty(password) && !Strings.isNullOrEmpty(username) && !Strings.isNullOrEmpty(email) ) {
-			DatabaseUtils.write(new UserImpl(username, password, email));
+			DatabaseUtils.write(new SimpleUser(username, password, email));
 		}
 	}
 
