@@ -17,7 +17,7 @@ public class DatabaseUtils {
     }
 
     public static void write(User user) throws IOException {
-        Files.write(user.getUsername() + "," + user.getPassword() + "," + user.getEmail(),
+        Files.append(user.getUsername() + "," + user.getPassword() + "," + user.getEmail() + "\n",
                     USERS_FILE, Charsets.UTF_8);
     }
 
