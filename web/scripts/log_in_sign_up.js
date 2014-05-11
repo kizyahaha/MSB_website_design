@@ -61,26 +61,12 @@ function log_in(form){;
 		url: '/api/login/login',
 		data: $('#log_in_form').serialize(),
 		success: function(msg) {
-		    alert("success: " + msg);
 		    window.document.location.href = 'daily.html';
 		},
 		error: function(msg) {
 		    document.getElementById('log_in_error_message').style.display = 'initial';
 		}
 	});
-	/*setTimeout( function(){
-		if(check_for_cookie()){
-			window.document.location.href = 'daily.html';
-			//var change_link = document.getElementById('banner_log_in_link');
-			//change_link.textContent = 'My profile';
-			//change_link.href = some user profile;
-		}
-		else{
-			document.getElementById('log_in_error_message').style.display = 'initial';
-		}
-	},500);*/
-	
-	
 }
 
 var logged_in_user = "";
