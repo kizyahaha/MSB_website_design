@@ -27,6 +27,7 @@
 	font-family:lao ui;
 	color:rgb(52,52,52);
 	font-size:18px;
+	border-radius:5px;
 }
 #my_rants_space{
 	position:absolute;
