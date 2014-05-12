@@ -1,0 +1,25 @@
+#detailed_rant_container{
+	position:relative;
+	margin-top: 20px;
+	width:98%;
+	height:900px;
+	margin-left:auto;
+	margin-right:auto;
+	background-color: rgb(12,120,154);
+	border-radius:20px;
+}
+#detailed_rant_space{
+	position:absolute;
+	left:20px;
+	right:20px;
+	top:20px;
+	bottom:350px;
+	background-color: rgb(215,226,229);
+	border:solid rgb(215,226,229) 20px;
+	border-radius:20px;
+}
+
+#detailed_rant_title{
+	font-size:18px;
+	padding-right:20px;
+}

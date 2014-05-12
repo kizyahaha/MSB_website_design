@@ -16,10 +16,6 @@ function create_my_rants_content(user_id){
 	get_my_rants();
 }
 
-
-
-
-
 function get_my_rants(){
 	var my_rants = document.getElementById('my_rants_space');
 	num_my_rants = get_num_my_rants();
@@ -143,7 +139,7 @@ function get_my_rant_title(temp_row , is_rant_active){
 	else{
 		my_rant_title_link.className = my_rant_title_link.className + ' inactive_rant';
 	}
-	my_rant_title_link.href = '#';
+	my_rant_title_link.href = 'rant_view.html';
 	my_rant_title_link.textContent = 'This is one of my rants';
 	my_rant_title.appendChild(my_rant_title_link);
 	temp_row.appendChild(my_rant_title);
@@ -170,18 +166,6 @@ function get_my_rant_rant(my_rant , num){
 	my_rant_rant.appendChild(fade);
 	my_rant.appendChild(my_rant_rant);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 function create_status_select(){
 	$('<form/>',{id:'status_pulldown'}).appendTo('#my_rant_sorts');
