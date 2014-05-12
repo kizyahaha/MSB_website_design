@@ -76,30 +76,31 @@ function get_random_num(){
 function create_banner_links(){
 	var banner_links = document.createElement('ul');
 	banner_links.id = 'banner_links';
-	var li_1 = document.createElement('li') , li_2 = document.createElement('li') , li_3 = document.createElement('li');
-	var a_1 = document.createElement('a') , a_2 = document.createElement('a') , a_3 = document.createElement('a');
+	var li_1 = document.createElement('li') , li_2 = document.createElement('li') , li_3 = document.createElement('li') , li_4 = document.createElement('li');
+	var a_1 = document.createElement('a') , a_2 = document.createElement('a') , a_3 = document.createElement('a') , a_4 = document.createElement('a');
 	a_1.href = '#';
 	a_1.textContent = 'FAQ';
 	li_1.appendChild(a_1);
 	a_2.href = '#';
 	a_2.textContent = 'Archives';
 	li_2.appendChild(a_2);
-	a_3.id = 'banner_log_in_link';
-	a_3.href = 'log_in_sign_up.html';
-	a_3.textContent = 'Log in/Sign up';
+	if (check_for_user_cookie()){
+		a_3.href = 'user_profile.html';
+		a_3.textContent = 'My profile';
+		a_4.href = 'javascript:delete_user_cookie();';
+		a_4.textContent = 'Log out';
+	}
+	else{
+		a_3.id = 'banner_log_in_link';
+		a_3.href = 'log_in_sign_up.html';
+		a_3.textContent = 'Log in/Sign up';
+	}
 	li_3.appendChild(a_3);
+	li_4.appendChild(a_4);
 	banner_links.appendChild(li_1);
 	banner_links.appendChild(li_2);
 	banner_links.appendChild(li_3);
-	
-	//temp for user profile testing only
-	var li_4 = document.createElement('li');
-	var a_4 = document.createElement('a');
-	a_4.href = 'user_profile.html';
-	a_4.textContent = 'My profile';
-	li_4.appendChild(a_4);
 	banner_links.appendChild(li_4);
-	//
 	
 	document.getElementById('banner_background').appendChild(banner_links);
 }

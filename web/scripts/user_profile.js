@@ -41,7 +41,8 @@ function get_user_profile_pic(user_id){
 
 function create_profile_username(user_id){
 	$('#user_banner').append("<div id='profile_username'></div>");
-	$('#profile_username').text(get_profile_username(user_id));
+	//$('#profile_username').text(get_profile_username(user_id));
+	$('#profile_username').text(logged_in_user);
 }
 
 function get_profile_username(user_id){

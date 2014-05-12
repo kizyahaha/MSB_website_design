@@ -82,7 +82,13 @@ function update_tabs(tab_num){
 }
 
 function create_submit_rant_tab(){
-	$('<a/>',{id:'submit_rant_link' , href:'submit_rant.html'}).appendTo('#tabs');
+	$('<a/>',{id:'submit_rant_link'}).appendTo('#tabs');
+	if (check_for_user_cookie()){
+		$('#submit_rant_link').attr('href','submit_rant.html');
+	}
+	else{
+		$('#submit_rant_link').attr('href','log_in_sign_up.html');
+	}
 	$('<li/>',{id:'submit_rant' , addClass:'other_tab'}).appendTo('#submit_rant_link');
 	$('#submit_rant').text('Create a rant!');
 }

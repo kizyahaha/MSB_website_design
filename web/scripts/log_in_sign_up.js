@@ -53,6 +53,13 @@ function create_stay_logged_in(){
 function create_log_in_button(){
 	$('<input/>',{id:'log_in_button' , type:'button' , value:'Log in'}).appendTo('#log_in_form');
 	$('#log_in_button').click( function(){log_in(this.form);} );
+	$(window).keypress(function (e) {
+		var key = e.which;
+		if(key == 13){
+			$('#log_in_button').click();
+			return false;  
+		}
+	});
 }
 
 function log_in(form){;
@@ -70,7 +77,7 @@ function log_in(form){;
 }
 
 var logged_in_user = "";
-function check_for_cookie(){
+function check_for_user_cookie(){
 	var cookie_name = 'MY_SOAP_BOX_USERNAME';
 	var cookies = document.cookie.split(';');
 	var cookies_length = cookies.length;
@@ -83,6 +90,15 @@ function check_for_cookie(){
 		}
 	}
 	return false;
+}
+
+function delete_user_cookie(){
+	var cookie_name = 'MY_SOAP_BOX_USERNAME';
+	document.cookie = cookie_name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT';
+	/*document.cookie = cookie_name + "=" +
+		((path) ? ";path="+path:"/main")+
+		";expires=Thu, 01 Jan 1970 00:00:01 GMT";*/
+	window.document.location.href = 'daily.html';
 }
 
 function create_log_in_help(){
