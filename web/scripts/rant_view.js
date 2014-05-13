@@ -68,11 +68,11 @@ function create_detailed_rant_power_graph_power_limits(){
 	$('<div/>',{id:'detailed_max_power'}).appendTo('#detailed_power_graph');
 	$('#detailed_max_power').text('9,437');
 	$('<div/>',{id:'detailed_min_power'}).appendTo('#detailed_power_graph');
-	$('#detailed_min_power').text('0');
+	$('#detailed_min_power').text('500');
 }
 
 function get_detailed_rant_power_graph(){
-	$('<div/>',{id:'detailed_power_bars' , width:'100%' , height:'100%'}).appendTo('#detailed_power_graph');
+	$('<div/>',{id:'detailed_power_bars'}).appendTo('#detailed_power_graph');
 	var detailed_graph_width = $('#detailed_power_bars').width();
 	var detailed_graph_height = $('#detailed_power_bars').height();
 	var curr_power = 500;
@@ -162,6 +162,7 @@ function get_random_num(range){
 }
 
 function get_detailed_rant_power_graph_events(events , bar_width){
+	$('<div/>',{id:'detailed_events'}).appendTo('#detailed_power_graph');
 	var events_length = events.length;
 	for (i=0 ; i<events_length ; i++){
 		var event_marker = document.createElement('div');
@@ -172,7 +173,7 @@ function get_detailed_rant_power_graph_events(events , bar_width){
 				event_marker.title = 'Rant initialized with 500 power';
 				break;
 			case 1:
-				event_marker.title = 'Won minutely title!';
+				event_marker.title = 'You won the minutely title!';
 				break;
 			case 2:
 				event_marker.title = 'Queen_of_Equestria used a leech attack!';
@@ -192,20 +193,23 @@ function get_detailed_rant_power_graph_events(events , bar_width){
 			default:
 				break;
 		}
-		document.getElementById('detailed_power_bars').appendChild(event_marker);
+		document.getElementById('detailed_events').appendChild(event_marker);
 	}
 }
-/*
-window.onresize = resize_power_bars;
-function resize_power_bars(){
-	var graph_width = $('#power_bars').width();
-	var power_bar_width = graph_width*0.75 / num_contenders;
-	var bar_spacing = graph_width*0.25 / (num_contenders+1);
-	var power_bars = new Array();
-	var power_bars = document.getElementById('power_bars').children;
-	for (i=0 ; i<power_bars.length ; i++){
-		power_bars[i].style.width = power_bar_width;
-		power_bars[i].style.left = bar_spacing*(i+1) + power_bar_width*i;
+
+window.onresize = resize_detailed_power_graph;
+function resize_detailed_power_graph(){
+	var detailed_graph_width = $('#detailed_power_bars').width();
+	var change_width = document.getElementById('detailed_power_bars').children;
+	var detailed_power_bar_width = detailed_graph_width / (change_width.length);
+	for (i=0 ; i<change_width.length ; i++){
+		change_width[i].style.width = detailed_power_bar_width;
+		change_width[i].style.left = detailed_power_bar_width*i;
 	}
+	/*
+	var change_events = document.getElementById('detailed_events').children;
+	for (i=0 ; i<change_events.length ; i++){
+		change_events[i].style.left = ;
+	}
+	*/
 }
-*/
