@@ -34,23 +34,24 @@
 	overflow:auto;
 }
 .contender_num{
-	color:rgb(0,0,0);
+	color:rgb(52,52,52);
 	font-size:18px;
 	padding-right:20px;
 }
 .NSFW{
-	color:red;
+	color:red !important;
 	font-size:18px;
 	padding-right:20px;
 }
 .contender_title{
-	color:rgb(0,0,0);
+	font-family:lao ui;
+	color:rgb(52,52,52);
 	font-size:18px;
 	padding-right:20px;
 }
 .contender_username{
 	color:rgb(12,120,154);
-	font-size: 15px;
+	font-size: 18px;
 	padding-right:20px;
 	text-decoration:none;
 }

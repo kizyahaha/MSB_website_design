@@ -145,7 +145,7 @@ function get_contender_title(temp_row){
 	var contender_title = document.createElement('td');
 	var contender_title_link = document.createElement('a');
 	contender_title_link.className = 'contender_title';
-	contender_title_link.href = '#';
+	contender_title_link.href = 'rant_view.html';
 	contender_title_link.textContent = 'This is a contender rant';
 	contender_title.appendChild(contender_title_link);
 	temp_row.appendChild(contender_title);

@@ -17,9 +17,50 @@
 	background-color: rgb(215,226,229);
 	border:solid rgb(215,226,229) 20px;
 	border-radius:20px;
+	overflow:auto;
+}
+
+#detailed_rant_info_table{
+	display:inline;
 }
 
 #detailed_rant_title{
+	color:rgb(52,52,52);
+	font-family:lao ui;
+	font-size:25px;
+	text-decoration:underline;
+	padding-right:20px;
+}
+
+.detailed_NSFW{
+	color:red !important;
 	font-size:18px;
 	padding-right:20px;
+}
+.detailed_username{
+	font-family:lao ui;
+	color:rgb(12,120,154);
+	font-size: 18px;
+	text-decoration:none;
+}
+
+#detailed_rant_level{
+	position:absolute;
+	font-family:lao ui;
+	text-size:20px;
+	color:rgb(52,52,52);
+	display:inline;
+	right:20px;
+	margin-top:20px;
+}
+#detailed_rant_level_link{
+	font-family:lao ui;
+	text-size:20px;
+	color:rgb(52,52,52);
+}
+#detailed_rant_content{
+	margin-top:15px;
+	font-family:lao ui;
+	text-size:20px;
+	color:rgb(52,52,52);
 }
