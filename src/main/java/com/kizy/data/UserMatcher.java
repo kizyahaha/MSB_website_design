@@ -21,7 +21,7 @@ public class UserMatcher {
             public boolean apply(String line) {
                 String[] parts = DatabaseUtils.splitLine(line);
                 if (set.contains(MatchComponent.USERNAME)
-                        && !match.getUsername().equals(parts[0])) {
+                        && !match.getUsername().equalsIgnoreCase(parts[0])) {
                     return false;
                 }
                 if (set.contains(MatchComponent.PASSWORD)
@@ -29,7 +29,7 @@ public class UserMatcher {
                     return false;
                 }
                 if (set.contains(MatchComponent.EMAIL)
-                        && !match.getEmail().equals(parts[2])) {
+                        && !match.getEmail().equalsIgnoreCase(parts[2])) {
                     return false;
                 }
                 return true;

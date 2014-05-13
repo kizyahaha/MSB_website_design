@@ -79,19 +79,30 @@ function get_my_rant_num(my_rant_num_tr , num){
 
 function get_my_rant_level(my_rant_level_tr , num){
 	var my_rant_level_td = document.createElement('td');
-	my_rant_level_td.className = 'my_rant_level';
+	//my_rant_level_td.className = 'my_rant_level';
+	var my_rant_level_link = document.createElement('a');
+	//my_rant_level_link.className = 'my_rant_level';
 	if (num%4 == 0){
-		my_rant_level_td.innerHTML = 'Daily';
+		my_rant_level_link.innerHTML = 'Daily';
+		my_rant_level_link.href = 'daily.html';
+		my_rant_level_link.className = 'active_rant';
 	}
 	if (num%4 == 1){
-		my_rant_level_td.innerHTML = 'Hourly';
+		my_rant_level_link.innerHTML = 'Hourly';
+		my_rant_level_link.href = 'hourly.html';
+		my_rant_level_link.className = 'inactive_rant';
 	}
 	if (num%4 == 2){
-		my_rant_level_td.innerHTML = '10-Minutely';
+		my_rant_level_link.innerHTML = '10-Minutely';
+		my_rant_level_link.href = 'ten_minutely.html';
+		my_rant_level_link.className = 'inactive_rant';
 	}
 	if (num%4 == 3){
-		my_rant_level_td.innerHTML = 'Minutely';
+		my_rant_level_link.innerHTML = 'Minutely';
+		my_rant_level_link.href = 'minutely.html';
+		my_rant_level_link.className = 'inactive_rant';
 	}
+	my_rant_level_td.appendChild(my_rant_level_link);
 	my_rant_level_tr.appendChild(my_rant_level_td);
 }
 
