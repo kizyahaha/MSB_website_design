@@ -18,7 +18,7 @@ function create_detailed_rant_info(){
 	create_detailed_rant_title();
 	create_detailed_rant_username();
 	create_detailed_rant_level();
-	create_detailed_rant_NSFW();
+	//create_detailed_rant_NSFW();
 	create_detailed_rant_content();
 }
 
@@ -29,7 +29,7 @@ function create_detailed_rant_NSFW(){
 
 function create_detailed_rant_title(){
 	$('<td/>',{id:'detailed_rant_title'}).appendTo('#detailed_temp_row');
-	$('#detailed_rant_title').text('This is the title of this rant');
+	$('#detailed_rant_title').text('This is the title of this rant - ');
 }
 
 function create_detailed_rant_username(){
@@ -41,7 +41,7 @@ function create_detailed_rant_username(){
 function create_detailed_rant_level(){
 	$('<div/>',{id:'detailed_rant_level'}).appendTo('#detailed_rant_space');
 	$('#detailed_rant_level').text('Currently in ');
-	$('<a/>',{id:'detailed_rant_level_link' , href:'hourly.html'}).appendTo('#detailed_rant_level');
+	$('<a/>',{id:'detailed_rant_level_link' , href:'/main/hourly'}).appendTo('#detailed_rant_level');
 	$('#detailed_rant_level_link').text('Hourly');
 }
 
@@ -68,7 +68,7 @@ function create_detailed_rant_power_graph_power_limits(){
 	$('<div/>',{id:'detailed_max_power'}).appendTo('#detailed_power_graph');
 	$('#detailed_max_power').text('9,437');
 	$('<div/>',{id:'detailed_min_power'}).appendTo('#detailed_power_graph');
-	$('#detailed_min_power').text('500');
+	$('#detailed_min_power').text('0');
 }
 
 function get_detailed_rant_power_graph(){
@@ -85,7 +85,7 @@ function get_detailed_rant_power_graph(){
 		detailed_power_bar.className = 'detailed_power_bar';
 		detailed_power_bar.title = 'time:' + curr_point + ', power:' + curr_power;
 		detailed_power_bar.style.height = (curr_power / max_power) * detailed_graph_height;
-		curr_power = curr_power + get_random_num(50);
+		curr_power = curr_power + get_detailed_random_num(50);
 		curr_point++;
 		document.getElementById('detailed_power_bars').appendChild(detailed_power_bar);
 	}
@@ -96,7 +96,7 @@ function get_detailed_rant_power_graph(){
 		detailed_power_bar.className = 'detailed_power_bar';
 		detailed_power_bar.title = 'time:' + curr_point + ', power:' + curr_power;
 		detailed_power_bar.style.height = (curr_power / max_power) * detailed_graph_height;
-		curr_power = curr_power + get_random_num(100);
+		curr_power = curr_power + get_detailed_random_num(100);
 		curr_point++;
 		document.getElementById('detailed_power_bars').appendChild(detailed_power_bar);
 	}
@@ -106,7 +106,7 @@ function get_detailed_rant_power_graph(){
 		detailed_power_bar.className = 'detailed_power_bar';
 		detailed_power_bar.title = 'time:' + curr_point + ', power:' + curr_power;
 		detailed_power_bar.style.height = (curr_power / max_power) * detailed_graph_height;
-		curr_power = curr_power - get_random_num(100);
+		curr_power = curr_power - get_detailed_random_num(100);
 		curr_point++;
 		document.getElementById('detailed_power_bars').appendChild(detailed_power_bar);
 	}
@@ -116,7 +116,7 @@ function get_detailed_rant_power_graph(){
 		detailed_power_bar.className = 'detailed_power_bar';
 		detailed_power_bar.title = 'time:' + curr_point + ', power:' + curr_power;
 		detailed_power_bar.style.height = (curr_power / max_power) * detailed_graph_height;
-		curr_power = curr_power + get_random_num(300);
+		curr_power = curr_power + get_detailed_random_num(300);
 		curr_point++;
 		document.getElementById('detailed_power_bars').appendChild(detailed_power_bar);
 	}
@@ -127,7 +127,7 @@ function get_detailed_rant_power_graph(){
 		detailed_power_bar.className = 'detailed_power_bar';
 		detailed_power_bar.title = 'time:' + curr_point + ', power:' + curr_power;
 		detailed_power_bar.style.height = (curr_power / max_power) * detailed_graph_height;
-		curr_power = curr_power + get_random_num(50);
+		curr_power = curr_power + get_detailed_random_num(50);
 		curr_point++;
 		document.getElementById('detailed_power_bars').appendChild(detailed_power_bar);
 	}
@@ -137,7 +137,7 @@ function get_detailed_rant_power_graph(){
 		detailed_power_bar.className = 'detailed_power_bar';
 		detailed_power_bar.title = 'time:' + curr_point + ', power:' + curr_power;
 		detailed_power_bar.style.height = (curr_power / max_power) * detailed_graph_height;
-		curr_power = curr_power - get_random_num(100);
+		curr_power = curr_power - get_detailed_random_num(100);
 		curr_point++;
 		document.getElementById('detailed_power_bars').appendChild(detailed_power_bar);
 	}
@@ -156,7 +156,7 @@ function get_detailed_rant_power_graph(){
 	get_detailed_rant_power_graph_events(events , detailed_power_bar_width);
 }
 
-function get_random_num(range){
+function get_detailed_random_num(range){
 	var n = Math.floor(Math.random()*range);
 	return n;
 }

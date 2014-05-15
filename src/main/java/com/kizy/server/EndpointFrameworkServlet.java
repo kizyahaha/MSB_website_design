@@ -42,7 +42,8 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                 "user_tabs.css",
                                                                 "user_tab_content.css",
                                                                 "submit_rant.css",
-                                                                "rant_view.css");
+                                                                "rant_view.css",
+                                                                "my_items.css");
 
     private static final List<String> scripts = ImmutableList.of("jquery-1.11.1.js",
                                                                  "banner.js",
@@ -58,7 +59,8 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                  "user_tabs.js",
                                                                  "user_tab_content.js",
                                                                  "submit_rant.js",
-                                                                 "rant_view.js");
+                                                                 "rant_view.js",
+                                                                 "my_items.js");
 
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -1,0 +1,86 @@
+#my_items_space{
+	position:absolute;
+	left:20px;
+	right:20px;
+	bottom:20px;
+	top:20px;
+}
+#my_boks{
+	width:100%;
+	text-align:right;
+}
+#my_bok_symbol{
+	display:inline;
+	height:25px;
+}
+#my_bok_count{
+	display:inline;
+	font-family:lao ui;
+	padding-right:5px;
+	color:rgb(52,52,52);
+	font-size:27px;
+}
+#get_more_boks_button{
+	display:inline;
+	text-align:center;
+	border-radius:5px;
+	margin-left:35px;
+	font-family: lao ui;
+	color:white;
+	background-color:rgb(52,52,52);
+	font-weight:700;
+	font-size:20px;
+	padding:5px 10px 5px 10px;
+}
+.closed_my_item_tab{
+	margin-top:10px;
+	background-color:rgb(52,160,194);
+	border-radius:5px;
+	width:100%;
+	font-family:lao ui;
+	font-size:30px;
+	color:rgb(52,52,52);
+	box-sizing:border-box;
+	padding:10px;
+}
+.closed_my_item_tab:hover {
+	background-color: rgb(62,170,204);
+}
+
+.num_items{
+	display:inline;
+	font-family:lao ui;
+	font-size:30px;
+	color:rgb(52,52,52);
+}
+
+#defense_tab_content{
+	width:100%;
+	height:270px;
+}
+#attack_tab_content{
+	width:100%;
+	height:300px;
+}
+#boost_tab_content{
+	width:100%;
+	height:300px;
+}
+
+.item_container{
+	box-sizing:border-box;
+	padding: 10px 10px 10px 50px;
+}
+.item_picture{
+	border-radius:12px;
+	border:solid rgb(12,120,154) 2px;
+}
+.item_picture:hover{
+	border-color:white;
+}
+.item_cost{
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	display:inline;
+	font-size:25px;
+}

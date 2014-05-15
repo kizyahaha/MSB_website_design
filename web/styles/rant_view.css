@@ -21,15 +21,13 @@
 }
 
 #detailed_rant_info_table{
-	display:inline;
 }
 
 #detailed_rant_title{
 	color:rgb(52,52,52);
 	font-family:lao ui;
-	font-size:25px;
-	text-decoration:underline;
-	padding-right:20px;
+	font-size:22px;
+	font-weight:600;
 }
 
 .detailed_NSFW{
@@ -45,21 +43,19 @@
 }
 
 #detailed_rant_level{
-	position:absolute;
 	font-family:lao ui;
 	text-size:20px;
 	color:rgb(52,52,52);
-	display:inline;
-	right:20px;
-	margin-top:20px;
 }
 #detailed_rant_level_link{
 	font-family:lao ui;
 	text-size:20px;
-	color:rgb(52,52,52);
+	color:rgb(12,120,154);
+	text-decoration:none;
 }
 #detailed_rant_content{
-	margin-top:15px;
+	margin-top:20px;
+	margin-left:15px;
 	font-family:lao ui;
 	text-size:20px;
 	color:rgb(52,52,52);

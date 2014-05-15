@@ -213,11 +213,6 @@ function create_my_activity_content(user_id){
 	document.getElementById('my_activity_space').style.display = 'none';
 }
 
-function create_my_items_content(user_id){
-	$('<div/>',{id:'my_items_space'}).appendTo('#user_content_space');
-	document.getElementById('my_items_space').style.display = 'none';
-}
-
 
 function update_user_tab_content(user_tab_num){
 	document.getElementById('my_rants_space').style.display = 'none';
