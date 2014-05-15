@@ -55,7 +55,8 @@
 }
 
 #defense_tab_content{
-	width:100%;
+	width:90%;
+	margin:0 auto;
 	height:270px;
 }
 #attack_tab_content{
@@ -69,7 +70,22 @@
 
 .item_container{
 	box-sizing:border-box;
-	padding: 10px 10px 10px 50px;
+	font-family:lao ui;
+	font-size:25px;
+	color:rgb(52,52,52);
+	height:90px;
+	position:relative;
+}
+.item_info{
+	float:left;
+}
+.purchase_info{
+	display:inline;
+	position:absolute;
+	width:380px;
+	margin-left:55%;
+	left:-190px;
+	margin-top:20px;
 }
 .item_picture{
 	border-radius:12px;
@@ -78,9 +94,31 @@
 .item_picture:hover{
 	border-color:white;
 }
-.item_cost{
+.qty{
 	font-family:lao ui;
 	color:rgb(52,52,52);
 	display:inline;
 	font-size:25px;
+	text-align:center;
+	width:65px;
+	border:none;
+	border-radius:5px;
+}
+.use_info{
+	display:inline;
+	position:absolute;
+	right:0;
+	margin-top:20px;
+}
+.use_item_button{
+	display:inline;
+	text-align:center;
+	border-radius:5px;
+	margin-left:35px;
+	font-family: lao ui;
+	color:white;
+	background-color:rgb(52,52,52);
+	font-weight:700;
+	font-size:20px;
+	padding:5px 10px 5px 10px;
 }

@@ -36,7 +36,7 @@ function create_defense_tab(){
 	create_defensive_items();
 }
 function get_num_defense_items(){
-	return 6;
+	return get_curr_num_item(0) + get_curr_num_item(1) + get_curr_num_item(2);
 }
 function create_defensive_items(){
 	create_defense_decoy();
@@ -45,25 +45,86 @@ function create_defensive_items(){
 }
 function create_defense_decoy(){
 	$('<div/>',{addClass:'item_container' , id:'defense_decoy'}).appendTo('#defense_tab_content');
-	$('<img/>',{addClass:'item_picture' , id:'defense_decoy_img' , src:'images/defense_decoy_1.png'}).appendTo('#defense_decoy');
+	
+	$('<div/>',{addClass:'item_info' , id:'decoy_item_info'}).appendTo('#defense_decoy');
+	$('<img/>',{addClass:'item_picture' , id:'defense_decoy_img' , src:'images/defense_decoy_1.png'}).appendTo('#decoy_item_info');
 	$('#defense_decoy_img').click(function(){alert(get_item_description(0))});
-	$('<img/>',{id:'my_bok_symbol' , src:'images/bok_symbol_1.png'}).appendTo('#defense_decoy');
-	$('<div/>',{addClass:'item_cost' , id:'defense_decoy_cost' , text:get_item_cost(0)}).appendTo('#defense_decoy');
+	$('<img/>',{id:'my_bok_symbol' , src:'images/bok_symbol_1.png'}).appendTo('#decoy_item_info');
+	var item_cost = get_item_cost(0);
+	$('#decoy_item_info').append(item_cost);
+	
+	$('<div/>',{addClass:'purchase_info' , id:'decoy_purchase_info'}).appendTo('#defense_decoy');
+	$('#decoy_purchase_info').append('Purchase Qty: ');
+	$('<input/>',{addClass:'qty' , id:'decoy_qty' , type:'text' , placeholder:'0-99' , max:99 , min:0}).appendTo('#decoy_purchase_info');
+	$('#decoy_purchase_info').append(' = ');
+	$('<img/>',{id:'my_bok_symbol' , src:'images/bok_symbol_1.png'}).appendTo('#decoy_purchase_info');
+	var qty_cost = document.createTextNode('');
+	qty_cost.textContent = '0';
+	$('#decoy_qty').change(function(){qty_cost.textContent = qty_check('#decoy_qty',item_cost);});
+	qty_check('decoy_qty',item_cost)
+	$('#decoy_purchase_info').append(qty_cost);
+	
+	var curr_num_item = get_curr_num_item(0);
+	if (curr_num_item > 0){
+		$('<div/>',{addClass:'use_info' , id:'decoy_use_info'}).appendTo('#defense_decoy');
+		$('<div/>',{addClass:'use_item_button' , id:'decoy_use_button' , text:'USE'}).appendTo('#decoy_use_info');
+		$('#decoy_use_info').append(' (' + curr_num_item +')');
+	}
 	
 }
-function create_defense_downvote_reduction(){
+function create_defense_downvote_reduction(){	
 	$('<div/>',{addClass:'item_container' , id:'defense_downvote_reduction'}).appendTo('#defense_tab_content');
-	$('<img/>',{addClass:'item_picture' , id:'defense_downvote_reduction_img' , src:'images/defense_downvote_reduction_1.png'}).appendTo('#defense_downvote_reduction');
+	
+	$('<div/>',{addClass:'item_info' , id:'downvote_reduction_item_info'}).appendTo('#defense_downvote_reduction');
+	$('<img/>',{addClass:'item_picture' , id:'defense_downvote_reduction_img' , src:'images/defense_downvote_reduction_1.png'}).appendTo('#downvote_reduction_item_info');
 	$('#defense_downvote_reduction_img').click(function(){alert(get_item_description(1))});
-	$('<img/>',{id:'my_bok_symbol' , src:'images/bok_symbol_1.png'}).appendTo('#defense_downvote_reduction');
-	$('<div/>',{addClass:'item_cost' , id:'defense_downvote_reduction_cost' , text:get_item_cost(1)}).appendTo('#defense_downvote_reduction');
+	$('<img/>',{id:'my_bok_symbol' , src:'images/bok_symbol_1.png'}).appendTo('#downvote_reduction_item_info');
+	var item_cost = get_item_cost(1);
+	$('#downvote_reduction_item_info').append(item_cost);
+	
+	$('<div/>',{addClass:'purchase_info' , id:'downvote_reduction_purchase_info'}).appendTo('#defense_downvote_reduction');
+	$('#downvote_reduction_purchase_info').append('Purchase Qty: ');
+	$('<input/>',{addClass:'qty' , id:'downvote_reduction_qty' , type:'text' , placeholder:'0-99' , max:99 , min:0}).appendTo('#downvote_reduction_purchase_info');
+	$('#downvote_reduction_purchase_info').append(' = ');
+	$('<img/>',{id:'my_bok_symbol' , src:'images/bok_symbol_1.png'}).appendTo('#downvote_reduction_purchase_info');
+	var qty_cost = document.createTextNode('');
+	qty_cost.textContent = '0';
+	$('#downvote_reduction_qty').change(function(){qty_cost.textContent = qty_check('#downvote_reduction_qty',item_cost);});
+	$('#downvote_reduction_purchase_info').append(qty_cost);
+	
+	var curr_num_item = get_curr_num_item(1);
+	if (curr_num_item > 0){
+		$('<div/>',{addClass:'use_info' , id:'downvote_reduction_use_info'}).appendTo('#defense_downvote_reduction');
+		$('<div/>',{addClass:'use_item_button' , id:'downvote_reduction_use_button' , text:'USE'}).appendTo('#downvote_reduction_use_info');
+		$('#downvote_reduction_use_info').append(' (' + curr_num_item +')');
+	}
 }
 function create_defense_antiscout(){
 	$('<div/>',{addClass:'item_container' , id:'defense_antiscout'}).appendTo('#defense_tab_content');
-	$('<img/>',{addClass:'item_picture' , id:'defense_antiscout_img' , src:'images/defense_antiscout_1.png'}).appendTo('#defense_antiscout');
+	
+	$('<div/>',{addClass:'item_info' , id:'antiscout_item_info'}).appendTo('#defense_antiscout');
+	$('<img/>',{addClass:'item_picture' , id:'defense_antiscout_img' , src:'images/defense_antiscout_1.png'}).appendTo('#antiscout_item_info');
 	$('#defense_antiscout_img').click(function(){alert(get_item_description(2))});
-	$('<img/>',{id:'my_bok_symbol' , src:'images/bok_symbol_1.png'}).appendTo('#defense_antiscout');
-	$('<div/>',{addClass:'item_cost' , id:'defense_antiscout_cost' , text:get_item_cost(2)}).appendTo('#defense_antiscout');
+	$('<img/>',{id:'my_bok_symbol' , src:'images/bok_symbol_1.png'}).appendTo('#antiscout_item_info');
+	var item_cost = get_item_cost(2);
+	$('#antiscout_item_info').append(item_cost);
+	
+	$('<div/>',{addClass:'purchase_info' , id:'antiscout_purchase_info'}).appendTo('#defense_antiscout');
+	$('#antiscout_purchase_info').append('Purchase Qty: ');
+	$('<input/>',{addClass:'qty' , id:'antiscout_qty' , type:'text' , placeholder:'0-99' , max:99 , min:0}).appendTo('#antiscout_purchase_info');
+	$('#antiscout_purchase_info').append(' = ');
+	$('<img/>',{id:'my_bok_symbol' , src:'images/bok_symbol_1.png'}).appendTo('#antiscout_purchase_info');
+	var qty_cost = document.createTextNode('');
+	qty_cost.textContent = '0';
+	$('#antiscout_qty').change(function(){qty_cost.textContent = qty_check('#antiscout_qty',item_cost);});
+	$('#antiscout_purchase_info').append(qty_cost);
+	
+	var curr_num_item = get_curr_num_item(2);
+	if (curr_num_item > 0){
+		$('<div/>',{addClass:'use_info' , id:'antiscout_use_info'}).appendTo('#defense_antiscout');
+		$('<div/>',{addClass:'use_item_button' , id:'antiscout_use_button' , text:'USE'}).appendTo('#antiscout_use_info');
+		$('#antiscout_use_info').append(' (' + curr_num_item +')');
+	}
 }
 
 function create_attack_tab(){
@@ -117,10 +178,10 @@ function get_item_description(num){
 function get_item_cost(num){
 	switch (num){
 		case 0: //decoy
-			return 100;
+			return 300;
 			break;
 		case 1: //downvote reduction
-			return 100;
+			return 200;
 			break;
 		case 2: //anti-scout
 			return 100;
@@ -128,4 +189,34 @@ function get_item_cost(num){
 		default:
 			break;
 	}
+}
+
+function get_curr_num_item(num){
+	switch (num){
+		case 0: //decoy
+			return 1;
+			break;
+		case 1: //downvote reduction
+			return 0;
+			break;
+		case 2: //anti-scout
+			return 3;
+			break;
+		default:
+			break;
+	}
+}
+
+function qty_check(id , item_cost){
+	if (isNaN($(id).val())){
+		$(id).val(0);
+	}
+	$(id).val(Math.round($(id).val()));
+	if ($(id).val() < 0){
+		$(id).val(0);
+	}
+	else if ($(id).val() > 99){
+		$(id).val(99);
+	}
+	return $(id).val() * item_cost;
 }
