@@ -628,14 +628,14 @@ function create_modal_window(){
 }
 function display_modal_content(num){
 	$('#modal_message').html('');
-	$('<img/>',{addClass:'item_picture' , src:get_item_image(num)}).appendTo('#modal_message');
+	$('<img/>',{addClass:'modal_item_picture' , src:get_item_image(num)}).appendTo('#modal_message');
 	
 	$('<div/>',{text:get_item_name(num)}).appendTo('#modal_message');
 	$("#modal_message").append("<br/><br/>");
 	$('<div/>',{text:get_item_description(num)}).appendTo('#modal_message');
 	$("#modal_message").append("<br/><br/>");
 	$('<div/>',{addClass:'modal_close' , id:'modal_close' , text:'CLOSE'}).appendTo('#modal_message');
-	$('#modal_background').click(function(){document.getElementById('modal_background').style.display = 'none';});
+	$('#modal_close').click(function(){document.getElementById('modal_background').style.display = 'none';});
 	document.getElementById('modal_background').style.display = 'block';
 }
 

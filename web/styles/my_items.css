@@ -113,6 +113,10 @@
 	border-color:white;
 	cursor:pointer;
 }
+.modal_item_picture{
+	border-radius:15px;
+	padding:0;
+}
 .qty{
 	font-family:lao ui;
 	color:rgb(52,52,52);
@@ -180,7 +184,8 @@
 	position:fixed;
 	top:25%;
 	width:100%;
-	border:solid 10px rgb(12,120,154);
+	box-sizing:border-box;
+	padding: 10px;
 	text-align:center;
 	font-family:lao ui;
 	color:rgb(52,52,52);
