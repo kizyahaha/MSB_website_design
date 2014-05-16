@@ -6,33 +6,29 @@
 	top:20px;
 }
 #my_boks{
-	width:100%;
 	text-align:right;
+}
+#my_boks_count{
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	font-size:27px;
+	background-color:white;
+	border-radius:8px;
+	width:90px;
+	border:solid white 5px;
+	display:inline;
 }
 #my_bok_symbol{
 	display:inline;
 	height:25px;
 }
-#my_bok_count{
-	display:inline;
-	font-family:lao ui;
-	padding-right:5px;
-	color:rgb(52,52,52);
-	font-size:27px;
-}
-#get_more_boks_button{
-	display:inline;
-	text-align:center;
-	border-radius:5px;
-	margin-left:35px;
+#get_more_boks_link{
 	font-family: lao ui;
 	color:white;
-	background-color:rgb(52,52,52);
-	font-weight:700;
 	font-size:20px;
-	padding:5px 10px 5px 10px;
+	padding-left:15px;
 }
-.closed_my_item_tab{
+.my_item_tab{
 	margin-top:10px;
 	background-color:rgb(52,160,194);
 	border-radius:5px;
@@ -43,8 +39,24 @@
 	box-sizing:border-box;
 	padding:10px;
 }
-.closed_my_item_tab:hover {
+.my_item_tab:hover {
 	background-color: rgb(62,170,204);
+	cursor:pointer;
+}
+.purchase_total_tab{
+	margin-top:10px;
+	background-color:rgb(52,160,194);
+	border-radius:5px;
+	width:100%;
+	font-family:lao ui;
+	font-size:30px;
+	color:rgb(52,52,52);
+	box-sizing:border-box;
+	padding:10px;
+	text-align:right;
+}
+#purchase_total{
+	display:inline;
 }
 
 .num_items{
@@ -52,6 +64,12 @@
 	font-family:lao ui;
 	font-size:30px;
 	color:rgb(52,52,52);
+}
+
+.tab_total{
+	display:inline;
+	font-size:28px;
+	float:right;
 }
 
 #defense_tab_content{
@@ -88,11 +106,13 @@
 	margin-top:20px;
 }
 .item_picture{
-	border-radius:12px;
+	border-radius:15px;
 	border:solid rgb(12,120,154) 2px;
+	padding:0;
 }
 .item_picture:hover{
 	border-color:white;
+	cursor:pointer;
 }
 .qty{
 	font-family:lao ui;
@@ -113,6 +133,7 @@
 .use_item_button{
 	display:inline;
 	text-align:center;
+	border:solid rgb(12,120,154) 2px;
 	border-radius:5px;
 	margin-left:35px;
 	font-family: lao ui;
@@ -121,4 +142,58 @@
 	font-weight:700;
 	font-size:20px;
 	padding:5px 10px 5px 10px;
+}
+.use_item_button:hover{
+	border-color:white;
+	cursor:pointer;
+}
+
+#purchase_items_button{
+	display:inline;
+	text-align:center;
+	border:solid rgb(52,160,194) 2px;
+	border-radius:5px;
+	margin-left:35px;
+	font-family: lao ui;
+	color:white;
+	background-color:rgb(52,52,52);
+	font-size:20px;
+	padding:5px 10px 5px 10px;
+}
+#purchase_items_button:hover{
+	border-color:white;
+	cursor:pointer;
+}
+.total_num{
+	display:inline;
+}
+
+#modal_background{
+	background-color:rgba(52,52,52,0.75);
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	display:none;
+}
+.modal_message{
+	background-color:rgb(12,120,154);
+	position:fixed;
+	top:25%;
+	border:solid 10px rgb(12,120,154);
+	text-align:center;
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	font-size: 20px;
+}
+.modal_close{
+	background-color:rgb(52,52,52);
+	border:solid 1px rgb(52,52,52);
+	font-family:lao ui;
+	color:white;
+	font-size: 20px;
+}
+.modal_close:hover{
+	border-color:white;
+	cursor:pointer
 }
