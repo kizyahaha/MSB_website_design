@@ -25,7 +25,7 @@ public class LoginController {
                       HttpServletResponse response) throws IOException {
         User user = DatabaseUtils.read(username, password);
         if (user != null) {
-            Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERNAME, username);
+            Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERNAME, user.getUsername());
             cookie.setPath("/main");
             response.addCookie(cookie);
             return ResponseEntities.plaintext("Successful Login");
