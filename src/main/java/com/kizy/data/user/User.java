@@ -1,4 +1,4 @@
-package com.kizy.data;
+package com.kizy.data.user;
 
 public interface User {
 

@@ -4,6 +4,7 @@ import java.util.EnumSet;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.kizy.data.user.User;
 
 public class UserMatcher {
 

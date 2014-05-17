@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.common.base.Strings;
 import com.kizy.data.DatabaseUtils;
-import com.kizy.data.SimpleUser;
+import com.kizy.data.user.SimpleUser;
 
 @Controller
 @RequestMapping(value = "/users", method = RequestMethod.POST)

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kizy.data.DatabaseUtils;
-import com.kizy.data.User;
+import com.kizy.data.user.User;
 
 @Controller
 @RequestMapping(value = "/login", method = RequestMethod.POST)
