@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kizy.data.DatabaseUtils;
-import com.kizy.data.User;
+import com.kizy.data.user.User;
 
 @Controller
 @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -25,7 +25,7 @@ public class LoginController {
                       HttpServletResponse response) throws IOException {
         User user = DatabaseUtils.read(username, password);
         if (user != null) {
-            Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERNAME, username);
+            Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERNAME, user.getUsername());
             cookie.setPath("/main");
             response.addCookie(cookie);
             return ResponseEntities.plaintext("Successful Login");

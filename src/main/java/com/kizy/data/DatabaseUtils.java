@@ -9,6 +9,8 @@ import com.google.common.base.Charsets;
 import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
 import com.kizy.data.UserMatcher.MatchComponent;
+import com.kizy.data.user.SimpleUser;
+import com.kizy.data.user.User;
 
 public class DatabaseUtils {
 
