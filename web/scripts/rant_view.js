@@ -197,7 +197,6 @@ function get_detailed_rant_power_graph_events(events , bar_width){
 	}
 }
 
-window.onresize = resize_detailed_power_graph;
 function resize_detailed_power_graph(){
 	var detailed_graph_width = $('#detailed_power_bars').width();
 	var change_width = document.getElementById('detailed_power_bars').children;

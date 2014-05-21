@@ -24,6 +24,7 @@ function create_item_category_tabs(){
 	create_attack_tab();
 	create_boost_tab();
 	create_total_tab();
+	update_my_profile_content_size();
 }
 var amounts = [0,0,0,0,0,0,0,0,0,0,0];
 function create_defense_tab(){
@@ -194,7 +195,6 @@ function create_attack_leach(attack_tab_total){
 	var curr_num_item = get_curr_num_item(3);
 	if (curr_num_item > 0){
 		$('<div/>',{addClass:'use_info' , id:'leach_use_info'}).appendTo('#attack_leach');
-		$('<div/>',{addClass:'use_item_button' , id:'leach_use_button' , text:'USE'}).appendTo('#leach_use_info');
 		$('#leach_use_info').append(' (' + curr_num_item +')');
 	}
 }
@@ -226,7 +226,6 @@ function create_attack_upvote_reduction(attack_tab_total){
 	var curr_num_item = get_curr_num_item(4);
 	if (curr_num_item > 0){
 		$('<div/>',{addClass:'use_info' , id:'upvote_reduction_use_info'}).appendTo('#attack_upvote_reduction');
-		$('<div/>',{addClass:'use_item_button' , id:'upvote_reduction_use_button' , text:'USE'}).appendTo('#upvote_reduction_use_info');
 		$('#upvote_reduction_use_info').append(' (' + curr_num_item +')');
 	}
 }
@@ -258,7 +257,6 @@ function create_attack_scout(attack_tab_total){
 	var curr_num_item = get_curr_num_item(5);
 	if (curr_num_item > 0){
 		$('<div/>',{addClass:'use_info' , id:'scout_use_info'}).appendTo('#attack_scout');
-		$('<div/>',{addClass:'use_item_button' , id:'scout_use_button' , text:'USE'}).appendTo('#scout_use_info');
 		$('#scout_use_info').append(' (' + curr_num_item +')');
 	}
 }
@@ -467,6 +465,7 @@ function toggle_visibility(id){
 	else{
 		el.style.display = 'none';
 	}
+	update_my_profile_content_size();
 }
 
 function get_item_description(num){
@@ -715,5 +714,32 @@ function get_item_name(num){
 			break;
 		default:
 			break;
+	}
+}
+
+function update_my_profile_content_size(){
+	var my_rants = document.getElementById('my_rants_space');
+	if (my_rants.style.display == 'initial'){
+		$('#my_rants_space').css('minHeight', 300 );
+		$('#my_rants_space').css('maxHeight', 600 );
+		$('#user_content_space').css('height',$('#my_rants_space').height() + 100);
+	}
+	var my_items = document.getElementById('my_items_space');
+	if (my_items.style.display == 'initial'){
+		var item_height = 370;
+		var defense = document.getElementById('defense_tab_content');
+		if (defense.style.display == 'block'){
+			item_height = item_height + 270;
+		}
+		var attack = document.getElementById('attack_tab_content');
+		if (attack.style.display == 'block'){
+			item_height = item_height + 270;
+		}
+		var boost = document.getElementById('boost_tab_content');
+		if (boost.style.display == 'block'){
+			item_height = item_height + 450;
+		}
+		$('#my_items_space').height( item_height );
+		$('#user_content_space').height( item_height + 0);
 	}
 }

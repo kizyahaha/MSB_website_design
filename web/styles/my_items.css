@@ -2,7 +2,7 @@
 	position:absolute;
 	left:20px;
 	right:20px;
-	bottom:20px;
+	/*bottom:20px;*/
 	top:20px;
 }
 #my_boks{
@@ -72,17 +72,17 @@
 #defense_tab_content{
 	width:90%;
 	margin:0 auto;
-	height:270px;
+	/*height:270px;*/
 }
 #attack_tab_content{
 	width:90%;
 	margin:0 auto;
-	height:270px;
+	/*height:270px;*/
 }
 #boost_tab_content{
 	width:90%;
 	margin:0 auto;
-	height:450px;
+	/*height:450px;*/
 }
 
 .item_container{
@@ -172,7 +172,7 @@
 }
 
 #modal_background{
-	background-color:rgba(52,52,52,0.75);
+	background-color:rgba(52,52,52,0.85);
 	position:absolute;
 	left:0;
 	top:0;

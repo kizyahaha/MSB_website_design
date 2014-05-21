@@ -52,7 +52,7 @@ function get_powers(tab_num){
 		document.getElementById('power_bars').appendChild(power_bar);
 	}	
 }
-window.onresize = resize_power_bars;
+
 function resize_power_bars(){
 	var graph_width = $('#power_bars').width();
 	var power_bar_width = graph_width*0.75 / num_contenders;
@@ -63,4 +63,10 @@ function resize_power_bars(){
 		power_bars[i].style.width = power_bar_width;
 		power_bars[i].style.left = bar_spacing*(i+1) + power_bar_width*i;
 	}
+}
+window.onresize = resize_stuff;
+function resize_stuff(){
+	update_sizes(); //rant bubble
+	resize_detailed_power_graph();
+	resize_power_bars();
 }

@@ -5,6 +5,7 @@ function create_user_tab_content(user_tab_num, user_id){
 	create_my_activity_content(user_id);
 	create_my_items_content(user_id);
 	update_user_tab_content(user_tab_num);
+	update_my_profile_content_size();
 }
 
 function create_my_rants_content(user_id){
@@ -233,4 +234,5 @@ function update_user_tab_content(user_tab_num){
 		default:
 			break;
 	}
+	update_my_profile_content_size();
 }

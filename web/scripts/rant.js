@@ -217,7 +217,7 @@ function leading_zero(t){
 	return t;
 }
 
-window.onresize = update_sizes;
+//window.onresize = update_sizes;
 function update_sizes(){
 	$('#rant_container').css('height',$('#rant_bubble').height()+190);
 }
