@@ -45,7 +45,9 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                 "rant_view.css",
                                                                 "my_items.css");
 
-    private static final List<String> scripts = ImmutableList.of("jquery-1.11.1.js",
+    private static final List<String> scripts = ImmutableList.of("jquery-1.11.1.min.js",
+    															 "rickshaw.min.js",
+    															 "global_vars.js",
                                                                  "banner.js",
                                                                  "tabs.js",
                                                                  "rant.js",

@@ -76,7 +76,6 @@ function log_in(form){;
 	});
 }
 
-var logged_in_user = "";
 function check_for_user_cookie(){
 	var cookie_name = 'MY_SOAP_BOX_USERNAME';
 	var cookies = document.cookie.split(';');

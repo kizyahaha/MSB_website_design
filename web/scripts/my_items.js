@@ -1,7 +1,9 @@
 function create_my_items_content(user_id){
 	$('<div/>',{id:'my_items_space'}).appendTo('#user_content_space');
 	document.getElementById('my_items_space').style.display = 'none';
-	
+	for (var i in tot_cost_per_item){
+		tot_cost_per_item[i] = 0;
+	}
 	create_bok_count();
 	create_item_category_tabs();
 	create_modal_window();
@@ -26,7 +28,7 @@ function create_item_category_tabs(){
 	create_total_tab();
 	update_my_profile_content_size();
 }
-var amounts = [0,0,0,0,0,0,0,0,0,0,0];
+
 function create_defense_tab(){
 	$('<div/>',{addClass:'my_item_tab' , id:'defense_tab' , text:'Defense '}).appendTo('#my_items_space');
 	$('<div/>',{addClass:'num_items' , id:'num_defense_items' , text:'(' + get_num_defense_items() + ')'}).appendTo('#defense_tab');
@@ -68,7 +70,7 @@ function create_defense_decoy(defense_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#decoy_qty').change(function(){	var cost = qty_check('#decoy_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[0] = cost;
+										tot_cost_per_item[0] = cost;
 										defense_tab_total.textContent = get_tab_total('defense');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -100,7 +102,7 @@ function create_defense_downvote_reduction(defense_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#downvote_reduction_qty').change(function(){	var cost = qty_check('#downvote_reduction_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[1] = cost;
+										tot_cost_per_item[1] = cost;
 										defense_tab_total.textContent = get_tab_total('defense');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -131,7 +133,7 @@ function create_defense_antiscout(defense_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#antiscout_qty').change(function(){	var cost = qty_check('#antiscout_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[2] = cost;
+										tot_cost_per_item[2] = cost;
 										defense_tab_total.textContent = get_tab_total('defense');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -185,7 +187,7 @@ function create_attack_leach(attack_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#leach_qty').change(function(){	var cost = qty_check('#leach_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[3] = cost;
+										tot_cost_per_item[3] = cost;
 										attack_tab_total.textContent = get_tab_total('attack');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -216,7 +218,7 @@ function create_attack_upvote_reduction(attack_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#upvote_reduction_qty').change(function(){	var cost = qty_check('#upvote_reduction_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[4] = cost;
+										tot_cost_per_item[4] = cost;
 										attack_tab_total.textContent = get_tab_total('attack');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -247,7 +249,7 @@ function create_attack_scout(attack_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#scout_qty').change(function(){	var cost = qty_check('#scout_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[5] = cost;
+										tot_cost_per_item[5] = cost;
 										attack_tab_total.textContent = get_tab_total('attack');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -303,7 +305,7 @@ function create_boost_upvote_increase(boost_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#upvote_increase_qty').change(function(){	var cost = qty_check('#upvote_increase_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[6] = cost;
+										tot_cost_per_item[6] = cost;
 										boost_tab_total.textContent = get_tab_total('boost');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -335,7 +337,7 @@ function create_boost_list_jump(boost_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#list_jump_qty').change(function(){	var cost = qty_check('#list_jump_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[7] = cost;
+										tot_cost_per_item[7] = cost;
 										boost_tab_total.textContent = get_tab_total('boost');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -367,7 +369,7 @@ function create_boost_granularity_jump(boost_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#granularity_jump_qty').change(function(){	var cost = qty_check('#granularity_jump_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[8] = cost;
+										tot_cost_per_item[8] = cost;
 										boost_tab_total.textContent = get_tab_total('boost');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -399,7 +401,7 @@ function create_boost_bok_increase(boost_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#bok_increase_qty').change(function(){	var cost = qty_check('#bok_increase_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[9] = cost;
+										tot_cost_per_item[9] = cost;
 										boost_tab_total.textContent = get_tab_total('boost');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -431,7 +433,7 @@ function create_boost_decay_reduction(boost_tab_total){
 	var qty_cost = document.createTextNode('0');
 	$('#decay_reduction_qty').change(function(){	var cost = qty_check('#decay_reduction_qty',item_cost);
 										qty_cost.textContent = cost;
-										amounts[10] = cost;
+										tot_cost_per_item[10] = cost;
 										boost_tab_total.textContent = get_tab_total('boost');
 										$('#total_num').text(get_tab_total('all'));
 										});
@@ -607,16 +609,16 @@ function qty_check(id , item_cost){
 
 function get_tab_total(tab){
 	if (tab == 'defense'){
-		return amounts[0] + amounts[1] + amounts[2];
+		return tot_cost_per_item[0] + tot_cost_per_item[1] + tot_cost_per_item[2];
 	}
 	if (tab == 'attack'){
-		return amounts[3] + amounts[4] + amounts[5];
+		return tot_cost_per_item[3] + tot_cost_per_item[4] + tot_cost_per_item[5];
 	}
 	if (tab == 'boost'){
-		return amounts[6] + amounts[7] + amounts[8] + amounts[9] + amounts[10];
+		return tot_cost_per_item[6] + tot_cost_per_item[7] + tot_cost_per_item[8] + tot_cost_per_item[9] + tot_cost_per_item[10];
 	}
 	if (tab == 'all'){
-		return amounts[0] + amounts[1] + amounts[2] + amounts[3] + amounts[4] + amounts[5] + amounts[6] + amounts[7] + amounts[8] + amounts[9] + amounts[10];
+		return tot_cost_per_item[0] + tot_cost_per_item[1] + tot_cost_per_item[2] + tot_cost_per_item[3] + tot_cost_per_item[4] + tot_cost_per_item[5] + tot_cost_per_item[6] + tot_cost_per_item[7] + tot_cost_per_item[8] + tot_cost_per_item[9] + tot_cost_per_item[10];
 	}
 }
 
