@@ -6,19 +6,19 @@ function create_user_tabs(user_tab_num){
 	update_user_tabs(user_tab_num);
 }
 
-function create_my_rants(user_id){
+function create_my_rants(userID){
 	$('<li/>',{id:'my_rants'}).appendTo('#user_tabs');
 	$('#my_rants').text('My rants');
 	$('#my_rants').click(function(){update_user_tabs(0); update_user_tab_content(0);});
 }
 
-function create_my_activity(user_id){
+function create_my_activity(userID){
 	$('<li/>',{id:'my_activity'}).appendTo('#user_tabs');
 	$('#my_activity').text('My activity');
 	$('#my_activity').click(function(){update_user_tabs(1); update_user_tab_content(1);});
 }
 
-function create_my_items(user_id){
+function create_my_items(userID){
 	$('<li/>',{id:'my_items'}).appendTo('#user_tabs');
 	$('#my_items').text('My items');
 	$('#my_items').click(function(){update_user_tabs(2); update_user_tab_content(2);});

@@ -1,14 +1,14 @@
 
-function create_user_tab_content(user_tab_num, user_id){
+function create_user_tab_content(user_tab_num, userID){
 	$('<div/>',{id:'user_content_space'}).appendTo('body');
-	create_my_rants_content(user_id);
-	create_my_activity_content(user_id);
-	create_my_items_content(user_id);
+	create_my_rants_content(userID);
+	create_my_activity_content(userID);
+	create_my_items_content(userID);
 	update_user_tab_content(user_tab_num);
 	update_my_profile_content_size();
 }
 
-function create_my_rants_content(user_id){
+function create_my_rants_content(userID){
 	$('<div/>',{id:'my_rant_sorts'}).appendTo('#user_content_space');
 	create_status_select();
 	create_level_select();
@@ -209,7 +209,7 @@ function create_order_sort(){
 	$('#order_select').append('<option>Power - low to high</option>');
 }
 
-function create_my_activity_content(user_id){
+function create_my_activity_content(userID){
 	$('<div/>',{id:'my_activity_space'}).appendTo('#user_content_space');
 	document.getElementById('my_activity_space').style.display = 'none';
 }

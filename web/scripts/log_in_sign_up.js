@@ -68,6 +68,7 @@ function log_in(form){;
 		url: '/api/login/login',
 		data: $('#log_in_form').serialize(),
 		success: function(msg) {
+			userID = get_user();
 		    window.document.location.href = 'daily.html';
 		},
 		error: function(msg) {
@@ -76,7 +77,7 @@ function log_in(form){;
 	});
 }
 
-function check_for_user_cookie(){
+function get_user(){
 	var cookie_name = 'MY_SOAP_BOX_USERNAME';
 	var cookies = document.cookie.split(';');
 	var cookies_length = cookies.length;
@@ -84,19 +85,16 @@ function check_for_user_cookie(){
 		var cookie = cookies[i].trim();
 		if (cookie.indexOf(cookie_name) == 0){
 			var temp = cookie.split("=");
-			logged_in_user = temp[1];
-			return true;
+			return temp[1];
 		}
 	}
-	return false;
+	return "";
 }
 
 function delete_user_cookie(){
 	var cookie_name = 'MY_SOAP_BOX_USERNAME';
 	document.cookie = cookie_name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-	/*document.cookie = cookie_name + "=" +
-		((path) ? ";path="+path:"/main")+
-		";expires=Thu, 01 Jan 1970 00:00:01 GMT";*/
+	userID = "";
 	window.document.location.href = 'daily.html';
 }
 

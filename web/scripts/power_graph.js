@@ -1,4 +1,64 @@
+function create_power_graph(tab_num){
+	$('<div/>',{id:'power_graph'}).appendTo('#contender_space');
+	var data = get_contender_data();
 
+	var power_graph = new Rickshaw.Graph( {
+		element: document.querySelector("#power_graph"),
+		renderer: 'bar',
+		width: $('#power_graph').width(),
+		height: $('#power_graph').height(),
+		series: [ {
+			color: 'rgb(52,52,52)',
+			data: data
+		} ]
+	} );
+	power_graph.render();
+	
+	create_x_axis(power_graph);
+	create_y_axis(power_graph);
+	
+	$(window).on('resize',function(){
+		power_graph.configure({
+			width: $('#power_graph').width()
+		});
+		power_graph.render();
+	});
+}
+
+function get_contender_data(){
+	var data = [];
+	var height = 1000;
+	for (var i=0 ; i<num_contenders ; i++){
+		var point = {x:0,y:0};
+		point.x = i;
+		point.y = height;
+		height = height*0.9;
+		data.push(point);
+	}
+	return data;
+}
+
+function create_x_axis(graph){
+	$('<div/>',{id:'x_axis'}).appendTo('#power_graph');
+	var x_axis = new Rickshaw.Graph.Axis.X({
+		graph: graph,
+		element: document.getElementById('x_axis'),
+	});
+	x_axis.render();
+}
+
+function create_y_axis(graph){
+	$('<div/>',{id:'y_axis'}).appendTo('#power_graph');
+	var y_axis = new Rickshaw.Graph.Axis.Y({
+		graph: graph,
+		element: document.getElementById('y_axis'),
+		ticks:5
+	});
+	y_axis.render();
+}
+
+
+/*
 function create_power_graph(tab_num){
 	var power_graph = document.createElement('div');
 	power_graph.id = 'power_graph';
@@ -69,4 +129,4 @@ function resize_stuff(){
 	update_sizes(); //rant bubble
 	resize_detailed_power_graph();
 	resize_power_bars();
-}
+}*/

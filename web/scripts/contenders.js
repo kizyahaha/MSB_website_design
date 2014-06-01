@@ -24,7 +24,7 @@ function update_contender_space(tab_num){
 	update_contender_title(tab_num);
 	get_num_contenders(tab_num);
 	update_contenders(tab_num);
-	update_power_graph(tab_num);
+	//update_power_graph(tab_num);
 }
 
 function get_num_contenders(tab_num){

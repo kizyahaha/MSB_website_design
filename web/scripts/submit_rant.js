@@ -1,5 +1,5 @@
 
-function create_rant_submission(user_id){
+function create_rant_submission(userID){
 	$('<div/>',{id:'submit_rant_container'}).appendTo('body');
 	$('<form/>',{name:'rant_submission_form' , id:'rant_submission_form'}).appendTo('#submit_rant_container');
 	create_title_for_submit();

@@ -28,7 +28,8 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final List<String> styles = ImmutableList.of("banner.css",
+    private static final List<String> styles = ImmutableList.of("rickshaw.css",
+    															"banner.css",
                                                                 "tabs.css",
                                                                 "rant.css",
                                                                 "contenders.css",
@@ -46,7 +47,11 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                 "my_items.css");
 
     private static final List<String> scripts = ImmutableList.of("jquery-1.11.1.min.js",
-    															 "rickshaw.min.js",
+    															 "d3.min.js",
+    															 "d3.layout.min.js",
+    															 "rickshaw.js",
+    															 "Rickshaw.Graph.Axis.X.js",
+    															 "Rickshaw.Graph.Axis.Y.js",
     															 "global_vars.js",
                                                                  "banner.js",
                                                                  "tabs.js",

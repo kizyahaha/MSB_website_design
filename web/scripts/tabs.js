@@ -83,7 +83,7 @@ function update_tabs(tab_num){
 
 function create_submit_rant_tab(){
 	$('<a/>',{id:'submit_rant_link'}).appendTo('#tabs');
-	if (check_for_user_cookie()){
+	if (userID != ""){
 		$('#submit_rant_link').attr('href','submit_rant.html');
 	}
 	else{
