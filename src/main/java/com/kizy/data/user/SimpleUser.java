@@ -2,14 +2,21 @@ package com.kizy.data.user;
 
 public class SimpleUser implements User {
 
+    private final long id;
     private final String username;
     private final String password;
     private final String email;
 
-    public SimpleUser(String username, String password, String email) {
+    public SimpleUser(long id, String username, String password, String email) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    @Override
+    public long getUserID() {
+        return id;
     }
 
     @Override
