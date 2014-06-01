@@ -47,6 +47,10 @@ public class DatabaseUtils {
         return findUser(new SimpleUser(0L, username, password, ""), EnumSet.of(MatchComponent.USERNAME, MatchComponent.PASSWORD));
     }
 
+    public static User findUserByID(long id) throws IOException {
+        return findUser(new SimpleUser(id, "", "", ""), EnumSet.of(MatchComponent.ID));
+    }
+
     public static User findUserByName(String username) throws IOException {
         return findUser(new SimpleUser(0L, username, "", ""), EnumSet.of(MatchComponent.USERNAME));
     }

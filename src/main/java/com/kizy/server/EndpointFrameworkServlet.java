@@ -111,7 +111,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         if (path == null) {
             return 0;
         }
-        Tab tab = Tab.fromName(path.substring(path.indexOf('/') + 1));
+        RantTab tab = RantTab.fromName(path.substring(path.indexOf('/') + 1));
         if (tab == null) {
             return 0;
         }

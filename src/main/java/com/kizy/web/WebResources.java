@@ -3,11 +3,14 @@ package com.kizy.web;
 import java.io.IOException;
 import java.util.Set;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 
 import com.google.common.collect.Sets;
+import com.kizy.data.DatabaseUtils;
+import com.kizy.data.user.User;
 
 public class WebResources {
 
@@ -33,6 +36,19 @@ public class WebResources {
 
     public static void sendError(HttpServletResponse response, HttpStatus status, String message) throws IOException {
         response.sendError(status.value(), message);
+    }
+
+    public static User userFromCookie(Cookie[] cookies) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(MY_SOAP_BOX_USERID)) {
+                try {
+                    return DatabaseUtils.findUserByID(Long.parseLong(cookie.getValue()));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 
 }
