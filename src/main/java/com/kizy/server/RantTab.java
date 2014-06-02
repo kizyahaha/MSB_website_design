@@ -1,6 +1,6 @@
 package com.kizy.server;
 
-public enum Tab {
+public enum RantTab {
     DAILY("daily", 0),
     HOURLY("hourly", 1),
     TEN_MINUTELY("ten_minutely", 2),
@@ -9,7 +9,7 @@ public enum Tab {
     public String displayName;
     public int tabNumber;
 
-    private Tab(String displayName, int tabNumber) {
+    private RantTab(String displayName, int tabNumber) {
         this.displayName = displayName;
         this.tabNumber = tabNumber;
     }
@@ -27,8 +27,8 @@ public enum Tab {
         return "TAB[Tab Name: " + displayName + ", Tab Number: " + tabNumber + "]";
     }
 
-    public static Tab fromName(String name) {
-        for (Tab possible : values()) {
+    public static RantTab fromName(String name) {
+        for (RantTab possible : values()) {
             if (possible.getDisplayName().equalsIgnoreCase(name)) {
                 return possible;
             }
@@ -37,8 +37,8 @@ public enum Tab {
         return null;
     }
 
-    public static Tab fromNumber(int number) {
-        for (Tab possible : values()) {
+    public static RantTab fromNumber(int number) {
+        for (RantTab possible : values()) {
             if (possible.getTabNumber() == number) {
                 return possible;
             }
