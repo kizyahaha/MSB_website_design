@@ -27,6 +27,7 @@
 	position: absolute;
 	background: white;
 	white-space: nowrap;
+	display:none;
 }
 .rickshaw_graph .detail .x_label.left {
 	left: 0;
@@ -40,11 +41,10 @@
 	border-radius: 3px;
 	padding: 0.25em;
 	font-size: 12px;
-	font-family: Arial, sans-serif;
+	font-family: lao ui;
 	opacity: 0;
 	background: rgba(0, 0, 0, 0.4);
 	color: white;
-	border: 1px solid rgba(0, 0, 0, 0.4);
 	margin-left: 1em;
 	margin-right: 1em;
 	margin-top: -1em;
@@ -58,30 +58,28 @@
 }
 .rickshaw_graph .detail .item.active {
 	opacity: 1;
-	background: rgba(0, 0, 0, 0.8);
+	background: rgb(52,160,194);
 }
 .rickshaw_graph .detail .item:after {
 	position: absolute;
 	display: block;
 	width: 0;
 	height: 0;
-
 	content: "";
-
 	border: 5px solid transparent;
 }
 .rickshaw_graph .detail .item.left:after {
 	top: 1em;
 	left: -5px;
 	margin-top: -5px;
-	border-right-color: rgba(0, 0, 0, 0.8);
+	border-right-color: rgb(52,160,194);
 	border-left-width: 0;
 }
 .rickshaw_graph .detail .item.right:after {
 	top: 1em;
 	right: -5px;
 	margin-top: -5px;
-	border-left-color: rgba(0, 0, 0, 0.8);
+	border-left-color: rgb(52,160,194);
 	border-right-width: 0;
 }
 .rickshaw_graph .detail .dot {
@@ -225,6 +223,7 @@
 	stroke-width: 2px;
 	shape-rendering: crisp-edges;
 	pointer-events: none;
+	display:none;
 }
 .rickshaw_graph .y_grid .tick,
 .rickshaw_graph .x_grid_d3 .tick {
@@ -244,7 +243,8 @@
 .rickshaw_graph .y_ticks path,
 .rickshaw_graph .x_ticks_d3 path {
 	fill: none;
-	stroke: #808080;
+	stroke: rgb(52,52,52);
+	display:none;
 }
 .rickshaw_graph .y_ticks text,
 .rickshaw_graph .x_ticks_d3 text {

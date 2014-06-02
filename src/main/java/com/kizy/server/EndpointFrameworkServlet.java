@@ -52,6 +52,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
     															 "rickshaw.js",
     															 "Rickshaw.Graph.Axis.X.js",
     															 "Rickshaw.Graph.Axis.Y.js",
+    															 "Rickshaw.Graph.HoverDetail.js",
     															 "global_vars.js",
                                                                  "banner.js",
                                                                  "tabs.js",

@@ -4,20 +4,27 @@ function create_power_graph(tab_num){
 
 	var power_graph = new Rickshaw.Graph( {
 		element: document.querySelector("#power_graph"),
-		renderer: 'bar',
+		renderer: 'area',
 		width: $('#power_graph').width(),
 		height: $('#power_graph').height(),
-		padding: {top: 0.04},
+		padding: {top:0.04, left:0.01, right:0.01},
 		series: [ {
 			color: 'rgb(52,52,52)',
-			data: data,
-			bars: {'align': "center"}
+			data: data
 		} ]
 	} );
 	power_graph.render();
 	
 	create_x_axis(power_graph);
 	create_y_axis(power_graph);
+	
+	var hover_text = new Rickshaw.Graph.HoverDetail({
+		graph:power_graph,
+		formatter: function(series,x,y){
+			var content = 'Rank: ' + parseInt(x) + '<br>Power: ' + parseInt(y);
+			return content;
+		}
+	});
 	
 	$(window).on('resize',function(){
 		power_graph.configure({
