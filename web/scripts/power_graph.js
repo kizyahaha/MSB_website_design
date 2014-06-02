@@ -7,9 +7,11 @@ function create_power_graph(tab_num){
 		renderer: 'bar',
 		width: $('#power_graph').width(),
 		height: $('#power_graph').height(),
+		padding: {top: 0.04},
 		series: [ {
 			color: 'rgb(52,52,52)',
-			data: data
+			data: data,
+			bars: {'align': "center"}
 		} ]
 	} );
 	power_graph.render();
@@ -27,10 +29,10 @@ function create_power_graph(tab_num){
 
 function get_contender_data(){
 	var data = [];
-	var height = 1000;
+	var height = 9437;
 	for (var i=0 ; i<num_contenders ; i++){
 		var point = {x:0,y:0};
-		point.x = i;
+		point.x = i+1;
 		point.y = height;
 		height = height*0.9;
 		data.push(point);
@@ -52,7 +54,7 @@ function create_y_axis(graph){
 	var y_axis = new Rickshaw.Graph.Axis.Y({
 		graph: graph,
 		element: document.getElementById('y_axis'),
-		ticks:5
+		ticks:5,
 	});
 	y_axis.render();
 }
