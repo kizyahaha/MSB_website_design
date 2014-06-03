@@ -252,6 +252,7 @@
 	stroke:white;
 	font-size: 15px;
 	pointer-events: none;
+	text-anchor:start;
 }
 .rickshaw_graph .x_tick.glow .title,
 .rickshaw_graph .y_ticks.glow text {

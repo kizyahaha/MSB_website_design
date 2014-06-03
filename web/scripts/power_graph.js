@@ -4,7 +4,8 @@ function create_power_graph(tab_num){
 
 	var power_graph = new Rickshaw.Graph( {
 		element: document.querySelector("#power_graph"),
-		renderer: 'area',
+		renderer: 'bar',
+		//interpolation: 'step-after',
 		width: $('#power_graph').width(),
 		height: $('#power_graph').height(),
 		padding: {top:0.04, left:0.01, right:0.01},
