@@ -1,11 +1,9 @@
 #power_graph{
 	position:absolute;
-	bottom:70px;
-	left:100px;
-	right:50px;
-	height:200px;
-	border-bottom:solid 2px white;
-	border-left:solid 2px white;
+	bottom:20px;
+	left:50px;
+	right:0px;
+	height:400px;
 	padding-top: 5px;
 }
 #y_axis{
@@ -18,4 +16,10 @@
 	position:absolute;
 	bottom:-30px;
 	width:100%;
+}
+
+/*format tooltips for google charts*/
+path {
+	fill:rgb(52,160,194);
+	stroke-width:0;
 }

@@ -5,7 +5,7 @@
 	margin-top:35px;
 	margin-left:auto;
 	margin-right:auto;
-	height:900px;
+	height:1000px;
 	background-color: rgb(12,120,154);
 	border-radius:20px;
 	box-sizing:border-box;
@@ -27,7 +27,7 @@
 	top: 80px;
 	left:20px;
 	right:20px;
-	bottom:300px;
+	bottom:400px;
 	background-color: rgb(215,226,229);
 	border-radius:20px;
 	border:solid 20px rgb(215,226,229);

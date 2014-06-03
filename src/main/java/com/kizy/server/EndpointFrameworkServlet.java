@@ -28,8 +28,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final List<String> styles = ImmutableList.of("rickshaw.css",
-    															"banner.css",
+    private static final List<String> styles = ImmutableList.of("banner.css",
                                                                 "tabs.css",
                                                                 "rant.css",
                                                                 "contenders.css",
@@ -47,12 +46,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                 "my_items.css");
 
     private static final List<String> scripts = ImmutableList.of("jquery-1.11.1.min.js",
-    															 "d3.min.js",
-    															 "d3.layout.min.js",
-    															 "rickshaw.js",
-    															 "Rickshaw.Graph.Axis.X.js",
-    															 "Rickshaw.Graph.Axis.Y.js",
-    															 "Rickshaw.Graph.HoverDetail.js",
+    															 "https://www.google.com/jsapi",
     															 "global_vars.js",
                                                                  "banner.js",
                                                                  "tabs.js",
@@ -98,8 +92,14 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         for (String style : styles) {
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/" + style + "\">");
         }
-        for (String script : scripts) {
-            out.println("<script src=\"scripts/" + script + "\"></script>");
+        for (int i=0 ; i<scripts.size(); i++) {
+        	String script = scripts.get(i);
+        	if (i==1) {
+        		out.println("<script src=\"" + script + "\"></script>");
+        	}
+        	else {
+        		out.println("<script src=\"scripts/" + script + "\"></script>");
+        	}
         }
         out.println("</head>");
         out.println("<body>");

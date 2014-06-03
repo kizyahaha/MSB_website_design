@@ -28,7 +28,7 @@ function update_contender_space(tab_num){
 }
 
 function get_num_contenders(tab_num){
-	num_contenders = 15;
+	return;
 }
 
 function update_contender_title(tab_num){
