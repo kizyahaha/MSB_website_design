@@ -27,12 +27,30 @@ function create_rant_for_submit(){
 function create_submit_rant_button(){
 	$('<input/>',{id:'submit_rant_button' , type:'button' , value:'Submit'}).appendTo('#rant_submission_form');
 	$('#submit_rant_button').click( function(){rant_submit(this.form);} );
+	$(window).keypress(function (e) {
+		var key = e.which;
+		if(key == 13){
+			$('#submit_rant_button').click();
+			return false;  
+		}
+	});
 }
 
 function rant_submit(form){
 	if (check_rant_filled(form)){
-		//$.post( '/api/users/add' , $('#rant_submission_form').serialize() );
-		window.document.location.href = 'daily.html';
+		//window.document.location.href = 'daily.html';
+		
+		$.ajax({
+		type: 'POST',
+		url: '/api/rants/add',
+		data: $('#rant_submission_form').serialize(),
+		success: function(msg) {
+		    window.document.location.href = 'daily.html';
+		},
+		error: function(msg) {
+			alert("Woops.  The submission failed.  Contact your local support.");
+		}
+	});
 	}
 }
 

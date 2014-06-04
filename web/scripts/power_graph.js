@@ -1,47 +1,3 @@
-/*function create_power_graph(tab_num){
-	$('<div/>',{id:'power_graph'}).appendTo('#contender_space');
-
-	// Load the Visualization API and the piechart package.
-    google.load('visualization', '1', {'packages':['corechart']});
-
-    // Set a callback to run when the Google Visualization API is loaded.
-    google.setOnLoadCallback(drawChart);
-
-	  
-    // Callback that creates and populates a data table,
-    // instantiates the pie chart, passes in the data and
-    // draws it.
-    function drawChart() {
-		// Create the data table.
-        var data = new google.visualization.DataTable();
-		data = get_contender_data();
-
-        // Set chart options
-        var options = {width:$('#power_graph').width(),
-                       height:$('#power_graph').height(),
-					   legend:'none',
-					   colors:['rgb(52,52,52)'],
-					   hAxis:{title:'Rank' , titleTextStyle:{color: 'rgb(52,52,52)' , fontName:'lao ui' , italic:false , bold:true} ,
-								gridlines:{color:'rgb(102,102,102)' , count:-1} , textStyle:{color: 'white' , fontName:'lao ui'}},
-					   vAxis:{title:'Power' , titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'lao ui' , italic:false , bold:true} ,
-								gridlines:{color:'rgb(102,102,102)' , count:5} , textStyle:{color: 'white' , fontName:'lao ui'}},
-					   backgroundColor: 'transparent',
-					   fontName: 'lao ui',
-					   tooltip:{textStyle:{color:'rgb(52,52,52)' , fontName:'lao ui'}}
-					   };
-
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.ColumnChart(document.getElementById('power_graph'));
-        chart.draw(data, options);
-    }
-}*/
-
-
-
-
-
-
-
 function create_power_graph(tab_num){
 	$('<div/>',{id:'power_graph'}).appendTo('#contender_space');
 	$('<div/>',{id:'graph'}).appendTo('#power_graph');
@@ -101,13 +57,6 @@ function create_power_graph(tab_num){
         dashboard.draw(data);
     }
 }
-
-
-
-
-
-
-
 
 function get_contender_data(){
 	var data = new google.visualization.DataTable();
