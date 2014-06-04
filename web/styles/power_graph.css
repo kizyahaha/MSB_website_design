@@ -18,10 +18,10 @@
 }
 
 /*format tooltips for google charts*/
-path {
+/*#power_graph path {
 	fill:rgb(52,160,194);
 	stroke-width:0;
-}
+}*/
 
 #graph{
 	position:relative;
