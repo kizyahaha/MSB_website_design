@@ -18,7 +18,7 @@ function create_power_graph(tab_num){
 		data = get_contender_data();
 		
 		// Create a dashboard
-		var dashboard = new google.visualization.Dashboard(document.getElementById('power_graph'));
+
 		
 		// Create a range slider, passing some options
         var rank_slider = new google.visualization.ControlWrapper({
@@ -51,10 +51,23 @@ function create_power_graph(tab_num){
 		// Establish dependencies, declaring that 'rank_slider' drives 'chart',
         // so that the graph will only display entries that are let through
         // given the chosen slider range.
-        dashboard.bind(rank_slider, chart);
+        
 		
         // Draw the dashboard.
-        dashboard.draw(data);
+        
+		function draw_contender_power_graph(){
+			chart.setOption('width' , $('#power_graph').width());
+			var dashboard = new google.visualization.Dashboard(document.getElementById('power_graph'));
+			dashboard.bind(rank_slider, chart);
+			dashboard.draw(data);
+		}
+		window.onload = draw_contender_power_graph();
+		
+		var resizeTimer;
+		$(window).resize(function() {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(function(){draw_contender_power_graph();}, 250);
+		});
     }
 }
 
@@ -145,8 +158,3 @@ function create_y_axis(graph){
 	});
 	y_axis.render();
 }*/
-
-window.onresize = resize_stuff;
-function resize_stuff(){
-	update_sizes(); //rant bubble
-}

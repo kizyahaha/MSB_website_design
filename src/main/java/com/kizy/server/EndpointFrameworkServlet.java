@@ -62,7 +62,8 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                  "user_tab_content.js",
                                                                  "submit_rant.js",
                                                                  "rant_view.js",
-                                                                 "my_items.js");
+                                                                 "my_items.js",
+                                                                 "utility.js");
 
     @Override
     protected void doService(HttpServletRequest request, HttpServletResponse response) throws Exception {

@@ -13,6 +13,13 @@ function create_rant_container(){
 	var rant_container = document.createElement('div');
 	rant_container.id = "rant_container";
 	document.body.appendChild(rant_container);
+	
+	window.onload = function(){$('#rant_container').css('height',$('#rant_bubble').height()+190);}
+	var resizeTimer;
+	$(window).resize(function() {
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(function(){$('#rant_container').css('height',$('#rant_bubble').height()+190);}, 250);
+	});
 }
 
 function create_winner_title(){
@@ -68,7 +75,7 @@ function update_rant(tab_num){
 	update_rant_text(tab_num);
 	update_character(tab_num);
 	update_countdown(tab_num);
-	update_sizes();
+	//update_sizes();
 }
 
 function update_winner_title(tab_num){
@@ -215,9 +222,4 @@ function leading_zero(t){
 		t = "0" + t;
 	}
 	return t;
-}
-
-//window.onresize = update_sizes;
-function update_sizes(){
-	$('#rant_container').css('height',$('#rant_bubble').height()+190);
 }

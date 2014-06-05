@@ -54,8 +54,8 @@ function create_detailed_rant_power_graph(){
 	$('<div/>',{id:'detailed_power_graph'}).appendTo('#detailed_rant_container');
 
     google.load('visualization', '1', {packages: ['corechart']});
-	google.setOnLoadCallback(draw_detailed_power_graph);
-    function draw_detailed_power_graph() {
+	google.setOnLoadCallback(setup_detailed_power_graph);
+    function setup_detailed_power_graph() {
         var data = new google.visualization.DataTable();
 		data = get_detailed_rant_data();
 
@@ -74,9 +74,19 @@ function create_detailed_rant_power_graph(){
 					   fontName: 'lao ui',
 					   tooltip:{textStyle:{color:'rgb(52,52,52)' , fontName:'lao ui'}}
 					   }
+		function draw_detailed_power_graph(){
+			options.width = $('#detailed_power_graph').width();
+			var chart = new google.visualization.AreaChart(document.getElementById('detailed_power_graph'));
+			chart.draw(data, options);
+		}
+		window.onload = draw_detailed_power_graph();
 
-        var chart = new google.visualization.AreaChart(document.getElementById('detailed_power_graph'));
-		chart.draw(data, options);
+		var resizeTimer;
+		$(window).resize(function() {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(function(){draw_detailed_power_graph();}, 250);
+		});
+		
     }
 }
 
