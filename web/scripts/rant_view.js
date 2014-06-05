@@ -101,8 +101,19 @@ function get_detailed_rant_data(){
 	var under_9000 = true;
 	var annotation_num = 1;
 	var height = 200;
-	for (var i=0 ; i<num_contenders/2 ; i++){
+	for (var i=0 ; i<num_contenders/4 ; i++){
 		data.setValue(i,0,i+1);
+		data.setValue(i,1,height);
+		height = Math.floor(height*1.09);
+	}
+	for (var i=num_contenders/4 ; i<num_contenders/2 ; i++){
+		data.setValue(i,0,i+1);
+		if (i == num_contenders/4){
+			height = height + 3000;
+			data.setValue(i,2,annotation_num);
+			data.setValue(i,3,"You won the 1-minute level!");
+			annotation_num++;
+		}
 		data.setValue(i,1,height);
 		if (height > 9000 && under_9000){
 			data.setValue(i,2,annotation_num);
@@ -110,7 +121,7 @@ function get_detailed_rant_data(){
 			annotation_num++;
 			under_9000 = false;
 		}
-		height = Math.floor(height*1.09);
+		height = Math.floor(height*1.04);
 	}
 	for (var i=num_contenders/2 ; i<(3*num_contenders/4) ; i++){
 		data.setValue(i,0,i+1);

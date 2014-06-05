@@ -19,6 +19,24 @@
 	font-weight:700;
 	margin-top:20px;
 }
+#title_input{
+	font-family:lao ui;
+	font-size:18px;
+	color:rgb(52,52,52);
+	padding-left:10px;
+	padding-right:10px;
+	border:0;
+	width:100%;
+	border-radius:5px;
+}
+#title_missing{
+	font-family:lao ui;
+	font-size:16px;
+	color:red;
+	padding-left:10px;
+	padding-right:10px;
+	width:100%;
+}
 
 #rant_for_submit{
 	position:absolute;
@@ -30,18 +48,6 @@
 	font-weight:700;
 	margin-top:100px;
 }
-
-#title_input{
-	font-family:lao ui;
-	font-size:18px;
-	color:rgb(52,52,52);
-	padding-left:10px;
-	padding-right:10px;
-	border:0;
-	width:100%;
-	border-radius:5px;
-}
-
 #rant_input{
 	font-family:lao ui;
 	font-size:18px;
@@ -52,16 +58,6 @@
 	width:100%;
 	border-radius:5px;
 }
-
-#title_missing{
-	font-family:lao ui;
-	font-size:16px;
-	color:red;
-	padding-left:10px;
-	padding-right:10px;
-	width:100%;
-}
-
 #rant_missing{
 	font-family:lao ui;
 	font-size:16px;
@@ -71,28 +67,25 @@
 	width:100%;
 }
 
-#submit_rant_button{
+#submit_rant_inputs{
 	position:relative;
+	top:450px;
+	margin-right:50px;
+	text-align:right;
+}
+#NSFW_checkbox_text{
+	font-family:lao ui;
+	color:red;
+	font-weight:700;
+	font-size:20px;
+	margin-right:50px;
+}
+#submit_rant_button{
 	font-family:lao ui;
 	color:rgb(52,52,52);
 	font-weight:700;
 	font-size:15px;
 	text-align:center;
-	top:450px;
-	left:45%;
 }
 
-#rant_area{
-	position:relative;
-	width:100%;
-	height:320px;
-	overflow:auto;
-	font-family:lao ui;
-	color:rgb(52,52,52);
-	font-size:18px;
-	font-weight:100;
-	background:white;
-	padding-left:10px;
-	padding-right:10px;
-}
 
