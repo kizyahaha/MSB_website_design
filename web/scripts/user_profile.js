@@ -7,7 +7,9 @@ function create_user_profile(user_tab_num , userID){
 
 function create_user_banner(userID){
 	$('<div/>',{id: 'user_banner'}).appendTo('body');
-	create_user_links(userID);
+	if (is_owner){
+		create_user_links(userID);
+	}
 	create_user_profile_pic(userID);
 	create_profile_username(userID);
 	create_member_date(userID);

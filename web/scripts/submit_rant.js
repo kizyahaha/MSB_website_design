@@ -16,7 +16,6 @@ function create_title_for_submit(){
 
 function create_rant_for_submit(){
 	$('#rant_submission_form').append("<div id='rant_for_submit'>Rant:<br/></div>");
-	//$('#rant_for_submit').append("<div id='rant_area' contenteditable='true'></div>");
 	$('<textarea/>',{name:'submit_rant_content' , id:'rant_input' , type:'text'}).appendTo('#rant_for_submit');
 	document.getElementById('rant_input').rows=12;
 	//CKEDITOR.replace('rant_input');
@@ -31,7 +30,7 @@ function create_submit_rant_inputs(){
 }
 
 function create_NSFW_checkbox(){
-	$('<input/>',{type:'checkbox'}).appendTo('#submit_rant_inputs');
+	$('<input/>',{name:'submit_NSFW' , type:'checkbox'}).appendTo('#submit_rant_inputs');
 	$('<span/>',{id:'NSFW_checkbox_text'}).appendTo('#submit_rant_inputs');
 	document.getElementById('NSFW_checkbox_text').textContent = 'NSFW';
 }

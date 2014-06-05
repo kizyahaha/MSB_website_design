@@ -2,7 +2,6 @@
 	position:relative;
 	margin-top: 20px;
 	width:98%;
-	height:900px;
 	margin-left:auto;
 	margin-right:auto;
 	background-color: rgb(12,120,154);
@@ -13,14 +12,13 @@
 	left:20px;
 	right:20px;
 	top:20px;
-	bottom:350px;
-	background-color: rgb(215,226,229);
-	border:solid rgb(215,226,229) 20px;
+	max-height:500px;
+	min-height:200px;
+	border-style:solid;
+	border-color:rgb(215,226,229);
 	border-radius:20px;
+	background-color: rgb(215,226,229);
 	overflow:auto;
-}
-
-#detailed_rant_info_table{
 }
 
 #detailed_rant_title{
@@ -44,12 +42,10 @@
 
 #detailed_rant_level{
 	font-family:lao ui;
-	text-size:20px;
 	color:rgb(52,52,52);
 }
 #detailed_rant_level_link{
 	font-family:lao ui;
-	text-size:20px;
 	color:rgb(12,120,154);
 	text-decoration:none;
 }
@@ -57,7 +53,6 @@
 	margin-top:20px;
 	margin-left:15px;
 	font-family:lao ui;
-	text-size:20px;
 	color:rgb(52,52,52);
 }
 
@@ -66,9 +61,20 @@
 	bottom:20px;
 	left:0px;
 	right:0px;
-	height:350px;
+	height:400px;
 }
 
 /*#detailed_power_graph text{
 	fill:white;
 }*/
+
+#detail_vote_buttons{
+	position:absolute;
+	bottom:40px;
+	left:0;
+	right:0;
+	text-align:center;
+}
+.detail_button{
+	margin-left:50px;
+}

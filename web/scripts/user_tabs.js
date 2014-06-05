@@ -1,14 +1,21 @@
 function create_user_tabs(user_tab_num){
 	$('<ul/>',{id: 'user_tabs'}).appendTo('body');
 	create_my_rants();
-	create_my_activity();
-	create_my_items();
+	if (is_owner){
+		create_my_activity();
+		create_my_items();
+	}
 	update_user_tabs(user_tab_num);
 }
 
 function create_my_rants(userID){
 	$('<li/>',{id:'my_rants'}).appendTo('#user_tabs');
-	$('#my_rants').text('My rants');
+	if (is_owner){
+		$('#my_rants').text('My rants');
+	}
+	else{
+		$('#my_rants').text('Their rants');
+	}
 	$('#my_rants').click(function(){update_user_tabs(0); update_user_tab_content(0);});
 }
 

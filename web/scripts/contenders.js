@@ -75,11 +75,11 @@ function get_contenders(tab_num){
 
 function create_vote_buttons(contender){
 	var up_button = document.createElement('img');
-	up_button.src = 'images/up_button_1.png';
+	up_button.src = 'images/up_button_2.png';
 	up_button.alt = 'upvote';
 	up_button.width = 20;
 	var down_button = document.createElement('img');
-	down_button.src = 'images/down_button_1.png';
+	down_button.src = 'images/down_button_2.png';
 	down_button.alt = 'downvote';
 	down_button.width = 20;
 	
@@ -97,19 +97,38 @@ function create_vote_buttons(contender){
 }
 
 function upvote_push(track_votes){
-	var initImg = "up_button_1.png";
-	var pushImg = "up_button_2.png";
+	var initImg = "up_button_2.png";
+	var pushImg = "up_button_1.png";
 	var currImg = track_votes[0].src.substring(track_votes[0].src.lastIndexOf('/') + 1);
-	track_votes[0].src = "images/" + (currImg == initImg ? pushImg : initImg);
-	track_votes[1].src = "images/down_button_1.png";
+	if (currImg == initImg){
+		track_votes[0].src = "images/" + pushImg;
+		track_votes[1].style.opacity = 0.3;
+		track_votes[0].style.opacity = 1.0;
+	}
+	else{
+		track_votes[0].src = "images/" + initImg;
+		track_votes[0].style.opacity = 1.0;
+		track_votes[1].style.opacity = 1.0;
+	}
+	track_votes[1].src = "images/down_button_2.png";
 }
 
 function downvote_push(track_votes){
-	var initImg = "down_button_1.png";
-	var pushImg = "down_button_2.png";
+	var initImg = "down_button_2.png";
+	var pushImg = "down_button_1.png";
 	var currImg = track_votes[1].src.substring(track_votes[1].src.lastIndexOf('/') + 1);
-	track_votes[1].src = "images/" + (currImg == initImg ? pushImg : initImg);
-	track_votes[0].src = "images/up_button_1.png";
+	if (currImg == initImg){
+		track_votes[1].src = "images/" + pushImg;
+		track_votes[0].style.opacity = 0.3;
+		track_votes[1].style.opacity = 1.0;
+	}
+	else{
+		track_votes[1].src = "images/" + initImg;
+		track_votes[1].style.opacity = 1.0;
+		track_votes[0].style.opacity = 1.0;
+	}
+	track_votes[0].src = "images/up_button_2.png";
+
 }
 
 function get_contender_info(contender , num){
