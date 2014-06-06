@@ -468,6 +468,7 @@ function toggle_visibility(id){
 		el.style.display = 'none';
 	}
 	update_my_profile_content_size();
+	$('#modal_background').height($(document).height());
 }
 
 function get_item_description(num){

@@ -78,7 +78,7 @@ function create_banner_links(){
 	banner_links.id = 'banner_links';
 	var li_1 = document.createElement('li') , li_2 = document.createElement('li') , li_3 = document.createElement('li') , li_4 = document.createElement('li');
 	var a_1 = document.createElement('a') , a_2 = document.createElement('a') , a_3 = document.createElement('a') , a_4 = document.createElement('a');
-	a_1.href = '#';
+	a_1.href = 'FAQ.html';
 	a_1.textContent = 'FAQ';
 	li_1.appendChild(a_1);
 	a_2.href = '#';
