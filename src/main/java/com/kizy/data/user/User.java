@@ -6,7 +6,7 @@ import com.kizy.data.rant.Rant;
 
 public interface User {
 
-    long getUserID();
+    long getUserId();
 
     String getUsername();
 

@@ -42,7 +42,7 @@ public class WebResources {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals(MY_SOAP_BOX_USERID)) {
                 try {
-                    return DatabaseUtils.findUserByID(Long.parseLong(cookie.getValue()));
+                    return DatabaseUtils.findUserById(Long.parseLong(cookie.getValue()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

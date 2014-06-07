@@ -4,16 +4,23 @@ import com.kizy.data.user.User;
 
 public class SimpleRant implements Rant {
 
+    private final long id;
     private final boolean isNsfw;
     private final String title;
-    private String contents;
+    private final String contents;
     private final User user;
 
-    public SimpleRant(boolean isNsfw, String title, String contents, User user) {
+    public SimpleRant(long id, boolean isNsfw, String title, String contents, User user) {
+        this.id = id;
         this.isNsfw = isNsfw;
         this.title = title;
         this.contents = contents;
         this.user = user;
+    }
+
+    @Override
+    public long getRantId() {
+        return id;
     }
 
     @Override

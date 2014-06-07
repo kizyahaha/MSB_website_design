@@ -23,7 +23,7 @@ public class SimpleUser implements User {
     }
 
     @Override
-    public long getUserID() {
+    public long getUserId() {
         return id;
     }
 
