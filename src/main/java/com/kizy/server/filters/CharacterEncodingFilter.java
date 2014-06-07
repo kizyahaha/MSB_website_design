@@ -1,4 +1,4 @@
-package com.kizy.filters;
+package com.kizy.server.filters;
 
 import java.io.IOException;
 

@@ -25,7 +25,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
-import com.kizy.filters.CharacterEncodingFilter;
+import com.kizy.server.filters.CharacterEncodingFilter;
 import com.kizy.server.prefs.ApplicationContext;
 
 public class ServerLauncher {
