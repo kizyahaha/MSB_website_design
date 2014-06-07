@@ -47,8 +47,8 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                 "FAQ.css");
 
     private static final List<String> scripts = ImmutableList.of("jquery-1.11.1.min.js",
-    															 "https://www.google.com/jsapi",
-    															 "global_vars.js",
+                                                                 "google_charts.js",
+                                                                 "global_vars.js",
                                                                  "banner.js",
                                                                  "tabs.js",
                                                                  "rant.js",
@@ -94,14 +94,8 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         for (String style : styles) {
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/" + style + "\">");
         }
-        for (int i=0 ; i<scripts.size(); i++) {
-        	String script = scripts.get(i);
-        	if (i==1) {
-        		out.println("<script src=\"" + script + "\"></script>");
-        	}
-        	else {
-        		out.println("<script src=\"scripts/" + script + "\"></script>");
-        	}
+        for (String script : scripts) {
+        	out.println("<script src=\"scripts/" + script + "\"></script>");
         }
         out.println("</head>");
         out.println("<body>");

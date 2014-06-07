@@ -22,7 +22,7 @@ public class DatabaseUtils {
     private static final String RANTS_FILENAME = "data" + File.separator + "rants.txt";
     private static final File RANTS_FILE = new File(RANTS_FILENAME);
 
-    private static final String LINE_DELIMITER = "|||";
+    private static final String LINE_DELIMITER = "~~~~~";
 
     private static final int USER_ID_PART = 0;
     private static final int USER_USERNAME_PART = 1;
