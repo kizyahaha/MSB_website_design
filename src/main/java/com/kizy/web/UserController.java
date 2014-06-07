@@ -45,8 +45,8 @@ public class UserController {
 	            DatabaseUtils.findUserByName(username) == null && DatabaseUtils.findUserByEmail(email) == null;
 	}
 
-	@RequestMapping(value = "/list")
-    public ResponseEntity<String> listRants() throws IOException {
+	@RequestMapping(value = "/listAll")
+    public ResponseEntity<String> listAllUsers() throws IOException {
         JSONArray users = Users.toJsonArray(DatabaseUtils.getUsers());
         return ResponseEntities.json(users.toString());
     }

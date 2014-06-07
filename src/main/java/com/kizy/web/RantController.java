@@ -39,9 +39,16 @@ public class RantController {
         }
     }
 
-    @RequestMapping(value = "/list")
-    public ResponseEntity<String> listRants() throws IOException {
+    @RequestMapping(value = "/listAll")
+    public ResponseEntity<String> listAllRants() throws IOException {
         JSONArray rants = Rants.toJsonArray(DatabaseUtils.getRants());
+        return ResponseEntities.json(rants.toString());
+    }
+
+    @RequestMapping(value = "/list")
+    public ResponseEntity<String> listUserRants(@RequestParam("username") String username) throws IOException {
+        User user = DatabaseUtils.findUserByName(username);
+        JSONArray rants = Rants.toJsonArray(user.getRants());
         return ResponseEntities.json(rants.toString());
     }
 
