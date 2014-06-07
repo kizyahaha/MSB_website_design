@@ -3,6 +3,8 @@ package com.kizy.web;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.json.JSONArray;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.google.common.base.Strings;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.user.SimpleUser;
+import com.kizy.data.user.Users;
 
 @Controller
 @RequestMapping(value = "/users", method = RequestMethod.POST)
@@ -41,5 +44,11 @@ public class UserController {
 	    return !Strings.isNullOrEmpty(password) && !Strings.isNullOrEmpty(username) && !Strings.isNullOrEmpty(email) &&
 	            DatabaseUtils.findUserByName(username) == null && DatabaseUtils.findUserByEmail(email) == null;
 	}
+
+	@RequestMapping(value = "/list")
+    public ResponseEntity<String> listRants() throws IOException {
+        JSONArray users = Users.toJsonArray(DatabaseUtils.getUsers());
+        return ResponseEntities.json(users.toString());
+    }
 
 }

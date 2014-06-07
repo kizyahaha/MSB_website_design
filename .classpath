@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="lib/spring-webmvc.jar"/>
 	<classpathentry kind="lib" path="lib/urlrewritefilter.jar"/>
 	<classpathentry kind="lib" path="lib/javax.servlet-3.0.0.v201103241009.jar"/>
+	<classpathentry kind="lib" path="lib/json-20140107.jar" sourcepath="lib-sources/json-20140107.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

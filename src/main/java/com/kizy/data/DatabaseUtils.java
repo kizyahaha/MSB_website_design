@@ -8,6 +8,7 @@ import java.util.List;
 import com.google.common.base.Charsets;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.io.Files;
 import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.SimpleRant;
@@ -80,8 +81,24 @@ public class DatabaseUtils {
         return readFile(USERS_FILE);
     }
 
+    public static List<User> getUsers() throws IOException {
+        List<User> users = Lists.newArrayList();
+        for (String line : readUsers()) {
+            users.add(parseUser(line));
+        }
+        return users;
+    }
+
     private static List<String> readRants() throws IOException {
         return readFile(RANTS_FILE);
+    }
+
+    public static List<Rant> getRants() throws IOException {
+        List<Rant> rants = Lists.newArrayList();
+        for (String line : readRants()) {
+            rants.add(parseRant(line));
+        }
+        return rants;
     }
 
     public static User readUser(String username, String password) throws IOException {
