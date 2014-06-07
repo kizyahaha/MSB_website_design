@@ -43,11 +43,6 @@ public class SimpleUser implements User {
     }
 
     @Override
-    public String toString() {
-        return String.format("[SimpleUser - Username: {}, Email: {}, Password: {}]", username, email, password);
-    }
-
-    @Override
     public void addRant(Rant rant) {
         rants.add(rant);
     }
@@ -55,6 +50,15 @@ public class SimpleUser implements User {
     @Override
     public Collection<Rant> getRants() {
         return rants;
+    }
+
+    @Override
+    public String toString() {
+        return formatUser(username, email, password);
+    }
+
+    public static String formatUser(String name, String email, String pass) {
+        return String.format("[SimpleUser - Username: {}, Email: {}, Password: {}]", name, email, pass);
     }
 
 }

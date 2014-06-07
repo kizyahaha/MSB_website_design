@@ -5,14 +5,14 @@ import com.kizy.data.user.User;
 public class SimpleRant implements Rant {
 
     private final long id;
-    private final boolean isNsfw;
+    private final boolean nsfw;
     private final String title;
     private final String contents;
     private final User user;
 
-    public SimpleRant(long id, boolean isNsfw, String title, String contents, User user) {
+    public SimpleRant(long id, boolean nsfw, String title, String contents, User user) {
         this.id = id;
-        this.isNsfw = isNsfw;
+        this.nsfw = nsfw;
         this.title = title;
         this.contents = contents;
         this.user = user;
@@ -25,7 +25,7 @@ public class SimpleRant implements Rant {
 
     @Override
     public boolean isNsfw() {
-        return isNsfw;
+        return nsfw;
     }
 
     @Override
@@ -41,6 +41,15 @@ public class SimpleRant implements Rant {
     @Override
     public User getOwner() {
         return user;
+    }
+
+    @Override
+    public String toString() {
+        return formatRant(title, contents, user.getUsername(), nsfw);
+    }
+
+    public static String formatRant(String title, String contents, String username, boolean nsfw) {
+        return String.format("[SimpleRant - Title: {}, Contents: {}, Owner: {}, NSFW: {}]", title, contents, username, nsfw);
     }
 
 }

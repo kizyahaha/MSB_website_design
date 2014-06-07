@@ -72,67 +72,76 @@ public class DatabaseUtils {
     }
 
     public static User readUser(String username, String password) throws IOException {
-        return findUser(new SimpleUser(0L, username, password, ""), EnumSet.of(UserMatchComponent.USERNAME, UserMatchComponent.PASSWORD));
+        return findUser(0L, username, password, "", EnumSet.of(UserMatchComponent.USERNAME, UserMatchComponent.PASSWORD));
     }
 
     public static User findUserById(long id) throws IOException {
-        return findUser(new SimpleUser(id, "", "", ""), EnumSet.of(UserMatchComponent.ID));
+        return findUser(id, "", "", "", EnumSet.of(UserMatchComponent.ID));
     }
 
     public static User findUserByName(String username) throws IOException {
-        return findUser(new SimpleUser(0L, username, "", ""), EnumSet.of(UserMatchComponent.USERNAME));
+        return findUser(0L, username, "", "", EnumSet.of(UserMatchComponent.USERNAME));
     }
 
     public static User findUserByEmail(String email) throws IOException {
-        return findUser(new SimpleUser(0L, "", "", email), EnumSet.of(UserMatchComponent.EMAIL));
+        return findUser(0L, "", "", email, EnumSet.of(UserMatchComponent.EMAIL));
     }
 
     public static Rant findRantById(long id) throws IOException {
-        return findRant(new SimpleRant(id, false, null, null, null), EnumSet.of(RantMatchComponent.ID));
+        return findRant(id, false, null, null, EnumSet.of(RantMatchComponent.ID));
     }
 
     public static Rant findRantByNsfw(boolean nsfw) throws IOException {
-        return findRant(new SimpleRant(0L, nsfw, null, null, null), EnumSet.of(RantMatchComponent.NSFW));
+        return findRant(0L, nsfw, null, null, EnumSet.of(RantMatchComponent.NSFW));
     }
 
     public static Rant findRantByTitle(String title) throws IOException {
-        return findRant(new SimpleRant(0L, false, title, null, null), EnumSet.of(RantMatchComponent.TITLE));
+        return findRant(0L, false, title, null, EnumSet.of(RantMatchComponent.TITLE));
     }
 
     public static Rant findRantByOwnerName(String owner) throws IOException {
-        return findRant(new SimpleRant(0L, false, null, null, new SimpleUser(0L, owner, "", "")), EnumSet.of(RantMatchComponent.OWNER));
+        return findRant(0L, false, null, owner, EnumSet.of(RantMatchComponent.OWNER));
     }
 
-    private static User findUser(User match, EnumSet<UserMatchComponent> set) throws IOException {
-        Iterable<String> matches = UserMatcher.matchOn(match, readUsers(), set);
+    private static User findUser(long matchId, String matchUsername, String matchPassword, String matchEmail, EnumSet<UserMatchComponent> set) throws IOException {
+        Iterable<String> matches = UserMatcher.matchOn(matchId, matchUsername, matchPassword, matchEmail, readUsers(), set);
         if (Iterables.size(matches) == 0) {
             return null;
         }
         if (Iterables.size(matches) > 1) {
-            throw new IllegalStateException(String.format("Multiple users match '{}' on properties: {}", match, set));
+            throw new IllegalStateException(String.format("Multiple users match '{}' on properties: {}",
+                                                          SimpleUser.formatUser(matchUsername, matchEmail, matchPassword), set));
         }
         return parseUser(matches.iterator().next());
     }
 
-    private static Rant findRant(Rant match, EnumSet<RantMatchComponent> set) throws IOException {
-        Iterable<String> matches = RantMatcher.matchOn(match, readRants(), set);
+    private static Rant findRant(long matchId, boolean matchNsfw, String matchTitle, String matchOwner, EnumSet<RantMatchComponent> set) throws IOException {
+        Iterable<String> matches = RantMatcher.matchOn(matchId, matchNsfw, matchTitle, matchOwner, readRants(), set);
         if (Iterables.size(matches) == 0) {
             return null;
         }
         if (Iterables.size(matches) > 1) {
-            throw new IllegalStateException(String.format("Multiple users match '{}' on properties: {}", match, set));
+            throw new IllegalStateException(String.format("Multiple users match '{}' on properties: {}",
+                                                          SimpleRant.formatRant(matchTitle, "", matchOwner, matchNsfw), set));
         }
         return parseRant(matches.iterator().next());
     }
 
     private static User parseUser(String line) {
         String[] parts = splitLine(line);
-        return new SimpleUser(Long.parseLong(parts[USER_ID_PART]), parts[USER_USERNAME_PART], parts[USER_PASSWORD_PART], parts[USER_EMAIL_PART]);
+        return new SimpleUser(Long.parseLong(parts[USER_ID_PART]),
+                              parts[USER_USERNAME_PART],
+                              parts[USER_PASSWORD_PART],
+                              parts[USER_EMAIL_PART]);
     }
 
     private static Rant parseRant(String line) throws IOException {
         String[] parts = splitLine(line);
-        return new SimpleRant(Long.parseLong(parts[RANT_ID_PART]), Boolean.parseBoolean(parts[RANT_NSFW_PART]), parts[RANT_TITLE_PART], parts[RANT_CONTENTS_PART], findUserByName(parts[RANT_OWNER_PART]));
+        return new SimpleRant(Long.parseLong(parts[RANT_ID_PART]),
+                              Boolean.parseBoolean(parts[RANT_NSFW_PART]),
+                              parts[RANT_TITLE_PART],
+                              parts[RANT_CONTENTS_PART],
+                              findUserByName(parts[RANT_OWNER_PART]));
     }
 
     private static String[] splitLine(String line) {
@@ -149,25 +158,26 @@ public class DatabaseUtils {
             // no instantiation
         }
 
-        public static Iterable<String> matchOn(final User match, final Iterable<String> lines, final EnumSet<UserMatchComponent> set) {
+        public static Iterable<String> matchOn(final long matchId, final String matchUsername, final String matchPassword,
+                                               final String matchEmail, final Iterable<String> lines, final EnumSet<UserMatchComponent> set) {
             return Iterables.filter(lines, new Predicate<String>() {
                 @Override
                 public boolean apply(String line) {
                     String[] parts = splitLine(line);
                     if (set.contains(UserMatchComponent.ID)
-                            && match.getUserId() != Long.parseLong(parts[USER_ID_PART])) {
+                            && matchId != Long.parseLong(parts[USER_ID_PART])) {
                         return false;
                     }
                     if (set.contains(UserMatchComponent.USERNAME)
-                            && !match.getUsername().equalsIgnoreCase(parts[USER_USERNAME_PART])) {
+                            && !matchUsername.equalsIgnoreCase(parts[USER_USERNAME_PART])) {
                         return false;
                     }
                     if (set.contains(UserMatchComponent.PASSWORD)
-                            && !match.getPassword().equals(parts[USER_PASSWORD_PART])) {
+                            && !matchPassword.equals(parts[USER_PASSWORD_PART])) {
                         return false;
                     }
                     if (set.contains(UserMatchComponent.EMAIL)
-                            && !match.getEmail().equalsIgnoreCase(parts[USER_EMAIL_PART])) {
+                            && !matchEmail.equalsIgnoreCase(parts[USER_EMAIL_PART])) {
                         return false;
                     }
                     return true;
@@ -186,25 +196,26 @@ public class DatabaseUtils {
             // no instantiation
         }
 
-        public static Iterable<String> matchOn(final Rant match, final Iterable<String> lines, final EnumSet<RantMatchComponent> set) {
+        public static Iterable<String> matchOn(final long matchId, final boolean matchNsfw, final String matchTitle, final String matchOwner,
+                                               final Iterable<String> lines, final EnumSet<RantMatchComponent> set) {
             return Iterables.filter(lines, new Predicate<String>() {
                 @Override
                 public boolean apply(String line) {
                     String[] parts = splitLine(line);
                     if (set.contains(RantMatchComponent.ID)
-                            && match.getRantId() != Long.parseLong(parts[RANT_ID_PART])) {
+                            && matchId != Long.parseLong(parts[RANT_ID_PART])) {
                         return false;
                     }
                     if (set.contains(RantMatchComponent.NSFW)
-                            && match.isNsfw() != Boolean.parseBoolean(parts[RANT_NSFW_PART])) {
+                            && matchNsfw != Boolean.parseBoolean(parts[RANT_NSFW_PART])) {
                         return false;
                     }
                     if (set.contains(RantMatchComponent.TITLE)
-                            && !match.getTitle().equalsIgnoreCase(parts[RANT_TITLE_PART])) {
+                            && matchTitle.equalsIgnoreCase(parts[RANT_TITLE_PART])) {
                         return false;
                     }
                     if (set.contains(RantMatchComponent.OWNER)
-                            && !match.getOwner().getUsername().equalsIgnoreCase(parts[RANT_OWNER_PART])) {
+                            && matchOwner.equalsIgnoreCase(parts[RANT_OWNER_PART])) {
                         return false;
                     }
                     return true;
