@@ -26,10 +26,14 @@ public class UserController {
 	@RequestMapping(value = "/add")
 	public void addUser(@RequestParam("username") String username,
 	                    @RequestParam("password") String password,
-	                    @RequestParam("email") String email) throws IOException {
-		if (isValid(username, password, email)) {
-			DatabaseUtils.writeUser(new SimpleUser(id.incrementAndGet(), username, password, email));
-		}
+	                    @RequestParam("email") String email) {
+	    try {
+	        if (isValid(username, password, email)) {
+	            DatabaseUtils.writeUser(new SimpleUser(id.incrementAndGet(), username, password, email));
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	private boolean isValid(String username, String password, String email) throws IOException {

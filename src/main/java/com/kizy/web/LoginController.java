@@ -20,9 +20,9 @@ import com.kizy.data.user.User;
 public class LoginController {
 
     @RequestMapping(value = "/login")
-    public ResponseEntity<String> login(@RequestParam("username_accept") String username,
-                      @RequestParam("password_accept") String password,
-                      HttpServletResponse response) throws IOException {
+    public ResponseEntity<String> login(HttpServletResponse response,
+                                        @RequestParam("username_accept") String username,
+                                        @RequestParam("password_accept") String password) throws IOException {
         User user = DatabaseUtils.readUser(username, password);
         if (user != null) {
             Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERID, Long.toString(user.getUserId()));

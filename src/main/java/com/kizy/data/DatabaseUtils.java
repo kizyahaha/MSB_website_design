@@ -43,6 +43,18 @@ public class DatabaseUtils {
         Files.append(contents, file, Charsets.UTF_8);
     }
 
+    private static void addRantToOwner(Rant rant) throws IOException {
+        StringBuilder newContents = new StringBuilder();
+        for (String line : readUsers()) {
+            newContents.append(line);
+            if (rant.getOwner().getUserId() == Long.parseLong(splitLine(line)[USER_ID_PART])) {
+                newContents.append(LINE_DELIMITER + rant.getRantId());
+            }
+            newContents.append("\n");
+        }
+        Files.write(newContents, USERS_FILE, Charsets.UTF_8);
+    }
+
     public static void writeUser(User user) throws IOException {
         append(USERS_FILE, user.getUserId() + LINE_DELIMITER +
                            user.getUsername() + LINE_DELIMITER +
@@ -57,6 +69,7 @@ public class DatabaseUtils {
                            rant.getTitle() + LINE_DELIMITER +
                            rant.getContents() + LINE_DELIMITER +
                            rant.getOwner().getUsername() + "\n");
+        addRantToOwner(rant);
     }
 
     private static List<String> readFile(File file) throws IOException {
