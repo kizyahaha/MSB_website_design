@@ -17,12 +17,13 @@ function create_questions_and_answers(){
 				"political views, or even bash your ex?  Whatever you want to say, you can say it here.  Our entire site is dedicated to one thing and " +
 				"one thing only - your message.");
 	//1
-	qNa.push("How does it work?");
+	qNa.push("How does this all work?");
 	qNa.push("It's simple.  First, craft your rant and submit it.  It will be placed into the contenders for the 1-minute title.  People can then " +
 				"view your rant and provide support or opposition.  If they support your rant, its power grows.  If they oppose it, its power drops.  " + 
 				"At the same time, you may apply a multitude of special items to influence the growth and defense of your rant.  " +
 				"If at the end of 1 minute your rant has the highest power of all the 1-minute contenders, it will be displayed as the winner and " +
-				"move into the contenders for the 10-minute title where the process repeats until (hopefully) your rant wins the daily title!");
+				"move into the contenders for the 10-minute title where the process repeats until (hopefully) your rant wins the daily title!  After " +
+				"a rant wins the daily title and has its 24 hours to bask in the glory of victory on the front page, it is retired to the archives.");
 	//2
 	qNa.push("Are there limits to what I can put in a rant?");
 	qNa.push("Good question.  The short answer is, 'I don't know.'  Let's see how this plays out.  With that being said, there is an option to " +
@@ -31,7 +32,7 @@ function create_questions_and_answers(){
 	qNa.push("How long will my rant survive?");
 	qNa.push("As long as it has power.  Power is lost at a very slow rate over time and by others opposing your rant.  A rant is initialized with " +
 				"enough power so that if it recieves no support and no opposition, it will survive at least 1 day.  Once your rant's power " +
-				"hits 0, it is removed from the list of contenders of which ever level it is currently in.");
+				"hits 0, it is removed from the list of contenders.  RIP.");
 	//4
 	qNa.push("Why does my rant lose power even if no one opposes it?");
 	qNa.push("We do this to assure that rants can't simply persist forever.  We want to have a fresh turn over of new rants on a regular basis " +
@@ -70,8 +71,13 @@ function create_questions_and_answers(){
 				"(assuming none have died or there were no new entries).  We do this to avoid disorientation.  But your friend will have a completely "+
 				"different 1-100.  Over the thousands of people viewing the site at any time, on average, each rant will be at the top and the bottom " +
 				"of the list an equal number of times.  Furthermore, the order of the contenders has absolutely no correlation to the graph showing the " +
-				"powers of each rank.  This graph simply exists to say, 'Which ever rant is currently in Nth place has X power.'");
+				"powers of each rank.  This graph simply exists to say, 'Whichever rant is currently in Nth place has X power.'");
 	//10
+	qNa.push("How is my power transferred from one level to the next?");
+	qNa.push("When you enter a new level (for example entering the daily level after winning the hourly level) your power will be set to which ever " +
+				"is greater - your current power or the median of the level you're entering.  We want to make sure you at least start on a level playing " +
+				"field with the other contenders at that level.");
+	//11
 	qNa.push("Can you make it so that all rants about cats never see the light of day?");
 	qNa.push("Look, can we?  Yes.  Should we?  Yes.  Would it be for the general well-being of the entire internet?  Of course, no argument there.  " +
 				"But....but, I mean....wait....Why haven't we done this?!");
