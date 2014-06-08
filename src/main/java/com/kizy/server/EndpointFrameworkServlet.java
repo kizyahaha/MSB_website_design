@@ -22,6 +22,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.io.ByteStreams;
 import com.google.common.io.Closeables;
 import com.google.common.io.Files;
+import com.kizy.data.rant.RantGranularity;
 import com.kizy.web.WebResources;
 
 public class EndpointFrameworkServlet extends FrameworkServlet {
@@ -108,7 +109,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         if (path == null) {
             return 0;
         }
-        RantTab tab = RantTab.fromName(path.substring(path.indexOf('/') + 1));
+        RantGranularity tab = RantGranularity.fromName(path.substring(path.indexOf('/') + 1));
         if (tab == null) {
             return 0;
         }
