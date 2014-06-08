@@ -21,7 +21,7 @@ public class Users {
         map.put("id", user.getUserId());
         map.put("username", user.getUsername());
         map.put("email", user.getEmail());
-        map.put("rants", Rants.toJsonArray(user.getRants()));
+        map.put("rants", Rants.toJsonArrayFromIds(user.getRantIds()));
         return new JSONObject(map);
     }
 

@@ -31,7 +31,7 @@ public class RantController {
                         @RequestParam("contents") String contents) {
         User owner = WebResources.userFromCookie(request.getCookies());
         Rant rant = new SimpleRant(id.incrementAndGet(), nsfw, title, contents, owner);
-        owner.addRant(rant);
+        owner.addRantId(rant.getRantId());
         try {
             DatabaseUtils.writeRant(rant);
         } catch (IOException e) {
@@ -41,14 +41,14 @@ public class RantController {
 
     @RequestMapping(value = "/listAll")
     public ResponseEntity<String> listAllRants() throws IOException {
-        JSONArray rants = Rants.toJsonArray(DatabaseUtils.getRants());
+        JSONArray rants = Rants.toJsonArrayFromRants(DatabaseUtils.getRants());
         return ResponseEntities.json(rants.toString());
     }
 
     @RequestMapping(value = "/list")
     public ResponseEntity<String> listUserRants(@RequestParam("username") String username) throws IOException {
         User user = DatabaseUtils.findUserByName(username);
-        JSONArray rants = Rants.toJsonArray(user.getRants());
+        JSONArray rants = Rants.toJsonArrayFromIds(user.getRantIds());
         return ResponseEntities.json(rants.toString());
     }
 

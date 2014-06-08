@@ -5,7 +5,6 @@ import java.util.Collection;
 import org.joda.time.DateTime;
 
 import com.google.common.collect.Sets;
-import com.kizy.data.rant.Rant;
 
 public class SimpleUser implements User {
 
@@ -15,7 +14,7 @@ public class SimpleUser implements User {
     private final String email;
     private final DateTime date;
 
-    private Collection<Rant> rants;
+    private Collection<Long> rantIds;
 
     public SimpleUser(long id, String username, String password, String email) {
         this.id = id;
@@ -23,7 +22,16 @@ public class SimpleUser implements User {
         this.password = password;
         this.email = email;
         this.date = DateTime.now();
-        this.rants = Sets.newConcurrentHashSet();
+        this.rantIds = Sets.newConcurrentHashSet();
+    }
+
+    public SimpleUser(long id, String username, String password, String email, DateTime date, Collection<Long> rants) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.date = date;
+        this.rantIds = rants;
     }
 
     @Override
@@ -47,13 +55,13 @@ public class SimpleUser implements User {
     }
 
     @Override
-    public void addRant(Rant rant) {
-        rants.add(rant);
+    public void addRantId(Long rantId) {
+        rantIds.add(rantId);
     }
 
     @Override
-    public Collection<Rant> getRants() {
-        return rants;
+    public Collection<Long> getRantIds() {
+        return rantIds;
     }
 
     @Override

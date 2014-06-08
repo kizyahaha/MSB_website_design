@@ -4,8 +4,6 @@ import java.util.Collection;
 
 import org.joda.time.DateTime;
 
-import com.kizy.data.rant.Rant;
-
 public interface User {
 
     long getUserId();
@@ -16,9 +14,9 @@ public interface User {
 
     String getPassword();
 
-    void addRant(Rant rant);
+    void addRantId(Long rantId);
 
-    Collection<Rant> getRants();
+    Collection<Long> getRantIds();
 
     DateTime getCreationTime();
 

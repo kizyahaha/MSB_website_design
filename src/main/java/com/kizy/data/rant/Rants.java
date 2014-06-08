@@ -1,5 +1,6 @@
 package com.kizy.data.rant;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.json.JSONObject;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.kizy.data.DatabaseUtils;
 
 public class Rants {
 
@@ -24,10 +26,23 @@ public class Rants {
         return new JSONObject(map);
     }
 
-    public static JSONArray toJsonArray(Collection<Rant> rants) {
+    public static JSONArray toJsonArrayFromRants(Collection<Rant> rants) {
         Collection<JSONObject> jsonRants = Lists.newArrayList();
         for (Rant rant : rants) {
             jsonRants.add(toJsonObject(rant));
+        }
+        return new JSONArray(jsonRants);
+    }
+
+    public static JSONArray toJsonArrayFromIds(Collection<Long> rantIds) {
+        Collection<JSONObject> jsonRants = Lists.newArrayList();
+        for (Long rantId : rantIds) {
+            try {
+                Rant rant = DatabaseUtils.findRantById(rantId);
+                jsonRants.add(toJsonObject(rant));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return new JSONArray(jsonRants);
     }

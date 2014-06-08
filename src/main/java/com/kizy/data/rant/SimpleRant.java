@@ -22,6 +22,15 @@ public class SimpleRant implements Rant {
         this.date = DateTime.now();
     }
 
+    public SimpleRant(long id, boolean nsfw, String title, String contents, User user, DateTime date) {
+        this.id = id;
+        this.nsfw = nsfw;
+        this.title = title;
+        this.contents = contents;
+        this.user = user;
+        this.date = date;
+    }
+
     @Override
     public long getRantId() {
         return id;

@@ -2,13 +2,17 @@ package com.kizy.data;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
+
+import org.joda.time.DateTime;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.SimpleRant;
@@ -29,12 +33,14 @@ public class DatabaseUtils {
     private static final int USER_USERNAME_PART = 1;
     private static final int USER_PASSWORD_PART = 2;
     private static final int USER_EMAIL_PART = 3;
+    private static final int USER_CREATION_PART = 4;
 
     private static final int RANT_ID_PART = 0;
     private static final int RANT_NSFW_PART = 1;
     private static final int RANT_TITLE_PART = 2;
     private static final int RANT_CONTENTS_PART = 3;
     private static final int RANT_OWNER_PART = 4;
+    private static final int RANT_CREATION_PART = 5;
 
     private DatabaseUtils() {
         // no instantiation
@@ -60,7 +66,8 @@ public class DatabaseUtils {
         append(USERS_FILE, user.getUserId() + LINE_DELIMITER +
                            user.getUsername() + LINE_DELIMITER +
                            user.getPassword() + LINE_DELIMITER +
-                           user.getEmail() + "\n");
+                           user.getEmail() + LINE_DELIMITER +
+                           user.getCreationTime().toString() + "\n");
     }
 
 
@@ -121,10 +128,6 @@ public class DatabaseUtils {
         return findRant(id, false, null, null, EnumSet.of(RantMatchComponent.ID));
     }
 
-    public static Rant findRantByNsfw(boolean nsfw) throws IOException {
-        return findRant(0L, nsfw, null, null, EnumSet.of(RantMatchComponent.NSFW));
-    }
-
     public static Rant findRantByTitle(String title) throws IOException {
         return findRant(0L, false, title, null, EnumSet.of(RantMatchComponent.TITLE));
     }
@@ -157,12 +160,18 @@ public class DatabaseUtils {
         return parseRant(matches.iterator().next());
     }
 
-    private static User parseUser(String line) {
+    private static User parseUser(String line) throws IOException {
         String[] parts = splitLine(line);
+        Collection<Long> rants = Sets.newConcurrentHashSet();
+        for (int i = USER_CREATION_PART + 1; i < parts.length; i++) {
+            rants.add(Long.parseLong(parts[i]));
+        }
         return new SimpleUser(Long.parseLong(parts[USER_ID_PART]),
                               parts[USER_USERNAME_PART],
                               parts[USER_PASSWORD_PART],
-                              parts[USER_EMAIL_PART]);
+                              parts[USER_EMAIL_PART],
+                              new DateTime(parts[USER_CREATION_PART]),
+                              rants);
     }
 
     private static Rant parseRant(String line) throws IOException {
@@ -171,7 +180,8 @@ public class DatabaseUtils {
                               Boolean.parseBoolean(parts[RANT_NSFW_PART]),
                               parts[RANT_TITLE_PART],
                               parts[RANT_CONTENTS_PART],
-                              findUserByName(parts[RANT_OWNER_PART]));
+                              findUserByName(parts[RANT_OWNER_PART]),
+                              new DateTime(parts[RANT_CREATION_PART]));
     }
 
     private static String[] splitLine(String line) {
@@ -217,7 +227,7 @@ public class DatabaseUtils {
     }
 
     public static enum RantMatchComponent {
-        ID, NSFW, TITLE, OWNER;
+        ID, TITLE, OWNER;
     }
 
     public static class RantMatcher {
@@ -234,10 +244,6 @@ public class DatabaseUtils {
                     String[] parts = splitLine(line);
                     if (set.contains(RantMatchComponent.ID)
                             && matchId != Long.parseLong(parts[RANT_ID_PART])) {
-                        return false;
-                    }
-                    if (set.contains(RantMatchComponent.NSFW)
-                            && matchNsfw != Boolean.parseBoolean(parts[RANT_NSFW_PART])) {
                         return false;
                     }
                     if (set.contains(RantMatchComponent.TITLE)
