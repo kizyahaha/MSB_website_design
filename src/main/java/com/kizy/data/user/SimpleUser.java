@@ -2,6 +2,8 @@ package com.kizy.data.user;
 
 import java.util.Collection;
 
+import org.joda.time.DateTime;
+
 import com.google.common.collect.Sets;
 import com.kizy.data.rant.Rant;
 
@@ -11,6 +13,7 @@ public class SimpleUser implements User {
     private final String username;
     private final String password;
     private final String email;
+    private final DateTime date;
 
     private Collection<Rant> rants;
 
@@ -19,6 +22,7 @@ public class SimpleUser implements User {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.date = DateTime.now();
         this.rants = Sets.newConcurrentHashSet();
     }
 
@@ -50,6 +54,11 @@ public class SimpleUser implements User {
     @Override
     public Collection<Rant> getRants() {
         return rants;
+    }
+
+    @Override
+    public DateTime getCreationTime() {
+        return date;
     }
 
     @Override

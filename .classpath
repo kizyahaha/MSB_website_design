@@ -17,5 +17,6 @@
 	<classpathentry kind="lib" path="lib/urlrewritefilter.jar"/>
 	<classpathentry kind="lib" path="lib/javax.servlet-3.0.0.v201103241009.jar"/>
 	<classpathentry kind="lib" path="lib/json-20140107.jar" sourcepath="lib-sources/json-20140107.zip"/>
+	<classpathentry kind="lib" path="lib/joda-time-2.3.jar" sourcepath="lib-sources/joda-time-2.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

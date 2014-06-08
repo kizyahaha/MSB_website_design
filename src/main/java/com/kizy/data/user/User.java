@@ -2,6 +2,8 @@ package com.kizy.data.user;
 
 import java.util.Collection;
 
+import org.joda.time.DateTime;
+
 import com.kizy.data.rant.Rant;
 
 public interface User {
@@ -17,5 +19,7 @@ public interface User {
     void addRant(Rant rant);
 
     Collection<Rant> getRants();
+
+    DateTime getCreationTime();
 
 }

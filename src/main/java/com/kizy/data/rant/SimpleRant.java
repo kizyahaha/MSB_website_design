@@ -1,5 +1,7 @@
 package com.kizy.data.rant;
 
+import org.joda.time.DateTime;
+
 import com.kizy.data.user.User;
 
 public class SimpleRant implements Rant {
@@ -9,6 +11,7 @@ public class SimpleRant implements Rant {
     private final String title;
     private final String contents;
     private final User user;
+    private final DateTime date;
 
     public SimpleRant(long id, boolean nsfw, String title, String contents, User user) {
         this.id = id;
@@ -16,6 +19,7 @@ public class SimpleRant implements Rant {
         this.title = title;
         this.contents = contents;
         this.user = user;
+        this.date = DateTime.now();
     }
 
     @Override
@@ -41,6 +45,11 @@ public class SimpleRant implements Rant {
     @Override
     public User getOwner() {
         return user;
+    }
+
+    @Override
+    public DateTime getCreationDate() {
+        return date;
     }
 
     @Override
