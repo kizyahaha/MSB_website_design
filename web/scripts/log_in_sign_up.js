@@ -45,7 +45,7 @@ function create_log_in_error_message(){
 }
 
 function create_stay_logged_in(){
-	$('<input/>',{type:'checkbox'}).appendTo('#log_in_form');
+	$('<input/>',{name:'stay_logged_in' , type:'checkbox'}).appendTo('#log_in_form');
 	$('<span/>',{addClass: 'checkbox_text' , id:'stay_logged_text'}).appendTo('#log_in_form');
 	document.getElementById('stay_logged_text').textContent = 'Stay logged in';
 }
@@ -63,6 +63,8 @@ function create_log_in_button(){
 }
 
 function log_in(form){;
+	//alert($('#log_in_form').serialize());
+	
 	$.ajax({
 		type: 'POST',
 		url: '/api/login/login',

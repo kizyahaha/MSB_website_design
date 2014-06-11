@@ -33,16 +33,22 @@ function create_submit_button(){
 
 function submit(form){
 	if (check_valid_input(form)){
+		//alert($('#sign_up_form').serialize());
+		
+		/*$.ajax({
+			type: 'POST',
+			url: '/api/users/add',
+			data: $('#sign_up_form').serialize(),
+			success: function(msg) {
+				window.document.location.href = 'sign_up_success.html';
+			},
+			error: function(msg) {
+				alert("Woops.  The submission failed.  Contact your local support.");
+			}
+		});*/
 		$.post( '/api/users/add' , $('#sign_up_form').serialize() );
 		window.document.location.href = 'sign_up_success.html';
 	}
-	/*
-    $.ajax({
-        type: 'POST',
-		url: '/api/users/add',
-        data: $('#sign_up_form').serialize(),
-    });
-	*/
 }
 
 function ask_visibility(str){
