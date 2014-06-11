@@ -26,7 +26,7 @@ public class LoginController {
         User user = DatabaseUtils.readUser(username, password);
         if (user != null) {
             Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERID, Long.toString(user.getUserId()));
-            cookie.setPath("/main");
+            cookie.setPath("/");
             response.addCookie(cookie);
             return ResponseEntities.plaintext("Successful Login");
         } else {
