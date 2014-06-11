@@ -80,7 +80,7 @@ function log_in(form){;
 }
 
 function get_user(){
-	var cookie_name = 'MY_SOAP_BOX_USERNAME';
+	var cookie_name = 'MY_SOAP_BOX_USERID';
 	var cookies = document.cookie.split(';');
 	var cookies_length = cookies.length;
 	for(var i=0; i<cookies_length; i++) {
@@ -94,9 +94,8 @@ function get_user(){
 }
 
 function delete_user_cookie(){
-	var cookie_name = 'MY_SOAP_BOX_USERNAME';
-	document.cookie = cookie_name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT';
-	userID = "";
+	var cookie_name = 'MY_SOAP_BOX_USERID';
+	document.cookie = cookie_name + '=; path=/ ; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
 	window.document.location.href = 'daily.html';
 }
 
