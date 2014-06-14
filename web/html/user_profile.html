@@ -17,7 +17,8 @@
 	<script>
 		create_banner();
 		create_user_profile(0);
-		create_footer();
+		//create_footer();  // Due to asynchronous call of create_user_profile(), this was loading before
+							// the user profile so it was placed in success function of create_user_profile()
 	</script>
 <!-- </body> -->
 <!-- </html> -->

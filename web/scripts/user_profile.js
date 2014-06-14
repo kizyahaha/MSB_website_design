@@ -8,6 +8,7 @@ function create_user_profile(user_tab_num){
             create_user_banner(data);
             create_user_tabs(user_tab_num);
             create_user_tab_content(user_tab_num);
+			create_footer();
         },
         error: function(name,status) {
             alert(status);
