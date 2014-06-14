@@ -67,7 +67,7 @@ public class DatabaseUtils {
                            user.getUsername() + LINE_DELIMITER +
                            user.getPassword() + LINE_DELIMITER +
                            user.getEmail() + LINE_DELIMITER +
-                           user.getCreationTime().toString() + "\n");
+                           user.getCreationDate().toString() + "\n");
     }
 
 
@@ -76,7 +76,8 @@ public class DatabaseUtils {
                            rant.isNsfw() + LINE_DELIMITER +
                            rant.getTitle() + LINE_DELIMITER +
                            rant.getContents() + LINE_DELIMITER +
-                           rant.getOwner().getUsername() + "\n");
+                           rant.getOwner().getUsername() + LINE_DELIMITER +
+                           rant.getCreationDate().toString() + "\n");
         addRantToOwner(rant);
     }
 

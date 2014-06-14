@@ -65,7 +65,7 @@ public class SimpleUser implements User {
     }
 
     @Override
-    public DateTime getCreationTime() {
+    public DateTime getCreationDate() {
         return date;
     }
 

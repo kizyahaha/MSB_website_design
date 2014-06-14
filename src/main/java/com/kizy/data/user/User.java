@@ -18,6 +18,6 @@ public interface User {
 
     Collection<Long> getRantIds();
 
-    DateTime getCreationTime();
+    DateTime getCreationDate();
 
 }
