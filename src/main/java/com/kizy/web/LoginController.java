@@ -21,7 +21,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login")
     @ResponseBody
-    public String login(HttpServletResponse response,
+    public void login(HttpServletResponse response,
                         @RequestParam("username_accept") String username,
                         @RequestParam("password_accept") String password) throws IOException {
         User user = DatabaseUtils.readUser(username, password);
@@ -29,10 +29,8 @@ public class LoginController {
             Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERID, Long.toString(user.getUserId()));
             cookie.setPath("/");
             response.addCookie(cookie);
-            return "Successful Login";
         } else {
-            WebResources.sendError(response, HttpStatus.FORBIDDEN, "Mismatched username and password");
-            return "Failed login";
+            response.setStatus(HttpStatus.FORBIDDEN.value());
         }
     }
 }

@@ -5,9 +5,6 @@ import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.http.HttpStatus;
 
 import com.google.common.collect.Sets;
 import com.kizy.data.DatabaseUtils;
@@ -33,10 +30,6 @@ public class WebResources {
             return "";
         }
         return path.substring(lastDotIndex + 1);
-    }
-
-    public static void sendError(HttpServletResponse response, HttpStatus status, String message) throws IOException {
-        response.sendError(status.value(), message);
     }
 
     public static User userFromRequest(HttpServletRequest request) {
