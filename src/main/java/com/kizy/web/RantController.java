@@ -25,7 +25,7 @@ public class RantController {
 
     @RequestMapping(value = "/add")
     public void addRant(HttpServletRequest request,
-                        @RequestParam("nsfw") boolean nsfw,
+                        @RequestParam(value = "nsfw", defaultValue = "false") boolean nsfw,
                         @RequestParam("title") String title,
                         @RequestParam("contents") String contents) {
         User owner = WebResources.userFromRequest(request);
