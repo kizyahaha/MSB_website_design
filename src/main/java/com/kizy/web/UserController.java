@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.common.base.Strings;
 import com.kizy.data.DatabaseUtils;
+import com.kizy.data.rant.Rants;
 import com.kizy.data.user.SimpleUser;
+import com.kizy.data.user.User;
 import com.kizy.data.user.Users;
 
 @Controller
@@ -49,6 +51,13 @@ public class UserController {
     public ResponseEntity<String> listAllUsers() throws IOException {
         JSONArray users = Users.toJsonArray(DatabaseUtils.getUsers());
         return ResponseEntities.json(users.toString());
+    }
+	
+	@RequestMapping(value = "/userData")
+    public ResponseEntity<String> getUserData(@RequestParam("id") long id) throws IOException {
+        User user = DatabaseUtils.findUserById(id);
+        //System.out.print("\n" + user.getUsername());
+        return ResponseEntities.json(user.getUsername());
     }
 
 }

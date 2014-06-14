@@ -1,19 +1,45 @@
 
 function create_user_profile(user_tab_num){
-	create_user_banner();
+	var user_data = get_user_data();
+	create_user_banner(user_data);
 	create_user_tabs(user_tab_num);
 	create_user_tab_content(user_tab_num);
 }
 
-function create_user_banner(){
+function get_user_data(){
+	var data = {
+		username: "Queen_of_Equestria",
+		pic: "images/jeremy.png",
+		birth: "April 14, 2014",
+		rant_ids:[],
+		trophies:[2,5,9,17]
+	};
+	
+	$.ajax({
+		type: 'POST',
+		url: '/api/users/userData',
+		//dataType: 'string',
+		data: {id:userID},
+		success: function(gotData) {
+			data = gotData;
+		},
+		error: function(name,status) {
+			alert(status);
+		}
+	});
+	
+	return data;
+}
+
+function create_user_banner(user_data){
 	$('<div/>',{id: 'user_banner'}).appendTo('body');
 	if (is_owner){
 		create_user_links();
 	}
-	create_user_profile_pic();
-	create_profile_username();
-	create_member_date();
-	create_trophy_case();
+	create_user_profile_pic(user_data);
+	create_profile_username(user_data);
+	create_member_date(user_data);
+	create_trophy_case(user_data);
 }
 
 function create_user_links(){
@@ -32,59 +58,34 @@ function user_has_new_message(){
 	return true;
 }
 
-function create_user_profile_pic(){
+function create_user_profile_pic(user_data){
 	$('#user_banner').append("<img id='user_profile_pic'>");
-	$('#user_profile_pic').attr('src', get_user_profile_pic());
+	$('#user_profile_pic').attr('src', user_data.pic);
 }
 
-function get_user_profile_pic(){
-	return 'images/jeremy.png';
-}
-
-function create_profile_username(){
+function create_profile_username(user_data){
 	$('#user_banner').append("<div id='profile_username'></div>");
-	//$('#profile_username').text(get_profile_username());
+	//$('#profile_username').text(user_data.username);
 	$('#profile_username').text(userID);
 }
 
-function get_profile_username(){
-	return 'Queen_of_Equestria';
-}
-
-function create_member_date(){
+function create_member_date(user_data){
 	$('#user_banner').append("<div id='member_date'></div>");
-	$('#member_date').text('Member since ' + get_member_date());
+	$('#member_date').text('Member since ' + user_data.birth);
 }
 
-function get_member_date(){
-	return 'April 14, 2014';
-}
-
-function create_trophy_case(){
+function create_trophy_case(user_data){
 	$('<ul/>',{id: 'trophy_case'}).appendTo('#user_banner');
 	$('<li/>',{id: 'king_trophies'}).appendTo('#trophy_case');
-	$('#king_trophies').text(get_user_king_trophies());
+	$('#king_trophies').text(user_data.trophies[0]);
 	$('#king_trophies').append("<img id='user_king_crown' src='images/king_crown_1.png'>");
 	$('<li/>',{id: 'queen_trophies'}).appendTo('#trophy_case');
-	$('#queen_trophies').text(get_user_queen_trophies());
+	$('#queen_trophies').text(user_data.trophies[1]);
 	$('#queen_trophies').append("<img id='user_queen_crown' src='images/queen_crown_1.png'>");
 	$('<li/>',{id: 'medal_trophies'}).appendTo('#trophy_case');
-	$('#medal_trophies').text(get_user_medals());
+	$('#medal_trophies').text(user_data.trophies[2]);
 	$('#medal_trophies').append("<img id='user_medal' src='images/medal_1.png'>");
 	$('<li/>',{id: 'star_trophies'}).appendTo('#trophy_case');
-	$('#star_trophies').text(get_user_stars());
+	$('#star_trophies').text(user_data.trophies[3]);
 	$('#star_trophies').append("<img id='user_star' src='images/star_1.png'>");
-}
-
-function get_user_king_trophies(){
-	return 2;
-}
-function get_user_queen_trophies(){
-	return 5;
-}
-function get_user_medals(){
-	return 9;
-}
-function get_user_stars(){
-	return 17;
 }
