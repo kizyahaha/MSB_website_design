@@ -30,6 +30,7 @@ public class UserController {
 
 	// TODO: figure out why request is sent to /api/users/users/add (jquery-1.11.1:9631 xhr.send)
 	@RequestMapping(value = "/add")
+	@ResponseBody
 	public void addUser(@RequestParam("username") String username,
 	                    @RequestParam("password") String password,
 	                    @RequestParam("email") String email) {
@@ -49,6 +50,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/listAll")
+	@ResponseBody
     public String listAllUsers() throws IOException {
         JSONArray users = Users.toJsonArray(DatabaseUtils.getUsers());
         return users.toString();

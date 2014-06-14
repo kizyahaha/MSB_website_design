@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.user.User;
@@ -19,6 +20,7 @@ import com.kizy.data.user.User;
 public class LoginController {
 
     @RequestMapping(value = "/login")
+    @ResponseBody
     public String login(HttpServletResponse response,
                         @RequestParam("username_accept") String username,
                         @RequestParam("password_accept") String password) throws IOException {
