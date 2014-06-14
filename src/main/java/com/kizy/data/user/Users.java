@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.kizy.data.Dates;
 import com.kizy.data.rant.Rants;
 
 public class Users {
@@ -22,7 +23,7 @@ public class Users {
         map.put("username", user.getUsername());
         map.put("email", user.getEmail());
         map.put("rants", Rants.toJsonArrayFromIds(user.getRantIds()));
-        map.put("birth", user.getCreationDate().toString());
+        map.put("birth", Dates.format(user.getCreationDate()));
         return new JSONObject(map);
     }
 

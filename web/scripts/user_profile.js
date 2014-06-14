@@ -22,7 +22,7 @@ function create_user_banner(user_data){
 	}
 	create_user_profile_pic(user_data); // NOT IMPLEMENTED ON THE BACKEND YET
 	create_profile_username(user_data);
-	create_member_date(user_data); // NOT IMPLEMENTED ON THE BACKEND YET
+	create_member_date(user_data);
 	create_trophy_case(user_data); // NOT IMPLEMENTED ON THE BACKEND YET
 }
 
@@ -55,8 +55,7 @@ function create_profile_username(user_data){
 
 function create_member_date(user_data){
 	$('#user_banner').append("<div id='member_date'></div>");
-	//$('#member_date').text('Member since ' + user_data.birth);
-	$('#member_date').text('Member since ' + "April 14, 2014");
+	$('#member_date').text('Member since ' + user_data.birth);
 }
 
 function create_trophy_case(user_data){

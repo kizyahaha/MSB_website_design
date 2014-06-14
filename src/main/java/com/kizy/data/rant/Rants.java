@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.kizy.data.DatabaseUtils;
+import com.kizy.data.Dates;
 
 public class Rants {
 
@@ -23,6 +24,7 @@ public class Rants {
         map.put("nsfw", rant.isNsfw());
         map.put("title", rant.getTitle());
         map.put("contents", rant.getContents());
+        map.put("birth", Dates.format(rant.getCreationDate()));
         return new JSONObject(map);
     }
 
