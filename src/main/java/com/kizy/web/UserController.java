@@ -3,16 +3,17 @@ package com.kizy.web;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.json.JSONArray;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Strings;
 import com.kizy.data.DatabaseUtils;
-import com.kizy.data.rant.Rants;
 import com.kizy.data.user.SimpleUser;
 import com.kizy.data.user.User;
 import com.kizy.data.user.Users;
@@ -48,16 +49,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/listAll")
-    public ResponseEntity<String> listAllUsers() throws IOException {
+    public String listAllUsers() throws IOException {
         JSONArray users = Users.toJsonArray(DatabaseUtils.getUsers());
-        return ResponseEntities.json(users.toString());
+        return users.toString();
     }
-	
+
 	@RequestMapping(value = "/userData")
-    public ResponseEntity<String> getUserData(@RequestParam("id") long id) throws IOException {
-        User user = DatabaseUtils.findUserById(id);
-        //System.out.print("\n" + user.getUsername());
-        return ResponseEntities.json(user.getUsername());
+	@ResponseBody
+    public String getUserData(HttpServletRequest request) throws IOException {
+        User user = WebResources.userFromRequest(request);
+        return Users.toJsonObject(user).toString();
     }
 
 }

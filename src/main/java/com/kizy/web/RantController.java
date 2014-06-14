@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicLong;
 import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONArray;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +28,7 @@ public class RantController {
                         @RequestParam("nsfw") boolean nsfw,
                         @RequestParam("title") String title,
                         @RequestParam("contents") String contents) {
-        User owner = WebResources.userFromCookie(request.getCookies());
+        User owner = WebResources.userFromRequest(request);
         Rant rant = new SimpleRant(id.incrementAndGet(), nsfw, title, contents, owner);
         owner.addRantId(rant.getRantId());
         try {
@@ -40,16 +39,16 @@ public class RantController {
     }
 
     @RequestMapping(value = "/listAll")
-    public ResponseEntity<String> listAllRants() throws IOException {
+    public String listAllRants() throws IOException {
         JSONArray rants = Rants.toJsonArrayFromRants(DatabaseUtils.getRants());
-        return ResponseEntities.json(rants.toString());
+        return rants.toString();
     }
 
     @RequestMapping(value = "/list")
-    public ResponseEntity<String> listUserRants(@RequestParam("username") String username) throws IOException {
+    public String listUserRants(@RequestParam("username") String username) throws IOException {
         User user = DatabaseUtils.findUserByName(username);
         JSONArray rants = Rants.toJsonArrayFromIds(user.getRantIds());
-        return ResponseEntities.json(rants.toString());
+        return rants.toString();
     }
 
 }

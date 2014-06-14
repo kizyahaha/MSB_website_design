@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
@@ -38,8 +39,8 @@ public class WebResources {
         response.sendError(status.value(), message);
     }
 
-    public static User userFromCookie(Cookie[] cookies) {
-        for (Cookie cookie : cookies) {
+    public static User userFromRequest(HttpServletRequest request) {
+        for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().equals(MY_SOAP_BOX_USERID)) {
                 try {
                     return DatabaseUtils.findUserById(Long.parseLong(cookie.getValue()));
