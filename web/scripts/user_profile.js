@@ -3,6 +3,7 @@ function create_user_profile(user_tab_num){
     $.ajax({
         type: 'POST',
         url: '/api/users/userData',
+        data: {id: 2}, // if you comment this line out, it will just get the currently logged in user
         success: function(gotData) {
             data = $.parseJSON(gotData);
             create_user_banner(data);
