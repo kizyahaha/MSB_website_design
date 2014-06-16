@@ -55,4 +55,11 @@ public class RantController {
         return rants.toString();
     }
 
+    @RequestMapping(value = "/rantData")
+    @ResponseBody
+    public String getRantData(@RequestParam("id") long id) throws IOException {
+        Rant rant = DatabaseUtils.findRantById(id);
+        return Rants.toJsonObject(rant).toString();
+    }
+
 }
