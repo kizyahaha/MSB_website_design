@@ -12,7 +12,7 @@ function create_questions_and_answers(){
 	qNa.push("Everyone wants to be heard.  But getting your message in front of an audience can be a challenge.  At other sites like Reddit you can " +
 				"make a post and maybe it'll be seen.  Or more likely, it'll be buried.  You can say what you want on your Facebook and Twitter, " +
 				"but who sees that other than your existing friends?  On Sobox, if your rant wins, it is seen by everyone.  And much like the real word, " +
-				"we provide you with the ability to fight for your rant rather than leaving it to chance.  Wanna give your " + 
+				"we provide you with the ability to fight for your rant and beat out the competition rather than leaving it to chance.  Wanna give your " + 
 				"take on Coke vs. Pepsi?  Or wish your friend a happy birthday? Maybe exhibit your poetry, link us to your band's music, voice your " + 
 				"political views, or even bash your ex?  Whatever you want to say, you can say it here.  Our entire site is dedicated to one thing and " +
 				"one thing only - your message.");
@@ -32,7 +32,7 @@ function create_questions_and_answers(){
 	qNa.push("How long will my rant survive?");
 	qNa.push("As long as it has power.  Power is lost at a very slow rate over time and by others opposing your rant.  A rant is initialized with " +
 				"enough power so that if it recieves no support and no opposition, it will survive at least 1 day.  Once your rant's power " +
-				"hits 0, it is removed from the list of contenders.  RIP.");
+				"hits 0, it is removed from the list of contenders.");
 	//4
 	qNa.push("Why does my rant lose power even if no one opposes it?");
 	qNa.push("We do this to assure that rants can't simply persist forever.  We want to have a fresh turn over of new rants on a regular basis " +
@@ -45,7 +45,7 @@ function create_questions_and_answers(){
 	qNa.push("What are these 'special items' of which you speak and how do I get them?");
 	qNa.push("On the 'My items' tab of your profile, you'll see three categories of special items: defense, attack, and boost.  Inside each of " +
 				"these categories you'll find particular items available for purchase using the site's bok currency system.  Click the item for a " +
-				"description.  These items can be used to attack competitor rants, defend your own rant against attacks, or boost your rant's "+
+				"description.  These items can be used to defend your rant against attacks, attack competitor rants, or boost your rant's "+
 				"performance.");
 	//7
 	qNa.push("Do I have to use special items and 'battle' in order to win?");
@@ -77,10 +77,6 @@ function create_questions_and_answers(){
 	qNa.push("When you enter a new level (for example entering the daily level after winning the hourly level) your power will be set to which ever " +
 				"is greater - your current power or the median of the level you're entering.  We want to make sure you at least start on a level playing " +
 				"field with the other contenders at that level.");
-	//11
-	qNa.push("Can you make it so that all rants about cats never see the light of day?");
-	qNa.push("Look, can we?  Yes.  Should we?  Yes.  Would it be for the general well-being of the entire internet?  Of course, no argument there.  " +
-				"But....but, I mean....wait....Why haven't we done this?!");
 	return qNa
 }
 

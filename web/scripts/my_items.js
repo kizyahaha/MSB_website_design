@@ -719,30 +719,3 @@ function get_item_name(num){
 			break;
 	}
 }
-
-function update_my_profile_content_size(){
-	var my_rants = document.getElementById('my_rants_space');
-	if (my_rants.style.display == 'initial'){
-		$('#my_rants_space').css('minHeight', 300 );
-		$('#my_rants_space').css('maxHeight', 600 );
-		$('#user_content_space').css('height',$('#my_rants_space').height() + 100);
-	}
-	var my_items = document.getElementById('my_items_space');
-	if (my_items.style.display == 'initial'){
-		var item_height = 370;
-		var defense = document.getElementById('defense_tab_content');
-		if (defense.style.display == 'block'){
-			item_height = item_height + 270;
-		}
-		var attack = document.getElementById('attack_tab_content');
-		if (attack.style.display == 'block'){
-			item_height = item_height + 270;
-		}
-		var boost = document.getElementById('boost_tab_content');
-		if (boost.style.display == 'block'){
-			item_height = item_height + 450;
-		}
-		$('#my_items_space').height( item_height );
-		$('#user_content_space').height( item_height + 0);
-	}
-}
