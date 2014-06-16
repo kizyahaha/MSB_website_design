@@ -8,7 +8,7 @@ function create_user_profile(user_tab_num){
             data = $.parseJSON(gotData);
             create_user_banner(data);
             create_user_tabs(user_tab_num);
-            create_user_tab_content(user_tab_num);
+            create_user_tab_content(user_tab_num, data);
 			create_footer();
         },
         error: function(name,status) {
@@ -77,11 +77,11 @@ function create_trophy_case(user_data){
 	$('#star_trophies').append("<img id='user_star' src='images/star_1.png'>");
 }
 
-function create_user_tab_content(user_tab_num, userID){
+function create_user_tab_content(user_tab_num, data){
 	$('<div/>',{id:'user_content_space'}).appendTo('body');
-	create_my_rants_content(userID);
-	create_my_activity_content(userID);
-	create_my_items_content(userID);
+	create_my_rants_content(data);
+	create_my_activity_content(data);
+	create_my_items_content(data);
 	update_user_tab_content(user_tab_num);
 	update_my_profile_content_size();
 }

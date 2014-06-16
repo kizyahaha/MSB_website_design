@@ -1,28 +1,24 @@
 
-function create_my_rants_content(userID){
+function create_my_rants_content(data){
 	$('<div/>',{id:'my_rant_sorts'}).appendTo('#user_content_space');
 	create_status_select();
 	create_level_select();
 	create_order_sort();
 	$('<div/>',{id:'my_rants_space'}).appendTo('#user_content_space');
-	get_my_rants();
+	get_my_rants(data);
 }
 
-function get_my_rants(){
+function get_my_rants(data){
 	var my_rants = document.getElementById('my_rants_space');
-	num_my_rants = get_num_my_rants();
+	num_my_rants = data.rants.length;
 	for (i=0 ; i<num_my_rants; i++){
 		var my_rant = document.createElement('div');
 		var is_rant_active = get_rant_status(i);
 		create_vertical_info(my_rant, i , is_rant_active);
-		create_horizontal_info(my_rant , i , is_rant_active);
-		get_my_rant_rant(my_rant , i);
+		create_horizontal_info(my_rant , i , is_rant_active , data);
+		get_my_rant_rant(my_rant , i , data);
 		my_rants.appendChild(my_rant);
 	}
-}
-
-function get_num_my_rants(){
-	return 10;
 }
 
 function create_vertical_info(my_rant , num , is_rant_active){
@@ -54,7 +50,7 @@ function create_vertical_info(my_rant , num , is_rant_active){
 
 function get_rant_status(num){
 	//if rant is active return true else return false;
-	if ((num+1)%4 == 0){
+	if ((num+1)%3 == 0){
 		return true;
 	}
 	else{
@@ -74,24 +70,19 @@ function get_my_rant_level(my_rant_level_tr , num){
 	//my_rant_level_td.className = 'my_rant_level';
 	var my_rant_level_link = document.createElement('a');
 	//my_rant_level_link.className = 'my_rant_level';
-	if (num%4 == 0){
+	if (num%3 == 0){
 		my_rant_level_link.innerHTML = 'Daily';
 		my_rant_level_link.href = 'daily.html';
 		my_rant_level_link.className = 'active_rant';
 	}
-	if (num%4 == 1){
+	if (num%3 == 1){
 		my_rant_level_link.innerHTML = 'Hourly';
 		my_rant_level_link.href = 'hourly.html';
 		my_rant_level_link.className = 'inactive_rant';
 	}
-	if (num%4 == 2){
+	if (num%3 == 2){
 		my_rant_level_link.innerHTML = '10-Minutely';
 		my_rant_level_link.href = 'ten_minutely.html';
-		my_rant_level_link.className = 'inactive_rant';
-	}
-	if (num%4 == 3){
-		my_rant_level_link.innerHTML = 'Minutely';
-		my_rant_level_link.href = 'minutely.html';
 		my_rant_level_link.className = 'inactive_rant';
 	}
 	my_rant_level_td.appendChild(my_rant_level_link);
@@ -105,7 +96,7 @@ function get_my_rant_power(my_rant_power_tr , num){
 	my_rant_power_tr.appendChild(my_rant_power_td);
 }
 
-function create_horizontal_info(my_rant , num, is_rant_active){
+function create_horizontal_info(my_rant , num, is_rant_active , data){
 	num = num + 1;
 	var my_rant_horizontal_info = document.createElement('table');
 	my_rant_horizontal_info.className = 'my_rant_horizontal_info';
@@ -116,15 +107,15 @@ function create_horizontal_info(my_rant , num, is_rant_active){
 		my_rant_horizontal_info.className = my_rant_horizontal_info.className + ' inactive_rant';
 	}
 	var temp_row = document.createElement('tr');
-	check_my_rant_NSFW(num , temp_row);
-	get_my_rant_title(temp_row , is_rant_active);
-	get_my_rant_dates(temp_row , num);
+	check_my_rant_NSFW(num , temp_row , data);
+	get_my_rant_title(temp_row , is_rant_active , data , num);
+	get_my_rant_dates(temp_row , num , data , num);
 	my_rant_horizontal_info.appendChild(temp_row);
 	my_rant.appendChild(my_rant_horizontal_info);
 }
 
-function check_my_rant_NSFW(num , temp_row){
-	if (num%2 == 0){
+function check_my_rant_NSFW(num , temp_row , data){
+	if (data.rants[num-1].nsfw){
 		var NSFW = document.createElement('td');
 		NSFW.className = 'NSFW';
 		NSFW.textContent = 'NSFW';
@@ -132,7 +123,7 @@ function check_my_rant_NSFW(num , temp_row){
 	}
 }
 
-function get_my_rant_title(temp_row , is_rant_active){
+function get_my_rant_title(temp_row , is_rant_active , data , num){
 	var my_rant_title = document.createElement('td');
 	var my_rant_title_link = document.createElement('a');
 	my_rant_title_link.className = 'my_rant_title';
@@ -143,27 +134,27 @@ function get_my_rant_title(temp_row , is_rant_active){
 		my_rant_title_link.className = my_rant_title_link.className + ' inactive_rant';
 	}
 	my_rant_title_link.href = 'rant_view.html';
-	my_rant_title_link.textContent = 'This is one of my rants';
+	my_rant_title_link.textContent = data.rants[num-1].title;
 	my_rant_title.appendChild(my_rant_title_link);
 	temp_row.appendChild(my_rant_title);
 }
 
-function get_my_rant_dates(temp_row , num){
+function get_my_rant_dates(temp_row , num , data, num){
 	var my_rant_dates = document.createElement('td');
-	if (num%4 == 0){
-		my_rant_dates.textContent = '(April 14, 2014 - ?)';
+	if (num%3 == 0){
+		my_rant_dates.textContent = data.rants[num-1].birth + ' - ?';
 	}
 	else{
-		my_rant_dates.textContent = '(April 14, 2014 - April 16, 2014)';
+		my_rant_dates.textContent = data.rants[num-1].birth + ' - death date';
 	}
 	temp_row.appendChild(my_rant_dates);
 }
 
-function get_my_rant_rant(my_rant , num){
+function get_my_rant_rant(my_rant , num, data){
 	num = num+1;
 	var my_rant_rant = document.createElement('div');
 	my_rant_rant.className = 'my_rant_preview';
-	my_rant_rant.textContent = 'I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  I completely agree with the "Jeremy is dumb" sentiment.  ';
+	my_rant_rant.textContent = data.rants[num-1].contents;
 	var fade = document.createElement('div');
 	fade.className = 'my_rant_preview_fade';
 	my_rant_rant.appendChild(fade);
