@@ -11,7 +11,7 @@ public class SimpleRant implements Rant {
     private final String title;
     private final String contents;
     private final User user;
-    private final DateTime date;
+    private final DateTime birth;
 
     public SimpleRant(long id, boolean nsfw, String title, String contents, User user) {
         this.id = id;
@@ -19,16 +19,16 @@ public class SimpleRant implements Rant {
         this.title = title;
         this.contents = contents;
         this.user = user;
-        this.date = DateTime.now();
+        this.birth = DateTime.now();
     }
 
-    public SimpleRant(long id, boolean nsfw, String title, String contents, User user, DateTime date) {
+    public SimpleRant(long id, boolean nsfw, String title, String contents, User user, DateTime birth, DateTime death) {
         this.id = id;
         this.nsfw = nsfw;
         this.title = title;
         this.contents = contents;
         this.user = user;
-        this.date = date;
+        this.birth = birth;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class SimpleRant implements Rant {
 
     @Override
     public DateTime getCreationDate() {
-        return date;
+        return birth;
     }
 
     @Override
@@ -69,5 +69,11 @@ public class SimpleRant implements Rant {
     public static String formatRant(String title, String contents, String username, boolean nsfw) {
         return String.format("[SimpleRant - Title: {}, Contents: {}, Owner: {}, NSFW: {}]", title, contents, username, nsfw);
     }
+
+	@Override
+	public DateTime getDeathDate() {
+		// TODO Auto-generated method stub
+		return DateTime.now();
+	}
 
 }

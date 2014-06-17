@@ -17,5 +17,7 @@ public interface Rant {
     User getOwner();
 
     DateTime getCreationDate();
-
+    
+    DateTime getDeathDate();
+    
 }

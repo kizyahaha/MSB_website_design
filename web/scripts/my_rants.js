@@ -128,7 +128,7 @@ function get_my_rant_title(temp_row , is_rant_active , data , num){
 	var my_rant_title_link = document.createElement('a');
 	my_rant_title_link.className = 'my_rant_title';
 	if (is_rant_active){
-		my_rant_title_link.className = my_rant_title_link.className + ' active_rant';
+		//my_rant_title_link.className = my_rant_title_link.className + ' active_rant';
 	}
 	else{
 		my_rant_title_link.className = my_rant_title_link.className + ' inactive_rant';
@@ -145,7 +145,7 @@ function get_my_rant_dates(temp_row , num , data, num){
 		my_rant_dates.textContent = data.rants[num-1].birth + ' - ?';
 	}
 	else{
-		my_rant_dates.textContent = data.rants[num-1].birth + ' - death date';
+		my_rant_dates.textContent = data.rants[num-1].birth + ' - ' + data.rants[num-1].death;
 	}
 	temp_row.appendChild(my_rant_dates);
 }
