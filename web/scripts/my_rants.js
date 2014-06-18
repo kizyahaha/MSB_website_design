@@ -13,6 +13,7 @@ function get_my_rants(data){
 	num_my_rants = data.rants.length;
 	for (i=0 ; i<num_my_rants; i++){
 		var my_rant = document.createElement('div');
+		my_rant.id = "my_rant";
 		var is_rant_active = get_rant_status(i);
 		create_vertical_info(my_rant, i , is_rant_active);
 		create_horizontal_info(my_rant , i , is_rant_active , data);
@@ -131,7 +132,7 @@ function get_my_rant_title(temp_row , is_rant_active , data , num){
 		//my_rant_title_link.className = my_rant_title_link.className + ' active_rant';
 	}
 	else{
-		my_rant_title_link.className = my_rant_title_link.className + ' inactive_rant';
+		//my_rant_title_link.className = my_rant_title_link.className + ' inactive_rant';
 	}
 	my_rant_title_link.href = 'rant_view.html';
 	my_rant_title_link.textContent = data.rants[num-1].title;
@@ -141,11 +142,14 @@ function get_my_rant_title(temp_row , is_rant_active , data , num){
 
 function get_my_rant_dates(temp_row , num , data, num){
 	var my_rant_dates = document.createElement('td');
+	my_rant_dates.id = "my_rant_dates";
 	if (num%3 == 0){
-		my_rant_dates.textContent = data.rants[num-1].birth + ' - ?';
+		my_rant_dates.textContent = data.rants[num-1].birth;
+		my_rant_dates.style.minWidth = '100px';
 	}
 	else{
 		my_rant_dates.textContent = data.rants[num-1].birth + ' - ' + data.rants[num-1].death;
+		my_rant_dates.style.minWidth = '200px';
 	}
 	temp_row.appendChild(my_rant_dates);
 }

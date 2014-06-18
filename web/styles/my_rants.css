@@ -31,6 +31,9 @@
 	border:solid 10px rgb(215,226,229);
 	overflow:auto;
 }
+#my_rant{
+	margin-bottom:25px;
+}
 .active_rant{
 	color:rgb(12,120,154);
 	font-weight:700;
@@ -51,12 +54,16 @@
 	color:red !important;
 	font-size:18px;
 	padding-right:20px;
+	font-weight:700;
 }
 .my_rant_title{
 	font-size:18px;
 	padding-right:20px;
 	font-weight:bold;
 	color:rgb(52,52,52);
+}
+#my_rant_dates{
+	text-align:center;
 }
 .my_rant_preview{
 	position:relative;
