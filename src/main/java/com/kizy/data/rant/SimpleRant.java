@@ -78,7 +78,11 @@ public class SimpleRant implements Rant {
 	
 	@Override
     public double getRantPower() {
-        return Math.round( Math.random() * 10000 );
+		double power = Math.round( Math.random() * 15000 ) - 5000;
+		if (power < 0){
+			return 0;
+		}
+        return power;
     }
 
 }

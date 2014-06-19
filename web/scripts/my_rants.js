@@ -14,7 +14,7 @@ function get_my_rants(data){
 	for (i=0 ; i<num_my_rants; i++){
 		var my_rant = document.createElement('div');
 		my_rant.id = "my_rant";
-		var is_rant_active = get_rant_status(i);
+		var is_rant_active = get_rant_status(i , data);
 		create_vertical_info(my_rant, i , is_rant_active , data);
 		create_horizontal_info(my_rant , i , is_rant_active , data);
 		get_my_rant_rant(my_rant , i , data);
@@ -39,7 +39,7 @@ function create_vertical_info(my_rant , num , is_rant_active , data){
 	my_rant_vertical_info.appendChild(my_rant_num_tr);
 	
 	var my_rant_level_tr = document.createElement('tr');
-	get_my_rant_level(my_rant_level_tr , num);
+	get_my_rant_level(my_rant_level_tr , num , is_rant_active);
 	my_rant_vertical_info.appendChild(my_rant_level_tr);
 	
 	var my_rant_power_tr = document.createElement('tr');
@@ -49,14 +49,12 @@ function create_vertical_info(my_rant , num , is_rant_active , data){
 	my_rant.appendChild(my_rant_vertical_info);
 }
 
-function get_rant_status(num){
+function get_rant_status(num , data){
 	//if rant is active return true else return false;
-	if ((num+1)%3 == 0){
+	if (data.rants[num].power > 0){
 		return true;
 	}
-	else{
-		return false;
-	}
+	return false;
 }
 
 function get_my_rant_num(my_rant_num_tr , num){
@@ -66,25 +64,24 @@ function get_my_rant_num(my_rant_num_tr , num){
 	my_rant_num_tr.appendChild(my_rant_num_td);
 }
 
-function get_my_rant_level(my_rant_level_tr , num){
+function get_my_rant_level(my_rant_level_tr , num , is_rant_active){
 	var my_rant_level_td = document.createElement('td');
-	//my_rant_level_td.className = 'my_rant_level';
 	var my_rant_level_link = document.createElement('a');
-	//my_rant_level_link.className = 'my_rant_level';
+	if (is_rant_active)
+		my_rant_level_link.className = 'active_rant';
+	else
+		my_rant_level_link.className = 'inactive_rant';
 	if (num%3 == 0){
 		my_rant_level_link.innerHTML = 'Daily';
 		my_rant_level_link.href = 'daily.html';
-		my_rant_level_link.className = 'active_rant';
 	}
 	if (num%3 == 1){
 		my_rant_level_link.innerHTML = 'Hourly';
 		my_rant_level_link.href = 'hourly.html';
-		my_rant_level_link.className = 'inactive_rant';
 	}
 	if (num%3 == 2){
 		my_rant_level_link.innerHTML = '10-Minutely';
 		my_rant_level_link.href = 'ten_minutely.html';
-		my_rant_level_link.className = 'inactive_rant';
 	}
 	my_rant_level_td.appendChild(my_rant_level_link);
 	my_rant_level_tr.appendChild(my_rant_level_td);
