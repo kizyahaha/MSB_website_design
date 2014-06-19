@@ -22,7 +22,7 @@ public class SimpleRant implements Rant {
         this.birth = DateTime.now();
     }
 
-    public SimpleRant(long id, boolean nsfw, String title, String contents, User user, DateTime birth, DateTime death) {
+    public SimpleRant(long id, boolean nsfw, String title, String contents, User user, DateTime birth, DateTime death, double power) {
         this.id = id;
         this.nsfw = nsfw;
         this.title = title;
@@ -75,5 +75,10 @@ public class SimpleRant implements Rant {
 		// TODO Auto-generated method stub
 		return DateTime.now();
 	}
+	
+	@Override
+    public double getRantPower() {
+        return Math.round( Math.random() * 10000 );
+    }
 
 }

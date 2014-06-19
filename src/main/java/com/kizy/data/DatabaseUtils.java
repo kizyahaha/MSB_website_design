@@ -42,6 +42,7 @@ public class DatabaseUtils {
     private static final int RANT_OWNER_PART = 4;
     private static final int RANT_CREATION_PART = 5;
     private static final int RANT_DEATH_PART = 6;
+    private static final int RANT_POWER_PART = 7;
 
 
     private DatabaseUtils() {
@@ -80,7 +81,8 @@ public class DatabaseUtils {
                            rant.getContents() + LINE_DELIMITER +
                            rant.getOwner().getUsername() + LINE_DELIMITER +
                            rant.getCreationDate().toString() + LINE_DELIMITER +
-                           rant.getDeathDate().toString() + "\n"); //temporary
+                           rant.getDeathDate().toString() + LINE_DELIMITER +
+                           rant.getRantPower() + "\n"); //temporary
         addRantToOwner(rant);
     }
 
@@ -186,7 +188,8 @@ public class DatabaseUtils {
                               parts[RANT_CONTENTS_PART],
                               findUserByName(parts[RANT_OWNER_PART]),
                               new DateTime(parts[RANT_CREATION_PART]),
-                              new DateTime(parts[RANT_DEATH_PART]));
+                              new DateTime(parts[RANT_DEATH_PART]),
+                              Double.parseDouble(parts[RANT_POWER_PART]));
     }
 
     private static String[] splitLine(String line) {

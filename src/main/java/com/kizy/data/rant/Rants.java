@@ -26,6 +26,7 @@ public class Rants {
         map.put("contents", rant.getContents());
         map.put("birth", Dates.format(rant.getCreationDate()));
         map.put("death", Dates.format(rant.getDeathDate()));
+        map.put("power", rant.getRantPower());
         return new JSONObject(map);
     }
 

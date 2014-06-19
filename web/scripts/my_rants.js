@@ -15,14 +15,14 @@ function get_my_rants(data){
 		var my_rant = document.createElement('div');
 		my_rant.id = "my_rant";
 		var is_rant_active = get_rant_status(i);
-		create_vertical_info(my_rant, i , is_rant_active);
+		create_vertical_info(my_rant, i , is_rant_active , data);
 		create_horizontal_info(my_rant , i , is_rant_active , data);
 		get_my_rant_rant(my_rant , i , data);
 		my_rants.appendChild(my_rant);
 	}
 }
 
-function create_vertical_info(my_rant , num , is_rant_active){
+function create_vertical_info(my_rant , num , is_rant_active , data){
 	num = num + 1;
 	
 	var my_rant_vertical_info = document.createElement('table');
@@ -43,7 +43,7 @@ function create_vertical_info(my_rant , num , is_rant_active){
 	my_rant_vertical_info.appendChild(my_rant_level_tr);
 	
 	var my_rant_power_tr = document.createElement('tr');
-	get_my_rant_power(my_rant_power_tr , num);
+	get_my_rant_power(my_rant_power_tr , num , data);
 	my_rant_vertical_info.appendChild(my_rant_power_tr);
 
 	my_rant.appendChild(my_rant_vertical_info);
@@ -90,10 +90,10 @@ function get_my_rant_level(my_rant_level_tr , num){
 	my_rant_level_tr.appendChild(my_rant_level_td);
 }
 
-function get_my_rant_power(my_rant_power_tr , num){
+function get_my_rant_power(my_rant_power_tr , num , data){
 	var my_rant_power_td = document.createElement('td');
 	my_rant_power_td.className = 'my_rant_power';
-	my_rant_power_td.innerHTML = '9,437';
+	my_rant_power_td.innerHTML = data.rants[num-1].power;
 	my_rant_power_tr.appendChild(my_rant_power_td);
 }
 

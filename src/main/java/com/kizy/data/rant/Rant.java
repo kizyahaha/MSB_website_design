@@ -20,4 +20,6 @@ public interface Rant {
     
     DateTime getDeathDate();
     
+    double getRantPower();
+    
 }
