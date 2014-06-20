@@ -22,7 +22,7 @@ public class SimpleRant implements Rant {
         this.birth = DateTime.now();
     }
 
-    public SimpleRant(long id, boolean nsfw, String title, String contents, User user, DateTime birth, DateTime death, double power) {
+    public SimpleRant(long id, boolean nsfw, String title, String contents, User user, DateTime birth, DateTime death, double power, String level) {
         this.id = id;
         this.nsfw = nsfw;
         this.title = title;
@@ -83,6 +83,21 @@ public class SimpleRant implements Rant {
 			return 0;
 		}
         return power;
+    }
+	
+	@Override
+    public String getRantLevel() {
+		double rand = Math.random() * 4;
+		if (rand <= 1){
+			return "Daily";
+		}
+		if (rand <= 2){
+			return "Hourly";
+		}
+		if (rand <= 3){
+			return "10-Minutely";
+		}
+        return "Minutely";
     }
 
 }

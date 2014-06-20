@@ -22,4 +22,6 @@ public interface Rant {
     
     double getRantPower();
     
+    String getRantLevel();
+    
 }
