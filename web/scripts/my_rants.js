@@ -223,51 +223,53 @@ function get_order_filter_value(filters){
 function apply_filters(data , filters){
 	var filtered_data = data.rants.slice(0);
 	num_my_rants = filtered_data.length;
-	for (i=0 ; i<num_my_rants ; i++){
-		if (filters[0] == 'Active'){
+	if (filters[0] == 'Active'){
+		for (i=0 ; i<num_my_rants ; i++){
 			if (filtered_data[i].power == 0){
 				filtered_data.splice(i,1);
 				i--;
 				num_my_rants--;
 			}
 		}
-		if (filters[0] == 'Past'){
+	}
+	if (filters[0] == 'Past'){
+		for (i=0 ; i<num_my_rants ; i++){
 			if (filtered_data[i].power > 0){
 				filtered_data.splice(i,1);
 				i--;
 				num_my_rants--;
 			}
 		}
-		if (filters[1] == 'Daily'){
-		}
-		if (filters[1] == 'Hourly'){
-		}
-		if (filters[1] == '10-Minutely'){
-		}
-		if (filters[1] == 'Minutely'){
-		}
-		if (filters[2] == 'Age - new to old'){
-			filtered_data.sort( function(a,b){
-									var c = new Date(a.birth);
-									var d = new Date(b.birth);
-									return (d-c);
-								}
-							);							
-		}
-		if (filters[2] == 'Age - old to new'){
-			filtered_data.sort( function(a,b){
-									var c = new Date(a.birth);
-									var d = new Date(b.birth);
-									return (c-d);
-								}
-							);							
-		}
-		if (filters[2] == 'Power - high to low'){
-			filtered_data.sort( function(a,b){return (b.power - a.power);} );							
-		}
-		if (filters[2] == 'Power - low to high'){
-			filtered_data.sort( function(a,b){return (a.power - b.power);} );							
-		}
+	}
+	if (filters[1] == 'Daily'){
+	}
+	if (filters[1] == 'Hourly'){
+	}
+	if (filters[1] == '10-Minutely'){
+	}
+	if (filters[1] == 'Minutely'){
+	}
+	if (filters[2] == 'Age - new to old'){
+		filtered_data.sort( function(a,b){
+								var c = new Date(a.birth);
+								var d = new Date(b.birth);
+								return (d-c);
+							}
+						);							
+	}
+	if (filters[2] == 'Age - old to new'){
+		filtered_data.sort( function(a,b){
+								var c = new Date(a.birth);
+								var d = new Date(b.birth);
+								return (c-d);
+							}
+						);							
+	}
+	if (filters[2] == 'Power - high to low'){
+		filtered_data.sort( function(a,b){return (b.power - a.power);} );							
+	}
+	if (filters[2] == 'Power - low to high'){
+		filtered_data.sort( function(a,b){return (a.power - b.power);} );							
 	}
 	get_my_rants(filtered_data);
 }
