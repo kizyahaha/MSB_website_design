@@ -242,12 +242,40 @@ function apply_filters(data , filters){
 		}
 	}
 	if (filters[1] == 'Daily'){
+		for (i=0 ; i<num_my_rants ; i++){
+			if (filtered_data[i].level != 'Daily'){
+				filtered_data.splice(i,1);
+				i--;
+				num_my_rants--;
+			}
+		}
 	}
 	if (filters[1] == 'Hourly'){
+		for (i=0 ; i<num_my_rants ; i++){
+			if (filtered_data[i].level != 'Hourly'){
+				filtered_data.splice(i,1);
+				i--;
+				num_my_rants--;
+			}
+		}
 	}
 	if (filters[1] == '10-Minutely'){
+		for (i=0 ; i<num_my_rants ; i++){
+			if (filtered_data[i].level != '10-Minutely'){
+				filtered_data.splice(i,1);
+				i--;
+				num_my_rants--;
+			}
+		}
 	}
 	if (filters[1] == 'Minutely'){
+		for (i=0 ; i<num_my_rants ; i++){
+			if (filtered_data[i].level != 'Minutely'){
+				filtered_data.splice(i,1);
+				i--;
+				num_my_rants--;
+			}
+		}
 	}
 	if (filters[2] == 'Age - new to old'){
 		filtered_data.sort( function(a,b){
