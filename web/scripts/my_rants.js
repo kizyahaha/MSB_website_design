@@ -1,16 +1,14 @@
 
 function create_my_rants_content(data){
 	$('<div/>',{id:'my_rant_sorts'}).appendTo('#user_content_space');
-	create_status_select();
-	create_level_select();
-	create_order_sort();
 	$('<div/>',{id:'my_rants_space'}).appendTo('#user_content_space');
-	get_my_rants(data);
+	create_rant_filters(data);
 }
 
 function get_my_rants(data){
 	var my_rants = document.getElementById('my_rants_space');
-	num_my_rants = data.rants.length;
+	my_rants.innerHTML = '';
+	num_my_rants = data.length;
 	for (i=0 ; i<num_my_rants; i++){
 		var my_rant = document.createElement('div');
 		my_rant.id = "my_rant";
@@ -51,7 +49,7 @@ function create_vertical_info(my_rant , num , is_rant_active , data){
 
 function get_rant_status(num , data){
 	//if rant is active return true else return false;
-	if (data.rants[num].power > 0){
+	if (data[num].power > 0){
 		return true;
 	}
 	return false;
@@ -90,7 +88,7 @@ function get_my_rant_level(my_rant_level_tr , num , is_rant_active){
 function get_my_rant_power(my_rant_power_tr , num , data){
 	var my_rant_power_td = document.createElement('td');
 	my_rant_power_td.className = 'my_rant_power';
-	my_rant_power_td.innerHTML = data.rants[num-1].power;
+	my_rant_power_td.innerHTML = data[num-1].power;
 	my_rant_power_tr.appendChild(my_rant_power_td);
 }
 
@@ -107,13 +105,13 @@ function create_horizontal_info(my_rant , num, is_rant_active , data){
 	var temp_row = document.createElement('tr');
 	check_my_rant_NSFW(num , temp_row , data);
 	get_my_rant_title(temp_row , is_rant_active , data , num);
-	get_my_rant_dates(temp_row , num , data , num);
+	get_my_rant_dates(temp_row , num , data , num , is_rant_active);
 	my_rant_horizontal_info.appendChild(temp_row);
 	my_rant.appendChild(my_rant_horizontal_info);
 }
 
 function check_my_rant_NSFW(num , temp_row , data){
-	if (data.rants[num-1].nsfw){
+	if (data[num-1].nsfw){
 		var NSFW = document.createElement('td');
 		NSFW.className = 'NSFW';
 		NSFW.textContent = 'NSFW';
@@ -132,20 +130,20 @@ function get_my_rant_title(temp_row , is_rant_active , data , num){
 		//my_rant_title_link.className = my_rant_title_link.className + ' inactive_rant';
 	}
 	my_rant_title_link.href = 'rant_view.html';
-	my_rant_title_link.textContent = data.rants[num-1].title;
+	my_rant_title_link.textContent = data[num-1].title;
 	my_rant_title.appendChild(my_rant_title_link);
 	temp_row.appendChild(my_rant_title);
 }
 
-function get_my_rant_dates(temp_row , num , data, num){
+function get_my_rant_dates(temp_row , num , data, num , is_rant_active){
 	var my_rant_dates = document.createElement('td');
 	my_rant_dates.id = "my_rant_dates";
-	if (num%3 == 0){
-		my_rant_dates.textContent = data.rants[num-1].birth;
+	if (is_rant_active){
+		my_rant_dates.textContent = data[num-1].birth;
 		my_rant_dates.style.minWidth = '100px';
 	}
 	else{
-		my_rant_dates.textContent = data.rants[num-1].birth + ' - ' + data.rants[num-1].death;
+		my_rant_dates.textContent = data[num-1].birth + ' - ' + data[num-1].death;
 		my_rant_dates.style.minWidth = '200px';
 	}
 	temp_row.appendChild(my_rant_dates);
@@ -155,23 +153,35 @@ function get_my_rant_rant(my_rant , num, data){
 	num = num+1;
 	var my_rant_rant = document.createElement('div');
 	my_rant_rant.className = 'my_rant_preview';
-	my_rant_rant.textContent = data.rants[num-1].contents;
+	my_rant_rant.textContent = data[num-1].contents;
 	var fade = document.createElement('div');
 	fade.className = 'my_rant_preview_fade';
 	my_rant_rant.appendChild(fade);
 	my_rant.appendChild(my_rant_rant);
 }
 
-function create_status_select(){
+function create_rant_filters(data){
+	var filters = ['Any' , 'Any' , 'Age - new to old'];
+	create_status_select(data , filters);
+	create_level_select(data , filters);
+	create_order_sort(data , filters);
+	apply_filters(data , filters);
+}
+
+function create_status_select(data , filters){
 	$('<form/>',{id:'status_pulldown'}).appendTo('#my_rant_sorts');
 	$('#status_pulldown').text('Status: ');
 	$('<select/>',{id:'status_select'}).appendTo('#status_pulldown');
 	$('#status_select').append('<option>Any</option>');
 	$('#status_select').append('<option>Active</option>');
 	$('#status_select').append('<option>Past</option>');
+	$('#status_select').change( function(){get_status_filter_value(filters);
+									apply_filters(data , filters);
+								}
+						);
 }
 
-function create_level_select(){
+function create_level_select(data , filters){
 	$('<form/>',{id:'level_pulldown'}).appendTo('#my_rant_sorts');
 	$('#level_pulldown').text('Level: ');
 	$('<select/>',{id:'level_select'}).appendTo('#level_pulldown');
@@ -180,9 +190,13 @@ function create_level_select(){
 	$('#level_select').append('<option>Hourly</option>');
 	$('#level_select').append('<option>10-Minutely</option>');
 	$('#level_select').append('<option>Minutely</option>');
+	$('#level_select').change( function(){get_level_filter_value(filters);
+									apply_filters(data , filters);
+								}
+						);
 }
 
-function create_order_sort(){
+function create_order_sort(data , filters){
 	$('<form/>',{id:'order_pulldown'}).appendTo('#my_rant_sorts');
 	$('#order_pulldown').text('Sort by: ');
 	$('<select/>',{id:'order_select'}).appendTo('#order_pulldown');
@@ -190,4 +204,70 @@ function create_order_sort(){
 	$('#order_select').append('<option>Age - old to new</option>');
 	$('#order_select').append('<option>Power - high to low</option>');
 	$('#order_select').append('<option>Power - low to high</option>');
+	$('#order_select').change( function(){get_order_filter_value(filters);
+									apply_filters(data , filters);
+								}
+						);
+}
+
+function get_status_filter_value(filters){
+	filters[0] = document.getElementById("status_select").value;
+}
+function get_level_filter_value(filters){
+	filters[1] = document.getElementById("level_select").value;
+}
+function get_order_filter_value(filters){
+	filters[2] = document.getElementById("order_select").value;
+}
+
+function apply_filters(data , filters){
+	var filtered_data = data.rants.slice(0);
+	num_my_rants = filtered_data.length;
+	for (i=0 ; i<num_my_rants ; i++){
+		if (filters[0] == 'Active'){
+			if (filtered_data[i].power == 0){
+				filtered_data.splice(i,1);
+				i--;
+				num_my_rants--;
+			}
+		}
+		if (filters[0] == 'Past'){
+			if (filtered_data[i].power > 0){
+				filtered_data.splice(i,1);
+				i--;
+				num_my_rants--;
+			}
+		}
+		if (filters[1] == 'Daily'){
+		}
+		if (filters[1] == 'Hourly'){
+		}
+		if (filters[1] == '10-Minutely'){
+		}
+		if (filters[1] == 'Minutely'){
+		}
+		if (filters[2] == 'Age - new to old'){
+			filtered_data.sort( function(a,b){
+									var c = new Date(a.birth);
+									var d = new Date(b.birth);
+									return (d-c);
+								}
+							);							
+		}
+		if (filters[2] == 'Age - old to new'){
+			filtered_data.sort( function(a,b){
+									var c = new Date(a.birth);
+									var d = new Date(b.birth);
+									return (c-d);
+								}
+							);							
+		}
+		if (filters[2] == 'Power - high to low'){
+			filtered_data.sort( function(a,b){return (b.power - a.power);} );							
+		}
+		if (filters[2] == 'Power - low to high'){
+			filtered_data.sort( function(a,b){return (a.power - b.power);} );							
+		}
+	}
+	get_my_rants(filtered_data);
 }
