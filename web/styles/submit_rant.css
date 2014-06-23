@@ -89,3 +89,75 @@
 }
 
 
+
+
+
+
+.mascot_button{
+	display:inline;
+	text-align:center;
+	border:solid rgb(12,120,154) 2px;
+	border-radius:5px;
+	font-family: lao ui;
+	color:white;
+	background-color:rgb(52,52,52);
+	font-weight:700;
+	font-size:20px;
+	padding:5px 10px 5px 10px;
+	margin-right:50px;
+	margin-left:50px;
+}
+.mascot_button:hover{
+	border-color:white;
+	cursor:pointer;
+}
+.modal_mascot_background{
+	background-color:rgba(52,52,52,0.85);
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+}
+#mascot_selection{
+	background-color:rgb(12,120,154);
+	position:fixed;
+	top:25%;
+	width:100%;
+	box-sizing:border-box;
+	padding: 10px;
+	text-align:center;
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	font-size: 20px;
+}
+.mascot_img{
+	width:75px;
+	border-radius:5px;
+}
+.mascot_img:hover{
+	border:solid white 2px;
+	cursor:pointer;
+}
+#mascot_detail_selection{
+	background-color:rgb(12,120,154);
+	position:fixed;
+	top:25%;
+	width:100%;
+	box-sizing:border-box;
+	padding: 10px;
+	text-align:center;
+	font-family:lao ui;
+	color:rgb(52,52,52);
+	font-size: 20px;
+}
+#detail_mascot_img{
+	width:200px;
+}
+#selected_mascot_img{
+	position:relative;
+	top:385px;
+	right:-785px;
+	width:50px;
+}
+
+

@@ -26,7 +26,7 @@ function create_banner_text(){
 	banner_text_link.href = 'daily.html';
 	var banner_text_img = document.createElement('img');
 	banner_text_img.alt = 'MSB';
-	banner_text_img.src = "images/MySoapBox_1.png";
+	banner_text_img.src = "images/MySoapBox_2.png";
 	banner_text_link.appendChild(banner_text_img);
 	document.getElementById('banner_background').appendChild(banner_text_link);
 }

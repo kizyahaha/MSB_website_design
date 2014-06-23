@@ -25,6 +25,7 @@ function create_rant_for_submit(){
 
 function create_submit_rant_inputs(){
 	$('<div/>',{id: 'submit_rant_inputs'}).appendTo('#rant_submission_form');
+	create_mascot_select();
 	create_NSFW_checkbox();
 	create_submit_rant_button();
 }
@@ -65,23 +66,6 @@ function rant_submit(form){
 		//$.post( '/api/rants/add' , $('#rant_submission_form').serialize());
 	}
 }
-/*
-function log_in(form){;
-	alert($('#log_in_form').serialize());
-	$.ajax({
-		type: 'POST',
-		url: '/api/login/login',
-		data: $('#log_in_form').serialize(),
-		success: function(msg) {
-			userID = get_user();
-		    window.document.location.href = 'daily.html';
-		},
-		error: function(msg) {
-		    document.getElementById('log_in_error_message').style.display = 'initial';
-		}
-	});
-}
-*/
 
 function check_rant_filled(form){
 	document.getElementById('title_missing').style.display = 'none';
@@ -96,4 +80,118 @@ function check_rant_filled(form){
 	}
 	return true;
 		
+}
+
+function create_mascot_select(){
+	create_modal_mascot_selection_background();
+	create_modal_mascot_selection();
+	create_modal_mascot_detail_background();
+	create_modal_mascot_detail_selection();
+	$('<img/>',{id:'selected_mascot_img' , src:'images/character_1.png'}).appendTo('#submit_rant_container');
+	$('<div/>',{addClass:'mascot_button' , id:'select_mascot_button' , text:'Choose mascot'}).appendTo('#submit_rant_inputs');
+	$('#select_mascot_button').click(function (){
+										toggle_mascot_visibility('modal_mascot_selection_background');
+										toggle_mascot_visibility('mascot_selection');
+									}
+								);
+}
+
+function create_modal_mascot_selection_background(){
+	$('<div/>',{addClass:'modal_mascot_background' , id:'modal_mascot_selection_background'}).appendTo('body');
+	$('#modal_mascot_selection_background').css('display','none');
+	$('#modal_mascot_selection_background').height($(document).height());
+}
+function create_modal_mascot_detail_background(){
+	$('<div/>',{addClass:'modal_mascot_background' , id:'modal_mascot_detail_background'}).appendTo('body');
+	$('#modal_mascot_detail_background').css('display','none');
+	$('#modal_mascot_detail_background').height($(document).height());
+}
+
+function create_modal_mascot_selection(){
+	$('<div/>',{id:'mascot_selection'}).appendTo('body');
+	$('#mascot_selection').css('display','none');
+	$('<img/>',{addClass:'mascot_img' , id:'mascot_picture_0' , src:get_mascot_image(0)}).appendTo('#mascot_selection');
+	//$('#mascot_picture_0').click(function(){show_detail_mascot('images/character_1.png')});
+	$('#mascot_picture_0').click(function(){toggle_mascot_visibility('mascot_detail_selection'); 
+											toggle_mascot_visibility('modal_mascot_detail_background');
+											$('#detail_mascot_img').attr('src','images/character_1.png');
+											}
+								);
+	
+	$('<img/>',{addClass:'mascot_img' , id:'mascot_picture_1' , src:get_mascot_image(1)}).appendTo('#mascot_selection');
+	$('#mascot_picture_1').click(function(){toggle_mascot_visibility('mascot_detail_selection'); 
+											toggle_mascot_visibility('modal_mascot_detail_background');
+											$('#detail_mascot_img').attr('src','images/character_2.png');
+											}
+								);
+	$('<img/>',{addClass:'mascot_img' , id:'mascot_picture_2' , src:get_mascot_image(2)}).appendTo('#mascot_selection');
+	$('#mascot_picture_2').click(function(){toggle_mascot_visibility('mascot_detail_selection'); 
+											toggle_mascot_visibility('modal_mascot_detail_background');
+											$('#detail_mascot_img').attr('src','images/character_3.png');
+											}
+								);
+	$('<img/>',{addClass:'mascot_img' , id:'mascot_picture_3' , src:get_mascot_image(3)}).appendTo('#mascot_selection');
+	$('#mascot_picture_3').click(function(){toggle_mascot_visibility('mascot_detail_selection'); 
+											toggle_mascot_visibility('modal_mascot_detail_background');
+											$('#detail_mascot_img').attr('src','images/character_4.png');
+											}
+								);
+	$("#mascot_selection").append("<br/><br/>");
+	$('<div/>',{addClass:'mascot_button' , id:'cancel_mascot_button' , text:'Cancel'}).appendTo('#mascot_selection');
+	$('#cancel_mascot_button').click(function (){
+										toggle_mascot_visibility('modal_mascot_selection_background');
+										toggle_mascot_visibility('mascot_selection');
+									}
+								);
+}
+
+function create_modal_mascot_detail_selection(){
+	$('<div/>',{id:'mascot_detail_selection'}).appendTo('body');
+	$('#mascot_detail_selection').css('display','none');
+	$('<img/>',{id:'detail_mascot_img' , src:'images/character_1.png'}).appendTo('#mascot_detail_selection');
+	$("#mascot_detail_selection").append("<br/><br/>");
+	$('<div/>',{addClass:'mascot_button' , id:'choose_this_mascot_button' , text:'Select'}).appendTo('#mascot_detail_selection');
+	$('#choose_this_mascot_button').click(function (){
+										toggle_mascot_visibility('modal_mascot_selection_background');
+										toggle_mascot_visibility('mascot_selection');
+										toggle_mascot_visibility('mascot_detail_selection');
+										toggle_mascot_visibility('modal_mascot_detail_background');
+										$('#selected_mascot_img').attr('src',$('#detail_mascot_img').attr('src'));
+									}
+								);
+	$('<div/>',{addClass:'mascot_button' , id:'cancel_this_mascot_button' , text:'Nope'}).appendTo('#mascot_detail_selection');
+	$('#cancel_this_mascot_button').click(function (){
+										toggle_mascot_visibility('mascot_detail_selection');
+										toggle_mascot_visibility('modal_mascot_detail_background');
+									}
+								);
+}
+
+function get_mascot_image(num){
+	switch (num){
+		case 0: //megaphone
+			return 'images/character_1.png';
+			break;
+		case 1: //giddy
+			return 'images/character_2.png';
+			break;
+		case 2: //confused
+			return 'images/character_3.png';
+			break;
+		case 3: //excited
+			return 'images/character_4.png';
+			break;
+		default:
+			break;
+	}
+}
+
+function toggle_mascot_visibility(id){
+	var el = document.getElementById(id);
+	if (el.style.display == 'none'){
+		el.style.display = 'block';
+	}
+	else{
+		el.style.display = 'none';
+	}
 }
