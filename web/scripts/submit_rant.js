@@ -110,32 +110,19 @@ function create_modal_mascot_detail_background(){
 function create_modal_mascot_selection(){
 	$('<div/>',{id:'mascot_selection'}).appendTo('body');
 	$('#mascot_selection').css('display','none');
-	$('<img/>',{addClass:'mascot_img' , id:'mascot_picture_0' , src:get_mascot_image(0)}).appendTo('#mascot_selection');
-	//$('#mascot_picture_0').click(function(){show_detail_mascot('images/character_1.png')});
-	$('#mascot_picture_0').click(function(){toggle_mascot_visibility('mascot_detail_selection'); 
-											toggle_mascot_visibility('modal_mascot_detail_background');
-											$('#detail_mascot_img').attr('src','images/character_1.png');
-											}
-								);
-	
-	$('<img/>',{addClass:'mascot_img' , id:'mascot_picture_1' , src:get_mascot_image(1)}).appendTo('#mascot_selection');
-	$('#mascot_picture_1').click(function(){toggle_mascot_visibility('mascot_detail_selection'); 
-											toggle_mascot_visibility('modal_mascot_detail_background');
-											$('#detail_mascot_img').attr('src','images/character_2.png');
-											}
-								);
-	$('<img/>',{addClass:'mascot_img' , id:'mascot_picture_2' , src:get_mascot_image(2)}).appendTo('#mascot_selection');
-	$('#mascot_picture_2').click(function(){toggle_mascot_visibility('mascot_detail_selection'); 
-											toggle_mascot_visibility('modal_mascot_detail_background');
-											$('#detail_mascot_img').attr('src','images/character_3.png');
-											}
-								);
-	$('<img/>',{addClass:'mascot_img' , id:'mascot_picture_3' , src:get_mascot_image(3)}).appendTo('#mascot_selection');
-	$('#mascot_picture_3').click(function(){toggle_mascot_visibility('mascot_detail_selection'); 
-											toggle_mascot_visibility('modal_mascot_detail_background');
-											$('#detail_mascot_img').attr('src','images/character_4.png');
-											}
-								);
+	var num_characters = 19;
+	for (i=0 ; i<num_characters ; i++){
+		var id = 'mascot_picture_' + i;
+		$('<img/>',{addClass:'mascot_img' , id:id , src:get_mascot_image(i)}).appendTo('#mascot_selection');
+		$('#' + id).click(function(arg){
+							return function(){
+								toggle_mascot_visibility('mascot_detail_selection'); 
+								toggle_mascot_visibility('modal_mascot_detail_background');
+								$('#detail_mascot_img').attr('src','images/character_' + (arg+1) + '.png');
+							}
+						}(i)
+					);
+	}
 	$("#mascot_selection").append("<br/><br/>");
 	$('<div/>',{addClass:'mascot_button' , id:'cancel_mascot_button' , text:'Cancel'}).appendTo('#mascot_selection');
 	$('#cancel_mascot_button').click(function (){
@@ -143,6 +130,7 @@ function create_modal_mascot_selection(){
 										toggle_mascot_visibility('mascot_selection');
 									}
 								);
+	
 }
 
 function create_modal_mascot_detail_selection(){
@@ -168,22 +156,9 @@ function create_modal_mascot_detail_selection(){
 }
 
 function get_mascot_image(num){
-	switch (num){
-		case 0: //megaphone
-			return 'images/character_1.png';
-			break;
-		case 1: //giddy
-			return 'images/character_2.png';
-			break;
-		case 2: //confused
-			return 'images/character_3.png';
-			break;
-		case 3: //excited
-			return 'images/character_4.png';
-			break;
-		default:
-			break;
-	}
+	var foo = num+1;
+	return 'images/character_' + foo + '.png';
+	
 }
 
 function toggle_mascot_visibility(id){
