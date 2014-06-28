@@ -23,7 +23,7 @@
 
 #detailed_rant_title{
 	color:rgb(52,52,52);
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:22px;
 	font-weight:600;
 }
@@ -34,25 +34,25 @@
 	padding-right:20px;
 }
 .detailed_username{
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(12,120,154);
 	font-size: 18px;
 	text-decoration:none;
 }
 
 #detailed_rant_level{
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 }
 #detailed_rant_level_link{
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(12,120,154);
 	text-decoration:none;
 }
 #detailed_rant_content{
 	margin-top:20px;
 	margin-left:15px;
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 }
 

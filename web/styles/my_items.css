@@ -9,7 +9,7 @@
 	text-align:right;
 }
 #my_boks_count{
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 	font-size:27px;
 	width:90px;
@@ -20,7 +20,7 @@
 	height:25px;
 }
 #get_more_boks_link{
-	font-family: lao ui;
+	font-family: Lato;
 	color:white;
 	font-size:20px;
 	padding-left:15px;
@@ -30,7 +30,7 @@
 	background-color:rgb(52,160,194);
 	border-radius:5px;
 	width:100%;
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:30px;
 	color:rgb(52,52,52);
 	box-sizing:border-box;
@@ -45,7 +45,7 @@
 	background-color:rgb(52,160,194);
 	border-radius:5px;
 	width:100%;
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:30px;
 	color:rgb(52,52,52);
 	box-sizing:border-box;
@@ -58,7 +58,7 @@
 
 .num_items{
 	display:inline;
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:30px;
 	color:rgb(52,52,52);
 }
@@ -87,7 +87,7 @@
 
 .item_container{
 	box-sizing:border-box;
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:25px;
 	color:rgb(52,52,52);
 	height:90px;
@@ -118,7 +118,7 @@
 	padding:0;
 }
 .qty{
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 	display:inline;
 	font-size:25px;
@@ -139,7 +139,7 @@
 	border:solid rgb(12,120,154) 2px;
 	border-radius:5px;
 	margin-left:35px;
-	font-family: lao ui;
+	font-family: Lato;
 	color:white;
 	background-color:rgb(52,52,52);
 	font-weight:700;
@@ -157,7 +157,7 @@
 	border:solid rgb(52,160,194) 2px;
 	border-radius:5px;
 	margin-left:35px;
-	font-family: lao ui;
+	font-family: Lato;
 	color:white;
 	background-color:rgb(52,52,52);
 	font-size:20px;
@@ -187,14 +187,14 @@
 	box-sizing:border-box;
 	padding: 10px;
 	text-align:center;
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 	font-size: 20px;
 }
 .modal_close{
 	background-color:rgb(52,52,52);
 	border:solid 1px rgb(52,52,52);
-	font-family:lao ui;
+	font-family:Lato;
 	color:white;
 	font-size: 20px;
 }

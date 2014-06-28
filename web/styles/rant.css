@@ -12,7 +12,7 @@
 	top:10px;
 	left:300px;
 	right:20px;
-	font-family:lao ui;
+	font-family:Lato;
 	color:white;
 	text-align:center;
 	font-weight:700;
@@ -30,7 +30,7 @@
 	border-radius:50px;
 	border:solid 40px rgb(215,226,229);
 	overflow:auto;
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:16px;
 	color:rgb(52,52,52);
 	z-index:1;
@@ -63,7 +63,7 @@
 	left:300px;
 	right:0px;
 	color:rgb(52,52,52);
-	font-family:times new roman;
+	font-family:Lato;
 	font-size:30px;
 	text-align:center;
 	line-height:20%;

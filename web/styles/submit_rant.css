@@ -13,14 +13,14 @@
 	position:absolute;
 	left:20px;
 	right:20px;
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:18px;
 	color:rgb(52,52,52);
 	font-weight:700;
 	margin-top:20px;
 }
 #title_input{
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:18px;
 	color:rgb(52,52,52);
 	padding-left:10px;
@@ -30,7 +30,7 @@
 	border-radius:5px;
 }
 #title_missing{
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:16px;
 	color:red;
 	padding-left:10px;
@@ -42,14 +42,14 @@
 	position:absolute;
 	left:20px;
 	right:20px;
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:18px;
 	color:rgb(52,52,52);
 	font-weight:700;
 	margin-top:100px;
 }
 #rant_input{
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:18px;
 	color:rgb(52,52,52);
 	padding-left:10px;
@@ -59,7 +59,7 @@
 	border-radius:5px;
 }
 #rant_missing{
-	font-family:lao ui;
+	font-family:Lato;
 	font-size:16px;
 	color:red;
 	padding-left:10px;
@@ -74,14 +74,14 @@
 	text-align:right;
 }
 #NSFW_checkbox_text{
-	font-family:lao ui;
+	font-family:Lato;
 	color:red;
 	font-weight:700;
 	font-size:20px;
 	margin-right:50px;
 }
 #submit_rant_button{
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 	font-weight:700;
 	font-size:15px;
@@ -98,7 +98,7 @@
 	text-align:center;
 	border:solid rgb(12,120,154) 2px;
 	border-radius:5px;
-	font-family: lao ui;
+	font-family: Lato;
 	color:white;
 	background-color:rgb(52,52,52);
 	font-weight:700;
@@ -127,7 +127,7 @@
 	padding-left: 25%;
 	padding-right: 25%;
 	text-align:center;
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 	font-size: 20px;
 	border: solid rgb(12,120,154) 10px;
@@ -149,7 +149,7 @@
 	box-sizing:border-box;
 	padding: 10px;
 	text-align:center;
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 	font-size: 20px;
 }

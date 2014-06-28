@@ -8,7 +8,7 @@
 
 #sign_up_form{
 	width:350px;
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 	font-weight:700;
 	font-size:20px;
@@ -16,7 +16,7 @@
 }
 
 #submit_button{
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 	font-weight:700;
 	font-size:15px;
@@ -30,7 +30,7 @@
 }
 
 #sign_up_form div{
-	font-family:lao ui;
+	font-family:Lato;
 	color:red;
 	font-weight:300;
 	font-size:16px;
@@ -43,7 +43,7 @@
 }
 
 .text_entry{
-	font-family:lao ui;
+	font-family:Lato;
 	color:rgb(52,52,52);
 	text-align:center;
 }
