@@ -7,6 +7,7 @@ function create_tabs(tab_num){
 	create_ten_minutely();
 	create_minutely();
 	create_submit_rant_tab();
+	create_submit_pointer();
 	update_tabs(tab_num);
 }
 
@@ -91,4 +92,10 @@ function create_submit_rant_tab(){
 	}
 	$('<li/>',{id:'submit_rant' , addClass:'other_tab'}).appendTo('#submit_rant_link');
 	$('#submit_rant').text('Create a rant!');
+}
+
+function create_submit_pointer(){
+	var submit_pointer = document.createElement('div');
+	submit_pointer.id = "submit_pointer";
+	document.body.appendChild(submit_pointer);
 }
