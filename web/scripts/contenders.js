@@ -49,7 +49,7 @@ function update_contender_title(tab_num){
 		default:
 			break;
 	}
-	$('#contender_title').append("<a href='FAQ.html#FAQ9' , style='color:rgb(52,52,52); font-size:18px;'><br/>in no particular order</a>");
+	$('#contender_title').append("<a href='FAQ.html#FAQ9' , style='color:rgb(52,52,52); font-size:14px;'><br/>in no particular order</a>");
 }
 
 function update_contenders(tab_num){
