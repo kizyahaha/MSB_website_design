@@ -85,7 +85,7 @@ function create_detailed_rant_content(){
 	$('<div/>',{id:'detailed_rant_content'}).appendTo('#detailed_rant_space');
 	$('#detailed_rant_content').text('Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.');
 	if (is_owner){
-		$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+450);
+		$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+480);
 	}
 	else{
 		$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+140);
@@ -102,45 +102,6 @@ function create_detailed_rant_content(){
 	});
 }
 
-/*function create_detailed_rant_power_graph(){
-	$('<div/>',{id:'detailed_power_graph'}).appendTo('#detailed_rant_container');
-
-    google.load('visualization', '1', {packages: ['corechart']});
-	google.setOnLoadCallback(setup_detailed_power_graph);
-    function setup_detailed_power_graph() {
-        var data = new google.visualization.DataTable();
-		data = get_detailed_rant_data();
-
-        var options = {width:$('#detailed_power_graph').width(),
-                       height:$('#detailed_power_graph').height(),
-					   legend:'none',
-					   colors:['rgb(52,52,52)'],
-					   areaOpacity:0.4,
-					   hAxis:{title:'Time' , titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'lao ui' , italic:false , bold:true} ,
-								gridlines:{color:'rgb(52,160,194)' , count:-1} , textStyle:{color: 'white' , fontName:'lao ui'} ,
-								baselineColor:'none' , format:'0'},
-					   vAxis:{title:'Power' , titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'lao ui' , italic:false , bold:true} ,
-								gridlines:{color:'rgb(52,52,52)' , count:5} , textStyle:{color: 'white' , fontName:'lao ui'} , 
-								baselineColor:'rgb(52,52,52)'}, 
-					   backgroundColor: 'transparent',
-					   fontName: 'lao ui',
-					   tooltip:{textStyle:{color:'rgb(52,52,52)' , fontName:'lao ui'}}
-					   }
-		function draw_detailed_power_graph(){
-			options.width = $('#detailed_power_graph').width();
-			var chart = new google.visualization.AreaChart(document.getElementById('detailed_power_graph'));
-			chart.draw(data, options);
-		}
-		window.onload = draw_detailed_power_graph();
-
-		var resizeTimer;
-		$(window).resize(function() {
-			clearTimeout(resizeTimer);
-			resizeTimer = setTimeout(function(){draw_detailed_power_graph();}, 250);
-		});
-		
-    }
-}*/
 function create_detailed_rant_power_graph(){
 	$('<div/>',{id:'detailed_power_graph'}).appendTo('#detailed_rant_container');
 	$('<div/>',{id:'detailed_graph'}).appendTo('#detailed_power_graph');
@@ -166,15 +127,17 @@ function create_detailed_rant_power_graph(){
           'options': {width:$('#detailed_power_graph').width(),
                        height:$('#detailed_power_graph').height(),
 					   legend:'none',
+					   title:'Power Evolution',
+					   titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'Lato' , italic:false , bold:true},
 					   colors:['rgb(52,52,52)'],
-					   hAxis:{gridlines:{color:'rgb(12,120,154)' , count:-1} , textStyle:{color: 'white' , fontName:'lao ui'} ,
+					   hAxis:{gridlines:{color:'rgb(12,120,154)' , count:-1} , textStyle:{color: 'white' , fontName:'Lato'} ,
 								baselineColor:'none' , format:'0'},
-					   vAxis:{title:'Power' , titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'lao ui' , italic:false , bold:true} ,
-								gridlines:{color:'rgb(52,52,52)' , count:5} , textStyle:{color: 'white' , fontName:'lao ui'} , 
+					   vAxis:{title:'Power' , titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'Lato' , italic:false , bold:true} ,
+								gridlines:{color:'rgb(52,52,52)' , count:5} , textStyle:{color: 'white' , fontName:'Lato'} , 
 								baselineColor:'rgb(52,52,52)'},
 					   backgroundColor: 'transparent',
-					   fontName: 'lao ui',
-					   tooltip:{textStyle:{color:'rgb(52,52,52)' , fontName:'lao ui'}}
+					   fontName: 'Lato',
+					   tooltip:{textStyle:{color:'rgb(52,52,52)' , fontName:'Lato'}}
 					   }
         });
 

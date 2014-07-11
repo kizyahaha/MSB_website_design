@@ -36,15 +36,17 @@ function create_power_graph(tab_num){
           'options': {width:$('#power_graph').width(),
                        height:$('#power_graph').height(),
 					   legend:'none',
+					   title:'Power Distribution of Contenders',
+					   titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'Lato' , italic:false , bold:true},
 					   colors:['rgb(52,52,52)'],
-					   hAxis:{gridlines:{color:'rgb(12,120,154)' , count:-1} , textStyle:{color: 'white' , fontName:'lao ui'} ,
+					   hAxis:{gridlines:{color:'rgb(12,120,154)' , count:-1} , textStyle:{color: 'white' , fontName:'Lato'} ,
 								baselineColor:'none' , format:'0'},
-					   vAxis:{title:'Power' , titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'lao ui' , italic:false , bold:true} ,
-								gridlines:{color:'rgb(52,52,52)' , count:5} , textStyle:{color: 'white' , fontName:'lao ui'} , 
+					   vAxis:{title:'Power' , titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'Lato' , italic:false , bold:true} ,
+								gridlines:{color:'rgb(52,52,52)' , count:5} , textStyle:{color: 'white' , fontName:'Lato'} , 
 								baselineColor:'rgb(52,52,52)'},
 					   backgroundColor: 'transparent',
-					   fontName: 'lao ui',
-					   tooltip:{textStyle:{color:'rgb(52,52,52)' , fontName:'lao ui'}}
+					   fontName: 'Lato',
+					   tooltip:{textStyle:{color:'rgb(52,52,52)' , fontName:'Lato'}}
 					   }
         });
 		
@@ -85,76 +87,3 @@ function get_contender_data(){
 	}
 	return data;
 }
-
-
-
-
-/* Rickshaw
-function create_power_graph(tab_num){
-	$('<div/>',{id:'power_graph'}).appendTo('#contender_space');
-	var data = get_contender_data();
-
-	var power_graph = new Rickshaw.Graph( {
-		element: document.querySelector("#power_graph"),
-		renderer: 'bar',
-		//interpolation: 'step-after',
-		width: $('#power_graph').width(),
-		height: $('#power_graph').height(),
-		padding: {top:0.04, left:0.01, right:0.01},
-		series: [ {
-			color: 'rgb(52,52,52)',
-			data: data
-		} ]
-	} );
-	power_graph.render();
-	
-	create_x_axis(power_graph);
-	create_y_axis(power_graph);
-	
-	var hover_text = new Rickshaw.Graph.HoverDetail({
-		graph:power_graph,
-		formatter: function(series,x,y){
-			var content = 'Rank: ' + parseInt(x) + '<br>Power: ' + parseInt(y);
-			return content;
-		}
-	});
-	
-	$(window).on('resize',function(){
-		power_graph.configure({
-			width: $('#power_graph').width()
-		});
-		power_graph.render();
-	});
-}
-
-function get_contender_data(){
-	var data = [];
-	var height = 9437;
-	for (var i=0 ; i<num_contenders ; i++){
-		var point = {x:0,y:0};
-		point.x = i+1;
-		point.y = height;
-		height = height*0.9;
-		data.push(point);
-	}
-	return data;
-}
-
-function create_x_axis(graph){
-	$('<div/>',{id:'x_axis'}).appendTo('#power_graph');
-	var x_axis = new Rickshaw.Graph.Axis.X({
-		graph: graph,
-		element: document.getElementById('x_axis'),
-	});
-	x_axis.render();
-}
-
-function create_y_axis(graph){
-	$('<div/>',{id:'y_axis'}).appendTo('#power_graph');
-	var y_axis = new Rickshaw.Graph.Axis.Y({
-		graph: graph,
-		element: document.getElementById('y_axis'),
-		ticks:5,
-	});
-	y_axis.render();
-}*/
