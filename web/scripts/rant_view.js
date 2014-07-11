@@ -102,7 +102,7 @@ function create_detailed_rant_content(){
 	});
 }
 
-function create_detailed_rant_power_graph(){
+/*function create_detailed_rant_power_graph(){
 	$('<div/>',{id:'detailed_power_graph'}).appendTo('#detailed_rant_container');
 
     google.load('visualization', '1', {packages: ['corechart']});
@@ -140,11 +140,63 @@ function create_detailed_rant_power_graph(){
 		});
 		
     }
+}*/
+function create_detailed_rant_power_graph(){
+	$('<div/>',{id:'detailed_power_graph'}).appendTo('#detailed_rant_container');
+	$('<div/>',{id:'detailed_graph'}).appendTo('#detailed_power_graph');
+	$('<div/>',{id:'detailed_rank_slider'}).appendTo('#detailed_power_graph');
+
+    google.load('visualization', '1', {'packages':['controls']});
+	google.setOnLoadCallback(draw_detailed_dashboard);
+    function draw_detailed_dashboard() {
+        var detailed_data = new google.visualization.DataTable();
+		detailed_data = get_detailed_rant_data();
+		
+		var detailed_rank_slider = new google.visualization.ControlWrapper({
+          'controlType': 'NumberRangeFilter',
+          'containerId': 'detailed_rank_slider',
+          'options': {'filterColumnLabel': 'Time Range:' ,
+						ui:{cssClass:'rank_slider'}
+					}
+        })
+		
+		var detailed_chart = new google.visualization.ChartWrapper({
+          'chartType': 'AreaChart',
+          'containerId': 'detailed_graph',
+          'options': {width:$('#detailed_power_graph').width(),
+                       height:$('#detailed_power_graph').height(),
+					   legend:'none',
+					   colors:['rgb(52,52,52)'],
+					   hAxis:{gridlines:{color:'rgb(12,120,154)' , count:-1} , textStyle:{color: 'white' , fontName:'lao ui'} ,
+								baselineColor:'none' , format:'0'},
+					   vAxis:{title:'Power' , titleTextStyle: {color: 'rgb(52,52,52)' , fontName:'lao ui' , italic:false , bold:true} ,
+								gridlines:{color:'rgb(52,52,52)' , count:5} , textStyle:{color: 'white' , fontName:'lao ui'} , 
+								baselineColor:'rgb(52,52,52)'},
+					   backgroundColor: 'transparent',
+					   fontName: 'lao ui',
+					   tooltip:{textStyle:{color:'rgb(52,52,52)' , fontName:'lao ui'}}
+					   }
+        });
+
+		function draw_detailed_power_graph(){
+			detailed_chart.setOption('width' , $('#detailed_power_graph').width());
+			var dashboard = new google.visualization.Dashboard(document.getElementById('detailed_power_graph'));
+			dashboard.bind(detailed_rank_slider, detailed_chart);
+			dashboard.draw(detailed_data);
+		}
+		window.onload = draw_detailed_power_graph();
+		
+		var resizeTimer;
+		$(window).resize(function() {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(function(){draw_detailed_power_graph();}, 250);
+		});		
+    }
 }
 
 function get_detailed_rant_data(){
 	var data = new google.visualization.DataTable();
-	data.addColumn('number', 'Time');
+	data.addColumn('number', 'Time Range:');
     data.addColumn('number', 'Power');
 	data.addColumn({type: 'number', role: 'annotation'});
 	data.addColumn({type: 'string', role: 'annotationText'});

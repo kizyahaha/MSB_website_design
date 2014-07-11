@@ -1,11 +1,11 @@
 #detailed_rant_container{
 	position:relative;
-	margin-top: 20px;
-	width:98%;
+	margin-top: 50px;
+	width:95%;
 	margin-left:auto;
 	margin-right:auto;
-	background-color: rgb(12,120,154);
-	border-radius:20px;
+	/*background-color: rgb(12,120,154);
+	border-radius:20px;*/
 }
 #detailed_rant_space{
 	position:absolute;
@@ -56,17 +56,34 @@
 	color:rgb(52,52,52);
 }
 
+
 #detailed_power_graph{
 	position:absolute;
 	bottom:20px;
-	left:0px;
+	left:50px;
 	right:0px;
 	height:400px;
 }
 
-/*#detailed_power_graph text{
-	fill:white;
-}*/
+#detailed_graph{
+	position:relative;
+	top:0px;
+	left:0px;
+	right:0px;
+	height:350px;
+}
+#detailed_rank_slider{
+	position:relative;
+	bottom:0px;
+	left:0px;
+	right:0px;
+	height:50px;
+	text-align:center;
+	color:rgb(52,52,52);
+	font-family:Lato;
+	font-weight:700;
+	margin-top:20px;
+}
 
 #detail_vote_buttons{
 	position:absolute;
