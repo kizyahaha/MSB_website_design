@@ -1,0 +1,98 @@
+.rant_preview{
+}
+.rant_preview_left_side{
+	position:absolute;
+	left:-20px;
+	width:90px;
+	font-family:Lato;
+	color:rgb(52,52,52);
+	font-size:18px;
+	text-align:center
+}
+.rant_preview_right_side{
+	position:relative;
+	margin-left:70px;
+	right:0px;
+	font-family:Lato;
+	color:rgb(52,52,52);
+}
+.rant_preview_title{
+	display:inline;
+	font-weight:700;
+}
+.rant_preview_author{
+	display:inline;
+	margin-left:30px;
+	color:rgb(12,120,154);
+}
+.rant_preview_level{
+	display:inline;
+	margin-left:30px;
+}
+.rant_preview_birth{
+	display:inline;
+	font-style:italic;
+}
+.rant_preview_star{
+	width:20px;
+	display:inline;
+	margin-left:20px;
+}
+.rant_preview_medal{
+	width:20px;
+	display:inline;
+	margin-left:20px;
+}
+.rant_preview_queen{
+	width:20px;
+	display:inline;
+	margin-left:20px;
+}
+.rant_preview_king{
+	width:20px;
+	display:inline;
+	margin-left:20px;
+}
+.rant_preview_death{
+	display:inline;
+	font-style:italic;
+	margin-left:20px;
+}
+.rant_preview_content_line{
+	min-height:20px;
+	max-height:80px;
+	overflow:hidden;
+	position:relative;
+}
+.rant_preview_content{
+}
+.rant_preview_content_fade{
+	position:absolute;
+	height:100%;
+	width:100%;
+	top:0;
+	background: -webkit-linear-gradient(rgba(215,226,229,0), rgba(215,226,229,1)); /*For Safari 5.1 to 6.0*/
+	background: -o-linear-gradient(rgba(215,226,229,0), rgba(215,226,229,1)); /*For Opera 11.1 to 12.0*/
+	background: -moz-linear-gradient(rgba(215,226,229,0), rgba(215,226,229,1)); /*For Firefox 3.6 to 15*/
+	background: linear-gradient(rgba(215,226,229,0), rgba(215,226,229,1)); /*Standard syntax*/
+}
+.rant_preview_NSFW_content{
+	color:red;
+}
+.rant_preview_actions_line{
+	text-align:center;
+}
+.rant_preview_use_item_button{
+	text-align:center;
+	border:solid rgb(215,226,229) 2px;
+	border-radius:5px;
+	color:white;
+	background-color:rgb(52,52,52);
+	font-weight:700;
+	font-size:20px;
+	padding:5px 10px 5px 10px;
+}
+.rant_preview_use_item_button:hover{
+	border-color:rgb(52,160,194);
+	cursor:pointer;
+}
