@@ -1,4 +1,5 @@
 .rant_preview{
+	margin-bottom:40px;
 }
 .rant_preview_left_side{
 	position:absolute;
@@ -16,25 +17,25 @@
 	font-family:Lato;
 	color:rgb(52,52,52);
 }
-.rant_preview_title{
-	display:inline;
+.rant_preview_title_link{
 	font-weight:700;
+	color:rgb(52,52,52);
 }
-.rant_preview_author{
-	display:inline;
-	margin-left:30px;
+.rant_preview_author_link{
+	padding-left:30px;
 	color:rgb(12,120,154);
+	text-decoration:none;
 }
 .rant_preview_level{
-	display:inline;
-	margin-left:30px;
+
+	padding-left:30px;
 }
 .rant_preview_birth{
 	display:inline;
 	font-style:italic;
 }
 .rant_preview_star{
-	width:20px;
+	width:25px;
 	display:inline;
 	margin-left:20px;
 }
@@ -44,12 +45,12 @@
 	margin-left:20px;
 }
 .rant_preview_queen{
-	width:20px;
+	width:25px;
 	display:inline;
 	margin-left:20px;
 }
 .rant_preview_king{
-	width:20px;
+	width:25px;
 	display:inline;
 	margin-left:20px;
 }
@@ -63,6 +64,7 @@
 	max-height:80px;
 	overflow:hidden;
 	position:relative;
+	margin-left:15px;
 }
 .rant_preview_content{
 }
@@ -80,19 +82,34 @@
 	color:red;
 }
 .rant_preview_actions_line{
-	text-align:center;
+	margin-left:60px;
+	margin-top:5px;
+}
+.rant_preview_support_button{
+	display:inline;
+	width:30px;
 }
 .rant_preview_use_item_button{
+	display:inline-block;
 	text-align:center;
 	border:solid rgb(215,226,229) 2px;
 	border-radius:5px;
 	color:white;
 	background-color:rgb(52,52,52);
 	font-weight:700;
-	font-size:20px;
 	padding:5px 10px 5px 10px;
+	width:150px;
+	margin-left:50px;
+	margin-right:50px;
+	position:absolute;
 }
 .rant_preview_use_item_button:hover{
 	border-color:rgb(52,160,194);
 	cursor:pointer;
+}
+.rant_preview_oppose_button{
+	display:inline;
+	width:30px;
+	margin-left:275px;
+	
 }
