@@ -53,6 +53,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                  "global_vars.js",
                                                                  "banner.js",
                                                                  "tabs.js",
+                                                                 "vote_buttons.js",
                                                                  "rant_preview.js",
                                                                  "rant.js",
                                                                  "contenders.js",

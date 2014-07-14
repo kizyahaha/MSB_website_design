@@ -4,7 +4,7 @@ function create_rant_preview(parent , num){
 	preview.id = ID;
 	preview.className = 'rant_preview';
 	ID = '#' + ID;
-	document.getElementById('contenders').appendChild(preview);
+	document.getElementById(parent).appendChild(preview);
 	create_rant_preview_left_side(ID);
 	create_rant_preview_right_side(ID);
 	if (is_owner){
@@ -29,18 +29,13 @@ function create_rant_preview_right_side(preview_ID){
 }
 
 function create_rant_preview_title_line(preview_ID){
-	/*$('<div/>',{addClass:'rant_preview_title_line'}).appendTo(preview_ID + ' .rant_preview_right_side');
-	$('<div/>',{addClass:'rant_preview_title'}).appendTo(preview_ID + ' .rant_preview_title_line');
-	$('<div/>',{addClass:'rant_preview_author'}).appendTo(preview_ID + ' .rant_preview_title_line');
-	$('<div/>',{addClass:'rant_preview_level'}).appendTo(preview_ID + ' .rant_preview_title_line');
-	$(preview_ID + ' .rant_preview_level').css('display','none');*/
 	$('<table/>',{addClass:'rant_preview_title_line'}).appendTo(preview_ID + ' .rant_preview_right_side');
-	$('<tr/>',{addClass:'title_row'}).appendTo(preview_ID + ' .rant_preview_title_line');
-	$('<td/>',{addClass:'rant_preview_title'}).appendTo(preview_ID + ' .title_row');
+	$('<tr/>',{addClass:'rant_preview_title_row'}).appendTo(preview_ID + ' .rant_preview_title_line');
+	$('<td/>',{addClass:'rant_preview_title'}).appendTo(preview_ID + ' .rant_preview_title_row');
 		$('<a/>',{addClass:'rant_preview_title_link'}).appendTo(preview_ID + ' .rant_preview_title');
-	$('<td/>',{addClass:'rant_preview_author'}).appendTo(preview_ID + ' .title_row');
+	$('<td/>',{addClass:'rant_preview_author'}).appendTo(preview_ID + ' .rant_preview_title_row');
 		$('<a/>',{addClass:'rant_preview_author_link'}).appendTo(preview_ID + ' .rant_preview_author');
-	$('<td/>',{addClass:'rant_preview_level'}).appendTo(preview_ID + ' .title_row');
+	$('<td/>',{addClass:'rant_preview_level'}).appendTo(preview_ID + ' .rant_preview_title_row');
 	$(preview_ID + ' .rant_preview_level').css('display','none');
 }
 
@@ -62,69 +57,24 @@ function create_rant_preview_content_line(preview_ID){
 }
 
 function create_rant_preview_actions_line(preview_ID){
-	$('<div/>',{addClass:'rant_preview_actions_line'}).appendTo(preview_ID + ' .rant_preview_right_side');
-	$('<img/>',{addClass:'rant_preview_support_button' , src:'images/up_button_2.png'}).appendTo(preview_ID + ' .rant_preview_actions_line');
-	$('<div/>',{addClass:'rant_preview_use_item_button', text:'Apply item'}).appendTo(preview_ID + ' .rant_preview_actions_line');
-	$('<img>',{addClass:'rant_preview_oppose_button' , src:'images/down_button_2.png'}).appendTo(preview_ID + ' .rant_preview_actions_line');
+	$('<table/>',{addClass:'rant_preview_actions_line'}).appendTo(preview_ID + ' .rant_preview_right_side');
+	$('<tr/>',{addClass:'rant_preview_action_row'}).appendTo(preview_ID + ' .rant_preview_actions_line');
+	$('<td/>',{addClass:'rant_preview_oppose_button'}).appendTo(preview_ID + ' .rant_preview_action_row');
+		$('<img/>',{addClass:'rant_preview_oppose_button_image' , src:'images/down_button_2.png'}).appendTo(preview_ID + ' .rant_preview_oppose_button');
+	$('<td/>',{addClass:'rant_preview_use_item'}).appendTo(preview_ID + ' .rant_preview_action_row');	
+		$('<div/>',{addClass:'rant_preview_use_item_button', text:'Apply item'}).appendTo(preview_ID + ' .rant_preview_use_item');
+	$('<td/>',{addClass:'rant_preview_support_button'}).appendTo(preview_ID + ' .rant_preview_action_row');
+		$('<img/>',{addClass:'rant_preview_support_button_image' , src:'images/up_button_2.png'}).appendTo(preview_ID + ' .rant_preview_support_button');
+	create_rant_preview_vote_button_functionality(preview_ID);
 }
 
-/*function create_vote_buttons(contender){
-	var up_button = document.createElement('img');
-	up_button.src = 'images/up_button_2.png';
-	up_button.alt = 'upvote';
-	up_button.width = 20;
-	var down_button = document.createElement('img');
-	down_button.src = 'images/down_button_2.png';
-	down_button.alt = 'downvote';
-	down_button.width = 20;
-	
+function create_rant_preview_vote_button_functionality(preview_ID){
 	var track_votes = new Array();
-	track_votes[0] = up_button;
-	track_votes[1] = down_button;
-	track_votes[0].onclick = function(){upvote_push(track_votes);};
-	track_votes[1].onclick = function(){downvote_push(track_votes);};
-	
-	var vote_buttons = document.createElement('div');
-	vote_buttons.className = 'vote_buttons';
-	vote_buttons.appendChild(track_votes[0]);
-	vote_buttons.appendChild(track_votes[1]);
-	contender.appendChild(vote_buttons);
+	track_votes[0] = $(preview_ID + ' .rant_preview_support_button_image');
+	track_votes[1] = $(preview_ID + ' .rant_preview_oppose_button_image');
+	track_votes[0].click( function(){support_push(track_votes);} );
+	track_votes[1].click( function(){oppose_push(track_votes);} );
 }
-
-function upvote_push(track_votes){
-	var initImg = "up_button_2.png";
-	var pushImg = "up_button_1.png";
-	var currImg = track_votes[0].src.substring(track_votes[0].src.lastIndexOf('/') + 1);
-	if (currImg == initImg){
-		track_votes[0].src = "images/" + pushImg;
-		track_votes[1].style.opacity = 0.3;
-		track_votes[0].style.opacity = 1.0;
-	}
-	else{
-		track_votes[0].src = "images/" + initImg;
-		track_votes[0].style.opacity = 1.0;
-		track_votes[1].style.opacity = 1.0;
-	}
-	track_votes[1].src = "images/down_button_2.png";
-}
-
-function downvote_push(track_votes){
-	var initImg = "down_button_2.png";
-	var pushImg = "down_button_1.png";
-	var currImg = track_votes[1].src.substring(track_votes[1].src.lastIndexOf('/') + 1);
-	if (currImg == initImg){
-		track_votes[1].src = "images/" + pushImg;
-		track_votes[0].style.opacity = 0.3;
-		track_votes[1].style.opacity = 1.0;
-	}
-	else{
-		track_votes[1].src = "images/" + initImg;
-		track_votes[1].style.opacity = 1.0;
-		track_votes[0].style.opacity = 1.0;
-	}
-	track_votes[0].src = "images/up_button_2.png";
-
-}*/
 
 /**********************************************************************************************************/
 
