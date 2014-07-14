@@ -19,6 +19,7 @@
 }
 .rant_preview_title_link{
 	font-weight:700;
+	font-size:20px;
 	color:rgb(52,52,52);
 }
 .rant_preview_author_link{
@@ -27,8 +28,10 @@
 	text-decoration:none;
 }
 .rant_preview_level{
-
 	padding-left:30px;
+}
+.rant_preview_level_link{
+	color:rgb(52,52,52);
 }
 .rant_preview_birth{
 	display:inline;

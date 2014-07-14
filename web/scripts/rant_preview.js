@@ -36,6 +36,9 @@ function create_rant_preview_title_line(preview_ID){
 	$('<td/>',{addClass:'rant_preview_author'}).appendTo(preview_ID + ' .rant_preview_title_row');
 		$('<a/>',{addClass:'rant_preview_author_link'}).appendTo(preview_ID + ' .rant_preview_author');
 	$('<td/>',{addClass:'rant_preview_level'}).appendTo(preview_ID + ' .rant_preview_title_row');
+		$(preview_ID + ' .rant_preview_level').append('(');
+		$('<a/>',{addClass:'rant_preview_level_link'}).appendTo(preview_ID + ' .rant_preview_level');
+		$(preview_ID + ' .rant_preview_level').append(')');
 	$(preview_ID + ' .rant_preview_level').css('display','none');
 }
 
@@ -86,7 +89,8 @@ function populate_rant_preview(preview_ID, list_num , rant_data){
 	$(preview_ID).find('.rant_preview_author_link').text('Queen_of_Equestria');
 		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html');
 		$(preview_ID).find('.rant_preview_author').css('width',('Queen_of_Equestria'.length)*10+'px');
-	$(preview_ID).find('.rant_preview_level').text('(' + rant_data.level + ')');
+	$(preview_ID).find('.rant_preview_level_link').text(rant_data.level);
+		$(preview_ID).find('.rant_preview_level_link').attr('href',get_rant_preview_level_link(rant_data));
 		$(preview_ID).find('.rant_preview_level').css('width',(rant_data.level.length+2)*10+'px');
 	$(preview_ID).find('.rant_preview_birth').text('Created ' + rant_data.birth);
 	$(preview_ID).find('.rant_preview_death').text('Died ' + rant_data.death);
@@ -98,6 +102,19 @@ function populate_rant_preview(preview_ID, list_num , rant_data){
 		$(preview_ID).find('.rant_preview_content').addClass('rant_preview_NSFW_content');
 		$(preview_ID + ' .rant_preview_content_fade').hide();
 	}
+}
+
+function get_rant_preview_level_link(rant_data){
+	if (rant_data.level == 'Daily'){
+		return 'daily.html';
+	}
+	else if (rant_data.level == 'Hourly'){
+		return 'hourly.html';
+	}
+	else if(rant_data.level == '10-Minutely'){
+		return 'ten_minutely.html';
+	}
+	return 'minutely.html';
 }
 
 /**********************************************************************************************************/
