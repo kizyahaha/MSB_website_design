@@ -86,9 +86,9 @@ function populate_rant_preview(preview_ID, list_num , rant_data){
 	$(preview_ID).find('.rant_preview_power').text(rant_data.power);
 	$(preview_ID).find('.rant_preview_title_link').text(rant_data.title);
 		$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html');
-	$(preview_ID).find('.rant_preview_author_link').text('Queen_of_Equestria');
+	$(preview_ID).find('.rant_preview_author_link').text(rant_data.owner);
 		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html');
-		$(preview_ID).find('.rant_preview_author').css('width',('Queen_of_Equestria'.length)*10+'px');
+		$(preview_ID).find('.rant_preview_author').css('width',(rant_data.owner.length)*10+'px');
 	$(preview_ID).find('.rant_preview_level_link').text(rant_data.level);
 		$(preview_ID).find('.rant_preview_level_link').attr('href',get_rant_preview_level_link(rant_data));
 		$(preview_ID).find('.rant_preview_level').css('width',(rant_data.level.length+2)*10+'px');
