@@ -50,7 +50,7 @@
 	height: 0;
 	border-top: 50px solid rgb(52,52,52);
 	border-right: 80px solid transparent;
-	border-left: 0px solid transparent;
-	left:660px;
+	border-left: 80px solid transparent;
+	left:580px;
 	top:200px;
 }

@@ -12,7 +12,7 @@ function create_questions_and_answers(){
 	qNa.push("One rant to rule them all.  That is the basic concept.  Get your message in front of as large an audience as possible.  At other sites you can " +
 				"make a post and maybe it'll be seen, but more likely, it'll be buried.  You can say what you want on your social profiles, " +
 				"but who sees that other than your existing friends?  On Sobox, if your rant wins, it is seen by EVERYONE.  And much like the real word, " +
-				"we provide you with the ability to fight for your rant and beat out the competition rather than leaving it to chance.  Wanna give your " + 
+				"we provide you with the ability to fight for your rant and use strategy to beat out the competition rather than leaving it to chance.  Wanna give your " + 
 				"take on Coke vs. Pepsi?  Or wish your friend a happy birthday? Maybe exhibit your poetry, link us to your band's music, voice your " + 
 				"political views, or even bash your ex?  Whatever you want to say, you can say it here.  Our entire site is dedicated to one thing and " +
 				"one thing only - your message.");
@@ -20,11 +20,11 @@ function create_questions_and_answers(){
 	qNa.push("How does this all work?");
 	qNa.push("It's simple.  First, craft your rant and submit it.  It will be placed into the contenders for the 1-minute title.  People can then " +
 				"view your rant and provide support or opposition.  If they support your rant, its power grows.  If they oppose it, its power drops.  " + 
-				"At the same time, you may apply a multitude of special items to influence the growth and defense of your rant.  " +
-				"If at the end of 1 minute your rant has the highest power of all the 1-minute contenders, it will be displayed as the winner and " +
-				"move into the contenders for the 10-minute title where the process repeats until (hopefully) your rant wins the daily title!  After " +
-				"a rant wins the daily title and has its 24 hours to bask in the glory of victory on the front page, it is retired to the archives.  " +
-				"And if your rant's power ever drops to zero, it is officially dead and is removed from the contender list.");
+				"At the same time, you may apply a multitude of special items to influence the growth and defense of your rant.  Apply your strategy in a fun, " +
+				"gameified battle against other soboxers to make your rant come out on top.  If at the end of 1 minute your rant has the highest power of all the 1-minute contenders, " +
+				"it will be displayed as the winner and move into the contenders for the 10-minute title where the process repeats until (hopefully) your rant " +
+				"wins the daily title!  After a rant wins the daily title and has its 24 hours to bask in the glory of victory on the front page, it is retired " +
+				"to the archives.  But be careful.  If your rant's power ever drops to zero, it is officially dead and is removed from the contender list.");
 	//2
 	qNa.push("Are there limits to what I can put in a rant?");
 	qNa.push("Good question.  The short answer is, 'I don't know.'  Let's see how this plays out.  With that being said, there is an option to " +
@@ -56,10 +56,10 @@ function create_questions_and_answers(){
 				"special items.");
 	//8
 	qNa.push("What is a bok?");
-	qNa.push("Boks are the site's currency system.  Get it?  Boks.  Like 'box' and 'bucks' kinda smashed together.  We're friggin' clever over here. " +
+	qNa.push("Boks are the site's currency system.  Get it?  Boks.  Like 'box' and 'bucks' kinda smashed together.  <-- clever. " +
 				"You earn boks primarily by getting support for your rants.  Each time someone supports one of your rants, you earn a certain number of " +
 				"boks.  You can also earn them by winning titles, signing in each day, and generally contributing to the site.  And if you choose to donate " +
-				"and help us out with some of our operating costs, of course we'll also thank you with some boks.  These boks can then be exchanged for special " +
+				"and help us out with some of our operating costs, of course we'll also shower you in boks.  These boks can then be exchanged for special " +
 				"items or to perform certain actions like submitting a new rant.");
 	//9
 	qNa.push("What order are the contenders displayed in?");
@@ -73,9 +73,13 @@ function create_questions_and_answers(){
 				"however, is constant for a particular viewer.  For example, rants numbered 1-100 for you will still be 1-100 the next time you visit the page " +
 				"(assuming none have died or there were no new entries).  We do this to avoid disorientation.  But your friend will have a completely "+
 				"different 1-100.  Over the thousands of people viewing the site at any time, on average, each rant will be at the top and the bottom " +
-				"of the list an equal number of times.  Furthermore, the order of the contenders has absolutely no correlation to the graph showing the " +
-				"powers of each rank.  This graph simply exists to say, 'Whichever rant is currently in Nth place has X power.'");
+				"of the list an equal number of times.");
 	//10
+	qNa.push("What is the power distribution graph shown under each list of contenders?");
+	qNa.push("This graph simply exists to say, 'Whichever rant is currently in Nth place has X power.'  The order of the contenders in the contender list " +
+				"has absolutely no correlation to the current rankings as displayed in the graph.  How you use this graph's information is up to you, but we " +
+				"felt that it opened the door for some potentially interesting game play.");
+	//11
 	qNa.push("How is my power transferred from one level to the next?");
 	qNa.push("When you enter a new level (for example entering the daily level after winning the hourly level) your power will be set to which ever " +
 				"is greater - your current power or the median of the level you're entering.  We want to make sure you at least start on a level playing " +
