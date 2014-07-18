@@ -71,6 +71,8 @@ function create_rant_preview_actions_line(preview_ID){
 	create_rant_preview_vote_button_functionality(preview_ID);
 }
 
+/**********************************************************************************************************/
+
 function create_rant_preview_vote_button_functionality(preview_ID){
 	var track_votes = new Array();
 	track_votes[0] = $(preview_ID + ' .rant_preview_support_button_image');

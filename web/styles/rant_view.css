@@ -92,6 +92,9 @@
 	right:0;
 	text-align:center;
 }
-.detail_button{
+.detail_up_button{
+	margin-left:50px;
+}
+.detail_down_button{
 	margin-left:50px;
 }

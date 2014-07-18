@@ -219,21 +219,22 @@ function create_detail_vote_buttons(){
 	up_button.src = 'images/up_button_2.png';
 	up_button.alt = 'upvote';
 	up_button.width = 40;
-	up_button.className = 'detail_button';
+	up_button.className = 'detail_up_button';
 	var down_button = document.createElement('img');
 	down_button.src = 'images/down_button_2.png';
 	down_button.alt = 'downvote';
 	down_button.width = 40;
-	down_button.className = 'detail_button';
-	
-	var track_votes = new Array();
-	track_votes[0] = up_button;
-	track_votes[1] = down_button;
-	track_votes[0].onclick = function(){upvote_push(track_votes);};
-	track_votes[1].onclick = function(){downvote_push(track_votes);};
+	down_button.className = 'detail_down_button';
 	
 	var detail_vote_buttons = document.getElementById('detail_vote_buttons');
-	detail_vote_buttons.appendChild(track_votes[0]);
-	detail_vote_buttons.appendChild(track_votes[1]);
+	detail_vote_buttons.appendChild(down_button);
+	detail_vote_buttons.appendChild(up_button);
+	
+	var track_votes = new Array();
+	track_votes[0] = $('.detail_up_button');
+	track_votes[1] = $('.detail_down_button');
+	track_votes[0].click( function(){support_push(track_votes);} );
+	track_votes[1].click( function(){oppose_push(track_votes);} );
 
 }
+

@@ -58,7 +58,9 @@ function create_questions_and_answers(){
 	qNa.push("What is a bok?");
 	qNa.push("Boks are the site's currency system.  Get it?  Boks.  Like 'box' and 'bucks' kinda smashed together.  We're friggin' clever over here. " +
 				"You earn boks primarily by getting support for your rants.  Each time someone supports one of your rants, you earn a certain number of " +
-				"boks.  You can also earn them by winning titles, signing in each day, and of course, they're available for purchase if you're the shortcut type.");
+				"boks.  You can also earn them by winning titles, signing in each day, and generally contributing to the site.  And if you choose to donate " +
+				"and help us out with some of our operating costs, of course we'll also thank you with some boks.  These boks can then be exchanged for special " +
+				"items or to perform certain actions like submitting a new rant.");
 	//9
 	qNa.push("What order are the contenders displayed in?");
 	qNa.push("Uh, no order.  Or random order.  Sort of.  We can explain....We wanted to make this site as 'fair' as possible to all potential " +
