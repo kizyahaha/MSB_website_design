@@ -68,7 +68,9 @@ function update_rant(tab_num){
 	update_rant_text(tab_num);
 	update_character(tab_num);
 	update_countdown(tab_num);
+	//window.onload = function(){update_sizes();};
 	update_sizes();
+	window.onload = function(){update_sizes();};
 }
 
 function update_winner_title(tab_num){
