@@ -75,7 +75,7 @@ public class SimpleRant implements Rant {
 		// TODO Auto-generated method stub
 		return DateTime.now();
 	}
-	
+
 	@Override
     public double getRantPower() {
 		double power = Math.round( Math.random() * 15000 ) - 5000;
@@ -84,7 +84,7 @@ public class SimpleRant implements Rant {
 		}
         return power;
     }
-	
+
 	@Override
     public String getRantLevel() {
 		double rand = Math.random() * 4;
