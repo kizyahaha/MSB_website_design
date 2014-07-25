@@ -5,6 +5,14 @@ function create_my_rants_content(data){
 	create_rant_filters(data);
 }
 
+function create_my_rants_navigation(){
+	$('<table/>',{id:'my_rants_navigation_table'}).appendTo('#user_content_space');
+	parent_id = 'my_rants_navigation_row';
+	$('<tr/>',{id:parent_id}).appendTo('#my_rants_navigation_table');
+	parent_id = '#' + parent_id;
+	create_page_navigation(parent_id);
+}
+
 function get_my_rants(data){
 	var my_rants = document.getElementById('my_rants_space');
 	my_rants.innerHTML = '';

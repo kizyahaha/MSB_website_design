@@ -80,6 +80,7 @@ function create_trophy_case(user_data){
 function create_user_tab_content(user_tab_num, data){
 	$('<div/>',{id:'user_content_space'}).appendTo('body');
 	create_my_rants_content(data);
+	create_my_rants_navigation();
 	create_my_activity_content(data);
 	create_my_items_content(data);
 	update_user_tab_content(user_tab_num);
@@ -89,11 +90,13 @@ function create_user_tab_content(user_tab_num, data){
 function update_user_tab_content(user_tab_num){
 	document.getElementById('my_rants_space').style.display = 'none';
 	document.getElementById('my_rant_sorts').style.display = 'none';
+	document.getElementById('my_rants_navigation_table').style.display = 'none';
 	document.getElementById('my_activity_space').style.display = 'none';
 	document.getElementById('my_items_space').style.display = 'none';
 	switch (user_tab_num){
 		case 0:
 			document.getElementById('my_rants_space').style.display = 'initial';
+			document.getElementById('my_rants_navigation_table').style.display = 'initial';
 			document.getElementById('my_rant_sorts').style.display = 'initial';
 			break;
 		case 1:
@@ -111,9 +114,9 @@ function update_user_tab_content(user_tab_num){
 function update_my_profile_content_size(){
 	var my_rants = document.getElementById('my_rants_space');
 	if (my_rants.style.display == 'initial'){
-		$('#my_rants_space').css('minHeight', 300 );
-		$('#my_rants_space').css('maxHeight', 600 );
-		$('#user_content_space').css('height',$('#my_rants_space').height() + 100);
+		$('#my_rants_space').css('minHeight', 100 );
+		$('#my_rants_space').css('maxHeight', 1050 );
+		$('#user_content_space').css('height',$('#my_rants_space').height() + 170);
 	}
 	var my_items = document.getElementById('my_items_space');
 	if (my_items.style.display == 'initial'){

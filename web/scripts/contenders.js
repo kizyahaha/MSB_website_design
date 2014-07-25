@@ -76,5 +76,4 @@ function create_contender_navigation(){
 	$('<tr/>',{id:parent_id}).appendTo('#contender_navigation_table');
 	parent_id = '#' + parent_id;
 	create_page_navigation(parent_id);
-	
 }
