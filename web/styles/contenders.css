@@ -3,10 +3,9 @@
 	position:relative;
 	top: 0px;
 	width:98%;
-	margin-top:80px;
+	margin-top:70px;
 	margin-left:auto;
 	margin-right:auto;
-	height:1030px;
 	background-color: rgb(52,160,194);
 	border-radius:20px;
 	box-sizing:border-box;
@@ -28,7 +27,8 @@
 	top: 80px;
 	left:20px;
 	right:20px;
-	bottom:430px;
+	max-height:1050px;
+	min-height:100px;
 	background-color: rgb(215,226,229);
 	border-radius:20px;
 	border:solid 20px rgb(215,226,229);

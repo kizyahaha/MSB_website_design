@@ -68,9 +68,8 @@ function update_rant(tab_num){
 	update_rant_text(tab_num);
 	update_character(tab_num);
 	update_countdown(tab_num);
-	//window.onload = function(){update_sizes();};
-	update_sizes();
-	window.onload = function(){update_sizes();};
+	update_rant_sizes();
+	window.onload = function(){update_rant_sizes();};
 }
 
 function update_winner_title(tab_num){
@@ -211,7 +210,7 @@ function update_countdown(tab_num){
 	}
 }
 
-function update_sizes(){
+function update_rant_sizes(){
 	//Size and position everything based on the size of the rant bubble
 	$('#rant_container').css('height',$('#rant_bubble').height()+190);
 	var resizeTimer;
