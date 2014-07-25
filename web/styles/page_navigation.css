@@ -1,0 +1,37 @@
+.navigation_element{
+	text-align:center;
+}
+
+.nav_ele_bound_box{
+	margin:0 auto;
+}
+
+.nav_ele_bound_box:hover{
+	cursor:pointer;
+}
+
+#jump_to_begin_bound_box{
+	width:70px;
+}
+
+#prev_bound_box{
+	width:40px;
+}
+
+#jump_to_page_bound_box{
+	width:80px;
+	margin:0 auto;
+}
+#jump_to_page_input{
+	text-align:center;
+	color:rgb(52,52,52);
+	font-family:Lato;
+}
+
+#next_bound_box{
+	width:40px;
+}
+
+#jump_to_end_bound_box{
+	width:60px;
+}

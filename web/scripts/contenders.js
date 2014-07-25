@@ -5,6 +5,7 @@ function create_contender_space(tab_num){
 	document.body.appendChild(contender_space);
 	create_contender_title();
 	create_contenders(tab_num);
+	create_contender_navigation();
 	create_power_graph(tab_num);
 }
 
@@ -62,9 +63,18 @@ function display_contenders(rants){
 }
 
 function update_contender_sizes(){
-	setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+550);}, 250);
+	setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+650);}, 250);
 	$(window).resize(function() {
 		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+550);}, 250);
+		resizeTimer = setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+650);}, 250);
 	});
+}
+
+function create_contender_navigation(){
+	$('<table/>',{id:'contender_navigation_table'}).appendTo('#contender_space');
+	parent_id = 'contender_navigation_row';
+	$('<tr/>',{id:parent_id}).appendTo('#contender_navigation_table');
+	parent_id = '#' + parent_id;
+	create_page_navigation(parent_id);
+	
 }
