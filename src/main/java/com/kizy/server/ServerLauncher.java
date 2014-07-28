@@ -13,6 +13,7 @@ import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.HandlerCollection;
+import org.eclipse.jetty.server.session.AbstractSessionManager;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.FilterMapping;
@@ -71,6 +72,7 @@ public class ServerLauncher {
         configureFilters(context.getServletHandler());
         configureServlets(context.getServletHandler());
         context.addOverrideDescriptor(null);
+        ((AbstractSessionManager) context.getSessionHandler().getSessionManager()).setHttpOnly(true);
         return context;
     }
 

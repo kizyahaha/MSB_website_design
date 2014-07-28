@@ -30,7 +30,6 @@ public class UserController {
 
     private static AtomicLong id = new AtomicLong(DatabaseUtils.maxUserId());
 
-	// TODO: figure out why request is sent to /api/users/users/add (jquery-1.11.1:9631 xhr.send)
 	@RequestMapping(value = "/add")
 	@ResponseBody
 	public void addUser(@RequestParam("username") String username,
@@ -78,6 +77,9 @@ public class UserController {
                 return "Id given and Username given, but they do not match.";
             }
             user = byId;
+        }
+        if (user == null) {
+            return "";
         }
         return Users.toJsonObject(user).toString();
     }
