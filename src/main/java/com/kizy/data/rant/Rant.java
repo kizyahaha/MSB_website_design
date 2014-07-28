@@ -17,11 +17,15 @@ public interface Rant {
     User getOwner();
 
     DateTime getCreationDate();
-    
+
     DateTime getDeathDate();
-    
-    double getRantPower();
-    
+
+    int getRantPower();
+
+    void changePower(int amount);
+
+    boolean isAlive();
+
     String getRantLevel();
-    
+
 }

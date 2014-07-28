@@ -14,6 +14,8 @@ import com.kizy.data.Dates;
 
 public class Rants {
 
+    public static final int STARTING_POWER = 100;
+
     private Rants() {
         // no instantiation
     }

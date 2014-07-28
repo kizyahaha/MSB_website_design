@@ -62,4 +62,18 @@ public class RantController {
         return Rants.toJsonObject(rant).toString();
     }
 
+    @RequestMapping(value = "/upvote")
+    @ResponseBody
+    public void upvote(@RequestParam("id") long id) throws IOException {
+        Rant rant = DatabaseUtils.findRantById(id);
+        rant.changePower(1);
+    }
+
+    @RequestMapping(value = "/downvote")
+    @ResponseBody
+    public void downvote(@RequestParam("id") long id) throws IOException {
+        Rant rant = DatabaseUtils.findRantById(id);
+        rant.changePower(-1);
+    }
+
 }

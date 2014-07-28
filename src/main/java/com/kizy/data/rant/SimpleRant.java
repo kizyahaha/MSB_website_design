@@ -12,23 +12,20 @@ public class SimpleRant implements Rant {
     private final String contents;
     private final User user;
     private final DateTime birth;
+    private int power;
 
     public SimpleRant(long id, boolean nsfw, String title, String contents, User user) {
-        this.id = id;
-        this.nsfw = nsfw;
-        this.title = title;
-        this.contents = contents;
-        this.user = user;
-        this.birth = DateTime.now();
+        this(id, nsfw, title, contents, user, DateTime.now(), null, Rants.STARTING_POWER, "");
     }
 
-    public SimpleRant(long id, boolean nsfw, String title, String contents, User user, DateTime birth, DateTime death, double power, String level) {
+    public SimpleRant(long id, boolean nsfw, String title, String contents, User user, DateTime birth, DateTime death, int power, String level) {
         this.id = id;
         this.nsfw = nsfw;
         this.title = title;
         this.contents = contents;
         this.user = user;
         this.birth = birth;
+        this.power = power;
     }
 
     @Override
@@ -77,13 +74,19 @@ public class SimpleRant implements Rant {
 	}
 
 	@Override
-    public double getRantPower() {
-		double power = Math.round( Math.random() * 15000 ) - 5000;
-		if (power < 0){
-			return 0;
-		}
+    public int getRantPower() {
         return power;
     }
+
+	@Override
+	public void changePower(int amount) {
+	    power += amount;
+	}
+
+	@Override
+	public boolean isAlive() {
+	    return power > 0;
+	}
 
 	@Override
     public String getRantLevel() {
@@ -99,5 +102,4 @@ public class SimpleRant implements Rant {
 		}
         return "Minutely";
     }
-
 }

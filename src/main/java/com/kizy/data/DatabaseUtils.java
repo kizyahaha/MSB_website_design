@@ -191,7 +191,7 @@ public class DatabaseUtils {
                               findUserByName(parts[RANT_OWNER_PART]),
                               new DateTime(parts[RANT_CREATION_PART]),
                               new DateTime(parts[RANT_DEATH_PART]),
-                              Double.parseDouble(parts[RANT_POWER_PART]),
+                              Integer.parseInt(parts[RANT_POWER_PART]),
                               parts[RANT_LEVEL_PART]);
     }
 
