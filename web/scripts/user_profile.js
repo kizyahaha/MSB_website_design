@@ -139,7 +139,7 @@ function update_my_profile_content_size(){
 }
 
 //eventually move once we create my activity
-function create_my_activity_content(userID){
+function create_my_activity_content(logged_user){
 	$('<div/>',{id:'my_activity_space'}).appendTo('#user_content_space');
 	document.getElementById('my_activity_space').style.display = 'none';
 }

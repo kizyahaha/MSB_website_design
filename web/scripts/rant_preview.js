@@ -1,4 +1,4 @@
-function create_rant_preview(parent , num){
+function create_rant_preview(parent , num , author){
 	var preview = document.createElement('div');
 	var ID = 'rant_preview' + num;
 	preview.id = ID;
@@ -7,7 +7,7 @@ function create_rant_preview(parent , num){
 	document.getElementById(parent).appendChild(preview);
 	create_rant_preview_left_side(ID);
 	create_rant_preview_right_side(ID);
-	if (is_owner){
+	if (logged_user.username == author){
 		owner_rant_preview_display(ID);
 	}
 	return ID;

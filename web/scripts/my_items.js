@@ -1,4 +1,4 @@
-function create_my_items_content(userID){
+function create_my_items_content(logged_user){
 	$('<div/>',{id:'my_items_space'}).appendTo('#user_content_space');
 	document.getElementById('my_items_space').style.display = 'none';
 	for (var i in tot_cost_per_item){

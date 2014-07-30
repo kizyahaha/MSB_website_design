@@ -33,4 +33,14 @@ public class LoginController {
             response.setStatus(HttpStatus.FORBIDDEN.value());
         }
     }
+    
+    @RequestMapping(value = "/logout")
+    @ResponseBody
+    public void logout(HttpServletResponse response) throws IOException {
+            Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERID, "");
+            cookie.setValue(null);
+            cookie.setMaxAge(0);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+    }
 }
