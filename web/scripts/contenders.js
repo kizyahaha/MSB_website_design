@@ -64,6 +64,7 @@ function display_contenders(rants){
 
 function update_contender_sizes(){
 	setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+650);}, 250);
+	var resizeTimer;
 	$(window).resize(function() {
 		clearTimeout(resizeTimer);
 		resizeTimer = setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+650);}, 250);

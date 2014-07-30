@@ -1,4 +1,5 @@
-function support_push(track_votes){
+function support_push(track_votes , rant_ID){
+	support_power(rant_ID);
 	var initImg = "up_button_2.png";
 	var pushImg = "up_button_1.png";
 	var currImg = track_votes[0].attr('src').substring(7);
@@ -15,7 +16,16 @@ function support_push(track_votes){
 	track_votes[1].attr('src','images/down_button_2.png');
 }
 
-function oppose_push(track_votes){
+function support_power(rant_ID){
+    $.ajax({
+        type: 'POST',
+        url: '/api/rants/upvote',
+		data: {id: rant_ID},
+    });
+}
+
+function oppose_push(track_votes , rant_ID){
+	oppose_power(rant_ID);
 	var initImg = "down_button_2.png";
 	var pushImg = "down_button_1.png";
 	var currImg = track_votes[1].attr('src').substring(7);
@@ -31,4 +41,12 @@ function oppose_push(track_votes){
 	}
 	track_votes[0].attr('src','images/up_button_2.png');
 
+}
+
+function oppose_power(rant_ID){
+    $.ajax({
+        type: 'POST',
+        url: '/api/rants/downvote',
+		data: {id: rant_ID}
+    });
 }

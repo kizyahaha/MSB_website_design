@@ -68,17 +68,17 @@ function create_rant_preview_actions_line(preview_ID){
 		$('<div/>',{addClass:'rant_preview_use_item_button', text:'Apply item'}).appendTo(preview_ID + ' .rant_preview_use_item');
 	$('<td/>',{addClass:'rant_preview_support_button'}).appendTo(preview_ID + ' .rant_preview_action_row');
 		$('<img/>',{addClass:'rant_preview_support_button_image' , src:'images/up_button_2.png'}).appendTo(preview_ID + ' .rant_preview_support_button');
-	create_rant_preview_vote_button_functionality(preview_ID);
+	//create_rant_preview_vote_button_functionality(preview_ID , rant_ID);
 }
 
 /**********************************************************************************************************/
 
-function create_rant_preview_vote_button_functionality(preview_ID){
+function create_rant_preview_vote_button_functionality(preview_ID , rant_ID){
 	var track_votes = new Array();
 	track_votes[0] = $(preview_ID + ' .rant_preview_support_button_image');
 	track_votes[1] = $(preview_ID + ' .rant_preview_oppose_button_image');
-	track_votes[0].click( function(){support_push(track_votes);} );
-	track_votes[1].click( function(){oppose_push(track_votes);} );
+	track_votes[0].click( function(){support_push(track_votes , rant_ID);} );
+	track_votes[1].click( function(){oppose_push(track_votes , rant_ID);} );
 }
 
 /**********************************************************************************************************/
@@ -104,6 +104,7 @@ function populate_rant_preview(preview_ID, list_num , rant_data){
 		$(preview_ID).find('.rant_preview_content').addClass('rant_preview_NSFW_content');
 		$(preview_ID + ' .rant_preview_content_fade').hide();
 	}
+	create_rant_preview_vote_button_functionality(preview_ID , rant_data.id);
 }
 
 function get_rant_preview_level_link(rant_data){
