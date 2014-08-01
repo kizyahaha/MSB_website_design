@@ -6,6 +6,12 @@ function create_user_profile(user_tab_num){
         data: {id: get_profile_id() }, // if you comment this line out, it will just get the currently logged in user
         success: function(gotData) {
             data = $.parseJSON(gotData);
+			if (data.id == logged_user.id){
+				is_owner = true;
+			}
+			else{
+				is_owner = false;
+			}
             create_user_banner(data);
             create_user_tabs(user_tab_num);
             create_user_tab_content(user_tab_num, data);

@@ -84,7 +84,7 @@ function create_banner_links(){
 	a_2.href = '#';
 	a_2.textContent = 'Archives';
 	li_2.appendChild(a_2);
-	if (logged_user.id != 3){
+	if (logged_user.id != 0){
 		a_3.href = 'user_profile.html?=' + logged_user.id;
 		a_3.textContent = 'My profile';
 		a_4.href = 'javascript:log_off_user();';

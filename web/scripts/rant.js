@@ -103,7 +103,7 @@ function update_winning_user(tab_num){
 function get_username(tab_num){
 	var user = document.createElement('a');
 	user.className = 'username';
-	user.href = 'user_profile.html';
+	user.href = 'user_profile.html?u=2';
 	user.textContent = 'Queen_of_Equestria';
 	return user;
 }
