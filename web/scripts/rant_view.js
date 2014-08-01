@@ -40,6 +40,7 @@ function create_detailed_rant(){
 			if (is_owner){
 				create_detailed_rant_power_graph();
 			}
+			create_footer();
         },
         error: function(name,status) {
             alert(status);
