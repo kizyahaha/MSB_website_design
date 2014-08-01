@@ -32,8 +32,8 @@
 	background-color: rgb(215,226,229);
 	border-radius:20px;
 	border:solid 20px rgb(215,226,229);
-	/*overflow:auto;*/
-	overflow:hidden;
+	overflow:auto;
+	/*overflow:hidden;*/
 }
 #contender_navigation_table{
 	position:absolute;

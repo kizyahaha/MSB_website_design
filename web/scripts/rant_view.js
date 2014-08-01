@@ -1,5 +1,5 @@
 
-function create_detailed_rant(){
+/*function create_detailed_rant(){
 	$('<div/>',{id:'detailed_rant_container'}).appendTo('body');
 	$('<div/>',{id:'detailed_rant_space'}).appendTo('#detailed_rant_container');
 	if (is_owner){
@@ -12,19 +12,60 @@ function create_detailed_rant(){
 	if (is_owner){
 		create_detailed_rant_power_graph();
 	}
+}*/
+
+function create_detailed_rant(){
+	google.load('visualization', '1', {'packages':['controls']});
+    $.ajax({
+        type: 'POST',
+        url: '/api/rants/rantData',
+        data: {id: get_rant_id() },
+        success: function(gotData) {
+			$('<div/>',{id:'detailed_rant_container'}).appendTo('body');
+			$('<div/>',{id:'detailed_rant_space'}).appendTo('#detailed_rant_container');
+            data = $.parseJSON(gotData);
+			if (data.owner == logged_user.username){
+				is_owner = true;
+			}
+			else{
+				is_owner = false;
+			}
+			if (is_owner){
+				$("#detailed_rant_space").css({ "border-width": "20px 20px 20px 20px" });
+			}
+			else{
+				$("#detailed_rant_space").css({ "border-width": "20px 20px 80px 20px" });
+			}
+			create_detailed_rant_info(data);
+			if (is_owner){
+				create_detailed_rant_power_graph();
+			}
+        },
+        error: function(name,status) {
+            alert(status);
+        }
+    });
 }
 
-function create_detailed_rant_info(){
+function get_rant_id(){
+	var url = window.location.href;
+	index = url.indexOf('=') + 1;
+	return url.substring(index);
+}
+
+function create_detailed_rant_info(rant_data){
 	$('<table/>',{id:'detailed_rant_info_table'}).appendTo('#detailed_rant_space');
 	$('<tr/>',{id:'detailed_temp_row'}).appendTo('#detailed_rant_info_table');
 	if (!is_owner){
-		create_detail_vote_buttons();
+		create_detail_vote_buttons(rant_data.id);
 	}
-	create_detailed_rant_title();
-	create_detailed_rant_username();
-	create_detailed_rant_level();
-	//create_detailed_rant_NSFW();
-	create_detailed_rant_content();
+	create_detailed_rant_title(rant_data.title);
+	create_detailed_rant_username(rant_data.owner);
+	create_detailed_rant_level(rant_data.level);
+	if (rant_data.nsfw){
+		create_detailed_rant_NSFW(rant_data.nsfw);
+	}
+	create_detailed_rant_content(rant_data.contents);
 }
 
 function create_detailed_rant_NSFW(){
@@ -32,18 +73,18 @@ function create_detailed_rant_NSFW(){
 	$('#detailed_rant_NSFW').text('NSFW');
 }
 
-function create_detailed_rant_title(){
+function create_detailed_rant_title(title){
 	$('<td/>',{id:'detailed_rant_title'}).appendTo('#detailed_temp_row');
-	$('#detailed_rant_title').text('This is the title of this rant - ');
+	$('#detailed_rant_title').text(title);
 }
 
-function create_detailed_rant_username(){
+function create_detailed_rant_username(owner){
 	$('<td/>',{id:'detailed_rant_user'}).appendTo('#detailed_temp_row');
 	$('<a/>',{id:'detailed_rant_user_link' , addClass:'detailed_username' , href:'user_profile.html'}).appendTo('#detailed_rant_user');
-	$('#detailed_rant_user_link').text('Queen_of_Equestria');
+	$('#detailed_rant_user_link').text(owner);
 }
 
-function create_detailed_rant_level(){
+function create_detailed_rant_level(level){
 	$('<div/>',{id:'detailed_rant_level'}).appendTo('#detailed_rant_space');
 	if (is_owner){
 		var rank = get_rant_current_rank();
@@ -52,8 +93,11 @@ function create_detailed_rant_level(){
 	else{
 		$('#detailed_rant_level').text('Currently in ');
 	}
-	$('<a/>',{id:'detailed_rant_level_link' , href:'/main/hourly'}).appendTo('#detailed_rant_level');
-	$('#detailed_rant_level_link').text('Hourly');
+	$('<a/>',{id:'detailed_rant_level_link' , href:'/main/' + level}).appendTo('#detailed_rant_level');
+	if (level == '10-Minutely'){
+		$('#detailed_rant_level_link').attr('href','/main/ten_minutely');
+	}
+	$('#detailed_rant_level_link').text(level);
 }
 
 function get_rant_current_rank(){
@@ -81,9 +125,9 @@ function get_rant_current_rank(){
 	return rank;
 }
 
-function create_detailed_rant_content(){
+function create_detailed_rant_content(contents){
 	$('<div/>',{id:'detailed_rant_content'}).appendTo('#detailed_rant_space');
-	$('#detailed_rant_content').text('Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.  Queen of Equestria?  More like Queer of E-queer-stria.');
+	$('#detailed_rant_content').text(contents);
 	update_detailed_rant_sizes();
 	window.onload = function(){update_detailed_rant_sizes();};
 }
@@ -112,7 +156,6 @@ function create_detailed_rant_power_graph(){
 	$('<div/>',{id:'detailed_graph'}).appendTo('#detailed_power_graph');
 	$('<div/>',{id:'detailed_rank_slider'}).appendTo('#detailed_power_graph');
 
-    google.load('visualization', '1', {'packages':['controls']});
 	google.setOnLoadCallback(draw_detailed_dashboard);
     function draw_detailed_dashboard() {
         var detailed_data = new google.visualization.DataTable();
@@ -158,7 +201,7 @@ function create_detailed_rant_power_graph(){
 		$(window).resize(function() {
 			clearTimeout(resizeTimer);
 			resizeTimer = setTimeout(function(){draw_detailed_power_graph();}, 250);
-		});		
+		});
     }
 }
 
@@ -218,7 +261,7 @@ function get_detailed_rant_data(){
 	return data;
 }
 
-function create_detail_vote_buttons(){
+function create_detail_vote_buttons(rant_id){
 	$('<div/>',{id:'detail_vote_buttons'}).appendTo('#detailed_rant_container');
 	var up_button = document.createElement('img');
 	up_button.src = 'images/up_button_2.png';
@@ -238,8 +281,8 @@ function create_detail_vote_buttons(){
 	var track_votes = new Array();
 	track_votes[0] = $('.detail_up_button');
 	track_votes[1] = $('.detail_down_button');
-	track_votes[0].click( function(){support_push(track_votes);} );
-	track_votes[1].click( function(){oppose_push(track_votes);} );
+	track_votes[0].click( function(){support_push(track_votes , rant_id);} );
+	track_votes[1].click( function(){oppose_push(track_votes , rant_id);} );
 
 }
 
