@@ -7,6 +7,9 @@ function create_rant_preview(parent , num , author){
 	document.getElementById(parent).appendChild(preview);
 	create_rant_preview_left_side(ID);
 	create_rant_preview_right_side(ID);
+	if (logged_user.id == 3){
+		no_log_rant_preview_display(ID);
+	}
 	if (logged_user.username == author){
 		owner_rant_preview_display(ID);
 	}
@@ -68,7 +71,6 @@ function create_rant_preview_actions_line(preview_ID){
 		$('<div/>',{addClass:'rant_preview_use_item_button', text:'Apply item'}).appendTo(preview_ID + ' .rant_preview_use_item');
 	$('<td/>',{addClass:'rant_preview_support_button'}).appendTo(preview_ID + ' .rant_preview_action_row');
 		$('<img/>',{addClass:'rant_preview_support_button_image' , src:'images/up_button_2.png'}).appendTo(preview_ID + ' .rant_preview_support_button');
-	//create_rant_preview_vote_button_functionality(preview_ID , rant_ID);
 }
 
 /**********************************************************************************************************/
@@ -129,6 +131,12 @@ function owner_rant_preview_display(preview_ID){
 	$(preview_ID + ' .rant_preview_dates_line').show();
 	$(preview_ID + ' .rant_preview_support_button').hide();
 	$(preview_ID + ' .rant_preview_oppose_button').hide();
+}
+
+function no_log_rant_preview_display(preview_ID){
+	$(preview_ID + ' .rant_preview_support_button').hide();
+	$(preview_ID + ' .rant_preview_oppose_button').hide();
+	$(preview_ID + ' .rant_preview_use_item').hide();
 }
 
 

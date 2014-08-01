@@ -57,7 +57,7 @@ function get_rant_id(){
 function create_detailed_rant_info(rant_data){
 	$('<table/>',{id:'detailed_rant_info_table'}).appendTo('#detailed_rant_space');
 	$('<tr/>',{id:'detailed_temp_row'}).appendTo('#detailed_rant_info_table');
-	if (!is_owner){
+	if (!is_owner && logged_user.id != 3){
 		create_detail_vote_buttons(rant_data.id);
 	}
 	create_detailed_rant_title(rant_data.title);
