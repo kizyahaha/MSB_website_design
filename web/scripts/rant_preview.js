@@ -7,7 +7,7 @@ function create_rant_preview(parent , num , author){
 	document.getElementById(parent).appendChild(preview);
 	create_rant_preview_left_side(ID);
 	create_rant_preview_right_side(ID);
-	if (logged_user.id == 3){
+	if (logged_user.id == 0){
 		no_log_rant_preview_display(ID);
 	}
 	if (logged_user.username == author){

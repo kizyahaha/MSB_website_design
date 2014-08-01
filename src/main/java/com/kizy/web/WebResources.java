@@ -44,7 +44,7 @@ public class WebResources {
         }
         //return null;
         try {
-            return DatabaseUtils.findUserById(3);
+            return DatabaseUtils.findUserById(0);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -9,7 +9,6 @@ function get_user(){
 		async: false,
         type: 'POST',
         url: '/api/users/userData',
-        //data: {id: 2}, // if you comment this line out, it will just get the currently logged in user
         success: function(gotData) {
             user = $.parseJSON(gotData);
         }
@@ -31,7 +30,7 @@ function log_off_user(){
 		async: false,
         type: 'POST',
         url: '/api/users/userData',
-        data: {id: 3}, // if you comment this line out, it will just get the currently logged in user
+        data: {id: 0},
         success: function(gotData) {
             logged_user = $.parseJSON(gotData);
 			window.document.location.href = 'daily.html';
