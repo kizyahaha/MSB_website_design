@@ -17,6 +17,7 @@
 function create_detailed_rant(){
 	google.load('visualization', '1', {'packages':['controls']});
     $.ajax({
+		async: false,
         type: 'POST',
         url: '/api/rants/rantData',
         data: {id: get_rant_id() },
