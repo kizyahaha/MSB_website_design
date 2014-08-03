@@ -9,8 +9,8 @@ function get_user(){
 		async: false,
         type: 'POST',
         url: '/api/users/userData',
-        success: function(gotData) {
-            user = $.parseJSON(gotData);
+        success: function(data) {
+            user = data;
         }
     });
 	return user;
@@ -31,8 +31,8 @@ function log_off_user(){
         type: 'POST',
         url: '/api/users/userData',
         data: {id: 0},
-        success: function(gotData) {
-            logged_user = $.parseJSON(gotData);
+        success: function(data) {
+            logged_user = data;
 			window.document.location.href = 'daily.html';
         }
     });

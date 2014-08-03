@@ -4,8 +4,7 @@ function create_user_profile(user_tab_num){
         type: 'POST',
         url: '/api/users/userData',
         data: {id: get_profile_id() }, // if you comment this line out, it will just get the currently logged in user
-        success: function(gotData) {
-            data = $.parseJSON(gotData);
+        success: function(data) {
 			if (data.id == logged_user.id){
 				is_owner = true;
 			}

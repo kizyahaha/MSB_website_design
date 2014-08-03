@@ -11,10 +11,13 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Dates;
+import com.kizy.data.user.Users;
 
 public class Rants {
 
     public static final int STARTING_POWER = 100;
+
+    public static final Rant DUMMY_RANT = new SimpleRant(-1, false, "INVALID", "INVALID", Users.DUMMY_USER);
 
     private Rants() {
         // no instantiation
