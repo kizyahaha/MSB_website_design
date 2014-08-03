@@ -20,7 +20,8 @@ function create_detailed_rant(){
         type: 'POST',
         url: '/api/rants/rantData',
         data: {id: get_rant_id() },
-        success: function(data) {
+        success: function(gotData) {
+            data = $.parseJSON(gotData);
 			$('<div/>',{id:'detailed_rant_container'}).appendTo('body');
 			$('<div/>',{id:'detailed_rant_space'}).appendTo('#detailed_rant_container');
 			if (data.owner == logged_user.username){

@@ -19,15 +19,19 @@ public class SimpleUser implements User {
     private final Collection<Long> rantIds;
 
     @JsonCreator
-    public SimpleUser(@JsonProperty("id") long id, @JsonProperty("username") String username,
-                      @JsonProperty("password") String password, @JsonProperty("email") String email) {
+    public SimpleUser(@JsonProperty("id") long id,
+                      @JsonProperty("username") String username,
+                      @JsonProperty("password") String password,
+                      @JsonProperty("email") String email) {
         this(id, username, password, email, DateTime.now(), Sets.<Long>newConcurrentHashSet());
     }
 
     @JsonCreator
-    public SimpleUser(@JsonProperty("id") long id, @JsonProperty("username") String username,
+    public SimpleUser(@JsonProperty("id") long id,
+                      @JsonProperty("username") String username,
                       @JsonProperty("password") String password,
-                      @JsonProperty("email") String email, @JsonProperty("date") DateTime date,
+                      @JsonProperty("email") String email,
+                      @JsonProperty("date") DateTime date,
                       @JsonProperty("rants") Collection<Long> rants) {
         this.id = id;
         this.username = username;

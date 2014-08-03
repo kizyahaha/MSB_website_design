@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Serializers;
 import com.kizy.data.rant.Rant;
@@ -42,21 +41,21 @@ public class RantController {
 
     @RequestMapping(value = "/listAll")
     @ResponseBody
-    public JsonNode listAllRants() throws IOException {
-        return Serializers.valueToTree(DatabaseUtils.getRants());
+    public String listAllRants() throws IOException {
+        return Serializers.valueToTree(DatabaseUtils.getRants()).toString();
     }
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public JsonNode listUserRants(@RequestParam("username") String username) throws IOException {
+    public String listUserRants(@RequestParam("username") String username) throws IOException {
         User user = DatabaseUtils.findUserByName(username);
-        return Serializers.valueToTree(user.getRantIds());
+        return Serializers.valueToTree(user.getRantIds()).toString();
     }
 
     @RequestMapping(value = "/rantData")
     @ResponseBody
-    public JsonNode getRantData(@RequestParam("id") long id) throws IOException {
-        return Serializers.valueToTree(DatabaseUtils.findRantById(id));
+    public String getRantData(@RequestParam("id") long id) throws IOException {
+        return Serializers.valueToTree(DatabaseUtils.findRantById(id)).toString();
     }
 
     @RequestMapping(value = "/upvote")

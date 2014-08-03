@@ -43,7 +43,8 @@ function get_contenders(){
     $.ajax({
         type: 'POST',
         url: '/api/rants/listAll',
-        success: function(rants) {
+        success: function(gotData) {
+            rants = $.parseJSON(gotData);
             display_contenders(rants);
         },
         error: function(name,status) {

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Strings;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Serializers;
@@ -55,13 +54,13 @@ public class UserController {
 
     @RequestMapping(value = "/listAll")
     @ResponseBody
-    public JsonNode listAllUsers() throws IOException {
-        return Serializers.valueToTree(DatabaseUtils.getUsers());
+    public String listAllUsers() throws IOException {
+        return Serializers.valueToTree(DatabaseUtils.getUsers()).toString();
     }
 
     @RequestMapping(value = "/userData")
     @ResponseBody
-    public JsonNode getUserData(HttpServletRequest request, HttpServletResponse response,
+    public String getUserData(HttpServletRequest request, HttpServletResponse response,
                                 @RequestParam(value = "id", required = false) Long id,
                                 @RequestParam(value = "username", required = false) String username)
             throws IOException {
@@ -82,9 +81,9 @@ public class UserController {
             }
         }
         if (user == null) {
-            return Serializers.valueToTree(Users.DUMMY_USER);
+            user = Users.DUMMY_USER;
         }
-        return Serializers.valueToTree(user);
+        return Serializers.valueToTree(user).toString();
     }
 
 }

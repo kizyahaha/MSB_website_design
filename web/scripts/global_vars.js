@@ -10,7 +10,7 @@ function get_user(){
         type: 'POST',
         url: '/api/users/userData',
         success: function(data) {
-            user = data;
+            user = $.parseJSON(data);
         }
     });
 	return user;
@@ -32,7 +32,7 @@ function log_off_user(){
         url: '/api/users/userData',
         data: {id: 0},
         success: function(data) {
-            logged_user = data;
+            logged_user = $.parseJSON(data);
 			window.document.location.href = 'daily.html';
         }
     });
