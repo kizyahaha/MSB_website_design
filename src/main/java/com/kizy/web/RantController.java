@@ -22,7 +22,7 @@ import com.kizy.data.user.User;
 @RequestMapping(value = "/rants", method = RequestMethod.POST)
 public class RantController {
 
-    private static AtomicLong id = new AtomicLong(DatabaseUtils.maxRantId());
+    private static AtomicLong countingId = new AtomicLong(DatabaseUtils.maxRantId());
 
     @RequestMapping(value = "/add")
     @ResponseBody
@@ -31,7 +31,7 @@ public class RantController {
                         @RequestParam("title") String title,
                         @RequestParam("contents") String contents) {
         User owner = WebResources.userFromRequest(request);
-        Rant rant = new SimpleRant(id.incrementAndGet(), nsfw, title, contents, owner);
+        Rant rant = new SimpleRant(countingId.incrementAndGet(), nsfw, title, contents, owner);
         owner.addRantId(rant.getRantId());
         try {
             DatabaseUtils.writeRant(rant);

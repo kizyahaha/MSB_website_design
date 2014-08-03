@@ -28,7 +28,7 @@ public class UserController {
 	//  username = Bill
 	//  password = password
 
-    private static AtomicLong id = new AtomicLong(DatabaseUtils.maxUserId());
+    private static AtomicLong currentId = new AtomicLong(DatabaseUtils.maxUserId());
 
 	@RequestMapping(value = "/add")
 	@ResponseBody
@@ -37,7 +37,7 @@ public class UserController {
 	                    @RequestParam("email") String email) {
 	    try {
 	        if (isValid(username, password, email)) {
-	            DatabaseUtils.writeUser(new SimpleUser(id.incrementAndGet(), username, password, email));
+	            DatabaseUtils.writeUser(new SimpleUser(currentId.incrementAndGet(), username, password, email));
 	        }
 	    } catch (IOException e) {
 	        e.printStackTrace();

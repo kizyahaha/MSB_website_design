@@ -36,7 +36,7 @@ public class LoginController {
     
     @RequestMapping(value = "/logout")
     @ResponseBody
-    public void logout(HttpServletResponse response) throws IOException {
+    public void logout(HttpServletResponse response) {
             Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERID, "");
             cookie.setValue(null);
             cookie.setMaxAge(0);
