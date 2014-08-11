@@ -62,14 +62,18 @@ public class RantController {
     @ResponseBody
     public void upvote(@RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
-        rant.changePower(1);
+        if (rant.isAlive()) {
+            rant.changePower(1);
+        }
     }
 
     @RequestMapping(value = "/downvote")
     @ResponseBody
     public void downvote(@RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
-        rant.changePower(-1);
+        if (rant.isAlive()) {
+            rant.changePower(-1);
+        }
     }
 
 }
