@@ -121,4 +121,71 @@ public class SimpleRant implements Rant {
         }
         return "Minutely";
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + (birth == null ? 0 : birth.hashCode());
+        result = prime * result + (contents == null ? 0 : contents.hashCode());
+        result = prime * result + (int) (id ^ id >>> 32);
+        result = prime * result + (nsfw ? 1231 : 1237);
+        result = prime * result + (owner == null ? 0 : owner.hashCode());
+        result = prime * result + power;
+        result = prime * result + (title == null ? 0 : title.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof SimpleRant)) {
+            return false;
+        }
+        SimpleRant other = (SimpleRant) obj;
+        if (birth == null) {
+            if (other.birth != null) {
+                return false;
+            }
+        } else if (!birth.equals(other.birth)) {
+            return false;
+        }
+        if (contents == null) {
+            if (other.contents != null) {
+                return false;
+            }
+        } else if (!contents.equals(other.contents)) {
+            return false;
+        }
+        if (id != other.id) {
+            return false;
+        }
+        if (nsfw != other.nsfw) {
+            return false;
+        }
+        if (owner == null) {
+            if (other.owner != null) {
+                return false;
+            }
+        } else if (!owner.equals(other.owner)) {
+            return false;
+        }
+        if (power != other.power) {
+            return false;
+        }
+        if (title == null) {
+            if (other.title != null) {
+                return false;
+            }
+        } else if (!title.equals(other.title)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
