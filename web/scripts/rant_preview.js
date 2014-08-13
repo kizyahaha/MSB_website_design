@@ -15,6 +15,12 @@ function create_rant_preview(is_list , parent , num , author){
 	if (logged_user.username == author){
 		owner_rant_preview_display(ID);
 	}
+	if (is_list){
+		preview_rant_display(ID);
+	}
+	if (!is_list){
+		detailed_rant_display(ID);
+	}
 	return ID;
 }
 
@@ -100,7 +106,7 @@ function create_rant_preview_vote_button_functionality(preview_ID , rant_ID){
 
 /**********************************************************************************************************/
 
-function populate_rant_preview(preview_ID, list_num , rant_data){
+function populate_rant_preview(is_list , preview_ID, list_num , rant_data){
 	$(preview_ID).find('.rant_preview_number').text( (list_num+1) + '.' );
 	//$(preview_ID).find('.rant_preview_power').text(rant_data.power);
 	$(preview_ID).find('.rant_preview_title_link').text(rant_data.title);
@@ -119,13 +125,13 @@ function populate_rant_preview(preview_ID, list_num , rant_data){
 		
 	$(preview_ID).find('.rant_preview_birth').text('Created ' + rant_data.birth);
 	$(preview_ID).find('.rant_preview_death').text('Died ' + rant_data.death);
-	if (!rant_data.nsfw){
-		$(preview_ID).find('.rant_preview_content').text(rant_data.contents);
-	}
-	else{
+	if (rant_data.nsfw && is_list){
 		$(preview_ID).find('.rant_preview_content').text('NSFW');
 		$(preview_ID).find('.rant_preview_content').addClass('rant_preview_NSFW_content');
 		$(preview_ID + ' .rant_preview_content_fade').hide();
+	}
+	else{
+		$(preview_ID).find('.rant_preview_content').text(rant_data.contents);
 	}
 	create_rant_preview_vote_button_functionality(preview_ID , rant_data.id);
 }
@@ -184,6 +190,21 @@ function no_log_rant_preview_display(preview_ID){
 	$(preview_ID + ' .rant_preview_support_button').hide();
 	$(preview_ID + ' .rant_preview_oppose_button').hide();
 	$(preview_ID + ' .rant_preview_use_item').hide();
+}
+
+function preview_rant_display(rant_ID){
+	$(rant_ID + ' .rant_preview_content_line').css('max-height','80px');
+	$(rant_ID + ' .rant_preview_content_line').css('overflow','hidden');
+	$(rant_ID + ' .rant_preview_right_side').css('margin-left','70px');
+	$(rant_ID + ' .rant_preview_actions_line').css('margin-top','5px');
+	$('.rant_preview').css('margin-bottom','40px');
+}
+
+function detailed_rant_display(rant_ID){
+	$(rant_ID + ' .rant_preview_content_fade').hide();
+	$(rant_ID + ' .rant_preview_actions_line').css('margin-top','20px');
+	$(rant_ID + ' .rant_preview_actions_line').css('margin-left','auto');
+	$(rant_ID + ' .rant_preview_actions_line').css('margin-right','auto');
 }
 
 

@@ -1,5 +1,23 @@
 #detailed_rant_container{
 	position:relative;
+	top: 0px;
+	width:95%;
+	margin-top:70px;
+	margin-left:auto;
+	margin-right:auto;
+}
+#detailed_rant_space{
+	position:absolute;
+	left:20px;
+	right:20px;
+	background-color: rgb(215,226,229);
+	border-style:solid;
+	border-color:rgb(215,226,229);
+	border-radius:20px;
+}
+
+/*#detailed_rant_container{
+	position:relative;
 	margin-top: 50px;
 	width:95%;
 	margin-left:auto;
@@ -7,7 +25,7 @@
 	/*background-color: rgb(12,120,154);
 	border-radius:20px;*/
 }
-#detailed_rant_space{
+/*#detailed_rant_space{
 	position:absolute;
 	left:20px;
 	right:20px;
@@ -100,7 +118,7 @@
 	margin-left:50px;
 }*/
 
-.rant_detail_actions_line{
+/*.rant_detail_actions_line{
 	position: absolute;
 	bottom:450px;
 	text-align:center;
@@ -127,3 +145,4 @@
 .rant_detail_oppose_button_image{
 	width:30px;
 }
+*/

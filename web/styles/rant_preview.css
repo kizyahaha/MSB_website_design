@@ -1,5 +1,5 @@
 .rant_preview{
-	margin-bottom:40px;
+	/*margin-bottom:40px;*/
 }
 .rant_preview_left_side{
 	position:absolute;
@@ -12,7 +12,7 @@
 }
 .rant_preview_right_side{
 	position:relative;
-	margin-left:70px;
+	/*margin-left:70px;*/
 	right:0px;
 	font-family:Lato;
 	color:rgb(52,52,52);
@@ -61,13 +61,11 @@
 }
 .rant_preview_content_line{
 	min-height:20px;
-	max-height:80px;
-	overflow:hidden;
+	/*max-height:80px;
+	overflow:hidden;*/
 	position:relative;
 	margin-left:25px;
 	margin-top:15px;
-}
-.rant_preview_content{
 }
 .rant_preview_content_fade{
 	position:absolute;
@@ -83,8 +81,7 @@
 	color:red;
 }
 .rant_preview_actions_line{
-
-	margin-top:5px;
+	/*margin-top:5px;*/
 }
 .rant_preview_support_button_image{
 	width:30px;

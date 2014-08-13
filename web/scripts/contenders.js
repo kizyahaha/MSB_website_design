@@ -57,7 +57,7 @@ function display_contenders(rants){
 	var num_contenders2 = rants.length;
 	for (i=0 ; i<num_contenders2 ; i++){
 		var contender_ID = create_rant_preview(true , 'contenders' , i , rants[i].owner);
-		populate_rant_preview(contender_ID , i , rants[i]);
+		populate_rant_preview(true , contender_ID , i , rants[i]);
 	}
 	update_contender_sizes();
 }

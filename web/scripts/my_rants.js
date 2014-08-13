@@ -16,10 +16,10 @@ function create_my_rants_navigation(){
 function get_my_rants(data){
 	var my_rants = document.getElementById('my_rants_space');
 	my_rants.innerHTML = '';
-	var num_contenders2 = data.length;
-	for (i=0 ; i<num_contenders2 ; i++){
-		var rant_ID = create_rant_preview('my_rants_space' , i);
-		populate_rant_preview(rant_ID , i , data[i]);
+	var num_my_rants = data.length;
+	for (i=0 ; i<num_my_rants ; i++){
+		var rant_ID = create_rant_preview(true , 'my_rants_space' , i , data[i].owner);
+		populate_rant_preview(true , rant_ID , i , data[i]);
 	}
 }
 
