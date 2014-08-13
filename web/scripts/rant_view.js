@@ -1,19 +1,4 @@
 
-/*function create_detailed_rant(){
-	$('<div/>',{id:'detailed_rant_container'}).appendTo('body');
-	$('<div/>',{id:'detailed_rant_space'}).appendTo('#detailed_rant_container');
-	if (is_owner){
-		$("#detailed_rant_space").css({ "border-width": "20px 20px 20px 20px" });
-	}
-	else{
-		$("#detailed_rant_space").css({ "border-width": "20px 20px 80px 20px" });
-	}
-	create_detailed_rant_info();
-	if (is_owner){
-		create_detailed_rant_power_graph();
-	}
-}*/
-
 function create_detailed_rant(){
 	google.load('visualization', '1', {'packages':['controls']});
     $.ajax({
@@ -31,12 +16,13 @@ function create_detailed_rant(){
 			else{
 				is_owner = false;
 			}
-			if (is_owner){
+			$("#detailed_rant_space").css({ "border-width": "20px 20px 80px 20px" });
+			/*if (is_owner){
 				$("#detailed_rant_space").css({ "border-width": "20px 20px 20px 20px" });
 			}
 			else{
 				$("#detailed_rant_space").css({ "border-width": "20px 20px 80px 20px" });
-			}
+			}*/
 			create_detailed_rant_info(data);
 			if (is_owner){
 				create_detailed_rant_power_graph();
@@ -58,9 +44,14 @@ function get_rant_id(){
 function create_detailed_rant_info(rant_data){
 	$('<table/>',{id:'detailed_rant_info_table'}).appendTo('#detailed_rant_space');
 	$('<tr/>',{id:'detailed_temp_row'}).appendTo('#detailed_rant_info_table');
-	if (!is_owner && logged_user.id != 0){
+	/*if (!is_owner && logged_user.id != 0){
 		create_detail_vote_buttons(rant_data.id);
+	}*/
+	if (logged_user.id != 0){
+		create_detail_actions_line(rant_data.id);
 	}
+	
+	
 	create_detailed_rant_title(rant_data.title);
 	create_detailed_rant_username(rant_data.owner);
 	create_detailed_rant_level(rant_data.level);
@@ -136,7 +127,7 @@ function create_detailed_rant_content(contents){
 
 function update_detailed_rant_sizes(){
 	if (is_owner){
-		$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+480);
+		$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+540);
 	}
 	else{
 		$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+140);
@@ -145,7 +136,7 @@ function update_detailed_rant_sizes(){
 	$(window).resize(function() {
 		clearTimeout(resizeTimer);
 		if (is_owner){
-			resizeTimer = setTimeout(function(){$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+480);}, 250);
+			resizeTimer = setTimeout(function(){$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+540);}, 250);
 		}
 		else{
 			resizeTimer = setTimeout(function(){$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+140);}, 250);
@@ -263,7 +254,7 @@ function get_detailed_rant_data(){
 	return data;
 }
 
-function create_detail_vote_buttons(rant_id){
+/*function create_detail_vote_buttons(rant_id){
 	$('<div/>',{id:'detail_vote_buttons'}).appendTo('#detailed_rant_container');
 	var up_button = document.createElement('img');
 	up_button.src = 'images/up_button_2.png';
@@ -285,6 +276,31 @@ function create_detail_vote_buttons(rant_id){
 	track_votes[1] = $('.detail_down_button');
 	track_votes[0].click( function(){support_push(track_votes , rant_id);} );
 	track_votes[1].click( function(){oppose_push(track_votes , rant_id);} );
+}*/
 
+function create_detail_actions_line(rant_id){
+	$('<table/>',{addClass:'rant_detail_actions_line'}).appendTo('#detailed_rant_container');
+	$('<tr/>',{addClass:'rant_detail_action_row'}).appendTo('.rant_detail_actions_line');
+	if (!is_owner){
+		$('<td/>',{addClass:'rant_detail_oppose_button'}).appendTo('.rant_detail_action_row');
+		$('<img/>',{addClass:'rant_detail_oppose_button_image' , src:'images/down_button_2.png'}).appendTo('.rant_detail_oppose_button');
+	}
+	$('<td/>',{addClass:'rant_detail_use_item'}).appendTo('.rant_detail_action_row');	
+	$('<div/>',{addClass:'rant_detail_use_item_button', text:'Apply item'}).appendTo('.rant_detail_use_item');
+	if (!is_owner){
+		$('<td/>',{addClass:'rant_detail_support_button'}).appendTo('.rant_detail_action_row');
+		$('<img/>',{addClass:'rant_detail_support_button_image' , src:'images/up_button_2.png'}).appendTo('.rant_detail_support_button');
+	}
+	if (!is_owner){
+		create_detail_vote_button_functionality(rant_id);
+	}
+}
+
+function create_detail_vote_button_functionality(rant_id){
+	var track_votes = new Array();
+	track_votes[0] = $('.rant_detail_support_button_image');
+	track_votes[1] = $('.rant_detail_oppose_button_image');
+	track_votes[0].click( function(){support_push(track_votes , rant_id);} );
+	track_votes[1].click( function(){oppose_push(track_votes , rant_id);} );
 }
 
