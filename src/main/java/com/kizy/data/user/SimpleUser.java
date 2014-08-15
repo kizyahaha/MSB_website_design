@@ -4,6 +4,8 @@ import java.util.Collection;
 
 import org.joda.time.DateTime;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
 
 public class SimpleUser implements User {
@@ -14,18 +16,23 @@ public class SimpleUser implements User {
     private final String email;
     private final DateTime date;
 
-    private Collection<Long> rantIds;
+    private final Collection<Long> rantIds;
 
-    public SimpleUser(long id, String username, String password, String email) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.date = DateTime.now();
-        this.rantIds = Sets.newConcurrentHashSet();
+    @JsonCreator
+    public SimpleUser(@JsonProperty("id") long id,
+                      @JsonProperty("username") String username,
+                      @JsonProperty("password") String password,
+                      @JsonProperty("email") String email) {
+        this(id, username, password, email, DateTime.now(), Sets.<Long>newConcurrentHashSet());
     }
 
-    public SimpleUser(long id, String username, String password, String email, DateTime date, Collection<Long> rants) {
+    @JsonCreator
+    public SimpleUser(@JsonProperty("id") long id,
+                      @JsonProperty("username") String username,
+                      @JsonProperty("password") String password,
+                      @JsonProperty("email") String email,
+                      @JsonProperty("date") DateTime date,
+                      @JsonProperty("rants") Collection<Long> rants) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -35,16 +42,19 @@ public class SimpleUser implements User {
     }
 
     @Override
+    @JsonProperty("id")
     public long getUserId() {
         return id;
     }
 
     @Override
+    @JsonProperty("username")
     public String getUsername() {
         return username;
     }
 
     @Override
+    @JsonProperty("email")
     public String getEmail() {
         return email;
     }
@@ -65,6 +75,7 @@ public class SimpleUser implements User {
     }
 
     @Override
+    @JsonProperty("date")
     public DateTime getCreationDate() {
         return date;
     }
@@ -75,7 +86,8 @@ public class SimpleUser implements User {
     }
 
     public static String formatUser(String name, String email, String pass) {
-        return String.format("[SimpleUser - Username: {}, Email: {}, Password: {}]", name, email, pass);
+        return String.format("[SimpleUser - Username: {}, Email: {}, Password: {}]", name, email,
+                pass);
     }
 
 }

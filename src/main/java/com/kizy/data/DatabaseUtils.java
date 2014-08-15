@@ -168,7 +168,7 @@ public class DatabaseUtils {
         return parseRant(matches.iterator().next());
     }
 
-    private static User parseUser(String line) throws IOException {
+    private static User parseUser(String line) {
         String[] parts = splitLine(line);
         Collection<Long> rants = Sets.newConcurrentHashSet();
         for (int i = USER_CREATION_PART + 1; i < parts.length; i++) {

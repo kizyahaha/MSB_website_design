@@ -13,6 +13,8 @@ import com.kizy.data.rant.Rants;
 
 public class Users {
 
+    public static final User DUMMY_USER = new SimpleUser(-1, "INVALID", "INVALID", "INVALID");
+
     private Users() {
         // no instantiation
     }
