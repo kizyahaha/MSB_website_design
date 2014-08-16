@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Serializers {
 
-    public static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private Serializers() {
         // No instantiation.
@@ -13,5 +13,9 @@ public class Serializers {
 
     public static JsonNode valueToTree(Object value) {
         return MAPPER.valueToTree(value);
+    }
+
+    public static ObjectMapper getMapper() {
+        return MAPPER;
     }
 }
