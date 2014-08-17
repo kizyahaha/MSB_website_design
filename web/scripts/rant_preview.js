@@ -9,7 +9,7 @@ function create_rant_preview(is_list , parent , num , author){
 		create_rant_preview_left_side(ID);
 	}
 	create_rant_preview_right_side(ID);
-	if (logged_user.id == 0){
+	if (logged_user.id == -1){
 		no_log_rant_preview_display(ID);
 	}
 	if (logged_user.username == author){

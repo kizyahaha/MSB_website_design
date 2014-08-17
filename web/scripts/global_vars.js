@@ -1,5 +1,5 @@
 var logged_user = get_user(); //logged_user of the currently logged in user
-var num_contenders = 80; //temporary variable only because we have no array of contenders yet
+var num_contenders = 50; //temporary variable only because we have no array of contenders yet
 var tot_cost_per_item = [0,0,0,0,0,0,0,0,0,0,0];  //how many boks are being spent for each item (quantity desired * price per).  amounts.length = number of special items
 var is_owner = false; //temporary until we can actually check for this
 
@@ -21,7 +21,7 @@ function log_off_user(){
 		async: false,
         type: 'POST',
         url: '/api/users/userData',
-        data: {id: 0},
+        data: {id: -1},
         success: function(data) {
             logged_user = $.parseJSON(data);
 			window.document.location.href = 'daily.html';

@@ -42,12 +42,7 @@ public class WebResources {
                 }
             }
         }
-        //return null;
-        try {
-            return DatabaseUtils.findUserById(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         return null;
     }
 
