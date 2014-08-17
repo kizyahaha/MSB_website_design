@@ -18,7 +18,7 @@ function get_my_rants(data){
 	my_rants.innerHTML = '';
 	var num_my_rants = data.length;
 	for (i=0 ; i<num_my_rants ; i++){
-		var rant_ID = create_rant_preview(true , 'my_rants_space' , i , data[i].owner);
+		var rant_ID = create_rant_preview(true , 'my_rants_space' , i , data[i].owner.id);
 		populate_rant_preview(true , rant_ID , i , data[i]);
 	}
 }

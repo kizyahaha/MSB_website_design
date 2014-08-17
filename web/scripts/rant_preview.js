@@ -1,4 +1,4 @@
-function create_rant_preview(is_list , parent , num , author){
+function create_rant_preview(is_list , parent , num , author_id){
 	var preview = document.createElement('div');
 	var ID = 'rant_preview' + num;
 	preview.id = ID;
@@ -12,7 +12,7 @@ function create_rant_preview(is_list , parent , num , author){
 	if (logged_user.id == -1){
 		no_log_rant_preview_display(ID);
 	}
-	if (logged_user.username == author){
+	if (logged_user.id == author_id){
 		owner_rant_preview_display(ID);
 	}
 	if (is_list){
@@ -103,9 +103,9 @@ function populate_rant_preview(is_list , preview_ID, list_num , rant_data){
 	$(preview_ID).find('.rant_preview_number').text( (list_num+1) + '.' );
 	$(preview_ID).find('.rant_preview_title_link').text(rant_data.title);
 		$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
-	$(preview_ID).find('.rant_preview_author_link').text(rant_data.owner);
-		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html?u=3');
-		$(preview_ID).find('.rant_preview_author').css('width',(rant_data.owner.length)*10+'px');	
+	$(preview_ID).find('.rant_preview_author_link').text(rant_data.owner.username);
+		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html?u=' + rant_data.owner.id);
+		$(preview_ID).find('.rant_preview_author').css('width',(rant_data.owner.username.length)*10+'px');	
 	$(preview_ID).find('.rant_preview_rank').text(get_rant_rank(list_num+1));	
 	$(preview_ID).find('.rant_preview_level').text(rant_data.level);
 		$(preview_ID).find('.rant_preview_level').attr('href',get_rant_preview_level_link(rant_data));
