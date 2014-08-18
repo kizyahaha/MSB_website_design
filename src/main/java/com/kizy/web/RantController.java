@@ -64,6 +64,7 @@ public class RantController {
         Rant rant = DatabaseUtils.findRantById(id);
         if (rant.isAlive()) {
             rant.changePower(1);
+            DatabaseUtils.modifyRant(DatabaseUtils.findRantById(id), rant);
         }
     }
 
@@ -73,6 +74,7 @@ public class RantController {
         Rant rant = DatabaseUtils.findRantById(id);
         if (rant.isAlive()) {
             rant.changePower(-1);
+            DatabaseUtils.modifyRant(DatabaseUtils.findRantById(id), rant);
         }
     }
 

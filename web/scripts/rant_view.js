@@ -13,7 +13,7 @@ function create_detailed_rant(){
 			$("#detailed_rant_space").css({ "border-width": "20px 20px 20px 20px" });
             data = $.parseJSON(gotData);
 			display_detailed_rant(data);
-			if (data.owner == logged_user.username){
+			if (data.owner.id == logged_user.id){
 				create_detailed_rant_power_graph();
 			}
 			create_footer();
@@ -31,7 +31,7 @@ function get_rant_id(){
 }
 
 function display_detailed_rant(rant_info){
-	var detailed_rant_ID = create_rant_preview(false , 'detailed_rant_space' , 0 , rant_info.owner);
+	var detailed_rant_ID = create_rant_preview(false , 'detailed_rant_space' , 0 , rant_info.owner.id);
 	populate_rant_preview(false , detailed_rant_ID , 0 , rant_info);
 	update_detailed_rant_sizes();
 }
