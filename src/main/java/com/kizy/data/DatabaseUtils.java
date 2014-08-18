@@ -79,23 +79,20 @@ public class DatabaseUtils {
                user.getCreationDate().toString();
     }
 
-    public static void modifyUser(User oldUser, User newUser) throws IOException {
-        if (oldUser.getUserId() != newUser.getUserId()) {
+    public static void modifyUser(long oldUserId, User newUser) throws IOException {
+        if (oldUserId != newUser.getUserId()) {
             throw new IllegalArgumentException("Cannot change user id.");
         }
-        if (!oldUser.equals(newUser)) {
-            StringBuilder newContents = new StringBuilder();
-            long oldUserId = oldUser.getUserId();
-            for (String line : readUsers()) {
-                if (oldUserId == Long.parseLong(splitLine(line)[USER_ID_PART])) {
-                    newContents.append(formatUser(newUser));
-                } else {
-                    newContents.append(line);
-                }
-                newContents.append("\n");
+        StringBuilder newContents = new StringBuilder();
+        for (String line : readUsers()) {
+            if (oldUserId == Long.parseLong(splitLine(line)[USER_ID_PART])) {
+                newContents.append(formatUser(newUser));
+            } else {
+                newContents.append(line);
             }
-            Files.write(newContents, USERS_FILE, Charsets.UTF_8);
+            newContents.append("\n");
         }
+        Files.write(newContents, USERS_FILE, Charsets.UTF_8);
     }
 
     public static void writeRant(Rant rant) throws IOException {
@@ -114,27 +111,21 @@ public class DatabaseUtils {
                rant.getRantPower() + LINE_DELIMITER +
                rant.getRantLevel();
     }
-    
-    public static void modifyRant(Rant oldRant, Rant newRant) throws IOException {
-        if (oldRant.getRantId() != newRant.getRantId()) {
+
+    public static void modifyRant(long oldRantId, Rant newRant) throws IOException {
+        if (oldRantId != newRant.getRantId()) {
             throw new IllegalArgumentException("Cannot change rant id.");
         }
-        if (!oldRant.getOwner().equals(newRant.getOwner())) {
-            throw new IllegalArgumentException("Cannot change rant owner.");
-        }
-        if (!oldRant.equals(newRant)) {
-            StringBuilder newContents = new StringBuilder();
-            long oldRantId = oldRant.getRantId();
-            for (String line : readRants()) {
-                if (oldRantId == Long.parseLong(splitLine(line)[RANT_ID_PART])) {
-                    newContents.append(formatRant(newRant));
-                } else {
-                    newContents.append(line);
-                }
-                newContents.append("\n");
+        StringBuilder newContents = new StringBuilder();
+        for (String line : readRants()) {
+            if (oldRantId == Long.parseLong(splitLine(line)[RANT_ID_PART])) {
+                newContents.append(formatRant(newRant));
+            } else {
+                newContents.append(line);
             }
-            Files.write(newContents, RANTS_FILE, Charsets.UTF_8);
+            newContents.append("\n");
         }
+        Files.write(newContents, RANTS_FILE, Charsets.UTF_8);
     }
 
     private static List<String> readFile(File file) throws IOException {
@@ -250,7 +241,7 @@ public class DatabaseUtils {
 
     public static enum UserMatchComponent {
         ID, USERNAME, PASSWORD, EMAIL;
-        
+
         public static EnumSet<UserMatchComponent> all() {
             return EnumSet.of(ID, USERNAME, PASSWORD, EMAIL);
         }
@@ -292,7 +283,7 @@ public class DatabaseUtils {
 
     public static enum RantMatchComponent {
         ID, TITLE, OWNER;
-        
+
         public static EnumSet<RantMatchComponent> all() {
             return EnumSet.of(ID, TITLE, OWNER);
         }
