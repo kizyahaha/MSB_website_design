@@ -110,8 +110,8 @@ function populate_rant_preview(is_list , preview_ID, list_num , rant_data){
 	$(preview_ID).find('.rant_preview_level').text(rant_data.level);
 		$(preview_ID).find('.rant_preview_level').attr('href',get_rant_preview_level_link(rant_data));
 	$(preview_ID).find('.rant_preview_power').text(rant_data.power);
-	$(preview_ID).find('.rant_preview_birth').text('Created ' + rant_data.birth);
-	$(preview_ID).find('.rant_preview_death').text('Died ' + rant_data.death);
+	$(preview_ID).find('.rant_preview_birth').text('Created ' + translate_date(rant_data.birth));
+	$(preview_ID).find('.rant_preview_death').text('Died ' + translate_date(rant_data.death));
 	if (rant_data.nsfw && is_list){
 		$(preview_ID).find('.rant_preview_content').text('NSFW');
 		$(preview_ID).find('.rant_preview_content').addClass('rant_preview_NSFW_content');
