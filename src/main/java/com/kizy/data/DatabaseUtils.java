@@ -34,6 +34,7 @@ public class DatabaseUtils {
     private static final int USER_PASSWORD_PART = 2;
     private static final int USER_EMAIL_PART = 3;
     private static final int USER_CREATION_PART = 4;
+    private static final int USER_RANTS_PART = 5;
 
     private static final int RANT_ID_PART = 0;
     private static final int RANT_NSFW_PART = 1;
@@ -59,8 +60,12 @@ public class DatabaseUtils {
         long userId = rant.getOwner().getUserId();
         for (String line : readUsers()) {
             newContents.append(line);
-            if (userId == Long.parseLong(splitLine(line)[USER_ID_PART])) {
-                newContents.append(LINE_DELIMITER + rant.getRantId());
+            String[] userString = splitLine(line);
+            if (userId == Long.parseLong(userString[USER_ID_PART])) {
+                if (userString.length > USER_RANTS_PART) {
+                    newContents.append(",");
+                }
+                newContents.append(rant.getRantId());
             }
             newContents.append("\n");
         }
@@ -76,7 +81,16 @@ public class DatabaseUtils {
                user.getUsername() + LINE_DELIMITER +
                user.getPassword() + LINE_DELIMITER +
                user.getEmail() + LINE_DELIMITER +
-               user.getCreationDate().toString();
+               user.getCreationDate().toString() +
+               (user.getRantIds().isEmpty() ? "" : LINE_DELIMITER + formatUserRants(user));
+    }
+
+    private static String formatUserRants(User user) {
+        StringBuilder rants = new StringBuilder();
+        for (Long rantId : user.getRantIds()) {
+            rants.append("," + rantId.toString());
+        }
+        return rants.substring(1);
     }
 
     public static void modifyUser(long oldUserId, User newUser) throws IOException {
@@ -210,16 +224,20 @@ public class DatabaseUtils {
 
     private static User parseUser(String line) {
         String[] parts = splitLine(line);
-        Collection<Long> rants = Sets.newConcurrentHashSet();
-        for (int i = USER_CREATION_PART + 1; i < parts.length; i++) {
-            rants.add(Long.parseLong(parts[i]));
-        }
         return new SimpleUser(Long.parseLong(parts[USER_ID_PART]),
                               parts[USER_USERNAME_PART],
                               parts[USER_PASSWORD_PART],
                               parts[USER_EMAIL_PART],
                               new DateTime(parts[USER_CREATION_PART]),
-                              rants);
+                              parseRants(parts[USER_RANTS_PART]));
+    }
+
+    private static Collection<Long> parseRants(String rantsString) {
+        Collection<Long> rants = Sets.newConcurrentHashSet();
+        for (String rantId : rantsString.split(",")) {
+            rants.add(Long.parseLong(rantId));
+        }
+        return rants;
     }
 
     private static Rant parseRant(String line) throws IOException {
