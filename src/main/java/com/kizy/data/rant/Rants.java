@@ -34,6 +34,8 @@ public class Rants {
         map.put("power", rant.getRantPower());
         map.put("level", rant.getRantLevel());
         map.put("owner", rant.getOwner().getUsername());
+        map.put("upvotes", new JSONArray(rant.getUpvoteIds()));
+        map.put("downvotes", new JSONArray(rant.getDownvoteIds()));
         return new JSONObject(map);
     }
 

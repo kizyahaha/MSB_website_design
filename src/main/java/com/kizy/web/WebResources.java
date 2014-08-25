@@ -32,7 +32,7 @@ public class WebResources {
         return path.substring(lastDotIndex + 1);
     }
 
-    public static User userFromRequest(HttpServletRequest request) {
+    public static User currentLoggedInUser(HttpServletRequest request) {
         for (Cookie cookie : request.getCookies()) {
             if (cookie.getName().equals(MY_SOAP_BOX_USERID)) {
                 try {

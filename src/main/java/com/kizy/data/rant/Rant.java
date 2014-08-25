@@ -1,5 +1,7 @@
 package com.kizy.data.rant;
 
+import java.util.Collection;
+
 import org.joda.time.DateTime;
 
 import com.kizy.data.user.User;
@@ -27,5 +29,15 @@ public interface Rant {
     boolean isAlive();
 
     String getRantLevel();
+
+    Collection<Long> getUpvoteIds();
+
+    Collection<Long> getDownvoteIds();
+
+    void upvote(Long userId);
+
+    void downvote(Long userId);
+
+    void unvote(Long userId);
 
 }

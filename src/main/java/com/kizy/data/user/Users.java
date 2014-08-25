@@ -24,8 +24,10 @@ public class Users {
         map.put("id", user.getUserId());
         map.put("username", user.getUsername());
         map.put("email", user.getEmail());
-        map.put("rants", Rants.toJsonArrayFromIds(user.getRantIds()));
+        map.put("rants", Rants.toJsonArrayFromIds(user.getOwnedRantIds()));
         map.put("birth", Dates.format(user.getCreationDate()));
+        map.put("upvotes", new JSONArray(user.getUpvoteIds()));
+        map.put("upvotes", new JSONArray(user.getDownvoteIds()));
         return new JSONObject(map);
     }
 

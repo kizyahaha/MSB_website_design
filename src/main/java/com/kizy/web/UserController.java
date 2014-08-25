@@ -66,7 +66,7 @@ public class UserController {
             throws IOException {
         User user = null;
         if (id == null && username == null) {
-            user = WebResources.userFromRequest(request);
+            user = WebResources.currentLoggedInUser(request);
         } else if (id == null) {
             user = DatabaseUtils.findUserByName(username);
         } else if (username == null) {

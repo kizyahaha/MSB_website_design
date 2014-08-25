@@ -15,6 +15,8 @@ public class SimpleUser implements User {
     private final String password;
     private final String email;
     private final DateTime date;
+    private Collection<Long> upvotes;
+    private Collection<Long> downvotes;
 
     private final Collection<Long> rantIds;
 
@@ -23,7 +25,8 @@ public class SimpleUser implements User {
                       @JsonProperty("username") String username,
                       @JsonProperty("password") String password,
                       @JsonProperty("email") String email) {
-        this(id, username, password, email, DateTime.now(), Sets.<Long>newConcurrentHashSet());
+        this(id, username, password, email, DateTime.now(), Sets.<Long>newConcurrentHashSet(),
+             Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet());
     }
 
     @JsonCreator
@@ -32,13 +35,17 @@ public class SimpleUser implements User {
                       @JsonProperty("password") String password,
                       @JsonProperty("email") String email,
                       @JsonProperty("date") DateTime date,
-                      @JsonProperty("rants") Collection<Long> rants) {
+                      @JsonProperty("rants") Collection<Long> rants,
+                      @JsonProperty("upvotes") Collection<Long> upvotes,
+                      @JsonProperty("downvotes") Collection<Long> downvotes) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
         this.date = date;
         this.rantIds = rants;
+        this.upvotes = upvotes;
+        this.downvotes = downvotes;
     }
 
     @Override
@@ -65,12 +72,12 @@ public class SimpleUser implements User {
     }
 
     @Override
-    public void addRantId(Long rantId) {
+    public void addRant(Long rantId) {
         rantIds.add(rantId);
     }
 
     @Override
-    public Collection<Long> getRantIds() {
+    public Collection<Long> getOwnedRantIds() {
         return rantIds;
     }
 
@@ -78,6 +85,36 @@ public class SimpleUser implements User {
     @JsonProperty("date")
     public DateTime getCreationDate() {
         return date;
+    }
+
+    @Override
+    @JsonProperty("upvotes")
+    public Collection<Long> getUpvoteIds() {
+        return upvotes;
+    }
+
+    @Override
+    @JsonProperty("downvotes")
+    public Collection<Long> getDownvoteIds() {
+        return downvotes;
+    }
+
+    @Override
+    public void upvote(Long rantId) {
+        unvote(rantId);
+        upvotes.add(rantId);
+    }
+
+    @Override
+    public void downvote(Long rantId) {
+        unvote(rantId);
+        downvotes.add(rantId);
+    }
+
+    @Override
+    public void unvote(Long rantId) {
+        upvotes.remove(rantId);
+        downvotes.remove(rantId);
     }
 
     @Override

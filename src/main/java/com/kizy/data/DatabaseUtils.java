@@ -82,12 +82,12 @@ public class DatabaseUtils {
                user.getPassword() + LINE_DELIMITER +
                user.getEmail() + LINE_DELIMITER +
                user.getCreationDate().toString() +
-               (user.getRantIds().isEmpty() ? "" : LINE_DELIMITER + formatUserRants(user));
+               (user.getOwnedRantIds().isEmpty() ? "" : LINE_DELIMITER + formatUserRants(user));
     }
 
     private static String formatUserRants(User user) {
         StringBuilder rants = new StringBuilder();
-        for (Long rantId : user.getRantIds()) {
+        for (Long rantId : user.getOwnedRantIds()) {
             rants.append("," + rantId.toString());
         }
         return rants.substring(1);
@@ -229,7 +229,9 @@ public class DatabaseUtils {
                               parts[USER_PASSWORD_PART],
                               parts[USER_EMAIL_PART],
                               new DateTime(parts[USER_CREATION_PART]),
-                              parseRants(parts[USER_RANTS_PART]));
+                              parseRants(parts[USER_RANTS_PART]),
+                              Sets.<Long>newConcurrentHashSet(),
+                              Sets.<Long>newConcurrentHashSet());
     }
 
     private static Collection<Long> parseRants(String rantsString) {
@@ -250,7 +252,9 @@ public class DatabaseUtils {
                               new DateTime(parts[RANT_CREATION_PART]),
                               new DateTime(parts[RANT_DEATH_PART]),
                               Integer.parseInt(parts[RANT_POWER_PART]),
-                              parts[RANT_LEVEL_PART]);
+                              parts[RANT_LEVEL_PART],
+                              Sets.<Long>newConcurrentHashSet(),
+                              Sets.<Long>newConcurrentHashSet());
     }
 
     private static String[] splitLine(String line) {

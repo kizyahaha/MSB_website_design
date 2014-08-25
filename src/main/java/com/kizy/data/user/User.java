@@ -14,10 +14,20 @@ public interface User {
 
     String getPassword();
 
-    void addRantId(Long rantId);
+    void addRant(Long rantId);
 
-    Collection<Long> getRantIds();
+    Collection<Long> getOwnedRantIds();
 
     DateTime getCreationDate();
+
+    Collection<Long> getUpvoteIds();
+
+    Collection<Long> getDownvoteIds();
+
+    void upvote(Long rantId);
+
+    void downvote(Long rantId);
+
+    void unvote(Long rantId);
 
 }
