@@ -1,9 +1,12 @@
 package com.kizy.data.rant;
 
+import java.util.Collection;
+
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Sets;
 import com.kizy.data.user.User;
 
 public class SimpleRant implements Rant {
@@ -15,20 +18,31 @@ public class SimpleRant implements Rant {
     private final User owner;
     private final DateTime birth;
     private int power;
+    private Collection<Long> upvotes;
+    private Collection<Long> downvotes;
 
     @JsonCreator
-    public SimpleRant(@JsonProperty("id") long id, @JsonProperty("nsfw") boolean nsfw,
+    public SimpleRant(@JsonProperty("id") long id,
+                      @JsonProperty("nsfw") boolean nsfw,
                       @JsonProperty("title") String title,
-                      @JsonProperty("contents") String contents, @JsonProperty("owner") User owner) {
-        this(id, nsfw, title, contents, owner, DateTime.now(), null, Rants.STARTING_POWER, "");
+                      @JsonProperty("contents") String contents,
+                      @JsonProperty("owner") User owner) {
+        this(id, nsfw, title, contents, owner, DateTime.now(), null, Rants.STARTING_POWER,
+             "", Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet());
     }
 
     @JsonCreator
-    public SimpleRant(@JsonProperty("id") long id, @JsonProperty("nsfw") boolean nsfw,
+    public SimpleRant(@JsonProperty("id") long id,
+                      @JsonProperty("nsfw") boolean nsfw,
                       @JsonProperty("title") String title,
-                      @JsonProperty("contents") String contents, @JsonProperty("owner") User owner,
-                      @JsonProperty("birth") DateTime birth, @JsonProperty("death") DateTime death,
-                      @JsonProperty("power") int power, @JsonProperty("level") String level) {
+                      @JsonProperty("contents") String contents,
+                      @JsonProperty("owner") User owner,
+                      @JsonProperty("birth") DateTime birth,
+                      @JsonProperty("death") DateTime death,
+                      @JsonProperty("power") int power,
+                      @JsonProperty("level") String level,
+                      @JsonProperty("upvotes") Collection<Long> upvotes,
+                      @JsonProperty("downvotes") Collection<Long> downvotes) {
         this.id = id;
         this.nsfw = nsfw;
         this.title = title;
@@ -36,6 +50,8 @@ public class SimpleRant implements Rant {
         this.owner = owner;
         this.birth = birth;
         this.power = power;
+        this.upvotes = upvotes;
+        this.downvotes = downvotes;
     }
 
     @Override
@@ -123,6 +139,36 @@ public class SimpleRant implements Rant {
     }
 
     @Override
+    @JsonProperty("upvotes")
+    public Collection<Long> getUpvoteIds() {
+        return upvotes;
+    }
+
+    @Override
+    @JsonProperty("downvotes")
+    public Collection<Long> getDownvoteIds() {
+        return downvotes;
+    }
+
+    @Override
+    public void upvote(Long userId) {
+        unvote(userId);
+        upvotes.add(userId);
+    }
+
+    @Override
+    public void downvote(Long userId) {
+        unvote(userId);
+        downvotes.add(userId);
+    }
+
+    @Override
+    public void unvote(Long userId) {
+        upvotes.remove(userId);
+        downvotes.remove(userId);
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -187,5 +233,5 @@ public class SimpleRant implements Rant {
         }
         return true;
     }
-    
+
 }

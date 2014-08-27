@@ -27,6 +27,12 @@ public class DatabaseUtils {
     private static final String RANTS_FILENAME = "data" + File.separator + "rants.txt";
     private static final File RANTS_FILE = new File(RANTS_FILENAME);
 
+    private static final String UPVOTES_FILENAME = "data" + File.separator + "upvotes.txt";
+    private static final File UPVOTES_FILE = new File(UPVOTES_FILENAME);
+
+    private static final String DOWNVOTES_FILENAME = "data" + File.separator + "downvotes.txt";
+    private static final File DOWNVOTES_FILE = new File(DOWNVOTES_FILENAME);
+
     private static final String LINE_DELIMITER = "~~~~~";
 
     private static final int USER_ID_PART = 0;
@@ -34,6 +40,7 @@ public class DatabaseUtils {
     private static final int USER_PASSWORD_PART = 2;
     private static final int USER_EMAIL_PART = 3;
     private static final int USER_CREATION_PART = 4;
+    private static final int USER_RANTS_PART = 5;
 
     private static final int RANT_ID_PART = 0;
     private static final int RANT_NSFW_PART = 1;
@@ -45,6 +52,8 @@ public class DatabaseUtils {
     private static final int RANT_POWER_PART = 7;
     private static final int RANT_LEVEL_PART = 8;
 
+    private static final int VOTE_USER_PART = 0;
+    private static final int VOTE_RANT_PART = 1;
 
     private DatabaseUtils() {
         // no instantiation
@@ -59,8 +68,12 @@ public class DatabaseUtils {
         long userId = rant.getOwner().getUserId();
         for (String line : readUsers()) {
             newContents.append(line);
-            if (userId == Long.parseLong(splitLine(line)[USER_ID_PART])) {
-                newContents.append(LINE_DELIMITER + rant.getRantId());
+            String[] userString = splitLine(line);
+            if (userId == Long.parseLong(userString[USER_ID_PART])) {
+                if (userString.length > USER_RANTS_PART) {
+                    newContents.append(",");
+                }
+                newContents.append(rant.getRantId());
             }
             newContents.append("\n");
         }
@@ -76,7 +89,16 @@ public class DatabaseUtils {
                user.getUsername() + LINE_DELIMITER +
                user.getPassword() + LINE_DELIMITER +
                user.getEmail() + LINE_DELIMITER +
-               user.getCreationDate().toString();
+               user.getCreationDate().toString() +
+               (user.getOwnedRantIds().isEmpty() ? "" : LINE_DELIMITER + formatUserRants(user));
+    }
+
+    private static String formatUserRants(User user) {
+        StringBuilder rants = new StringBuilder();
+        for (Long rantId : user.getOwnedRantIds()) {
+            rants.append("," + rantId.toString());
+        }
+        return rants.substring(1);
     }
 
     public static void modifyUser(long oldUserId, User newUser) throws IOException {
@@ -128,6 +150,35 @@ public class DatabaseUtils {
         Files.write(newContents, RANTS_FILE, Charsets.UTF_8);
     }
 
+    public static void upvote(long userId, long rantId) throws IOException {
+        removeDownvote(userId, rantId);
+        append(UPVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
+    }
+
+    public static void removeUpvote(long userId, long rantId) throws IOException {
+        removeVote(userId, rantId, readUpvotes(), UPVOTES_FILE);
+    }
+
+    public static void downvote(long userId, long rantId) throws IOException {
+        removeUpvote(userId, rantId);
+        append(DOWNVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
+    }
+
+    public static void removeDownvote(long userId, long rantId) throws IOException {
+        removeVote(userId, rantId, readDownvotes(), DOWNVOTES_FILE);
+    }
+
+    private static void removeVote(long userId, long rantId, List<String> lines, File file) throws IOException {
+        StringBuilder newContents = new StringBuilder();
+        for (String line : lines) {
+            Long[] vote = parseVote(line);
+            if (vote[VOTE_USER_PART] != userId || vote[VOTE_RANT_PART] != rantId) {
+                newContents.append(line + "\n");
+            }
+        }
+        Files.write(newContents, file, Charsets.UTF_8);
+    }
+
     private static List<String> readFile(File file) throws IOException {
         return Files.readLines(file, Charsets.UTF_8);
     }
@@ -154,6 +205,14 @@ public class DatabaseUtils {
             rants.add(parseRant(line));
         }
         return rants;
+    }
+
+    public static List<String> readUpvotes() throws IOException {
+        return readFile(UPVOTES_FILE);
+    }
+
+    public static List<String> readDownvotes() throws IOException {
+        return readFile(DOWNVOTES_FILE);
     }
 
     public static User readUser(String username, String password) throws IOException {
@@ -208,23 +267,31 @@ public class DatabaseUtils {
         return parseRant(matches.iterator().next());
     }
 
-    private static User parseUser(String line) {
+    private static User parseUser(String line) throws IOException {
         String[] parts = splitLine(line);
-        Collection<Long> rants = Sets.newConcurrentHashSet();
-        for (int i = USER_CREATION_PART + 1; i < parts.length; i++) {
-            rants.add(Long.parseLong(parts[i]));
-        }
-        return new SimpleUser(Long.parseLong(parts[USER_ID_PART]),
+        long userId = Long.parseLong(parts[USER_ID_PART]);
+        return new SimpleUser(userId,
                               parts[USER_USERNAME_PART],
                               parts[USER_PASSWORD_PART],
                               parts[USER_EMAIL_PART],
                               new DateTime(parts[USER_CREATION_PART]),
-                              rants);
+                              parseRants(parts[USER_RANTS_PART]),
+                              getUserUpvotes(userId),
+                              getUserDownVotes(userId));
+    }
+
+    private static Collection<Long> parseRants(String rantsString) {
+        Collection<Long> rants = Sets.newConcurrentHashSet();
+        for (String rantId : rantsString.split(",")) {
+            rants.add(Long.parseLong(rantId));
+        }
+        return rants;
     }
 
     private static Rant parseRant(String line) throws IOException {
         String[] parts = splitLine(line);
-        return new SimpleRant(Long.parseLong(parts[RANT_ID_PART]),
+        long rantId = Long.parseLong(parts[RANT_ID_PART]);
+        return new SimpleRant(rantId,
                               Boolean.parseBoolean(parts[RANT_NSFW_PART]),
                               parts[RANT_TITLE_PART],
                               parts[RANT_CONTENTS_PART],
@@ -232,7 +299,49 @@ public class DatabaseUtils {
                               new DateTime(parts[RANT_CREATION_PART]),
                               new DateTime(parts[RANT_DEATH_PART]),
                               Integer.parseInt(parts[RANT_POWER_PART]),
-                              parts[RANT_LEVEL_PART]);
+                              parts[RANT_LEVEL_PART],
+                              getRantUpvotes(rantId),
+                              getRantDownVotes(rantId));
+    }
+
+    private static Collection<Long> getRantUpvotes(long rantId) throws IOException {
+        return getRantVotes(rantId, readUpvotes());
+    }
+
+    private static Collection<Long> getRantDownVotes(long rantId) throws IOException {
+        return getRantVotes(rantId, readDownvotes());
+    }
+
+    private static Collection<Long> getRantVotes(long rantId, List<String> lines) {
+        return getVotes(rantId, lines, VOTE_RANT_PART, VOTE_USER_PART);
+    }
+
+    private static Collection<Long> getUserUpvotes(long userId) throws IOException {
+        return getUserVotes(userId, readUpvotes());
+    }
+
+    private static Collection<Long> getUserDownVotes(long userId) throws IOException {
+        return getUserVotes(userId, readDownvotes());
+    }
+
+    private static Collection<Long> getUserVotes(long userId, List<String> lines) {
+        return getVotes(userId, lines, VOTE_USER_PART, VOTE_RANT_PART);
+    }
+
+    private static Collection<Long> getVotes(long id, List<String> lines, int matchPart, int addPart) {
+        Collection<Long> votes = Sets.newConcurrentHashSet();
+        for (String line : lines) {
+            Long[] vote = parseVote(line);
+            if (vote[matchPart] == id) {
+                votes.add(vote[addPart]);
+            }
+        }
+        return votes;
+    }
+
+    private static Long[] parseVote(String line) {
+        String[] parts = splitLine(line);
+        return new Long[] { Long.parseLong(parts[VOTE_USER_PART]), Long.parseLong(parts[VOTE_RANT_PART]) };
     }
 
     private static String[] splitLine(String line) {

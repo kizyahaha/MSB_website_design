@@ -83,7 +83,7 @@ function get_contender_data(){
 	for (var i=0 ; i<num_contenders ; i++){
 		data.setValue(i,0,i+1);
 		data.setValue(i,1,height);
-		height = Math.floor(height*0.9);
+		height = Math.floor(height*0.95);
 	}
 	return data;
 }

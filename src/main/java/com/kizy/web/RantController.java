@@ -29,9 +29,9 @@ public class RantController {
                         @RequestParam(value = "nsfw", defaultValue = "false") boolean nsfw,
                         @RequestParam("title") String title,
                         @RequestParam("contents") String contents) {
-        User owner = WebResources.userFromRequest(request);
+        User owner = WebResources.currentLoggedInUser(request);
         Rant rant = new SimpleRant(countingId.incrementAndGet(), nsfw, title, contents, owner);
-        owner.addRantId(rant.getRantId());
+        owner.addRant(rant.getRantId());
         try {
             DatabaseUtils.writeRant(rant);
         } catch (IOException e) {
@@ -49,7 +49,7 @@ public class RantController {
     @ResponseBody
     public String listUserRants(@RequestParam("username") String username) throws IOException {
         User user = DatabaseUtils.findUserByName(username);
-        return Serializers.valueToTree(user.getRantIds()).toString();
+        return Serializers.valueToTree(user.getOwnedRantIds()).toString();
     }
 
     @RequestMapping(value = "/rantData")
@@ -60,21 +60,31 @@ public class RantController {
 
     @RequestMapping(value = "/upvote")
     @ResponseBody
-    public void upvote(@RequestParam("id") long id) throws IOException {
+    public void upvote(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
         if (rant.isAlive()) {
             rant.changePower(1);
             DatabaseUtils.modifyRant(id, rant);
+
+            User user = WebResources.currentLoggedInUser(request);
+            rant.upvote(user.getUserId());
+            user.upvote(rant.getRantId());
+            DatabaseUtils.upvote(user.getUserId(), rant.getRantId());
         }
     }
 
     @RequestMapping(value = "/downvote")
     @ResponseBody
-    public void downvote(@RequestParam("id") long id) throws IOException {
+    public void downvote(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
         if (rant.isAlive()) {
             rant.changePower(-1);
             DatabaseUtils.modifyRant(id, rant);
+
+            User user = WebResources.currentLoggedInUser(request);
+            rant.downvote(user.getUserId());
+            user.downvote(rant.getRantId());
+            DatabaseUtils.downvote(user.getUserId(), rant.getRantId());
         }
     }
 
