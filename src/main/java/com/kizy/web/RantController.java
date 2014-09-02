@@ -1,6 +1,8 @@
 package com.kizy.web;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,17 +13,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.collect.Maps;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Serializers;
 import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.SimpleRant;
 import com.kizy.data.user.User;
+import com.kizy.filter.AliveFilter;
+import com.kizy.filter.Filter;
+import com.kizy.filter.UsernameFilter;
 
 @Controller
 @RequestMapping(value = "/rants", method = RequestMethod.POST)
 public class RantController {
 
     private static AtomicLong countingId = new AtomicLong(DatabaseUtils.maxRantId());
+    
+    private static final Map<String, Filter> FILTERS = Maps.newHashMap();
+    static {
+        FILTERS.put("username", new UsernameFilter());
+        FILTERS.put("alive", new AliveFilter());
+    }
 
     @RequestMapping(value = "/add")
     @ResponseBody
@@ -39,17 +51,44 @@ public class RantController {
         }
     }
 
+    // TODO: (kczaja) rename this to list when the other list is removed
     @RequestMapping(value = "/listAll")
     @ResponseBody
-    public String listAllRants() throws IOException {
-        return Serializers.valueToTree(DatabaseUtils.getRants()).toString();
+    public String listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
+        List<Rant> allRants = DatabaseUtils.getRants();
+        List<Rant> filteredRants = allRants;
+        if (appliedFiltersString != null) {
+            @SuppressWarnings("unchecked")
+            Map<String, String> appliedFilters = Serializers.getMapper().readValue(appliedFiltersString, Map.class);
+            for (String s : appliedFilters.keySet()) {
+                String arg = appliedFilters.get(s);
+                Filter filter = FILTERS.get(s);
+                filteredRants = filter.doFilter(filteredRants, arg);
+            }
+        }
+        return Serializers.valueToTree(filteredRants).toString();
     }
+    /**
+     * KEEP FOREVER
+     * 
+     * dict = {
+     *   a: A,
+     *   b: B,
+     *   c: C
+     * }
+     * 
+     * dict.keySet = {a, b, c}
+     * dict.valueSet = {A, B, C}
+     * dict.get(a) = dict[a] = A
+     */
 
+    // TODO: (kczaja) delete this when all references in frontend are removed!
     @RequestMapping(value = "/list")
     @ResponseBody
     public String listUserRants(@RequestParam("username") String username) throws IOException {
-        User user = DatabaseUtils.findUserByName(username);
-        return Serializers.valueToTree(user.getOwnedRantIds()).toString();
+        List<Rant> allRants = DatabaseUtils.getRants();
+        List<Rant> filteredRants = FILTERS.get("username").doFilter(allRants, username);
+        return Serializers.valueToTree(filteredRants).toString();
     }
 
     @RequestMapping(value = "/rantData")
