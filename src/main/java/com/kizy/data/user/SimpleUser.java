@@ -77,7 +77,7 @@ public class SimpleUser implements User {
     }
 
     @Override
-    @JsonProperty("randIds")
+    @JsonProperty("rantIds")
     public Collection<Long> getOwnedRantIds() {
         return rantIds;
     }
