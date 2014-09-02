@@ -42,7 +42,7 @@ function create_contenders(tab_num){
 function get_contenders(){
     $.ajax({
         type: 'POST',
-        url: '/api/rants/listAll',
+        url: '/api/rants/list',
 		data: {appliedFilters: get_level_string()},
         success: function(gotData) {
             rants = $.parseJSON(gotData);

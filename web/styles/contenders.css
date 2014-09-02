@@ -27,13 +27,13 @@
 	top: 80px;
 	left:20px;
 	right:20px;
-	max-height:1050px;
+	/*max-height:1050px;*/
 	min-height:100px;
 	background-color: rgb(215,226,229);
 	border-radius:20px;
 	border:solid 20px rgb(215,226,229);
 	/*overflow:auto;*/
-	overflow:hidden;
+	/*overflow:hidden;*/
 }
 #contender_navigation_table{
 	position:absolute;

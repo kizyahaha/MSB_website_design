@@ -53,8 +53,7 @@ public class RantController {
         }
     }
 
-    // TODO: (kczaja) rename this to list when the other list is removed
-    @RequestMapping(value = "/listAll")
+    @RequestMapping(value = "/list")
     @ResponseBody
     public String listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
         List<Rant> allRants = DatabaseUtils.getRants();
@@ -84,14 +83,6 @@ public class RantController {
      * dict.get(a) = dict[a] = A
      */
 
-    // TODO: (kczaja) delete this when all references in frontend are removed!
-    @RequestMapping(value = "/list")
-    @ResponseBody
-    public String listUserRants(@RequestParam("username") String username) throws IOException {
-        List<Rant> allRants = DatabaseUtils.getRants();
-        List<Rant> filteredRants = FILTERS.get("username").doFilter(allRants, username);
-        return Serializers.valueToTree(filteredRants).toString();
-    }
 
     @RequestMapping(value = "/rantData")
     @ResponseBody
