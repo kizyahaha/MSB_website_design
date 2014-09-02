@@ -18,6 +18,7 @@ public class SimpleRant implements Rant {
     private final User owner;
     private final DateTime birth;
     private int power;
+    private String level;
     private Collection<Long> upvotes;
     private Collection<Long> downvotes;
 
@@ -50,6 +51,7 @@ public class SimpleRant implements Rant {
         this.owner = owner;
         this.birth = birth;
         this.power = power;
+        this.level = level;
         this.upvotes = upvotes;
         this.downvotes = downvotes;
     }
@@ -125,7 +127,7 @@ public class SimpleRant implements Rant {
     @Override
     @JsonProperty("level")
     public String getRantLevel() {
-        double rand = Math.random() * 4;
+        /*double rand = Math.random() * 4;
         if (rand <= 1) {
             return "Daily";
         }
@@ -135,7 +137,8 @@ public class SimpleRant implements Rant {
         if (rand <= 3) {
             return "10-Minutely";
         }
-        return "Minutely";
+        return "Minutely";*/
+    	return level;
     }
 
     @Override
