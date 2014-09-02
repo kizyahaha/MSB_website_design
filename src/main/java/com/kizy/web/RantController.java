@@ -21,6 +21,7 @@ import com.kizy.data.rant.SimpleRant;
 import com.kizy.data.user.User;
 import com.kizy.filter.AliveFilter;
 import com.kizy.filter.Filter;
+import com.kizy.filter.LevelFilter;
 import com.kizy.filter.UsernameFilter;
 
 @Controller
@@ -33,6 +34,7 @@ public class RantController {
     static {
         FILTERS.put("username", new UsernameFilter());
         FILTERS.put("alive", new AliveFilter());
+        FILTERS.put("level", new LevelFilter());
     }
 
     @RequestMapping(value = "/add")
