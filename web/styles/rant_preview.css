@@ -78,6 +78,9 @@
 .rant_preview_support_button_image{
 	width:30px;
 }
+.rant_preview_support_button:hover{
+	cursor:pointer;
+}
 .rant_preview_use_item_button{
 	text-align:center;
 	border:solid rgb(215,226,229) 2px;
@@ -96,4 +99,7 @@
 }
 .rant_preview_oppose_button_image{
 	width:30px;
+}
+.rant_preview_oppose_button:hover{
+	cursor:pointer;
 }

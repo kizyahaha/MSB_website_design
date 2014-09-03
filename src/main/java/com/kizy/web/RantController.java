@@ -95,9 +95,6 @@ public class RantController {
     public void upvote(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
         if (rant.isAlive()) {
-            rant.changePower(1);
-            DatabaseUtils.modifyRant(id, rant);
-
             User user = WebResources.currentLoggedInUser(request);
             rant.upvote(user.getUserId());
             user.upvote(rant.getRantId());
@@ -110,9 +107,6 @@ public class RantController {
     public void downvote(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
         if (rant.isAlive()) {
-            rant.changePower(-1);
-            DatabaseUtils.modifyRant(id, rant);
-
             User user = WebResources.currentLoggedInUser(request);
             rant.downvote(user.getUserId());
             user.downvote(rant.getRantId());
