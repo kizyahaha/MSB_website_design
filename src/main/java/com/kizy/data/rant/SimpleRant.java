@@ -127,17 +127,6 @@ public class SimpleRant implements Rant {
     @Override
     @JsonProperty("level")
     public String getRantLevel() {
-        /*double rand = Math.random() * 4;
-        if (rand <= 1) {
-            return "Daily";
-        }
-        if (rand <= 2) {
-            return "Hourly";
-        }
-        if (rand <= 3) {
-            return "10-Minutely";
-        }
-        return "Minutely";*/
     	return level;
     }
 

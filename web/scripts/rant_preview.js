@@ -80,11 +80,11 @@ function create_rant_preview_actions_line(preview_ID){
 	$('<table/>',{addClass:'rant_preview_actions_line'}).appendTo(preview_ID + ' .rant_preview_right_side');
 	$('<tr/>',{addClass:'rant_preview_action_row'}).appendTo(preview_ID + ' .rant_preview_actions_line');
 	$('<td/>',{addClass:'rant_preview_oppose_button'}).appendTo(preview_ID + ' .rant_preview_action_row');
-		$('<img/>',{addClass:'rant_preview_oppose_button_image' , src:'images/down_button_2.png'}).appendTo(preview_ID + ' .rant_preview_oppose_button');
+		$('<img/>',{addClass:'rant_preview_oppose_button_image'}).appendTo(preview_ID + ' .rant_preview_oppose_button');
 	$('<td/>',{addClass:'rant_preview_use_item'}).appendTo(preview_ID + ' .rant_preview_action_row');	
 		$('<div/>',{addClass:'rant_preview_use_item_button', text:'Apply item'}).appendTo(preview_ID + ' .rant_preview_use_item');
 	$('<td/>',{addClass:'rant_preview_support_button'}).appendTo(preview_ID + ' .rant_preview_action_row');
-		$('<img/>',{addClass:'rant_preview_support_button_image' , src:'images/up_button_2.png'}).appendTo(preview_ID + ' .rant_preview_support_button');
+		$('<img/>',{addClass:'rant_preview_support_button_image'}).appendTo(preview_ID + ' .rant_preview_support_button');
 }
 
 /**********************************************************************************************************/
@@ -120,7 +120,41 @@ function populate_rant_preview(is_list , preview_ID, list_num , rant_data){
 	else{
 		$(preview_ID).find('.rant_preview_content').text(rant_data.contents);
 	}
+	
+	if (user_did_oppose(rant_data)){
+		$(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_1.png');
+		$(preview_ID).find('.rant_preview_support_button_image').css('opacity','0.3');
+	}
+	else {
+		$(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_2.png');
+	}
+	if (user_did_support(rant_data)){
+		$(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_1.png');
+		$(preview_ID).find('.rant_preview_oppose_button_image').css('opacity','0.3');
+	}
+	else{
+		$(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_2.png');
+	}
 	create_rant_preview_vote_button_functionality(preview_ID , rant_data.id);
+}
+
+function user_did_oppose(rant_data){
+	num_voters = rant_data.downvotes.length;
+	for (j=0 ; j<num_voters; j++){
+		if (rant_data.downvotes[j] == logged_user.id){
+			return true;
+		}
+	}
+	return false;
+}
+function user_did_support(rant_data){
+	num_voters = rant_data.upvotes.length;
+	for (j=0 ; j<num_voters; j++){
+		if (rant_data.upvotes[j] == logged_user.id){
+			return true;
+		}
+	}
+	return false;
 }
 
 function get_rant_rank(rank){
