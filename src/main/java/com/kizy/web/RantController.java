@@ -23,7 +23,8 @@ import com.kizy.filter.AliveFilter;
 import com.kizy.filter.Filter;
 import com.kizy.filter.LevelFilter;
 import com.kizy.filter.UsernameFilter;
-import com.kizy.pagination.Pagination;
+import com.kizy.pagination.Pages;
+import com.kizy.pagination.Page;
 import com.kizy.pagination.SimplePage;
 
 @Controller
@@ -59,6 +60,9 @@ public class RantController {
     @ResponseBody
     public String listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString,
     							@RequestParam(value = "pageNum", required = true) int pageNum) throws IOException {
+    	if (pageNum <= 0) {
+    		throw new IllegalArgumentException("Cannot request non-positive page number.");
+    	}
     	List<Rant> allRants = DatabaseUtils.getRants();
         List<Rant> filteredRants = allRants;
         if (appliedFiltersString != null) {
@@ -71,25 +75,12 @@ public class RantController {
             }
         }
         
-        if (pageNum != -1){
-	        Pagination page = new SimplePage();
-	        page.setFirstRantNum(pageNum);
-	        page.setNumPages(filteredRants.size());
-	        page.setRantsOnPage(filteredRants , pageNum);
-	        
-	        String rant_string = Serializers.valueToTree(page.getRantsOnPage()).toString();
-	        return ("{\"firstRantNum\":" + page.getFirstRantNum() +",\"numPages\":" + page.getNumPages() + ",\"rantsOnPage\":"+ rant_string + "}" );
-        }
-        
-        return Serializers.valueToTree(filteredRants).toString();
+    	int firstRantNum = ((pageNum-1) * Pages.RANTS_PER_PAGE);
+    	int numPages = (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE);
+    	List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
+        Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
+        return  Serializers.valueToTree(page).toString();
     }
-    
-    /*@RequestMapping(value = "/list")
-    @ResponseBody
-    public void listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
-        listAllRants(appliedFiltersString, -1);
-        return;
-    }*/
     
     /**
      * KEEP FOREVER

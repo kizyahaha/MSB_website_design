@@ -4,13 +4,7 @@ import java.util.List;
 import com.kizy.data.rant.Rant;
 
 
-public interface Pagination {
-
-	void setFirstRantNum(final int pageNum);
-	
-	void setNumPages(int numRants);
-	
-	void setRantsOnPage(final List<Rant> rants , final int pageNum);
+public interface Page {
 	
 	int getFirstRantNum();
 	
