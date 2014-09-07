@@ -7,7 +7,6 @@ function create_detailed_rant(){
         url: '/api/rants/rantData',
         data: {id: get_rant_id() },
         success: function(gotData) {
-            data = $.parseJSON(gotData);
 			$('<div/>',{id:'detailed_rant_container'}).appendTo('body');
 			$('<div/>',{id:'detailed_rant_space'}).appendTo('#detailed_rant_container');
 			$("#detailed_rant_space").css({ "border-width": "20px 20px 20px 20px" });
@@ -32,7 +31,7 @@ function get_rant_id(){
 
 function display_detailed_rant(rant_info){
 	var detailed_rant_ID = create_rant_preview(false , 'detailed_rant_space' , 0 , rant_info.owner.id);
-	populate_rant_preview(false , detailed_rant_ID , 0 , rant_info);
+	populate_rant_preview(false , detailed_rant_ID , 0 , 1 , rant_info);
 	update_detailed_rant_sizes();
 }
 

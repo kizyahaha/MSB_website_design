@@ -22,7 +22,7 @@ function create_banner_background(){
 function create_banner_text(){
 	var banner_text_link = document.createElement('a');
 	banner_text_link.id = 'banner_text';
-	banner_text_link.href = 'daily.html';
+	banner_text_link.href = 'daily';
 	var banner_text_img = document.createElement('img');
 	banner_text_img.alt = 'MSB';
 	banner_text_img.src = "images/MySoapBox_2.png";

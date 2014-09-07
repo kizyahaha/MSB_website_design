@@ -151,32 +151,57 @@ public class DatabaseUtils {
     }
 
     public static void upvote(long userId, long rantId) throws IOException {
-        removeDownvote(userId, rantId);
-        append(UPVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
+    	Rant rant = findRantById(rantId);
+    	if ( removeDownvote(userId, rantId) ){
+        	rant.changePower(1);
+        }
+    	if ( removeUpvote(userId, rantId) ){
+        	rant.changePower(-1);
+        }
+    	else {
+    		rant.changePower(1);
+    		append(UPVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
+    	}
+    	modifyRant(rantId, rant);
     }
 
-    public static void removeUpvote(long userId, long rantId) throws IOException {
-        removeVote(userId, rantId, readUpvotes(), UPVOTES_FILE);
+    public static Boolean removeUpvote(long userId, long rantId) throws IOException {
+        return removeVote(userId, rantId, readUpvotes(), UPVOTES_FILE);
     }
 
     public static void downvote(long userId, long rantId) throws IOException {
-        removeUpvote(userId, rantId);
-        append(DOWNVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
+    	Rant rant = findRantById(rantId);
+        if ( removeUpvote(userId, rantId) ){
+        	rant.changePower(-1);
+        }
+        if ( removeDownvote(userId, rantId) ){
+        	rant.changePower(1);
+        }
+        else {
+        	rant.changePower(-1);
+        	append(DOWNVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
+        }
+        modifyRant(rantId, rant);
     }
 
-    public static void removeDownvote(long userId, long rantId) throws IOException {
-        removeVote(userId, rantId, readDownvotes(), DOWNVOTES_FILE);
+    public static Boolean removeDownvote(long userId, long rantId) throws IOException {
+        return removeVote(userId, rantId, readDownvotes(), DOWNVOTES_FILE);
     }
 
-    private static void removeVote(long userId, long rantId, List<String> lines, File file) throws IOException {
+    private static Boolean removeVote(long userId, long rantId, List<String> lines, File file) throws IOException {
         StringBuilder newContents = new StringBuilder();
+        Boolean didRemove = false;
         for (String line : lines) {
             Long[] vote = parseVote(line);
             if (vote[VOTE_USER_PART] != userId || vote[VOTE_RANT_PART] != rantId) {
                 newContents.append(line + "\n");
             }
+            else{
+            	didRemove = true;
+            }
         }
         Files.write(newContents, file, Charsets.UTF_8);
+        return didRemove;
     }
 
     private static List<String> readFile(File file) throws IOException {

@@ -5,7 +5,6 @@ function create_contender_space(tab_num){
 	document.body.appendChild(contender_space);
 	create_contender_title();
 	create_contenders(tab_num);
-	create_contender_navigation();
 	create_power_graph(tab_num);
 }
 
@@ -36,17 +35,28 @@ function create_contenders(tab_num){
 	var contenders = document.createElement('div');
 	contenders.id = 'contenders';
 	document.getElementById('contender_space').appendChild(contenders);
-	get_contenders();
+	create_contender_navigation();
+	window.addEventListener('popstate', function(event) {
+		update_contenders(event.state.page_num)
+	});
+	update_contenders(1);
 }
 
-function get_contenders(){
+function update_contenders(pageNum){
+	$('#contenders').empty();
+	get_contenders(pageNum);
+	history.pushState({page_num:pageNum}, '', pageNum);
+}
+
+function get_contenders(page_num){
     $.ajax({
         type: 'POST',
         url: '/api/rants/list',
-		data: {appliedFilters: get_level_string()},
+		data: {appliedFilters: get_level_string() , pageNum:page_num},
         success: function(gotData) {
             rants = $.parseJSON(gotData);
-            display_contenders(rants);
+            display_contenders(rants.firstRantNum , rants.rantsOnPage);
+			update_contender_navigation(rants.numPages);
         },
         error: function(name,status) {
             alert(status);
@@ -64,11 +74,11 @@ function get_level_string(){
 	return JSON.stringify( {level:"Minutely"} );
 }
 
-function display_contenders(rants){
+function display_contenders(first_rant_num , rants){
 	var num_contenders2 = rants.length;
 	for (i=0 ; i<num_contenders2 ; i++){
 		var contender_ID = create_rant_preview(true , 'contenders' , i , rants[i].owner.id);
-		populate_rant_preview(true , contender_ID , i , rants[i]);
+		populate_rant_preview(true , contender_ID , i , first_rant_num , rants[i]);
 	}
 	update_contender_sizes();
 }
@@ -88,4 +98,8 @@ function create_contender_navigation(){
 	$('<tr/>',{id:parent_id}).appendTo('#contender_navigation_table');
 	parent_id = '#' + parent_id;
 	create_page_navigation(parent_id);
+}
+
+function update_contender_navigation (num_pages){
+	update_navigation('#contenders', num_pages);
 }

@@ -1,10 +1,9 @@
-function create_page_navigation(parent){
-	var num_pages = 13;
+function create_page_navigation(parent , num_pages){
 	create_jump_to_begin(parent);
 	create_prev(parent);
-	create_jump_to_page(parent , num_pages);
+	create_jump_to_page(parent);
 	create_next(parent);
-	create_jump_to_end(parent , num_pages);
+	create_jump_to_end(parent);
 }
 
 function create_jump_to_begin(parent){
@@ -23,10 +22,10 @@ function create_prev(parent){
 	$('#prev_text').text('prev');
 }
 
-function create_jump_to_page(parent , num_pages){
+function create_jump_to_page(parent){
 	$('<td/>',{addClass:'navigation_element' , id:'jump_to_page'}).appendTo(parent);
 	$('<div/>',{id:'jump_to_page_bound_box'}).appendTo('#jump_to_page');
-	$('<input/>',{id:'jump_to_page_input' , maxlength:5 , placeholder:'1-'+num_pages}).appendTo('#jump_to_page_bound_box');
+	$('<input/>',{id:'jump_to_page_input' , maxlength:5}).appendTo('#jump_to_page_bound_box');
 	$('#jump_to_page_input').attr('size',8);
 	$('<div/>',{id:'jump_to_page_text'}).appendTo('#jump_to_page_bound_box');
 	$('#jump_to_page_text').text('jump to');
@@ -40,10 +39,71 @@ function create_next(parent){
 	$('#next_text').text('next');
 }
 
-function create_jump_to_end(parent , num_pages){
+function create_jump_to_end(parent){
 	$('<td/>',{addClass:'navigation_element' , id:'jump_to_end'}).appendTo(parent);
 	$('<div/>',{addClass:'nav_ele_bound_box' , id:'jump_to_end_bound_box'}).appendTo('#jump_to_end');
 	$('<img/>',{id:'end_arrows' , src:'images/jump_to_end_arrows.png'}).appendTo('#jump_to_end_bound_box');
 	$('<div/>',{id:'end_text'}).appendTo('#jump_to_end_bound_box');
+}
+
+function update_navigation(navigated_space , num_pages){
+	page_num = get_page_num();
+	if (page_num != 1){
+		$('#prev_text').text('prev (' + (page_num-1) + ')');
+	}
+	else{
+		$('#prev_text').text('prev');
+	}
+	if (page_num != num_pages){
+		$('#next_text').text('next (' + (page_num+1) + ')');
+	}
+	else{
+		$('#next_text').text('next');
+	}
 	$('#end_text').text('last (' + num_pages + ')');
+	$('#jump_to_page_input').attr('placeholder','1-'+num_pages);
+	$('#jump_to_begin_bound_box').unbind();
+	$('#prev_bound_box').unbind();
+	$('#next_bound_box').unbind();
+	$('#jump_to_end_bound_box').unbind();
+	$('#jump_to_begin_bound_box').click(function(){click_navigation('beginning' , navigated_space);});
+	$('#prev_bound_box').click(function(){click_navigation('prev' , navigated_space);});
+	$('#next_bound_box').click(function(){click_navigation('next' , navigated_space , num_pages);});
+	$('#jump_to_end_bound_box').click(function(){click_navigation('end' , navigated_space , num_pages);});
+}
+
+function click_navigation(navigator , navigated_space , num_pages){
+	current_page = get_page_num();
+	desired_page = 1;
+	
+	if (navigator == 'next'){
+		desired_page = current_page + 1;
+		if (desired_page > num_pages)
+			desired_page = num_pages;
+	}
+	else if (navigator == 'prev'){
+		desired_page = current_page - 1;
+		if (desired_page < 1)
+			desired_page = 1;
+	}
+	else if (navigator == 'beginning'){
+		desired_page = 1;
+	}
+	else if (navigator == 'end'){
+		desired_page = num_pages;
+	}
+	else{
+		alert("Sorry, that's not a valid navigator");
+	}
+	
+	$(navigated_space).empty();
+	if (navigated_space == '#contenders'){
+		update_contenders(desired_page);
+	}
+	else if (navigated_space == '#my_rants_space'){
+	}
+}
+
+function get_page_num(){
+	return window.history.state.page_num;
 }
