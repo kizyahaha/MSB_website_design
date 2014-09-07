@@ -15,7 +15,7 @@
 }
 
 #prev_bound_box{
-	width:40px;
+	width:100px;
 }
 
 #jump_to_page_bound_box{
@@ -29,7 +29,7 @@
 }
 
 #next_bound_box{
-	width:40px;
+	width:100px;
 }
 
 #jump_to_end_bound_box{

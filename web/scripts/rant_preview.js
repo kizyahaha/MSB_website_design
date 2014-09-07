@@ -99,14 +99,14 @@ function create_rant_preview_vote_button_functionality(preview_ID , rant_ID){
 
 /**********************************************************************************************************/
 
-function populate_rant_preview(is_list , preview_ID, list_num , rant_data){
-	$(preview_ID).find('.rant_preview_number').text( (list_num+1) + '.' );
+function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, rant_data){
+	$(preview_ID).find('.rant_preview_number').text( (first_list_num+list_num+1) + '.' );
 	$(preview_ID).find('.rant_preview_title_link').text(rant_data.title);
 		$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
 	$(preview_ID).find('.rant_preview_author_link').text(rant_data.owner.username);
 		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html?u=' + rant_data.owner.id);
 		$(preview_ID).find('.rant_preview_author').css('width',(rant_data.owner.username.length)*10+'px');	
-	$(preview_ID).find('.rant_preview_rank').text(get_rant_rank(list_num+1));	
+	$(preview_ID).find('.rant_preview_rank').text(get_rant_rank(first_list_num+list_num+1));	
 	$(preview_ID).find('.rant_preview_level').text(rant_data.level);
 		$(preview_ID).find('.rant_preview_level').attr('href',get_rant_preview_level_link(rant_data));
 	$(preview_ID).find('.rant_preview_power').text(rant_data.power);

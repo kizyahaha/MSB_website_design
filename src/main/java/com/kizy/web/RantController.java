@@ -23,6 +23,8 @@ import com.kizy.filter.AliveFilter;
 import com.kizy.filter.Filter;
 import com.kizy.filter.LevelFilter;
 import com.kizy.filter.UsernameFilter;
+import com.kizy.pagination.Pagination;
+import com.kizy.pagination.SimplePage;
 
 @Controller
 @RequestMapping(value = "/rants", method = RequestMethod.POST)
@@ -55,8 +57,9 @@ public class RantController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public String listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
-        List<Rant> allRants = DatabaseUtils.getRants();
+    public String listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString,
+    							@RequestParam(value = "pageNum", required = true) int pageNum) throws IOException {
+    	List<Rant> allRants = DatabaseUtils.getRants();
         List<Rant> filteredRants = allRants;
         if (appliedFiltersString != null) {
             @SuppressWarnings("unchecked")
@@ -67,8 +70,27 @@ public class RantController {
                 filteredRants = filter.doFilter(filteredRants, arg);
             }
         }
+        
+        if (pageNum != -1){
+	        Pagination page = new SimplePage();
+	        page.setFirstRantNum(pageNum);
+	        page.setNumPages(filteredRants.size());
+	        page.setRantsOnPage(filteredRants , pageNum);
+	        
+	        String rant_string = Serializers.valueToTree(page.getRantsOnPage()).toString();
+	        return ("{\"firstRantNum\":" + page.getFirstRantNum() +",\"numPages\":" + page.getNumPages() + ",\"rantsOnPage\":"+ rant_string + "}" );
+        }
+        
         return Serializers.valueToTree(filteredRants).toString();
     }
+    
+    /*@RequestMapping(value = "/list")
+    @ResponseBody
+    public void listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
+        listAllRants(appliedFiltersString, -1);
+        return;
+    }*/
+    
     /**
      * KEEP FOREVER
      * 
