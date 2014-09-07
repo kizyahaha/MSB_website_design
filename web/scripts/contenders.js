@@ -42,7 +42,8 @@ function create_contenders(tab_num){
 function get_contenders(){
     $.ajax({
         type: 'POST',
-        url: '/api/rants/listAll',
+        url: '/api/rants/list',
+		data: {appliedFilters: get_level_string()},
         success: function(gotData) {
             rants = $.parseJSON(gotData);
             display_contenders(rants);
@@ -51,6 +52,16 @@ function get_contenders(){
             alert(status);
         }
     });
+}
+
+function get_level_string(){
+	if (tab_num == 0)
+		return JSON.stringify( {level:"Daily"} );
+	else if (tab_num == 1)
+		return JSON.stringify( {level:"Hourly"} );
+	else if (tab_num == 2)
+		return JSON.stringify( {level:"10-Minutely"} );
+	return JSON.stringify( {level:"Minutely"} );
 }
 
 function display_contenders(rants){

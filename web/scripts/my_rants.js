@@ -13,16 +13,16 @@ function create_my_rants_navigation(){
 	create_page_navigation(parent_id);
 }
 
-function get_my_rants(filtered_users_rant_ids){
+function get_my_rants(filtered_user_rant_ids){
 	var my_rants = document.getElementById('my_rants_space');
 	my_rants.innerHTML = '';
-	var num_my_rants = filtered_users_rant_ids.length;
+	var num_my_rants = filtered_user_rant_ids.length;
 	for (i=0 ; i<num_my_rants ; i++){
 		$.ajax({
 			async: false,
 			type: 'POST',
 			url: '/api/rants/rantData',
-			data: {id: filtered_users_rant_ids[i]},
+			data: {id: filtered_user_rant_ids[i]},
 			success: function(gotData) {
 				rant_data = $.parseJSON(gotData);
 				var rant_ID = create_rant_preview(true , 'my_rants_space' , i , rant_data.owner.id);
@@ -98,7 +98,7 @@ function get_order_filter_value(filters){
 }
 
 function apply_filters(data , filters){
-	var filtered_data = data.rantIds.slice(0); //make a copy of rantIds array
+	var filtered_data = data.rantIds.slice(0); //make a copy of user rants
 	num_my_rants = filtered_data.length;
 	if (filters[0] == 'Active'){
 		for (i=0 ; i<num_my_rants ; i++){
