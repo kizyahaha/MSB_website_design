@@ -5,7 +5,6 @@ import java.util.List;
 import com.google.common.collect.Lists;
 import com.kizy.data.rant.Rant;
 
-
 public class AliveFilter implements Filter {
 
     @Override
