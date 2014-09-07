@@ -29,7 +29,7 @@ public class SimpleRant implements Rant {
                       @JsonProperty("contents") String contents,
                       @JsonProperty("owner") User owner) {
         this(id, nsfw, title, contents, owner, DateTime.now(), null, Rants.STARTING_POWER,
-             "", Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet());
+             "Minutely", Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet());
     }
 
     @JsonCreator
