@@ -39,8 +39,14 @@ function create_contenders(tab_num){
 	contenders.id = 'contenders';
 	document.getElementById('contender_space').appendChild(contenders);
 	create_contender_navigation();
-	update_contenders(1);
-	history.replaceState({page_num:1}, '', '');
+	if (window.history.state){
+		update_contenders(window.history.state.page_num);
+		history.replaceState({page_num:window.history.state.page_num}, '', '');
+	}
+	else{
+		update_contenders(1);
+		history.replaceState({page_num:1}, '', '');
+	}
 }
 
 function update_contenders(pageNum){
