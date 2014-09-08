@@ -49,9 +49,8 @@ function create_jump_to_end(parent){
 function update_navigation(navigated_space , num_pages){
 	page_num = get_page_num();
 	unbind_navigations();
-	$('#jump_to_page_input').attr('placeholder','1-'+num_pages);
 	if (num_pages == 1){
-		one_page_navigator_display();
+		one_page_navigator_display(num_pages);
 	}
 	else{
 		if (page_num == 1){
@@ -63,18 +62,23 @@ function update_navigation(navigated_space , num_pages){
 		else {
 			general_page_navigator_display(num_pages , page_num , navigated_space);
 		}
-	}	
+	}
+	$('#jump_to_page_input').val('');
+	$('#jump_to_page_input').attr('placeholder','1-'+num_pages);	
 }
 
 function unbind_navigations(){
 	$('#jump_to_begin_bound_box').unbind();
 	$('#prev_bound_box').unbind();
+	$('#jump_to_page_input').unbind();
 	$('#next_bound_box').unbind();
 	$('#jump_to_end_bound_box').unbind();
 }
 
-function one_page_navigator_display(){
-	$('#end_text').text('last');
+function one_page_navigator_display(num_pages){
+	$('#end_text').text('last (' + num_pages + ')');
+	$('#prev_text').text('prev');
+	$('#next_text').text('next');
 	$('#jump_to_begin_bound_box').attr('class','inactive_nav_ele_bound_box');
 	$('#prev_bound_box').attr('class','inactive_nav_ele_bound_box');
 	$('#jump_to_page_bound_box').css('opacity','0.3');
@@ -89,53 +93,56 @@ function first_page_navigator_display(num_pages , page_num , navigated_space){
 	$('#prev_bound_box').attr('class','inactive_nav_ele_bound_box');
 	
 	$('#jump_to_page_bound_box').css('opacity','1.0');
+	$('#jump_to_page_input').change(function (){page_navigate('jump' , navigated_space , num_pages)});
 	
 	$('#next_text').text('next (' + (page_num+1) + ')');
 	$('#next_bound_box').attr('class','active_nav_ele_bound_box');
-	$('#next_bound_box').click(function(){click_navigation('next' , navigated_space , num_pages);});
+	$('#next_bound_box').click(function(){page_navigate('next' , navigated_space , num_pages);});
 	
 	$('#end_text').text('last (' + num_pages + ')');
 	$('#jump_to_end_bound_box').attr('class','active_nav_ele_bound_box');
-	$('#jump_to_end_bound_box').click(function(){click_navigation('end' , navigated_space , num_pages);});
+	$('#jump_to_end_bound_box').click(function(){page_navigate('end' , navigated_space , num_pages);});
 }
 
 function last_page_navigator_display(num_pages, page_num , navigated_space){
 	$('#jump_to_begin_bound_box').attr('class','active_nav_ele_bound_box');
-	$('#jump_to_begin_bound_box').click(function(){click_navigation('beginning' , navigated_space);});
+	$('#jump_to_begin_bound_box').click(function(){page_navigate('beginning' , navigated_space);});
 
 	$('#prev_text').text('prev (' + (page_num-1) + ')');
 	$('#prev_bound_box').attr('class','active_nav_ele_bound_box');
-	$('#prev_bound_box').click(function(){click_navigation('prev' , navigated_space);});
+	$('#prev_bound_box').click(function(){page_navigate('prev' , navigated_space);});
 	
 	$('#jump_to_page_bound_box').css('opacity','1.0');
+	$('#jump_to_page_input').change(function (){page_navigate('jump' , navigated_space , num_pages)});
 	
 	$('#next_text').text('next');
 	$('#next_bound_box').attr('class','inactive_nav_ele_bound_box');
 	
-	$('#end_text').text('last');
+	$('#end_text').text('last (' + num_pages + ')');
 	$('#jump_to_end_bound_box').attr('class','inactive_nav_ele_bound_box');
 }
 
 function general_page_navigator_display(num_pages , page_num , navigated_space){
 	$('#jump_to_begin_bound_box').attr('class','active_nav_ele_bound_box');
-	$('#jump_to_begin_bound_box').click(function(){click_navigation('beginning' , navigated_space);});
+	$('#jump_to_begin_bound_box').click(function(){page_navigate('beginning' , navigated_space);});
 
 	$('#prev_text').text('prev (' + (page_num-1) + ')');
 	$('#prev_bound_box').attr('class','active_nav_ele_bound_box');
-	$('#prev_bound_box').click(function(){click_navigation('prev' , navigated_space);});
+	$('#prev_bound_box').click(function(){page_navigate('prev' , navigated_space);});
 	
 	$('#jump_to_page_bound_box').css('opacity','1.0');
+	$('#jump_to_page_input').change(function (){page_navigate('jump' , navigated_space , num_pages)});
 	
 	$('#next_text').text('next (' + (page_num+1) + ')');
 	$('#next_bound_box').attr('class','active_nav_ele_bound_box');
-	$('#next_bound_box').click(function(){click_navigation('next' , navigated_space , num_pages);});
+	$('#next_bound_box').click(function(){page_navigate('next' , navigated_space , num_pages);});
 	
 	$('#end_text').text('last (' + num_pages + ')');
 	$('#jump_to_end_bound_box').attr('class','active_nav_ele_bound_box');
-	$('#jump_to_end_bound_box').click(function(){click_navigation('end' , navigated_space , num_pages);});
+	$('#jump_to_end_bound_box').click(function(){page_navigate('end' , navigated_space , num_pages);});
 }
 
-function click_navigation(navigator , navigated_space , num_pages){
+function page_navigate(navigator , navigated_space , num_pages){
 	current_page = get_page_num();
 	desired_page = 1;
 	
@@ -144,6 +151,9 @@ function click_navigation(navigator , navigated_space , num_pages){
 	}
 	else if (navigator == 'prev'){
 		desired_page = current_page - 1;
+	}
+	else if (navigator == 'jump'){
+		desired_page = validate_jump_to_input(num_pages);
 	}
 	else if (navigator == 'beginning'){
 		desired_page = 1;
@@ -162,6 +172,19 @@ function click_navigation(navigator , navigated_space , num_pages){
 	else if (navigated_space == '#my_rants_space'){
 	}
 	history.pushState({page_num:desired_page}, '', '');
+}
+
+function validate_jump_to_input(num_pages){
+	desired_page = $('#jump_to_page_input').val();
+	if (!isNaN(desired_page))
+		desired_page = Math.round(desired_page);
+	else
+		desired_page = 1;
+	if (desired_page < 1)
+		desired_page = 1;
+	else if (desired_page > num_pages)
+		desired_page = num_pages;
+	return desired_page;
 }
 
 function get_page_num(){
