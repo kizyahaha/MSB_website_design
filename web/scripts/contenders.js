@@ -40,7 +40,7 @@ function create_contenders(tab_num){
 	document.getElementById('contender_space').appendChild(contenders);
 	create_contender_navigation();
 	update_contenders(1);
-	history.replaceState({page_num:1}, '', 1);
+	history.replaceState({page_num:1}, '', '');
 }
 
 function update_contenders(pageNum){

@@ -102,7 +102,7 @@ function click_navigation(navigator , navigated_space , num_pages){
 	}
 	else if (navigated_space == '#my_rants_space'){
 	}
-	history.pushState({page_num:desired_page}, '', desired_page);
+	history.pushState({page_num:desired_page}, '', '');
 }
 
 function get_page_num(){
