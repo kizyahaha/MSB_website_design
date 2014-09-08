@@ -2,12 +2,17 @@
 	text-align:center;
 }
 
-.nav_ele_bound_box{
+.active_nav_ele_bound_box{
 	margin:0 auto;
+	opactiy: 1.0;
+}
+.active_nav_ele_bound_box:hover{
+	cursor:pointer;
 }
 
-.nav_ele_bound_box:hover{
-	cursor:pointer;
+.inactive_nav_ele_bound_box{
+	margin:0 auto;
+	opacity:0.3;
 }
 
 #jump_to_begin_bound_box{

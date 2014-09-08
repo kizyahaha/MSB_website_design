@@ -48,27 +48,90 @@ function create_jump_to_end(parent){
 
 function update_navigation(navigated_space , num_pages){
 	page_num = get_page_num();
-	if (page_num != 1){
-		$('#prev_text').text('prev (' + (page_num-1) + ')');
-	}
-	else{
-		$('#prev_text').text('prev');
-	}
-	if (page_num != num_pages){
-		$('#next_text').text('next (' + (page_num+1) + ')');
-	}
-	else{
-		$('#next_text').text('next');
-	}
-	$('#end_text').text('last (' + num_pages + ')');
+	unbind_navigations();
 	$('#jump_to_page_input').attr('placeholder','1-'+num_pages);
+	if (num_pages == 1){
+		one_page_navigator_display();
+	}
+	else{
+		if (page_num == 1){
+			first_page_navigator_display(num_pages , page_num , navigated_space);
+		}
+		else if (page_num == num_pages){
+			last_page_navigator_display(num_pages , page_num , navigated_space);
+		}
+		else {
+			general_page_navigator_display(num_pages , page_num , navigated_space);
+		}
+	}	
+}
+
+function unbind_navigations(){
 	$('#jump_to_begin_bound_box').unbind();
 	$('#prev_bound_box').unbind();
 	$('#next_bound_box').unbind();
 	$('#jump_to_end_bound_box').unbind();
-	$('#jump_to_begin_bound_box').click(function(){click_navigation('beginning' , navigated_space);});
-	$('#prev_bound_box').click(function(){click_navigation('prev' , navigated_space);});
+}
+
+function one_page_navigator_display(){
+	$('#end_text').text('last');
+	$('#jump_to_begin_bound_box').attr('class','inactive_nav_ele_bound_box');
+	$('#prev_bound_box').attr('class','inactive_nav_ele_bound_box');
+	$('#jump_to_page_bound_box').css('opacity','0.3');
+	$('#next_bound_box').attr('class','inactive_nav_ele_bound_box');
+	$('#jump_to_end_bound_box').attr('class','inactive_nav_ele_bound_box');
+}
+
+function first_page_navigator_display(num_pages , page_num , navigated_space){
+	$('#jump_to_begin_bound_box').attr('class','inactive_nav_ele_bound_box');
+
+	$('#prev_text').text('prev');
+	$('#prev_bound_box').attr('class','inactive_nav_ele_bound_box');
+	
+	$('#jump_to_page_bound_box').css('opacity','1.0');
+	
+	$('#next_text').text('next (' + (page_num+1) + ')');
+	$('#next_bound_box').attr('class','active_nav_ele_bound_box');
 	$('#next_bound_box').click(function(){click_navigation('next' , navigated_space , num_pages);});
+	
+	$('#end_text').text('last (' + num_pages + ')');
+	$('#jump_to_end_bound_box').attr('class','active_nav_ele_bound_box');
+	$('#jump_to_end_bound_box').click(function(){click_navigation('end' , navigated_space , num_pages);});
+}
+
+function last_page_navigator_display(num_pages, page_num , navigated_space){
+	$('#jump_to_begin_bound_box').attr('class','active_nav_ele_bound_box');
+	$('#jump_to_begin_bound_box').click(function(){click_navigation('beginning' , navigated_space);});
+
+	$('#prev_text').text('prev (' + (page_num-1) + ')');
+	$('#prev_bound_box').attr('class','active_nav_ele_bound_box');
+	$('#prev_bound_box').click(function(){click_navigation('prev' , navigated_space);});
+	
+	$('#jump_to_page_bound_box').css('opacity','1.0');
+	
+	$('#next_text').text('next');
+	$('#next_bound_box').attr('class','inactive_nav_ele_bound_box');
+	
+	$('#end_text').text('last');
+	$('#jump_to_end_bound_box').attr('class','inactive_nav_ele_bound_box');
+}
+
+function general_page_navigator_display(num_pages , page_num , navigated_space){
+	$('#jump_to_begin_bound_box').attr('class','active_nav_ele_bound_box');
+	$('#jump_to_begin_bound_box').click(function(){click_navigation('beginning' , navigated_space);});
+
+	$('#prev_text').text('prev (' + (page_num-1) + ')');
+	$('#prev_bound_box').attr('class','active_nav_ele_bound_box');
+	$('#prev_bound_box').click(function(){click_navigation('prev' , navigated_space);});
+	
+	$('#jump_to_page_bound_box').css('opacity','1.0');
+	
+	$('#next_text').text('next (' + (page_num+1) + ')');
+	$('#next_bound_box').attr('class','active_nav_ele_bound_box');
+	$('#next_bound_box').click(function(){click_navigation('next' , navigated_space , num_pages);});
+	
+	$('#end_text').text('last (' + num_pages + ')');
+	$('#jump_to_end_bound_box').attr('class','active_nav_ele_bound_box');
 	$('#jump_to_end_bound_box').click(function(){click_navigation('end' , navigated_space , num_pages);});
 }
 
@@ -78,13 +141,9 @@ function click_navigation(navigator , navigated_space , num_pages){
 	
 	if (navigator == 'next'){
 		desired_page = current_page + 1;
-		if (desired_page > num_pages)
-			return;
 	}
 	else if (navigator == 'prev'){
 		desired_page = current_page - 1;
-		if (desired_page < 1)
-			return;
 	}
 	else if (navigator == 'beginning'){
 		desired_page = 1;
