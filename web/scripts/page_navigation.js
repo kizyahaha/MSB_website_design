@@ -79,12 +79,12 @@ function click_navigation(navigator , navigated_space , num_pages){
 	if (navigator == 'next'){
 		desired_page = current_page + 1;
 		if (desired_page > num_pages)
-			desired_page = num_pages;
+			return;
 	}
 	else if (navigator == 'prev'){
 		desired_page = current_page - 1;
 		if (desired_page < 1)
-			desired_page = 1;
+			return;
 	}
 	else if (navigator == 'beginning'){
 		desired_page = 1;
@@ -102,6 +102,7 @@ function click_navigation(navigator , navigated_space , num_pages){
 	}
 	else if (navigated_space == '#my_rants_space'){
 	}
+	history.pushState({page_num:desired_page}, '', desired_page);
 }
 
 function get_page_num(){

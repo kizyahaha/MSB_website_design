@@ -5,6 +5,9 @@ function create_contender_space(tab_num){
 	document.body.appendChild(contender_space);
 	create_contender_title();
 	create_contenders(tab_num);
+	window.addEventListener('popstate', function(event) {
+		update_contenders(event.state.page_num)
+	});
 	create_power_graph(tab_num);
 }
 
@@ -36,16 +39,13 @@ function create_contenders(tab_num){
 	contenders.id = 'contenders';
 	document.getElementById('contender_space').appendChild(contenders);
 	create_contender_navigation();
-	window.addEventListener('popstate', function(event) {
-		update_contenders(event.state.page_num)
-	});
 	update_contenders(1);
+	history.replaceState({page_num:1}, '', 1);
 }
 
 function update_contenders(pageNum){
 	$('#contenders').empty();
 	get_contenders(pageNum);
-	history.pushState({page_num:pageNum}, '', pageNum);
 }
 
 function get_contenders(page_num){
