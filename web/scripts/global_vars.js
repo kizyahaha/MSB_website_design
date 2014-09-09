@@ -79,3 +79,19 @@ function translate_date(date){
 	}
 	return month + ' ' + date.dayOfMonth + ', ' + date.year;
 }
+
+function get_level(){
+	url = window.location.href;
+	if (url.indexOf("daily") >= 0){
+		return 0;
+	}
+	if (url.indexOf("hourly") >= 0){
+		return 1;
+	}
+	if (url.indexOf("ten_minutely") >= 0){
+		return 2;
+	}
+	if (url.indexOf("minutely") >= 0){
+		return 3;
+	}
+}

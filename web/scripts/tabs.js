@@ -1,4 +1,4 @@
-function create_tabs(tab_num){
+function create_tabs(){
 	var tabs = document.createElement('ul');
 	tabs.id = 'tabs';
 	document.body.appendChild(tabs);
@@ -8,7 +8,7 @@ function create_tabs(tab_num){
 	create_minutely();
 	create_submit_rant_tab();
 	create_submit_pointer();
-	update_tabs(tab_num);
+	update_tabs();
 }
 
 function create_daily(){
@@ -77,9 +77,9 @@ function create_minutely(){
 	document.getElementById('tabs').appendChild(minutely_link);
 }
 
-function update_tabs(tab_num){
+function update_tabs(){
 	var tabs = document.getElementById('tabs');
-	tabs.children[tab_num].children[0].className = 'current_tab';
+	tabs.children[get_level()].children[0].className = 'current_tab';
 }
 
 function create_submit_rant_tab(){

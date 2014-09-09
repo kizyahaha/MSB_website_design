@@ -1,4 +1,4 @@
-function create_rant(tab_num){
+function create_rant(){
 	create_rant_container();
 	create_winner_title();
 	create_rant_bubble();
@@ -6,7 +6,7 @@ function create_rant(tab_num){
 	create_soapbox();
 	create_character();
 	create_countdown();
-	update_rant(tab_num);
+	update_rant();
 }
 
 function create_rant_container(){
@@ -61,20 +61,21 @@ function create_countdown(){
 	document.getElementById('rant_container').appendChild(countdown);	
 }
 
-function update_rant(tab_num){
-	update_winner_title(tab_num);
-	update_winning_user(tab_num); //include rant title and power
-	//update_time_stamp(tab_num);
-	update_rant_text(tab_num);
-	update_character(tab_num);
-	update_countdown(tab_num);
+function update_rant(){
+	level = get_level()
+	update_winner_title(level);
+	update_winning_user(level); //include rant title and power
+	//update_time_stamp(level);
+	update_rant_text(level);
+	update_character(level);
+	update_countdown(level);
 	update_rant_sizes();
 	window.onload = function(){update_rant_sizes();};
 }
 
-function update_winner_title(tab_num){
+function update_winner_title(level){
 	var winner_title = document.getElementById('winner_title');
-	switch(tab_num){
+	switch(level){
 		case 0:
 			winner_title.innerText = "Today's Top Rant";
 			break;
@@ -92,15 +93,15 @@ function update_winner_title(tab_num){
 	}
 }
 
-function update_winning_user(tab_num){
+function update_winning_user(level){
 	var rant_bubble = document.getElementById('rant_bubble');
-	var user = get_username(tab_num);
+	var user = get_username(level);
 	rant_bubble.appendChild(user);
 	var text = document.createTextNode("'s rant");
 	rant_bubble.appendChild(text);
 }
 
-function get_username(tab_num){
+function get_username(level){
 	var user = document.createElement('a');
 	user.className = 'username';
 	user.href = 'user_profile.html?u=2';
@@ -108,17 +109,17 @@ function get_username(tab_num){
 	return user;
 }
 
-function update_rant_text(tab_num){
+function update_rant_text(level){
 	var rant_bubble = document.getElementById('rant_bubble');
-	var rant = get_rant(tab_num);
+	var rant = get_rant(level);
 	rant_bubble.appendChild(document.createElement('br'));
 	rant_bubble.appendChild(document.createElement('br'));
 	rant_bubble.appendChild(rant);
 }
 
-function get_rant(tab_num){
+function get_rant(level){
 	var rant;
-	switch(tab_num){
+	switch(level){
 		case 0:
 			rant = document.createTextNode("Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  ");
 			break;
@@ -137,13 +138,13 @@ function get_rant(tab_num){
 	return rant;
 }
 
-function update_character(tab_num){
-	get_character(tab_num);
+function update_character(level){
+	get_character(level);
 }
 
-function get_character(tab_num){
+function get_character(level){
 	var character = document.getElementById('character');
-	switch(tab_num){
+	switch(level){
 		case 0:
 			character.src = "images/character_1.png";
 			break;
@@ -161,7 +162,7 @@ function get_character(tab_num){
 	}
 }
 
-function update_countdown(tab_num){
+function update_countdown(level){
 	var d = new Date();
 	var curr_hour = d.getHours();
 	var curr_minute = d.getMinutes();
@@ -172,13 +173,13 @@ function update_countdown(tab_num){
 	minutes = leading_zero(minutes);
 	seconds = leading_zero(seconds);
 	var clock = document.getElementById('clock');
-	switch(tab_num){
+	switch(level){
 		case 0:
 			if (hours==0 && minutes==0 && seconds <= 1)
 				clock.innerHTML="NOW!";
 			else{
 				clock.innerHTML = hours + ":" + minutes + ":" + seconds;
-				var refresh_clock = setTimeout(function(){update_countdown(tab_num)},500);
+				var refresh_clock = setTimeout(function(){update_countdown(level)},500);
 			}
 			break;
 		case 1:
@@ -186,7 +187,7 @@ function update_countdown(tab_num){
 				clock.innerHTML="NOW!";
 			else{
 				clock.innerHTML = minutes + ":" + seconds;
-				var refresh_clock = setTimeout(function(){update_countdown(tab_num)},500);
+				var refresh_clock = setTimeout(function(){update_countdown(level)},500);
 			}
 			break;
 		case 2:
@@ -194,7 +195,7 @@ function update_countdown(tab_num){
 				clock.innerHTML="NOW!";
 			else{
 				clock.innerHTML = minutes%10 + ":" + seconds;
-				var refresh_clock = setTimeout(function(){update_countdown(tab_num)},500);
+				var refresh_clock = setTimeout(function(){update_countdown(level)},500);
 			}
 			break;
 		case 3:
@@ -202,7 +203,7 @@ function update_countdown(tab_num){
 				clock.innerHTML="NOW!";
 			else{
 				clock.innerHTML = "0:" + seconds;
-				var refresh_clock = setTimeout(function(){update_countdown(tab_num)},500);
+				var refresh_clock = setTimeout(function(){update_countdown(level)},500);
 			}
 			break;
 		default:

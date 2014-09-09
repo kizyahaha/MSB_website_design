@@ -25,7 +25,7 @@ function get_my_rants(filtered_user_rant_ids){
 			data: {id: filtered_user_rant_ids[i]},
 			success: function(gotData) {
 				rant_data = $.parseJSON(gotData);
-				var rant_ID = create_rant_preview(true , 'my_rants_space' , i , rant_data.owner.id);
+				var rant_ID = create_rant_preview(true , 'my_rants_space' , i , 1 , rant_data.owner.id);
 				populate_rant_preview(true , rant_ID , i , rant_data);
 			},
 			error: function(name,status) {

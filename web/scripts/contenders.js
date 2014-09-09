@@ -1,20 +1,20 @@
 
-function create_contender_space(tab_num){
+function create_contender_space(){
 	var contender_space = document.createElement('div');
 	contender_space.id = 'contender_space';
 	document.body.appendChild(contender_space);
 	create_contender_title();
-	create_contenders(tab_num);
+	create_contenders();
 	window.addEventListener('popstate', function(event) {
 		update_contenders(event.state.page_num)
 	});
-	create_power_graph(tab_num);
+	create_power_graph();
 }
 
 function create_contender_title(){
 	var contender_title = document.createElement('div');
 	contender_title.id = 'contender_title';
-	switch(tab_num){
+	switch(get_level()){
 		case 0:
 			contender_title.innerText = "Contenders for Tomorrow's Title";
 			break;
@@ -34,7 +34,7 @@ function create_contender_title(){
 	$('#contender_title').append("<a href='FAQ.html#FAQ9' , style='color:rgb(52,52,52); font-size:14px;'><br/>in no particular order</a>");
 }
 
-function create_contenders(tab_num){
+function create_contenders(){
 	var contenders = document.createElement('div');
 	contenders.id = 'contenders';
 	document.getElementById('contender_space').appendChild(contenders);
@@ -71,11 +71,12 @@ function get_contenders(page_num){
 }
 
 function get_level_string(){
-	if (tab_num == 0)
+	level = get_level();
+	if (level == 0)
 		return JSON.stringify( {level:"Daily"} );
-	else if (tab_num == 1)
+	else if (level == 1)
 		return JSON.stringify( {level:"Hourly"} );
-	else if (tab_num == 2)
+	else if (level == 2)
 		return JSON.stringify( {level:"10-Minutely"} );
 	return JSON.stringify( {level:"Minutely"} );
 }

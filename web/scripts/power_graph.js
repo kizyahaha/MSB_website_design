@@ -1,4 +1,4 @@
-function create_power_graph(tab_num){
+function create_power_graph(){
 	$('<div/>',{id:'power_graph'}).appendTo('#contender_space');
 	$('<div/>',{id:'graph'}).appendTo('#power_graph');
 	$('<div/>',{id:'rank_slider'}).appendTo('#power_graph');
