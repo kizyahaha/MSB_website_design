@@ -80,7 +80,7 @@ function translate_date(date){
 	return month + ' ' + date.dayOfMonth + ', ' + date.year;
 }
 
-function get_level(){
+function get_level_index(){
 	url = window.location.href;
 	if (url.indexOf("daily") >= 0){
 		return 0;
@@ -94,4 +94,15 @@ function get_level(){
 	if (url.indexOf("minutely") >= 0){
 		return 3;
 	}
+}
+
+function get_level_string(){
+	level = get_level_index();
+	if (level == 0)
+		return 'Daily';
+	else if (level == 1)
+		return 'Hourly';
+	else if (level == 2)
+		return '10-Minutely';
+	return 'Minutely';
 }

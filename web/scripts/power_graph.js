@@ -1,11 +1,24 @@
 function create_power_graph(){
-	$('<div/>',{id:'power_graph'}).appendTo('#contender_space');
-	$('<div/>',{id:'graph'}).appendTo('#power_graph');
-	$('<div/>',{id:'rank_slider'}).appendTo('#power_graph');
+	google.load('visualization', '1', {'packages':['controls']});
+	$.ajax({
+        type: 'POST',
+        url: '/api/rants/list',
+		async: false,
+		data: {appliedFilters: '{"level":"' + get_level_string() + '", "power":"descending"}' , pageNum:0},
+        success: function(gotData) {
+            rants = $.parseJSON(gotData);
+			$('<div/>',{id:'power_graph'}).appendTo('#contender_space');
+			$('<div/>',{id:'graph'}).appendTo('#power_graph');
+			$('<div/>',{id:'rank_slider'}).appendTo('#power_graph');
+            do_contender_power_graph(rants);
+        },
+        error: function(name,status) {
+            alert(status);
+        }
+    });
+}
 
-	// Load the Visualization API and the piechart package.
-    google.load('visualization', '1', {'packages':['controls']});
-
+function do_contender_power_graph(rants){
     // Set a callback to run when the Google Visualization API is loaded.
     google.setOnLoadCallback(drawDashboard);
 	  
@@ -15,7 +28,7 @@ function create_power_graph(){
     function drawDashboard() {
 		// Create the data table.
         var data = new google.visualization.DataTable();
-		data = get_contender_data();
+		data = get_contender_data(rants);
 		
 		// Create a dashboard
 
@@ -73,17 +86,17 @@ function create_power_graph(){
     }
 }
 
-function get_contender_data(){
+function get_contender_data(rants){
 	var data = new google.visualization.DataTable();
 	data.addColumn('number', 'Rank Range:');
     data.addColumn('number', 'Power');
-	data.addRows(num_contenders);
 	
-	var height = 9437;
-	for (var i=0 ; i<num_contenders ; i++){
+	num_rants = rants.length;
+	data.addRows(num_rants);
+	
+	for (var i=0 ; i<num_rants ; i++){
 		data.setValue(i,0,i+1);
-		data.setValue(i,1,height);
-		height = Math.floor(height*0.95);
+		data.setValue(i,1,rants[i].power);
 	}
 	return data;
 }

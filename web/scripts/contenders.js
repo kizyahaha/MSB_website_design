@@ -14,7 +14,7 @@ function create_contender_space(){
 function create_contender_title(){
 	var contender_title = document.createElement('div');
 	contender_title.id = 'contender_title';
-	switch(get_level()){
+	switch(get_level_index()){
 		case 0:
 			contender_title.innerText = "Contenders for Tomorrow's Title";
 			break;
@@ -58,7 +58,7 @@ function get_contenders(page_num){
     $.ajax({
         type: 'POST',
         url: '/api/rants/list',
-		data: {appliedFilters: get_level_string() , pageNum:page_num},
+		data: {appliedFilters: '{"level":"'+get_level_string()+'"}' , pageNum:page_num},
         success: function(gotData) {
             rants = $.parseJSON(gotData);
             display_contenders(rants.firstRantNum , rants.rantsOnPage);
@@ -68,17 +68,6 @@ function get_contenders(page_num){
             alert(status);
         }
     });
-}
-
-function get_level_string(){
-	level = get_level();
-	if (level == 0)
-		return JSON.stringify( {level:"Daily"} );
-	else if (level == 1)
-		return JSON.stringify( {level:"Hourly"} );
-	else if (level == 2)
-		return JSON.stringify( {level:"10-Minutely"} );
-	return JSON.stringify( {level:"Minutely"} );
 }
 
 function display_contenders(first_rant_num , rants){

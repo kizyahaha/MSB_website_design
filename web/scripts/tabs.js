@@ -79,7 +79,7 @@ function create_minutely(){
 
 function update_tabs(){
 	var tabs = document.getElementById('tabs');
-	tabs.children[get_level()].children[0].className = 'current_tab';
+	tabs.children[get_level_index()].children[0].className = 'current_tab';
 }
 
 function create_submit_rant_tab(){

@@ -62,7 +62,7 @@ function create_countdown(){
 }
 
 function update_rant(){
-	level = get_level()
+	level = get_level_index()
 	update_winner_title(level);
 	update_winning_user(level); //include rant title and power
 	//update_time_stamp(level);
