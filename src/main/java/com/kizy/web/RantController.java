@@ -23,6 +23,7 @@ import com.kizy.filter.AliveFilter;
 import com.kizy.filter.Filter;
 import com.kizy.filter.LevelFilter;
 import com.kizy.filter.UsernameFilter;
+import com.kizy.filter.PowerSort;
 import com.kizy.pagination.Pages;
 import com.kizy.pagination.Page;
 import com.kizy.pagination.SimplePage;
@@ -38,6 +39,7 @@ public class RantController {
         FILTERS.put("username", new UsernameFilter());
         FILTERS.put("alive", new AliveFilter());
         FILTERS.put("level", new LevelFilter());
+        FILTERS.put("power", new PowerSort());
     }
 
     @RequestMapping(value = "/add")
@@ -60,7 +62,7 @@ public class RantController {
     @ResponseBody
     public String listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString,
     							@RequestParam(value = "pageNum", required = true) int pageNum) throws IOException {
-    	if (pageNum <= 0) {
+    	if (pageNum < 0) {
     		throw new IllegalArgumentException("Cannot request non-positive page number.");
     	}
     	List<Rant> allRants = DatabaseUtils.getRants();
@@ -74,7 +76,9 @@ public class RantController {
                 filteredRants = filter.doFilter(filteredRants, arg);
             }
         }
-        
+        if (pageNum == 0){
+        	return Serializers.valueToTree(filteredRants).toString();
+        }
     	int firstRantNum = ((pageNum-1) * Pages.RANTS_PER_PAGE);
     	int numPages = (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE);
     	List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
