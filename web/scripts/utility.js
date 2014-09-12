@@ -89,6 +89,7 @@ function get_level_index(){
 	if (url.indexOf("minutely") >= 0){
 		return 3;
 	}
+	return 4;
 }
 
 function get_level_string(){
