@@ -61,9 +61,14 @@ public class UserController {
     @RequestMapping(value = "/userData")
     @ResponseBody
     public String getUserData(HttpServletRequest request, HttpServletResponse response,
-                                @RequestParam(value = "id", required = false) Long id,
-                                @RequestParam(value = "username", required = false) String username)
+                              @RequestParam(value = "id", required = false) Long id,
+                              @RequestParam(value = "username", required = false) String username)
             throws IOException {
+        User user = optionalUser(id, username, request, response);
+        return Serializers.valueToTree(user).toString();
+    }
+
+    private User optionalUser(Long id, String username, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = null;
         if (id == null && username == null) {
             user = WebResources.currentLoggedInUser(request);
@@ -83,7 +88,7 @@ public class UserController {
         if (user == null) {
             user = Users.DUMMY_USER;
         }
-        return Serializers.valueToTree(user).toString();
+        return user;
     }
 
 }
