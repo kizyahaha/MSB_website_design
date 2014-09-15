@@ -12,7 +12,7 @@ public class PowerSort implements Filter {
 	@Override
 	public List<Rant> doFilter(final List<Rant> rants, String arg) {
 		List<Rant> sortedRants = rants;
-		Comparator powerComparator = new PowerComparator();
+		Comparator<Rant> powerComparator = new PowerComparator();
 		Collections.sort(sortedRants , powerComparator);
 		if (arg.equalsIgnoreCase("descending")){
 			Collections.reverse(sortedRants);
