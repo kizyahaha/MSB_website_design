@@ -22,10 +22,10 @@ import com.kizy.data.user.User;
 import com.kizy.filter.AliveFilter;
 import com.kizy.filter.Filter;
 import com.kizy.filter.LevelFilter;
-import com.kizy.filter.UsernameFilter;
 import com.kizy.filter.PowerSort;
-import com.kizy.pagination.Pages;
+import com.kizy.filter.UsernameFilter;
 import com.kizy.pagination.Page;
+import com.kizy.pagination.Pages;
 import com.kizy.pagination.SimplePage;
 
 @Controller
@@ -33,7 +33,7 @@ import com.kizy.pagination.SimplePage;
 public class RantController {
 
     private static AtomicLong countingId = new AtomicLong(DatabaseUtils.maxRantId());
-    
+
     private static final Map<String, Filter> FILTERS = Maps.newHashMap();
     static {
         FILTERS.put("username", new UsernameFilter());
@@ -85,16 +85,16 @@ public class RantController {
         Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
         return  Serializers.valueToTree(page).toString();
     }
-    
+
     /**
      * KEEP FOREVER
-     * 
+     *
      * dict = {
      *   a: A,
      *   b: B,
      *   c: C
      * }
-     * 
+     *
      * dict.keySet = {a, b, c}
      * dict.valueSet = {A, B, C}
      * dict.get(a) = dict[a] = A

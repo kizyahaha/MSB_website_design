@@ -98,7 +98,7 @@ public class SimpleRant implements Rant {
     }
 
     public static String formatRant(String title, String contents, String username, boolean nsfw) {
-        return String.format("[SimpleRant - Title: {}, Contents: {}, Owner: {}, NSFW: {}]", title, contents, username, nsfw);
+        return String.format("[SimpleRant - Title: %s, Contents: %s, Owner: %s, NSFW: %s]", title, contents, username, nsfw);
     }
 
     @Override

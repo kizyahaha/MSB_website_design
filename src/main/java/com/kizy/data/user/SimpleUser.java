@@ -124,8 +124,7 @@ public class SimpleUser implements User {
     }
 
     public static String formatUser(String name, String email, String pass) {
-        return String.format("[SimpleUser - Username: {}, Email: {}, Password: {}]", name, email,
-                pass);
+        return String.format("[SimpleUser - Username: %s, Email: %s, Password: %s]", name, email, pass);
     }
 
     @Override
