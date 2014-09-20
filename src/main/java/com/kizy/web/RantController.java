@@ -61,11 +61,11 @@ public class RantController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public String listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString,
-    							@RequestParam(value = "pageNum", required = true) int pageNum) throws IOException {
-    	if (pageNum < 0) {
-    		throw new IllegalArgumentException("Cannot request non-positive page number.");
-    	}
-    	List<Rant> allRants = DatabaseUtils.getRants();
+                               @RequestParam(value = "pageNum", required = true) int pageNum) throws IOException {
+        if (pageNum < 0) {
+            throw new IllegalArgumentException("Cannot request non-positive page number.");
+        }
+        List<Rant> allRants = DatabaseUtils.getRants();
         List<Rant> filteredRants = allRants;
         if (appliedFiltersString != null) {
             @SuppressWarnings("unchecked")
@@ -77,11 +77,11 @@ public class RantController {
             }
         }
         if (pageNum == 0){
-        	return Serializers.valueToTree(filteredRants).toString();
+            return Serializers.valueToTree(filteredRants).toString();
         }
-    	int firstRantNum = ((pageNum-1) * Pages.RANTS_PER_PAGE);
-    	int numPages = (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE);
-    	List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
+        int firstRantNum = (pageNum-1) * Pages.RANTS_PER_PAGE;
+        int numPages = (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE);
+        List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
         Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
         return  Serializers.valueToTree(page).toString();
     }

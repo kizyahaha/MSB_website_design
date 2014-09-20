@@ -80,8 +80,8 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         if (extension.isEmpty()) {
             outputShim(request, response, path, null);
         } else if (extension.equalsIgnoreCase("html")) {
-        	String body = Files.toString(new File("web/html" + path), Charsets.UTF_8);
-        	outputShim(request, response, path, body);
+            String body = Files.toString(new File("web/html" + path), Charsets.UTF_8);
+            outputShim(request, response, path, body);
         }
         else if (isContent(extension)) {
             outputContent(request, response, path);
@@ -104,7 +104,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/" + style + "\">");
         }
         for (String script : scripts) {
-        	out.println("<script src=\"scripts/" + script + "\"></script>");
+            out.println("<script src=\"scripts/" + script + "\"></script>");
         }
         out.println("</head>");
         out.println("<body>");
