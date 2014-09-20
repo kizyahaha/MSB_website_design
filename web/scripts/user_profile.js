@@ -1,5 +1,5 @@
 
-function create_user_profile(user_tab_num){
+function create_user_profile(){
     $.ajax({
         type: 'POST',
         url: '/api/users/userData',
@@ -13,19 +13,25 @@ function create_user_profile(user_tab_num){
 				is_owner = false;
 			}
             create_user_banner(data);
-            create_user_tabs(user_tab_num);
-            create_user_tab_content(user_tab_num, data);
+            create_user_tabs(data);
+			update_user_tabs(0);
+            create_user_tab_content_space();
+			update_user_tab_content(0);
 			create_footer();
         },
         error: function(name,status) {
             alert(status);
         }
     });
+	window.addEventListener('popstate', function(event) {
+		update_user_tabs(event.state.user_tab_num);
+		update_user_tab_content(event.state.user_tab_num);
+	});
 }
 
 function get_profile_id(){
 	var url = window.location.href;
-	index = url.indexOf('=') + 1;
+	index = url.indexOf('u=') + 2;
 	return url.substring(index);
 }
 
@@ -89,33 +95,27 @@ function create_trophy_case(user_data){
 	$('#star_trophies').append("<img id='user_star' src='images/star_1.png'>");
 }
 
-function create_user_tab_content(user_tab_num, data){
+function create_user_tab_content_space(){
 	$('<div/>',{id:'user_content_space'}).appendTo('body');
-	create_my_rants_content(data);
-	create_my_rants_navigation();
-	create_my_activity_content(data);
-	create_my_items_content(data);
-	update_user_tab_content(user_tab_num);
-	update_my_profile_content_size();
+	if (window.history.state){
+		history.replaceState({user_tab_num:window.history.state.user_tab_num, page_num:window.history.state.page_num}, '', '');
+	}
+	else{
+		history.replaceState({user_tab_num:0, page_num:1}, '', '');
+	}
 }
 
 function update_user_tab_content(user_tab_num){
-	document.getElementById('my_rants_space').style.display = 'none';
-	document.getElementById('my_rant_sorts').style.display = 'none';
-	document.getElementById('my_rants_navigation_table').style.display = 'none';
-	document.getElementById('my_activity_space').style.display = 'none';
-	document.getElementById('my_items_space').style.display = 'none';
+	$('#user_content_space').empty();
 	switch (user_tab_num){
 		case 0:
-			document.getElementById('my_rants_space').style.display = 'initial';
-			document.getElementById('my_rants_navigation_table').style.display = 'initial';
-			document.getElementById('my_rant_sorts').style.display = 'initial';
+			create_my_rants_content();
 			break;
 		case 1:
-			document.getElementById('my_activity_space').style.display = 'initial';
+			create_my_activity_content(data);
 			break;
 		case 2:
-			document.getElementById('my_items_space').style.display = 'initial';
+			create_my_items_content(data);
 			break;
 		default:
 			break;
@@ -125,13 +125,13 @@ function update_user_tab_content(user_tab_num){
 
 function update_my_profile_content_size(){
 	var my_rants = document.getElementById('my_rants_space');
-	if (my_rants.style.display == 'initial'){
+	if (my_rants){
 		$('#my_rants_space').css('minHeight', 100 );
 		$('#my_rants_space').css('maxHeight', 1050 );
 		$('#user_content_space').css('height',$('#my_rants_space').height() + 170);
 	}
 	var my_items = document.getElementById('my_items_space');
-	if (my_items.style.display == 'initial'){
+	if (my_items){
 		var item_height = 370;
 		var defense = document.getElementById('defense_tab_content');
 		if (defense.style.display == 'block'){
@@ -149,6 +149,16 @@ function update_my_profile_content_size(){
 		$('#user_content_space').height( item_height + 0);
 	}
 }
+/*
+function update_contender_sizes(){
+	setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+650);}, 250);
+	var resizeTimer;
+	$(window).resize(function() {
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+650);}, 250);
+	});
+}
+*/
 
 //eventually move once we create my activity
 function create_my_activity_content(logged_user){

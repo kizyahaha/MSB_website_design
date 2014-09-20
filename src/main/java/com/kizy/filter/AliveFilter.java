@@ -9,7 +9,10 @@ public class AliveFilter implements Filter {
 
     @Override
     public List<Rant> doFilter(final List<Rant> rants, String arg) {
-        List<Rant> filteredRants = Lists.newArrayList();
+    	if (arg.equalsIgnoreCase("any")){
+        	return rants;
+        }
+    	List<Rant> filteredRants = Lists.newArrayList();
         boolean alive = Boolean.parseBoolean(arg);
         for (Rant rant : rants) {
             if (rant.isAlive() && alive) {

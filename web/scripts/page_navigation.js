@@ -1,4 +1,4 @@
-function create_page_navigation(parent , num_pages){
+function create_page_navigation(parent){
 	create_jump_to_begin(parent);
 	create_prev(parent);
 	create_jump_to_page(parent);
@@ -166,12 +166,13 @@ function page_navigate(navigator , navigated_space , num_pages){
 	}
 	
 	$(navigated_space).empty();
+	history.pushState({user_tab_num:0, page_num:desired_page}, '', '');
 	if (navigated_space == '#contenders'){
 		update_contenders(desired_page);
 	}
 	else if (navigated_space == '#my_rants_space'){
+		update_user_tab_content(0);
 	}
-	history.pushState({page_num:desired_page}, '', '');
 }
 
 function validate_jump_to_input(num_pages){

@@ -7,19 +7,11 @@ import java.util.List;
 import com.kizy.data.rant.Rant;
 import com.kizy.filter.PowerComparator;
 
-public class PowerSort implements Filter {
+public class BirthSort implements Filter {
 
 	@Override
 	public List<Rant> doFilter(final List<Rant> rants, String arg) {
 		List<Rant> sortedRants = rants;
-		if (arg.equalsIgnoreCase("any")){
-			return sortedRants;
-		}
-		Comparator<Rant> powerComparator = new PowerComparator();
-		Collections.sort(sortedRants , powerComparator);
-		if (arg.equalsIgnoreCase("descending")){
-			Collections.reverse(sortedRants);
-		}
 		return sortedRants;
 	}
 

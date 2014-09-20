@@ -23,6 +23,7 @@ import com.kizy.filter.AliveFilter;
 import com.kizy.filter.Filter;
 import com.kizy.filter.LevelFilter;
 import com.kizy.filter.PowerSort;
+import com.kizy.filter.BirthSort;
 import com.kizy.filter.UsernameFilter;
 import com.kizy.pagination.Page;
 import com.kizy.pagination.Pages;
@@ -40,6 +41,7 @@ public class RantController {
         FILTERS.put("alive", new AliveFilter());
         FILTERS.put("level", new LevelFilter());
         FILTERS.put("power", new PowerSort());
+        FILTERS.put("birthDate", new BirthSort());
     }
 
     @RequestMapping(value = "/add")
