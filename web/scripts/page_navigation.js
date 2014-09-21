@@ -171,7 +171,7 @@ function page_navigate(navigator , navigated_space , num_pages){
 		update_contenders(desired_page);
 	}
 	else if (navigated_space == '#my_rants_space'){
-		update_user_tab_content(0);
+		get_my_rants();
 	}
 }
 

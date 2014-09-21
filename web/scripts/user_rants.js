@@ -2,6 +2,7 @@
 function create_my_rants_content(){
 	$('<div/>',{id:'my_rant_sorts'}).appendTo('#user_content_space');
 	$('<div/>',{id:'my_rants_space'}).appendTo('#user_content_space');
+	create_my_rants_navigation();
 	create_rant_filters();
 	get_my_rants();
 }
@@ -64,15 +65,16 @@ function create_order_sort(filters){
 }
 
 function apply_filters(){
+	$('#my_rants_space').empty();
 	history.pushState({user_tab_num:0, page_num:1}, '', '');
-	update_user_tab_content(0);
+	get_my_rants();
 }
 
 function get_status_filter(){
 	status = document.getElementById("status_select").value;
 	if (status == 'Any')
 		return 'any';
-	else if (status == 'Alive')
+	else if (status == 'Active')
 		return 'true';
 	else // status == 'Past'
 		return 'false';
@@ -119,8 +121,8 @@ function get_my_rants(){
         success: function(gotData) {
             rants = $.parseJSON(gotData);
             display_my_rants(rants.firstRantNum , rants.rantsOnPage);
-			create_my_rants_navigation();
 			update_my_rants_navigation(rants.numPages);
+			update_my_profile_content_size();
         },
         error: function(name,status) {
             alert(status);
