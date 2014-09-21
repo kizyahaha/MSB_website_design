@@ -151,18 +151,18 @@ public class DatabaseUtils {
     }
 
     public static void upvote(long userId, long rantId) throws IOException {
-    	Rant rant = findRantById(rantId);
-    	if ( removeDownvote(userId, rantId) ){
-        	rant.changePower(1);
+        Rant rant = findRantById(rantId);
+        if ( removeDownvote(userId, rantId) ){
+            rant.changePower(1);
         }
-    	if ( removeUpvote(userId, rantId) ){
-        	rant.changePower(-1);
+        if ( removeUpvote(userId, rantId) ){
+            rant.changePower(-1);
         }
-    	else {
-    		rant.changePower(1);
-    		append(UPVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
-    	}
-    	modifyRant(rantId, rant);
+        else {
+            rant.changePower(1);
+            append(UPVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
+        }
+        modifyRant(rantId, rant);
     }
 
     public static Boolean removeUpvote(long userId, long rantId) throws IOException {
@@ -170,16 +170,16 @@ public class DatabaseUtils {
     }
 
     public static void downvote(long userId, long rantId) throws IOException {
-    	Rant rant = findRantById(rantId);
+        Rant rant = findRantById(rantId);
         if ( removeUpvote(userId, rantId) ){
-        	rant.changePower(-1);
+            rant.changePower(-1);
         }
         if ( removeDownvote(userId, rantId) ){
-        	rant.changePower(1);
+            rant.changePower(1);
         }
         else {
-        	rant.changePower(-1);
-        	append(DOWNVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
+            rant.changePower(-1);
+            append(DOWNVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
         }
         modifyRant(rantId, rant);
     }
@@ -197,7 +197,7 @@ public class DatabaseUtils {
                 newContents.append(line + "\n");
             }
             else{
-            	didRemove = true;
+                didRemove = true;
             }
         }
         Files.write(newContents, file, Charsets.UTF_8);

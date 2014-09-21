@@ -127,7 +127,7 @@ public class SimpleRant implements Rant {
     @Override
     @JsonProperty("level")
     public String getRantLevel() {
-    	return level;
+        return level;
     }
 
     @Override
