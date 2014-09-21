@@ -14,16 +14,13 @@ public class BirthSort implements Filter {
         if (arg.equalsIgnoreCase("any")){
             return sortedRants;
         }
-        Comparator<Rant> birthComparator = new Comparator<Rant>() {
+        Comparator<Rant> birthComparator = Filters.signedComparator(new Comparator<Rant>() {
             @Override
             public int compare(Rant rant1, Rant rant2){
                 return rant1.getCreationDate().compareTo(rant2.getCreationDate());
             }
-        };
+        }, arg);
         Collections.sort(sortedRants , birthComparator);
-        if (arg.equalsIgnoreCase("descending")){
-            Collections.reverse(sortedRants);
-        }
         return sortedRants;
     }
 }

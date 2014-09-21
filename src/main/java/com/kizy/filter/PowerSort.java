@@ -14,19 +14,13 @@ public class PowerSort implements Filter {
         if (arg.equalsIgnoreCase("any")){
             return sortedRants;
         }
-        final int sign = isDescending(arg) ? -1 : 1;
-        Comparator<Rant> powerComparator = new Comparator<Rant>() {
+        Comparator<Rant> powerComparator = Filters.signedComparator(new Comparator<Rant>() {
             @Override
             public int compare(Rant rant1, Rant rant2){
-                return (rant1.getRantPower() - rant2.getRantPower()) * sign;
+                return rant1.getRantPower() - rant2.getRantPower();
             }
-        };
+        }, arg);
         Collections.sort(sortedRants , powerComparator);
         return sortedRants;
-    }
-
-    private boolean isDescending(String arg) {
-        return arg.equalsIgnoreCase("descending") ||
-               arg.equalsIgnoreCase("decreasing");
     }
 }
