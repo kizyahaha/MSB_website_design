@@ -12,8 +12,8 @@ public class PowerSort implements Filter {
     public List<Rant> doFilter(final List<Rant> rants, String arg) {
         List<Rant> sortedRants = rants;
         if (arg.equalsIgnoreCase("any")){
-			return sortedRants;
-		}
+            return sortedRants;
+        }
         final int sign = isDescending(arg) ? -1 : 1;
         Comparator<Rant> powerComparator = new Comparator<Rant>() {
             @Override
