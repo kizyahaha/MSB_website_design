@@ -1,4 +1,4 @@
-1~~~~~false~~~~~Test~~~~~Hello World!~~~~~name~~~~~2014-06-08T12:45:18.736-05:00~~~~~2014-09-03T10:34:49.064-05:00~~~~~352~~~~~10-Minutely
+1~~~~~false~~~~~Test~~~~~Hello World!~~~~~name~~~~~2014-06-08T12:45:18.736-05:00~~~~~2014-09-23T09:31:52.122-05:00~~~~~351~~~~~10-Minutely
 2~~~~~true~~~~~Title~~~~~Contents~~~~~Queen_of_Equestria~~~~~2014-06-08T10:46:18.736-07:00~~~~~2014-08-25T02:23:08.753-07:00~~~~~4563~~~~~Hourly
 3~~~~~true~~~~~This is a title~~~~~These are contents.~~~~~Queen_of_Equestria~~~~~2014-06-08T10:47:18.736-07:00~~~~~2014-08-25T02:22:11.963-07:00~~~~~7866~~~~~10-Minutely
 4~~~~~true~~~~~This is a title~~~~~These are contents.~~~~~Queen_of_Equestria~~~~~2014-06-08T10:49:18.736-07:00~~~~~2014-08-25T02:22:12.565-07:00~~~~~3246~~~~~Minutely
@@ -15,3 +15,4 @@
 15~~~~~false~~~~~Testing power initiation~~~~~This should have 100 power~~~~~Queen_of_Equestria~~~~~2014-07-29T21:02:56.331-05:00~~~~~2014-07-29T21:02:56.331-05:00~~~~~100~~~~~10-Minutely
 16~~~~~false~~~~~My firstest rant - of what I'm told will be many many many rants - how's that for a title?~~~~~John Jacob Jingleheimer-Schmidt da da da da da da~~~~~Queen_of_Equestria~~~~~2014-09-06T19:54:13.488-05:00~~~~~2014-09-06T19:54:13.489-05:00~~~~~100~~~~~Minutely
 17~~~~~false~~~~~Testing Level Initiation~~~~~This should go to "Minutely"~~~~~Queen_of_Equestria~~~~~2014-09-08T08:23:30.688-05:00~~~~~2014-09-08T08:23:30.689-05:00~~~~~100~~~~~Minutely
+18~~~~~false~~~~~Link Test~~~~~https://www.google.com/search?q=jeremy+zink&espv=2&biw=1757&bih=1014&source=lnms&tbm=isch&sa=X&ei=JQUjVIGlKY2lyATB_IHgBA&ved=0CAYQ_AUoAQ#imgdii=_~~~~~Queen_of_Equestria~~~~~2014-09-24T12:55:17.705-05:00~~~~~2014-09-24T12:55:17.751-05:00~~~~~100~~~~~Minutely

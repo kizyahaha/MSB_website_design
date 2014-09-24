@@ -102,7 +102,12 @@ function create_rant_preview_vote_button_functionality(preview_ID , rant_ID){
 function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, rant_data){
 	$(preview_ID).find('.rant_preview_number').text( (first_list_num+list_num+1) + '.' );
 	$(preview_ID).find('.rant_preview_title_link').text(rant_data.title);
-		$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
+		if (is_url(rant_data.contents)){
+			$(preview_ID).find('.rant_preview_title_link').attr('href',rant_data.contents);
+		}
+		else{
+			$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
+		}
 	$(preview_ID).find('.rant_preview_author_link').text(rant_data.owner.username);
 		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html?u=' + rant_data.owner.id);
 		$(preview_ID).find('.rant_preview_author').css('width',(rant_data.owner.username.length)*10+'px');	
@@ -136,6 +141,10 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 		$(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_2.png');
 	}
 	create_rant_preview_vote_button_functionality(preview_ID , rant_data.id);
+}
+
+function is_url(text){
+	return /(https?:\/\/[^\s]+)/g.test(text); //this is a really bad regex!
 }
 
 function user_did_oppose(rant_data){
