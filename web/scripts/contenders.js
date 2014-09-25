@@ -5,10 +5,29 @@ function create_contender_space(){
 	document.body.appendChild(contender_space);
 	create_contender_title();
 	create_contenders();
+	create_power_graph();
+	some_stupid_fucking_bullshit_workaround_for_a_god_damn_chrome_popstate_onload_bug();
 	window.addEventListener('popstate', function(event) {
 		update_contenders(event.state.page_num)
 	});
-	create_power_graph();
+}
+
+ function some_stupid_fucking_bullshit_workaround_for_a_god_damn_chrome_popstate_onload_bug(){
+	// There's nothing to do for older browsers ;)
+	if (!window.addEventListener)
+		return;
+	var blockPopstateEvent = document.readyState!="complete";
+	window.addEventListener("load", function() {
+		// The timeout ensures that popstate-events will be unblocked right
+		// after the load event occured, but not in the same event-loop cycle.
+		setTimeout(function(){ blockPopstateEvent = false; }, 0);
+	}, false);
+	window.addEventListener("popstate", function(evt) {
+		if (blockPopstateEvent && document.readyState=="complete") {
+			evt.preventDefault();
+			evt.stopImmediatePropagation();
+		}
+	}, false);
 }
 
 function create_contender_title(){
