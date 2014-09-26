@@ -19,3 +19,10 @@
 19~~~~~false~~~~~Early texting whilst driving~~~~~http://extrafabulouscomics.com/comic/183-2/~~~~~Queen_of_Equestria~~~~~2014-09-24T13:09:54.846-05:00~~~~~2014-09-24T13:09:54.847-05:00~~~~~100~~~~~Minutely
 20~~~~~false~~~~~Swish~~~~~http://extrafabulouscomics.com/comic/48/~~~~~Queen_of_Equestria~~~~~2014-09-24T13:12:08.412-05:00~~~~~2014-09-24T13:12:08.412-05:00~~~~~100~~~~~Minutely
 21~~~~~false~~~~~....CAT TRAP!~~~~~http://extrafabulouscomics.com/comic/62/~~~~~Queen_of_Equestria~~~~~2014-09-24T13:13:20.522-05:00~~~~~2014-09-24T13:13:20.523-05:00~~~~~100~~~~~Minutely
+22~~~~~false~~~~~I suspect gamers will appreciate this~~~~~http://extrafabulouscomics.com/comic/64/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:08:18.880-05:00~~~~~2014-09-25T12:08:18.880-05:00~~~~~100~~~~~Minutely
+23~~~~~false~~~~~Dry humor~~~~~http://extrafabulouscomics.com/comic/118/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:23:23.520-05:00~~~~~2014-09-25T12:23:23.521-05:00~~~~~100~~~~~Minutely
+24~~~~~false~~~~~Gay humor~~~~~http://extrafabulouscomics.com/comic/160/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:34:34.799-05:00~~~~~2014-09-25T12:34:34.799-05:00~~~~~100~~~~~Minutely
+25~~~~~false~~~~~Even drier humor~~~~~http://extrafabulouscomics.com/comic/167/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:37:01.217-05:00~~~~~2014-09-25T12:37:01.217-05:00~~~~~100~~~~~Minutely
+26~~~~~false~~~~~Also much funny~~~~~http://extrafabulouscomics.com/comic/182/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:39:34.584-05:00~~~~~2014-09-25T12:39:34.584-05:00~~~~~100~~~~~Minutely
+27~~~~~false~~~~~Clearly just wasting time at work~~~~~http://threewordphrase.com/moulting.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:42:44.072-05:00~~~~~2014-09-25T12:42:44.072-05:00~~~~~100~~~~~Minutely
+28~~~~~false~~~~~Tiny fingers~~~~~http://threewordphrase.com/supertiny.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:46:00.585-05:00~~~~~2014-09-25T12:46:00.585-05:00~~~~~100~~~~~Minutely
