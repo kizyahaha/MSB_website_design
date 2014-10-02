@@ -104,6 +104,17 @@ public class RantController {
     	}
     	return  Serializers.valueToTree(rantPowers).toString();
     }
+    
+    @RequestMapping(value = "/winner")
+    @ResponseBody
+    public String getLevelWinnerRant(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
+    	return Serializers.valueToTree(DatabaseUtils.findRantById(getLevelWinnerId(appliedFiltersString))).toString();
+    }
+    
+    public long getLevelWinnerId(String appliedFiltersString) throws IOException{
+    	List<Rant> levelRants = filterRants(appliedFiltersString);
+    	return levelRants.get(0).getRantId();
+    }
 
     /**
      * KEEP FOREVER
