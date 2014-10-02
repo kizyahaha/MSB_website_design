@@ -2,15 +2,15 @@ function create_power_graph(){
 	google.load('visualization', '1', {'packages':['controls']});
 	$.ajax({
         type: 'POST',
-        url: '/api/rants/list',
+        url: '/api/rants/powers',
 		async: false,
-		data: {appliedFilters: '{"level":"' + get_level_string() + '", "power":"descending"}' , pageNum:0},
+		data: {appliedFilters: '{"level":"' + get_level_string() + '", "power":"descending"}'},
         success: function(gotData) {
-            rants = $.parseJSON(gotData);
+            powers = $.parseJSON(gotData);
 			$('<div/>',{id:'power_graph'}).appendTo('#contender_space');
 			$('<div/>',{id:'graph'}).appendTo('#power_graph');
 			$('<div/>',{id:'rank_slider'}).appendTo('#power_graph');
-            do_contender_power_graph(rants);
+            do_contender_power_graph(powers);
         },
         error: function(name,status) {
             alert(status);
@@ -18,7 +18,7 @@ function create_power_graph(){
     });
 }
 
-function do_contender_power_graph(rants){
+function do_contender_power_graph(powers){
     // Set a callback to run when the Google Visualization API is loaded.
     google.setOnLoadCallback(drawDashboard);
 	  
@@ -28,7 +28,7 @@ function do_contender_power_graph(rants){
     function drawDashboard() {
 		// Create the data table.
         var data = new google.visualization.DataTable();
-		data = get_contender_data(rants);
+		data = get_contender_data(powers);
 		
 		// Create a dashboard
 
@@ -86,17 +86,17 @@ function do_contender_power_graph(rants){
     }
 }
 
-function get_contender_data(rants){
+function get_contender_data(powers){
 	var data = new google.visualization.DataTable();
 	data.addColumn('number', 'Rank Range:');
     data.addColumn('number', 'Power');
 	
-	num_rants = rants.length;
+	num_rants = powers.length;
 	data.addRows(num_rants);
 	
 	for (var i=0 ; i<num_rants ; i++){
 		data.setValue(i,0,i+1);
-		data.setValue(i,1,rants[i].power);
+		data.setValue(i,1,powers[i]);
 	}
 	return data;
 }
