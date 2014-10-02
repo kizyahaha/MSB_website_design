@@ -1,24 +1,17 @@
 function create_rant(){
 	create_rant_container();
-	create_winner_title();
 	create_rant_bubble();
 	create_triangle();
 	create_soapbox();
 	create_character();
 	create_countdown();
-	update_rant();
+	update_winner_rant();
 }
 
 function create_rant_container(){
 	var rant_container = document.createElement('div');
 	rant_container.id = "rant_container";
 	document.body.appendChild(rant_container);
-}
-
-function create_winner_title(){
-	var winner_title = document.createElement('div');
-	winner_title.id = "winner_title";
-	document.getElementById('rant_container').appendChild(winner_title);
 }
 
 function create_rant_bubble(){
@@ -61,81 +54,24 @@ function create_countdown(){
 	document.getElementById('rant_container').appendChild(countdown);	
 }
 
-function update_rant(){
-	level = get_level_index()
-	update_winner_title(level);
-	update_winning_user(level); //include rant title and power
-	//update_time_stamp(level);
-	update_rant_text(level);
-	update_character(level);
-	update_countdown(level);
-	update_rant_sizes();
-	window.onload = function(){update_rant_sizes();};
-}
-
-function update_winner_title(level){
-	var winner_title = document.getElementById('winner_title');
-	switch(level){
-		case 0:
-			winner_title.innerText = "Today's Top Rant";
-			break;
-		case 1:
-			winner_title.innerText = "Hour's Top Rant";
-			break;
-		case 2:
-			winner_title.innerText = "Ten's Top Rant";
-			break;
-		case 3:
-			winner_title.innerText = "Minute's Top Rant";
-			break;
-		default:
-			break;
-	}
-}
-
-function update_winning_user(level){
-	var rant_bubble = document.getElementById('rant_bubble');
-	var user = get_username(level);
-	rant_bubble.appendChild(user);
-	var text = document.createTextNode("'s rant");
-	rant_bubble.appendChild(text);
-}
-
-function get_username(level){
-	var user = document.createElement('a');
-	user.className = 'username';
-	user.href = 'user_profile.html?u=2';
-	user.textContent = 'Queen_of_Equestria';
-	return user;
-}
-
-function update_rant_text(level){
-	var rant_bubble = document.getElementById('rant_bubble');
-	var rant = get_rant(level);
-	rant_bubble.appendChild(document.createElement('br'));
-	rant_bubble.appendChild(document.createElement('br'));
-	rant_bubble.appendChild(rant);
-}
-
-function get_rant(level){
-	var rant;
-	switch(level){
-		case 0:
-			rant = document.createTextNode("Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  Jeremy is dumb.  ");
-			break;
-		case 1:
-			rant = document.createTextNode("Jeremy?  More like Jere-gay!  Hehe!");
-			break;
-		case 2:
-			rant = document.createTextNode('Jeremy likes ponies?....You mean, like, "My Little Pony" ponies?');
-			break;
-		case 3:
-			rant = document.createTextNode("Clippity cloppity, clippity cloppity, clippity cloppity, boo!");
-			break;
-		default:
-			break;
-	}
-	return rant;
+function update_winner_rant(){
+	$.ajax({
+        type: 'POST',
+        url: '/api/rants/winner',
+		data: {appliedFilters: '{"level":"'+get_level_string()+'"}'},
+        success: function(gotData) {
+            winner = $.parseJSON(gotData);
+            var winner_ID = create_rant_preview(false , 'rant_bubble' , -1 , winner.owner.id);
+			populate_rant_preview(false , winner_ID , -1 , 1 , winner);			
+			update_character(get_level_index());
+			update_countdown(get_level_index());
+			update_rant_sizes();
+			window.onload = function(){update_rant_sizes();};
+        },
+        error: function(name,status) {
+            alert(status);
+        }
+    });
 }
 
 function update_character(level){

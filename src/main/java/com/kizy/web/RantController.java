@@ -1,6 +1,7 @@
 package com.kizy.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -62,12 +63,24 @@ public class RantController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public String listAllRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString,
+    public String listRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString,
                                @RequestParam(value = "pageNum", required = true) int pageNum) throws IOException {
         if (pageNum < 0) {
             throw new IllegalArgumentException("Cannot request non-positive page number.");
         }
-        List<Rant> allRants = DatabaseUtils.getRants();
+        List<Rant> filteredRants = filterRants(appliedFiltersString);
+        if (pageNum == 0){
+            return Serializers.valueToTree(filteredRants).toString();
+        }
+        int firstRantNum = (pageNum-1) * Pages.RANTS_PER_PAGE;
+        int numPages = (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE);
+        List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
+        Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
+        return  Serializers.valueToTree(page).toString();
+    }
+    
+    public List<Rant> filterRants(String appliedFiltersString) throws IOException{
+    	List<Rant> allRants = DatabaseUtils.getRants();
         List<Rant> filteredRants = allRants;
         if (appliedFiltersString != null) {
             @SuppressWarnings("unchecked")
@@ -78,14 +91,29 @@ public class RantController {
                 filteredRants = filter.doFilter(filteredRants, arg);
             }
         }
-        if (pageNum == 0){
-            return Serializers.valueToTree(filteredRants).toString();
-        }
-        int firstRantNum = (pageNum-1) * Pages.RANTS_PER_PAGE;
-        int numPages = (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE);
-        List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
-        Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
-        return  Serializers.valueToTree(page).toString();
+        return filteredRants;
+    }
+    
+    @RequestMapping(value = "/powers")
+    @ResponseBody
+    public String listAllPowers(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
+    	List<Rant> levelRants = filterRants(appliedFiltersString);
+    	List<Integer> rantPowers = new ArrayList<Integer>();
+    	for (Rant rant : levelRants){
+    		rantPowers.add(rant.getRantPower());
+    	}
+    	return  Serializers.valueToTree(rantPowers).toString();
+    }
+    
+    @RequestMapping(value = "/winner")
+    @ResponseBody
+    public String getLevelWinnerRant(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
+    	return Serializers.valueToTree(DatabaseUtils.findRantById(getLevelWinnerId(appliedFiltersString))).toString();
+    }
+    
+    public long getLevelWinnerId(String appliedFiltersString) throws IOException{
+    	List<Rant> levelRants = filterRants(appliedFiltersString);
+    	return levelRants.get(0).getRantId();
     }
 
     /**
