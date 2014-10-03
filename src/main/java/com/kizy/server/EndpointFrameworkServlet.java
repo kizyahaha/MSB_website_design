@@ -126,11 +126,10 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
 
     private static String getBodyShim(int tabIndex) {
         return "<script>" +
-                 "var tab_num = " + tabIndex + ";" +
                  "create_banner();" +
-                 "create_tabs(tab_num);" +
-                 "create_rant(tab_num);" +
-                 "create_contender_space(tab_num);" +
+                 "create_tabs();" +
+                 "create_rant();" +
+                 "create_contender_space();" +
                  "create_footer();" +
                "</script>";
     }
