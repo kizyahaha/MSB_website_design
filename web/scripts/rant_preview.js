@@ -108,9 +108,9 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 		else{
 			$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
 		}
-	$(preview_ID).find('.rant_preview_author_link').text(rant_data.owner.username);
-		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html?u=' + rant_data.owner.id);
-		$(preview_ID).find('.rant_preview_author').css('width',(rant_data.owner.username.length)*10+'px');	
+	$(preview_ID).find('.rant_preview_author_link').text(rant_data.ownername);
+		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html?u=' + rant_data.owner);
+		$(preview_ID).find('.rant_preview_author').css('width',(rant_data.ownername.length)*10+'px');
 	$(preview_ID).find('.rant_preview_rank').text(get_rant_rank(first_list_num+list_num+1));	
 	$(preview_ID).find('.rant_preview_level').text(rant_data.level);
 		$(preview_ID).find('.rant_preview_level').attr('href',get_rant_preview_level_link(rant_data));

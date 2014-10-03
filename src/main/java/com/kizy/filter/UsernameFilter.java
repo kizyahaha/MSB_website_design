@@ -12,7 +12,7 @@ public class UsernameFilter implements Filter {
     public List<Rant> doFilter(final List<Rant> rants, String arg) {
         List<Rant> filteredRants = Lists.newArrayList();
         for (Rant rant : rants) {
-            if (rant.getOwner().getUsername().equalsIgnoreCase(arg)) {
+            if (rant.getOwnerUsername().equalsIgnoreCase(arg)) {
                 filteredRants.add(rant);
             }
         }

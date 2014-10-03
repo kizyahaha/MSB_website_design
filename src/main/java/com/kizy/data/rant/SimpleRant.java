@@ -7,7 +7,6 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
-import com.kizy.data.user.User;
 
 public class SimpleRant implements Rant {
 
@@ -15,7 +14,8 @@ public class SimpleRant implements Rant {
     private final boolean nsfw;
     private final String title;
     private final String contents;
-    private final User owner;
+    private final long owner;
+    private final String ownername;
     private final DateTime birth;
     private int power;
     private String level;
@@ -27,8 +27,9 @@ public class SimpleRant implements Rant {
                       @JsonProperty("nsfw") boolean nsfw,
                       @JsonProperty("title") String title,
                       @JsonProperty("contents") String contents,
-                      @JsonProperty("owner") User owner) {
-        this(id, nsfw, title, contents, owner, DateTime.now(), null, Rants.STARTING_POWER,
+                      @JsonProperty("owner") long owner,
+                      @JsonProperty("ownername") String ownername) {
+        this(id, nsfw, title, contents, owner, ownername, DateTime.now(), null, Rants.STARTING_POWER,
              "Minutely", Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet());
     }
 
@@ -37,7 +38,8 @@ public class SimpleRant implements Rant {
                       @JsonProperty("nsfw") boolean nsfw,
                       @JsonProperty("title") String title,
                       @JsonProperty("contents") String contents,
-                      @JsonProperty("owner") User owner,
+                      @JsonProperty("owner") long owner,
+                      @JsonProperty("ownername") String ownername,
                       @JsonProperty("birth") DateTime birth,
                       @JsonProperty("death") DateTime death,
                       @JsonProperty("power") int power,
@@ -49,6 +51,7 @@ public class SimpleRant implements Rant {
         this.title = title;
         this.contents = contents;
         this.owner = owner;
+        this.ownername = ownername;
         this.birth = birth;
         this.power = power;
         this.level = level;
@@ -82,8 +85,14 @@ public class SimpleRant implements Rant {
 
     @Override
     @JsonProperty("owner")
-    public User getOwner() {
+    public Long getOwnerId() {
         return owner;
+    }
+
+    @Override
+    @JsonProperty("ownername")
+    public String getOwnerUsername() {
+        return ownername;
     }
 
     @Override
@@ -94,7 +103,7 @@ public class SimpleRant implements Rant {
 
     @Override
     public String toString() {
-        return formatRant(title, contents, owner.getUsername(), nsfw);
+        return formatRant(title, contents, ownername, nsfw);
     }
 
     public static String formatRant(String title, String contents, String username, boolean nsfw) {
@@ -164,13 +173,17 @@ public class SimpleRant implements Rant {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (birth == null ? 0 : birth.hashCode());
-        result = prime * result + (contents == null ? 0 : contents.hashCode());
-        result = prime * result + (int) (id ^ id >>> 32);
+        result = prime * result + ((birth == null) ? 0 : birth.hashCode());
+        result = prime * result + ((contents == null) ? 0 : contents.hashCode());
+        result = prime * result + ((downvotes == null) ? 0 : downvotes.hashCode());
+        result = prime * result + (int) (id ^ (id >>> 32));
+        result = prime * result + ((level == null) ? 0 : level.hashCode());
         result = prime * result + (nsfw ? 1231 : 1237);
-        result = prime * result + (owner == null ? 0 : owner.hashCode());
+        result = prime * result + (int) (owner ^ (owner >>> 32));
+        result = prime * result + ((ownername == null) ? 0 : ownername.hashCode());
         result = prime * result + power;
-        result = prime * result + (title == null ? 0 : title.hashCode());
+        result = prime * result + ((title == null) ? 0 : title.hashCode());
+        result = prime * result + ((upvotes == null) ? 0 : upvotes.hashCode());
         return result;
     }
 
@@ -182,7 +195,7 @@ public class SimpleRant implements Rant {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof SimpleRant)) {
+        if (getClass() != obj.getClass()) {
             return false;
         }
         SimpleRant other = (SimpleRant) obj;
@@ -200,17 +213,34 @@ public class SimpleRant implements Rant {
         } else if (!contents.equals(other.contents)) {
             return false;
         }
+        if (downvotes == null) {
+            if (other.downvotes != null) {
+                return false;
+            }
+        } else if (!downvotes.equals(other.downvotes)) {
+            return false;
+        }
         if (id != other.id) {
+            return false;
+        }
+        if (level == null) {
+            if (other.level != null) {
+                return false;
+            }
+        } else if (!level.equals(other.level)) {
             return false;
         }
         if (nsfw != other.nsfw) {
             return false;
         }
-        if (owner == null) {
-            if (other.owner != null) {
+        if (owner != other.owner) {
+            return false;
+        }
+        if (ownername == null) {
+            if (other.ownername != null) {
                 return false;
             }
-        } else if (!owner.equals(other.owner)) {
+        } else if (!ownername.equals(other.ownername)) {
             return false;
         }
         if (power != other.power) {
@@ -221,6 +251,13 @@ public class SimpleRant implements Rant {
                 return false;
             }
         } else if (!title.equals(other.title)) {
+            return false;
+        }
+        if (upvotes == null) {
+            if (other.upvotes != null) {
+                return false;
+            }
+        } else if (!upvotes.equals(other.upvotes)) {
             return false;
         }
         return true;

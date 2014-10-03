@@ -21,10 +21,10 @@ import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.SimpleRant;
 import com.kizy.data.user.User;
 import com.kizy.filter.AliveFilter;
+import com.kizy.filter.BirthSort;
 import com.kizy.filter.Filter;
 import com.kizy.filter.LevelFilter;
 import com.kizy.filter.PowerSort;
-import com.kizy.filter.BirthSort;
 import com.kizy.filter.UsernameFilter;
 import com.kizy.pagination.Page;
 import com.kizy.pagination.Pages;
@@ -52,7 +52,7 @@ public class RantController {
                         @RequestParam("title") String title,
                         @RequestParam("contents") String contents) {
         User owner = WebResources.currentLoggedInUser(request);
-        Rant rant = new SimpleRant(countingId.incrementAndGet(), nsfw, title, contents, owner);
+        Rant rant = new SimpleRant(countingId.incrementAndGet(), nsfw, title, contents, owner.getUserId(), owner.getUsername());
         owner.addRant(rant.getRantId());
         try {
             DatabaseUtils.writeRant(rant);
@@ -78,7 +78,7 @@ public class RantController {
         Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
         return  Serializers.valueToTree(page).toString();
     }
-    
+
     public List<Rant> filterRants(String appliedFiltersString) throws IOException{
     	List<Rant> allRants = DatabaseUtils.getRants();
         List<Rant> filteredRants = allRants;
@@ -93,7 +93,7 @@ public class RantController {
         }
         return filteredRants;
     }
-    
+
     @RequestMapping(value = "/powers")
     @ResponseBody
     public String listAllPowers(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
@@ -104,13 +104,13 @@ public class RantController {
     	}
     	return  Serializers.valueToTree(rantPowers).toString();
     }
-    
+
     @RequestMapping(value = "/winner")
     @ResponseBody
     public String getLevelWinnerRant(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
     	return Serializers.valueToTree(DatabaseUtils.findRantById(getLevelWinnerId(appliedFiltersString))).toString();
     }
-    
+
     public long getLevelWinnerId(String appliedFiltersString) throws IOException{
     	List<Rant> levelRants = filterRants(appliedFiltersString);
     	return levelRants.get(0).getRantId();
@@ -162,7 +162,7 @@ public class RantController {
     }
 
     private boolean isOwner(User user, Rant rant) {
-        return rant.getOwner().equals(user);
+        return rant.getOwnerId().equals(user);
     }
 
 }

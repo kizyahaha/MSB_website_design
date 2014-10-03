@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.joda.time.DateTime;
 
-import com.kizy.data.user.User;
 
 public interface Rant {
 
@@ -16,7 +15,9 @@ public interface Rant {
 
     String getContents();
 
-    User getOwner();
+    Long getOwnerId();
+
+    String getOwnerUsername();
 
     DateTime getCreationDate();
 

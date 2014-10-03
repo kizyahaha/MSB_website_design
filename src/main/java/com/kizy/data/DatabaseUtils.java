@@ -65,7 +65,7 @@ public class DatabaseUtils {
 
     private static void addRantToOwner(Rant rant) throws IOException {
         StringBuilder newContents = new StringBuilder();
-        long userId = rant.getOwner().getUserId();
+        long userId = rant.getOwnerId();
         for (String line : readUsers()) {
             newContents.append(line);
             String[] userString = splitLine(line);
@@ -127,7 +127,7 @@ public class DatabaseUtils {
                rant.isNsfw() + LINE_DELIMITER +
                rant.getTitle() + LINE_DELIMITER +
                rant.getContents() + LINE_DELIMITER +
-               rant.getOwner().getUsername() + LINE_DELIMITER +
+               rant.getOwnerUsername() + LINE_DELIMITER +
                rant.getCreationDate().toString() + LINE_DELIMITER +
                rant.getDeathDate().toString() + LINE_DELIMITER + //temporary
                rant.getRantPower() + LINE_DELIMITER +
@@ -316,11 +316,13 @@ public class DatabaseUtils {
     private static Rant parseRant(String line) throws IOException {
         String[] parts = splitLine(line);
         long rantId = Long.parseLong(parts[RANT_ID_PART]);
+        User user = findUserByName(parts[RANT_OWNER_PART]);
         return new SimpleRant(rantId,
                               Boolean.parseBoolean(parts[RANT_NSFW_PART]),
                               parts[RANT_TITLE_PART],
                               parts[RANT_CONTENTS_PART],
-                              findUserByName(parts[RANT_OWNER_PART]),
+                              user.getUserId(),
+                              user.getUsername(),
                               new DateTime(parts[RANT_CREATION_PART]),
                               new DateTime(parts[RANT_DEATH_PART]),
                               Integer.parseInt(parts[RANT_POWER_PART]),
