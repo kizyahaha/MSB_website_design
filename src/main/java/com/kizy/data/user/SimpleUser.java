@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
 
@@ -61,12 +62,13 @@ public class SimpleUser implements User {
     }
 
     @Override
-    @JsonProperty("email")
+    @JsonIgnore
     public String getEmail() {
         return email;
     }
 
     @Override
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -89,13 +91,13 @@ public class SimpleUser implements User {
     }
 
     @Override
-    @JsonProperty("upvotes")
+    @JsonIgnore
     public Collection<Long> getUpvoteIds() {
         return upvotes;
     }
 
     @Override
-    @JsonProperty("downvotes")
+    @JsonIgnore
     public Collection<Long> getDownvoteIds() {
         return downvotes;
     }

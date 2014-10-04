@@ -1,6 +1,8 @@
 package com.kizy.web;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Serializers;
 import com.kizy.data.user.SimpleUser;
@@ -66,6 +69,16 @@ public class UserController {
             throws IOException {
         User user = optionalUser(id, username, request, response);
         return Serializers.valueToTree(user).toString();
+    }
+
+    @RequestMapping(value = "/votes")
+    @ResponseBody
+    public String getVotes(HttpServletRequest request) throws IOException {
+        User user = WebResources.currentLoggedInUser(request);
+        Map<String, Collection<Long>> votes = Maps.newHashMap();
+        votes.put("upvotes", user.getUpvoteIds());
+        votes.put("downvotes", user.getDownvoteIds());
+        return Serializers.valueToTree(votes).toString();
     }
 
     private User optionalUser(Long id, String username, HttpServletRequest request, HttpServletResponse response) throws IOException {

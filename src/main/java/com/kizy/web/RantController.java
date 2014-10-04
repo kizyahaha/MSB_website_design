@@ -2,6 +2,7 @@ package com.kizy.web;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
@@ -161,8 +162,33 @@ public class RantController {
         }
     }
 
+    @RequestMapping(value = "/votes")
+    @ResponseBody
+    public String getVotes(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
+        Rant rant = DatabaseUtils.findRantById(id);
+        User user = WebResources.currentLoggedInUser(request);
+        if (!isOwner(user, rant)) {
+            return "";
+        }
+        Map<String, Collection<Long>> votes = Maps.newHashMap();
+        votes.put("upvotes", rant.getUpvoteIds());
+        votes.put("downvotes", rant.getDownvoteIds());
+        return Serializers.valueToTree(votes).toString();
+    }
+
+    @RequestMapping(value = "/power")
+    @ResponseBody
+    public String getPower(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
+        Rant rant = DatabaseUtils.findRantById(id);
+        User user = WebResources.currentLoggedInUser(request);
+        if (!isOwner(user, rant)) {
+            return "";
+        }
+        return Integer.toString(rant.getRantPower());
+    }
+
     private boolean isOwner(User user, Rant rant) {
-        return rant.getOwnerId().equals(user);
+        return rant.getOwnerId() == user.getUserId();
     }
 
 }

@@ -126,20 +126,8 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 		$(preview_ID).find('.rant_preview_content').text(rant_data.contents);
 	}
 	
-	if (user_did_oppose(rant_data)){
-		$(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_1.png');
-		$(preview_ID).find('.rant_preview_support_button_image').css('opacity','0.3');
-	}
-	else {
-		$(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_2.png');
-	}
-	if (user_did_support(rant_data)){
-		$(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_1.png');
-		$(preview_ID).find('.rant_preview_oppose_button_image').css('opacity','0.3');
-	}
-	else{
-		$(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_2.png');
-	}
+	draw_downvote(rant_data, preview_ID);
+	draw_upvote(rant_data, preview_ID);
 	create_rant_preview_vote_button_functionality(preview_ID , rant_data.id);
 }
 
@@ -147,23 +135,47 @@ function is_url(text){
 	return /(https?:\/\/[^\s]+)/g.test(text); //this is a really bad regex!
 }
 
-function user_did_oppose(rant_data){
-	num_voters = rant_data.downvotes.length;
-	for (j=0 ; j<num_voters; j++){
-		if (rant_data.downvotes[j] == logged_user.id){
-			return true;
-		}
-	}
-	return false;
+function draw_downvote(rant_data, preview_ID){
+    $.ajax({
+        type: 'POST',
+        url: '/api/users/votes',
+        success: function(gotData) {
+            data = $.parseJSON(gotData);
+            downvotes = data.downvotes;
+            for (j = 0; j < downvotes.length; j++){
+                if (downvotes[j] == rant_data.id){
+                    $(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_1.png');
+                    $(preview_ID).find('.rant_preview_support_button_image').css('opacity','0.3');
+                    return;
+                }
+            }
+            $(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_2.png');
+        },
+        error: function(name,status) {
+            alert(status);
+        }
+    });
 }
-function user_did_support(rant_data){
-	num_voters = rant_data.upvotes.length;
-	for (j=0 ; j<num_voters; j++){
-		if (rant_data.upvotes[j] == logged_user.id){
-			return true;
-		}
-	}
-	return false;
+function draw_upvote(rant_data, preview_ID){
+	$.ajax({
+        type: 'POST',
+        url: '/api/users/votes',
+        success: function(gotData) {
+            data = $.parseJSON(gotData);
+            upvotes = data.upvotes;
+            for (j = 0; j < upvotes.length; j++){
+                if (upvotes[j] == rant_data.id){
+                    $(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_1.png');
+                    $(preview_ID).find('.rant_preview_oppose_button_image').css('opacity','0.3');
+                    return;
+                }
+            }
+            $(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_2.png');
+        },
+        error: function(name,status) {
+            alert(status);
+        }
+    });
 }
 
 function get_rant_rank(rank){
