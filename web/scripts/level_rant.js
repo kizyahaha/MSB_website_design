@@ -1,5 +1,6 @@
 function create_rant(){
 	create_rant_container();
+	create_winner_headline();
 	create_rant_bubble();
 	create_triangle();
 	create_soapbox();
@@ -12,6 +13,12 @@ function create_rant_container(){
 	var rant_container = document.createElement('div');
 	rant_container.id = "rant_container";
 	document.body.appendChild(rant_container);
+}
+
+function create_winner_headline(){
+	var winner_headline = document.createElement('div');
+	winner_headline.id = "winner_headline";
+	document.getElementById('rant_container').appendChild(winner_headline);
 }
 
 function create_rant_bubble(){
@@ -62,7 +69,8 @@ function update_winner_rant(){
         success: function(gotData) {
             winner = $.parseJSON(gotData);
             var winner_ID = create_rant_preview(false , 'rant_bubble' , -1 , winner.owner.id);
-			populate_rant_preview(false , winner_ID , -1 , 1 , winner);			
+			populate_rant_preview(false , winner_ID , -1 , 1 , winner);
+			update_winner_headline(get_level_index());
 			update_character(get_level_index());
 			update_countdown(get_level_index());
 			update_rant_sizes();
@@ -72,6 +80,26 @@ function update_winner_rant(){
             alert(status);
         }
     });
+}
+
+function update_winner_headline(level){
+	var winner_headline = document.getElementById('winner_headline');
+	switch(level){
+		case 0:
+			winner_headline.innerText = "Today's Top Rant";
+			break;
+		case 1:
+			winner_headline.innerText = "Hour's Top Rant";
+			break;
+		case 2:
+			winner_headline.innerText = "Ten's Top Rant";
+			break;
+		case 3:
+			winner_headline.innerText = "Minute's Top Rant";
+			break;
+		default:
+			break;
+	}
 }
 
 function update_character(level){
