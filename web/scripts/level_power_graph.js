@@ -13,7 +13,7 @@ function create_power_graph(){
             do_contender_power_graph(powers);
         },
         error: function(name,status) {
-            alert(status);
+            window.document.location.href = "error_page.html";
         }
     });
 }

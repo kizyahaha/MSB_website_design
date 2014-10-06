@@ -84,7 +84,7 @@ function get_contenders(page_num){
 			update_contender_navigation(rants.numPages);
         },
         error: function(name,status) {
-            alert(status);
+            window.document.location.href = "error_page.html";
         }
     });
 }

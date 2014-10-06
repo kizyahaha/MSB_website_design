@@ -60,7 +60,7 @@ function rant_submit(form){
 				window.document.location.href = "daily.html";
 			},
 			error: function(msg) {
-				alert("Computers suck");
+				window.document.location.href = "error_page.html";
 			}
 		});
 		//$.post( '/api/rants/add' , $('#rant_submission_form').serialize());

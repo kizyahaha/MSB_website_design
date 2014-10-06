@@ -20,7 +20,7 @@ function create_user_profile(){
 			create_footer();
         },
         error: function(name,status) {
-            alert(status);
+            window.document.location.href = "error_page.html";
         }
     });
 	window.addEventListener('popstate', function(event) {

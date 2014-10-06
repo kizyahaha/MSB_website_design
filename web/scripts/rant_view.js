@@ -18,7 +18,7 @@ function create_detailed_rant(){
 			create_footer();
         },
         error: function(name,status) {
-            alert(status);
+            window.document.location.href = "error_page.html";
         }
     });
 }

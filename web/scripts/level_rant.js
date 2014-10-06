@@ -77,7 +77,7 @@ function update_winner_rant(){
 			window.onload = function(){update_rant_sizes();};
         },
         error: function(name,status) {
-            alert(status);
+            window.document.location.href = "error_page.html";
         }
     });
 }

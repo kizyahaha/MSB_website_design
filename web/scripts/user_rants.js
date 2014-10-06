@@ -25,7 +25,7 @@ function get_user_username(){
 			username = data.username;
         },
         error: function(name,status) {
-            alert(status);
+            window.document.location.href = "error_page.html";
         }
     });
 	return username;
@@ -125,7 +125,7 @@ function get_my_rants(){
 			update_my_profile_content_size();
         },
         error: function(name,status) {
-            alert(status);
+            window.document.location.href = "error_page.html";
         }
     });
 }

@@ -6,7 +6,10 @@ function get_user(){
         url: '/api/users/userData',
         success: function(data) {
             user = $.parseJSON(data);
-        }
+        },
+		error: function(name,status) {
+			window.document.location.href = "error_page.html";
+		}
     });
 	return user;
 }
@@ -20,7 +23,10 @@ function log_off_user(){
         success: function(data) {
             logged_user = $.parseJSON(data);
 			window.document.location.href = 'daily.html';
-        }
+        },
+		error: function(name,status) {
+			window.document.location.href = "error_page.html";
+		}
     });
 	$.ajax({
 		async: false,
@@ -28,6 +34,9 @@ function log_off_user(){
 		url: '/api/login/logout',
 		success: function(msg) {
 		    window.document.location.href = 'daily.html';
+		},
+		error: function(name,status) {
+			window.document.location.href = "error_page.html";
 		}
 	});
 }
