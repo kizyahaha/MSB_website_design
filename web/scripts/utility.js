@@ -111,3 +111,7 @@ function get_level_string(){
 		return '10-Minutely';
 	return 'Minutely';
 }
+
+function is_url(text){
+	return /(https?:\/\/[^\s]+)/g.test(text); //this is a really bad regex!
+}

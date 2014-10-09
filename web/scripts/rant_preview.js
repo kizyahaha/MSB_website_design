@@ -131,10 +131,6 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 	create_rant_preview_vote_button_functionality(preview_ID , rant_data.id);
 }
 
-function is_url(text){
-	return /(https?:\/\/[^\s]+)/g.test(text); //this is a really bad regex!
-}
-
 function draw_downvote(rant_data, preview_ID){
     $.ajax({
         type: 'POST',
@@ -156,6 +152,7 @@ function draw_downvote(rant_data, preview_ID){
         }
     });
 }
+
 function draw_upvote(rant_data, preview_ID){
 	$.ajax({
         type: 'POST',
@@ -221,7 +218,6 @@ function owner_rant_preview_display(preview_ID){
 	$(preview_ID + ' .rant_preview_dates_line').show();
 	$(preview_ID + ' .rant_preview_support_button').hide();
 	$(preview_ID + ' .rant_preview_oppose_button').hide();
-	
 	$(preview_ID + ' .rant_preview_owner_info_line').show();
 }
 

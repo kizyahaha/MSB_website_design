@@ -30,12 +30,12 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
     private static final long serialVersionUID = 1L;
 
     private static final List<String> styles = ImmutableList.of("banner.css",
-                                                                "tabs.css",
-                                                                "rant.css",
+                                                                "level_tabs.css",
+                                                                "level_rant.css",
                                                                 "rant_preview.css",
                                                                 "page_navigation.css",
                                                                 "contenders.css",
-                                                                "power_graph.css",
+                                                                "level_power_graph.css",
                                                                 "footer.css",
                                                                 "main.css",
                                                                 "log_in_sign_up.css",
@@ -43,10 +43,10 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
                                                                 "sign_up_success.css",
                                                                 "user_profile.css",
                                                                 "user_tabs.css",
-                                                                "my_rants.css",
+                                                                "user_rants.css",
                                                                 "submit_rant.css",
                                                                 "rant_view.css",
-                                                                "my_items.css",
+                                                                "user_items.css",
                                                                 "FAQ.css",
                                                                 "error_page.css");
 

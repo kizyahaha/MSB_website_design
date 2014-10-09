@@ -68,3 +68,65 @@
 	text-align:center;
 	line-height:20%;
 }
+
+/****************************************************************************************************/
+
+
+.winner_rant_right_side{
+    position:relative;
+    right:0px;
+    font-family:Lato;
+    color:rgb(52,52,52);
+}
+.winner_rant_title_link{
+    font-weight:700;
+    font-size:20px;
+    color:rgb(52,52,52);
+}
+.winner_rant_author_link{
+    padding-left:30px;
+    color:rgb(12,120,154);
+    text-decoration:none;
+}
+.winner_rant_level{
+    color:rgb(52,52,52);
+}
+.winner_rant_birth{
+    display:inline;
+    font-style:italic;
+}
+.winner_rant_star{
+    width:25px;
+    display:inline;
+    margin-left:20px;
+}
+.winner_rant_medal{
+    width:20px;
+    display:inline;
+    margin-left:20px;
+}
+.winner_rant_queen{
+    width:25px;
+    display:inline;
+    margin-left:20px;
+}
+.winner_rant_king{
+    width:25px;
+    display:inline;
+    margin-left:20px;
+}
+.winner_rant_death{
+    display:inline;
+    font-style:italic;
+    margin-left:20px;
+}
+.winner_rant_content_line{
+    min-height:20px;
+    position:relative;
+    margin-left:25px;
+    margin-top:15px;
+}
+
+.winner_rant_NSFW_content{
+    color:red;
+}
