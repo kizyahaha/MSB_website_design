@@ -130,7 +130,7 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 	$(preview_ID).find('.rant_preview_rank').text(get_rant_rank(first_list_num+list_num+1));	
 	$(preview_ID).find('.rant_preview_level').text(rant_data.level);
 		$(preview_ID).find('.rant_preview_level').attr('href',get_rant_preview_level_link(rant_data));
-	$(preview_ID).find('.rant_preview_power').text(rant_data.power);
+	$(preview_ID).find('.rant_preview_power').text(get_rant_power(rant_data.id));
 	$(preview_ID).find('.rant_preview_birth').text('Created ' + translate_date(rant_data.birth));
 	$(preview_ID).find('.rant_preview_death').text('Died ' + translate_date(rant_data.death));
 	if (rant_data.nsfw && is_list){
@@ -165,7 +165,7 @@ function draw_downvote(rant_data, preview_ID){
 			$(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_2.png');
         },
         error: function(name,status) {
-            alert(status);
+            window.document.location.href = "error_page.html";
         }
     });
 }
@@ -187,7 +187,7 @@ function draw_upvote(rant_data, preview_ID){
 			$(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_2.png');
         },
         error: function(name,status) {
-            alert(status);
+            window.document.location.href = "error_page.html";
         }
     });
 }
@@ -227,6 +227,23 @@ function get_rant_preview_level_link(rant_data){
 		return 'ten_minutely.html';
 	}
 	return 'minutely.html';
+}
+
+function get_rant_power(rant_id){
+	var power = 0;
+	$.ajax({
+        type: 'POST',
+		async: false,
+        url: '/api/rants/power',
+		data: {id: rant_id},
+        success: function(gotData) {
+            power = gotData;
+        },
+        error: function(name,status) {
+            window.document.location.href = "error_page.html";
+        }
+    });
+	return power;
 }
 
 /**********************************************************************************************************/
