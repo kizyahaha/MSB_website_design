@@ -133,7 +133,7 @@ function get_my_rants(){
 function display_my_rants(first_rant_num , rants){
 	var num_my_rants = rants.length;
 	for (i=0 ; i<num_my_rants ; i++){
-		var rant_ID = create_rant_preview(true , 'my_rants_space' , i , rants[i].owner.id);
+		var rant_ID = create_rant_preview(true , 'my_rants_space' , i , rants[i].owner);
 		populate_rant_preview(true , rant_ID , i , first_rant_num , rants[i]);
 	}
 }

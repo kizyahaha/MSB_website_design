@@ -92,7 +92,7 @@ function get_contenders(page_num){
 function display_contenders(first_rant_num , rants){
 	var num_contenders2 = rants.length;
 	for (i=0 ; i<num_contenders2 ; i++){
-		var contender_ID = create_rant_preview(true , 'contenders' , i , rants[i].owner.id);
+		var contender_ID = create_rant_preview(true , 'contenders' , i , rants[i].owner);
 		populate_rant_preview(true , contender_ID , i , first_rant_num , rants[i]);
 	}
 	update_contender_sizes();

@@ -233,8 +233,6 @@ function get_rant_preview_level_link(rant_data){
 
 function owner_rant_preview_display(preview_ID){
 	$(preview_ID + ' .rant_preview_dates_line').show();
-	$(preview_ID + ' .rant_preview_support_button').hide();
-	$(preview_ID + ' .rant_preview_oppose_button').hide();
 	$(preview_ID + ' .rant_preview_owner_info_line').show();
 }
 
