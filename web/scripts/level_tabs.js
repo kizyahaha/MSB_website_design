@@ -84,7 +84,7 @@ function update_tabs(){
 
 function create_submit_rant_tab(){
 	$('<a/>',{id:'submit_rant_link'}).appendTo('#tabs');
-	if (logged_user != ""){
+	if (logged_user.id != -1){
 		$('#submit_rant_link').attr('href','submit_rant.html');
 	}
 	else{

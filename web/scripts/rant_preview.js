@@ -9,9 +9,9 @@ function create_rant_preview(is_list , parent , num , author_id){
 		create_rant_preview_left_side(ID);
 	}
 	create_rant_preview_right_side(ID);
-	if (logged_user.id == -1){
+	/*if (logged_user.id == -1){
 		no_log_rant_preview_display(ID);
-	}
+	}*/
 	if (logged_user.id == author_id){
 		owner_rant_preview_display(ID);
 	}
@@ -93,8 +93,24 @@ function create_rant_preview_vote_button_functionality(preview_ID , rant_ID){
 	var track_votes = new Array();
 	track_votes[0] = $(preview_ID + ' .rant_preview_support_button_image');
 	track_votes[1] = $(preview_ID + ' .rant_preview_oppose_button_image');
-	track_votes[0].click( function(){support_push(track_votes , rant_ID);} );
-	track_votes[1].click( function(){oppose_push(track_votes , rant_ID);} );
+	if (logged_user.id == -1){
+		track_votes[0].click( function(){window.document.location.href = 'log_in_sign_up.html'} );
+		track_votes[1].click( function(){window.document.location.href = 'log_in_sign_up.html'} );
+	}
+	else{
+		track_votes[0].click( function(){support_push(track_votes , rant_ID);} );
+		track_votes[1].click( function(){oppose_push(track_votes , rant_ID);} );
+	}
+}
+
+function create_use_item_button_functionality(preview_ID , rant_ID){
+	use_item_button = $(preview_ID + ' .rant_preview_use_item_button');
+	if (logged_user.id == -1){
+		use_item_button.click( function(){window.document.location.href = 'log_in_sign_up.html'} );
+	}
+	else{
+		//use_item_button.click( function(){} );
+	}
 }
 
 /**********************************************************************************************************/
@@ -129,6 +145,7 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 	draw_downvote(rant_data, preview_ID);
 	draw_upvote(rant_data, preview_ID);
 	create_rant_preview_vote_button_functionality(preview_ID , rant_data.id);
+	create_use_item_button_functionality(preview_ID , rant_data.id);
 }
 
 function draw_downvote(rant_data, preview_ID){

@@ -264,12 +264,12 @@ function create_winner_rant_content_line(winner_ID){
 
 function populate_winner_rant(winner_ID , rant_data){
 	$(winner_ID).find('.winner_rant_title_link').text(rant_data.title);
-		if (is_url(rant_data.contents)){
+		/*if (is_url(rant_data.contents)){
 			$(winner_ID).find('.winner_rant_title_link').attr('href',rant_data.contents);
 		}
 		else{
 			$(winner_ID).find('.winner_rant_title_link').attr('href','rant_view.html?r=' + rant_data.id);
-		}
+		}*/
 	$(winner_ID).find('.winner_rant_author_link').text(rant_data.owner.username);
 		$(winner_ID).find('.winner_rant_author_link').attr('href','user_profile.html?u=' + rant_data.owner.id);
 		$(winner_ID).find('.winner_rant_author').css('width',(rant_data.owner.username.length)*10+'px');	
