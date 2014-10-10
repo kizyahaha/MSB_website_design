@@ -2,6 +2,7 @@ package com.kizy.web;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -75,12 +76,14 @@ public class UserController {
     @ResponseBody
     public String getVotes(HttpServletRequest request) throws IOException {
         User user = WebResources.currentLoggedInUser(request);
-        if (user == null) {
-        	return "";
-        }
         Map<String, Collection<Long>> votes = Maps.newHashMap();
-        votes.put("upvotes", user.getUpvoteIds());
-        votes.put("downvotes", user.getDownvoteIds());
+        if (user == null) {
+            votes.put("upvotes", Collections.<Long>emptyList());
+            votes.put("downvotes", Collections.<Long>emptyList());
+        } else {
+            votes.put("upvotes", user.getUpvoteIds());
+            votes.put("downvotes", user.getDownvoteIds());
+        }
         return Serializers.valueToTree(votes).toString();
     }
 
