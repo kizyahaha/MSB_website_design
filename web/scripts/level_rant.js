@@ -270,9 +270,9 @@ function populate_winner_rant(winner_ID , rant_data){
 		else{
 			$(winner_ID).find('.winner_rant_title_link').attr('href','rant_view.html?r=' + rant_data.id);
 		}*/
-	$(winner_ID).find('.winner_rant_author_link').text(rant_data.owner.username);
-		$(winner_ID).find('.winner_rant_author_link').attr('href','user_profile.html?u=' + rant_data.owner.id);
-		$(winner_ID).find('.winner_rant_author').css('width',(rant_data.owner.username.length)*10+'px');	
+	$(winner_ID).find('.winner_rant_author_link').text(rant_data.ownername);
+		$(winner_ID).find('.winner_rant_author_link').attr('href','user_profile.html?u=' + rant_data.owner);
+		$(winner_ID).find('.winner_rant_author').css('width',(rant_data.ownername.length)*10+'px');	
 	$(winner_ID).find('.winner_rant_rank').text(get_rant_rank(0));	
 	$(winner_ID).find('.winner_rant_level').text(rant_data.level);
 		$(winner_ID).find('.winner_rant_level').attr('href',get_winner_rant_level_link(rant_data));

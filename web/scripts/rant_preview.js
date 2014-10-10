@@ -154,15 +154,17 @@ function draw_downvote(rant_data, preview_ID){
         url: '/api/users/votes',
         success: function(gotData) {
             data = $.parseJSON(gotData);
-            downvotes = data.downvotes;
-            for (j = 0; j < downvotes.length; j++){
-                if (downvotes[j] == rant_data.id){
-                    $(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_1.png');
-                    $(preview_ID).find('.rant_preview_support_button_image').css('opacity','0.3');
-                    return;
-                }
-            }
-            $(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_2.png');
+			if (data != '') {
+				downvotes = data.downvotes;
+				for (j = 0; j < downvotes.length; j++){
+					if (downvotes[j] == rant_data.id){
+						$(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_1.png');
+						$(preview_ID).find('.rant_preview_support_button_image').css('opacity','0.3');
+						return;
+					}
+				}
+				$(preview_ID).find('.rant_preview_oppose_button_image').attr('src','images/down_button_2.png');
+			}
         },
         error: function(name,status) {
             alert(status);
@@ -176,15 +178,17 @@ function draw_upvote(rant_data, preview_ID){
         url: '/api/users/votes',
         success: function(gotData) {
             data = $.parseJSON(gotData);
-            upvotes = data.upvotes;
-            for (j = 0; j < upvotes.length; j++){
-                if (upvotes[j] == rant_data.id){
-                    $(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_1.png');
-                    $(preview_ID).find('.rant_preview_oppose_button_image').css('opacity','0.3');
-                    return;
-                }
-            }
-            $(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_2.png');
+			if (data != '') {
+				upvotes = data.upvotes;
+				for (j = 0; j < upvotes.length; j++){
+					if (upvotes[j] == rant_data.id){
+						$(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_1.png');
+						$(preview_ID).find('.rant_preview_oppose_button_image').css('opacity','0.3');
+						return;
+					}
+				}
+				$(preview_ID).find('.rant_preview_support_button_image').attr('src','images/up_button_2.png');
+			}
         },
         error: function(name,status) {
             alert(status);

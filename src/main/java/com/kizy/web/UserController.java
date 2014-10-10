@@ -75,6 +75,9 @@ public class UserController {
     @ResponseBody
     public String getVotes(HttpServletRequest request) throws IOException {
         User user = WebResources.currentLoggedInUser(request);
+        if (user == null) {
+        	return "";
+        }
         Map<String, Collection<Long>> votes = Maps.newHashMap();
         votes.put("upvotes", user.getUpvoteIds());
         votes.put("downvotes", user.getDownvoteIds());
