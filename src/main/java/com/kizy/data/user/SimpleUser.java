@@ -18,6 +18,7 @@ public class SimpleUser implements User {
     private final DateTime date;
     private Collection<Long> upvotes;
     private Collection<Long> downvotes;
+    private final int nsfwPreference;
 
     private final Collection<Long> rantIds;
 
@@ -27,7 +28,7 @@ public class SimpleUser implements User {
                       @JsonProperty("password") String password,
                       @JsonProperty("email") String email) {
         this(id, username, password, email, DateTime.now(), Sets.<Long>newConcurrentHashSet(),
-             Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet());
+             Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet(), 0);
     }
 
     @JsonCreator
@@ -38,7 +39,8 @@ public class SimpleUser implements User {
                       @JsonProperty("date") DateTime date,
                       @JsonProperty("rants") Collection<Long> rants,
                       @JsonProperty("upvotes") Collection<Long> upvotes,
-                      @JsonProperty("downvotes") Collection<Long> downvotes) {
+                      @JsonProperty("downvotes") Collection<Long> downvotes,
+                      @JsonProperty("nsfwPrerence") int nsfwPreference) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -47,6 +49,7 @@ public class SimpleUser implements User {
         this.rantIds = rants;
         this.upvotes = upvotes;
         this.downvotes = downvotes;
+        this.nsfwPreference = nsfwPreference;
     }
 
     @Override
@@ -193,6 +196,12 @@ public class SimpleUser implements User {
             return false;
         }
         return true;
+    }
+    
+    @Override
+    @JsonProperty("nsfwPreference")
+    public int getNsfwPreference() {
+        return nsfwPreference;
     }
 
 }

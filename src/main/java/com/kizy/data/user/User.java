@@ -29,5 +29,7 @@ public interface User {
     void downvote(Long rantId);
 
     void unvote(Long rantId);
+    
+    int getNsfwPreference();
 
 }
