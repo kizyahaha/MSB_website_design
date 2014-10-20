@@ -109,5 +109,16 @@ public class UserController {
         }
         return user;
     }
+    
+    @RequestMapping(value = "/setPreferences")
+    @ResponseBody
+    public void setUserPreferences(HttpServletRequest request,
+    								@RequestParam("nsfwPreference") int nsfwPreference) throws IOException {
+    	User user = WebResources.currentLoggedInUser(request);
+    	if (user.getNsfwPreference() != nsfwPreference){
+    		user.setNsfwPreference(nsfwPreference);
+    	}
+    	DatabaseUtils.modifyUser(user.getUserId(), user);
+    }
 
 }

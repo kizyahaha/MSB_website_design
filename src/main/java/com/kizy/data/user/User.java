@@ -31,5 +31,7 @@ public interface User {
     void unvote(Long rantId);
     
     int getNsfwPreference();
+    
+    void setNsfwPreference(int preference);
 
 }

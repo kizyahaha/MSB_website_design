@@ -18,7 +18,7 @@ public class SimpleUser implements User {
     private final DateTime date;
     private Collection<Long> upvotes;
     private Collection<Long> downvotes;
-    private final int nsfwPreference;
+    private int nsfwPreference;
 
     private final Collection<Long> rantIds;
 
@@ -202,6 +202,11 @@ public class SimpleUser implements User {
     @JsonProperty("nsfwPreference")
     public int getNsfwPreference() {
         return nsfwPreference;
+    }
+    
+    @Override
+    public void setNsfwPreference (int preference) {
+        nsfwPreference = preference;
     }
 
 }
