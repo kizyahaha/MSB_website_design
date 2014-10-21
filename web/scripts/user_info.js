@@ -25,21 +25,10 @@ function create_nsfw_preference_select(current_preference){
 	$('<form/>',{id:'nsfw_preference'}).appendTo('#edit_user_info_form');
 	$('#nsfw_preference').text('NSFW Preference: ');
 	$('<select/>',{id:'nsfw_preference_select'}).appendTo('#nsfw_preference');
-	$('#nsfw_preference_select').append('<option>No, thanks.  Do not show me any NSFW content!</option>');
-	$('#nsfw_preference_select').append("<option>Warn me about NSFW content.</option>");
-	$('#nsfw_preference_select').append('<option>Screw it.  Show me all NSFW content!</option>');
-	set_nsfw_current_preference(current_preference);
-}
-
-function set_nsfw_current_preference(preference){
-	var temp = "No, thanks.  Do not show me any NSFW content!";
-	if (preference == 1){
-		temp = "Screw it.  Show me all NSFW content!";
-	}
-	if (preference == 2){
-		temp = "Warn me about NSFW content.";
-	}
-	$('#nsfw_preference_select').val(temp);
+	$('#nsfw_preference_select').append('<option value="0">No, thanks.  Do not show me any NSFW content!</option>');
+	$('#nsfw_preference_select').append('<option value="2">Warn me about NSFW content.</option>');
+	$('#nsfw_preference_select').append('<option value="1">Screw it.  Show me all NSFW content!</option>');
+	$('#nsfw_preference_select').val(current_preference);
 }
 
 function create_submit_user_info_button(){
@@ -58,7 +47,7 @@ function user_info_submit(form){
 	$.ajax({
 		type: "POST",
 		url: "/api/users/setPreferences",
-		data: {nsfwPreference: get_nsfw_preference()},
+		data: {nsfwPreference: $('#nsfw_preference_select').val()},
 		success: function(msg) {
 			window.document.location.href = "daily.html";
 		},
@@ -66,14 +55,4 @@ function user_info_submit(form){
 			window.document.location.href = "error_page.html";
 		}
 	});
-}
-
-function get_nsfw_preference(){
-	if ($('#nsfw_preference_select').val == "Screw it.  Show me all NSFW content!"){
-		return 1;
-	}
-	if ($('#nsfw_preference_select').val == "Warn me about NSFW content."){
-		return 2;
-	}
-	return 0;
 }
