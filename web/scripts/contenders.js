@@ -77,7 +77,7 @@ function get_contenders(page_num){
     $.ajax({
         type: 'POST',
         url: '/api/rants/list',
-		data: {appliedFilters: '{"level":"'+get_level_string()+'"}' , pageNum:page_num},
+		data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'"}' , pageNum:page_num},
         success: function(gotData) {
             rants = $.parseJSON(gotData);
             display_contenders(rants.firstRantNum , rants.rantsOnPage);
@@ -88,6 +88,7 @@ function get_contenders(page_num){
         }
     });
 }
+//data: {appliedFilters: '{"username":"'+get_user_username()+'", "alive":"'+get_status_filter()+'", "level":"'+get_level_filter()+'", "birthDate":"'+get_age_order()+'", "power":"'+get_power_order()+'"}', pageNum:window.history.state.page_num},
 
 function display_contenders(first_rant_num , rants){
 	var num_contenders2 = rants.length;

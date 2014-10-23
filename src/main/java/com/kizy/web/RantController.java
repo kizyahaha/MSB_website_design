@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Serializers;
@@ -23,6 +22,7 @@ import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.SimpleRant;
 import com.kizy.data.user.User;
 import com.kizy.filter.AliveFilter;
+import com.kizy.filter.NsfwFilter;
 import com.kizy.filter.BirthSort;
 import com.kizy.filter.Filter;
 import com.kizy.filter.LevelFilter;
@@ -45,6 +45,7 @@ public class RantController {
         FILTERS.put("level", new LevelFilter());
         FILTERS.put("power", new PowerSort());
         FILTERS.put("birthDate", new BirthSort());
+        FILTERS.put("nsfw",  new NsfwFilter());
     }
 
     @RequestMapping(value = "/add")
@@ -71,7 +72,7 @@ public class RantController {
         if (pageNum < 0) {
             throw new IllegalArgumentException("Cannot request non-positive page number.");
         }
-        List<Rant> filteredRants = filterRants(WebResources.currentLoggedInUser(request), appliedFiltersString);
+        List<Rant> filteredRants = filterRants(appliedFiltersString);
         if (pageNum == 0){
             return Serializers.valueToTree(filteredRants).toString();
         }
@@ -82,14 +83,8 @@ public class RantController {
         return  Serializers.valueToTree(page).toString();
     }
 
-    public List<Rant> filterRants(User loggedUser, String appliedFiltersString) throws IOException{
-        List<Rant> filteredRants;
-        if (loggedUser != null && loggedUser.getNsfwPreference() == 0) {
-        	filteredRants = filterNsfwRants();
-        }
-        else {
-        	filteredRants = DatabaseUtils.getRants();
-        }
+    public List<Rant> filterRants(String appliedFiltersString) throws IOException{
+        List<Rant> filteredRants = DatabaseUtils.getRants();
         if (appliedFiltersString != null) {
             @SuppressWarnings("unchecked")
             Map<String, String> appliedFilters = Serializers.getMapper().readValue(appliedFiltersString, Map.class);
@@ -101,22 +96,11 @@ public class RantController {
         }
         return filteredRants;
     }
-    
-    public List<Rant> filterNsfwRants() throws IOException{
-    	List<Rant> rants = DatabaseUtils.getRants();
-    	List<Rant> filteredRants = Lists.newArrayList();
-        for (Rant rant : rants) {
-            if (!rant.isNsfw()) {
-                filteredRants.add(rant);
-            }
-        }
-        return filteredRants;
-    }
 
     @RequestMapping(value = "/powers")
     @ResponseBody
     public String listAllPowers(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
-    	List<Rant> levelRants = filterRants(null , appliedFiltersString);
+    	List<Rant> levelRants = filterRants(appliedFiltersString);
     	List<Integer> rantPowers = new ArrayList<Integer>();
     	for (Rant rant : levelRants){
     		rantPowers.add(rant.getRantPower());
@@ -131,7 +115,7 @@ public class RantController {
     }
 
     public long getLevelWinnerId(String appliedFiltersString) throws IOException{
-    	List<Rant> levelRants = filterRants(null, appliedFiltersString);
+    	List<Rant> levelRants = filterRants(appliedFiltersString);
     	return levelRants.get(0).getRantId();
     }
 
@@ -199,7 +183,7 @@ public class RantController {
     public String getPower(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
         User user = WebResources.currentLoggedInUser(request);
-        if (!isOwner(user, rant)) {
+        if (user == null || !isOwner(user, rant)) {
             return "";
         }
         return Integer.toString(rant.getRantPower());
