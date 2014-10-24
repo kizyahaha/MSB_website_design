@@ -9,9 +9,7 @@ public class NsfwFilter implements Filter {
 
 	@Override
 	public List<Rant> doFilter(List<Rant> rants, String arg) {
-		System.out.print(arg);
 		if (arg.equalsIgnoreCase("0")){
-			System.out.print(arg);
 	    	List<Rant> filteredRants = Lists.newArrayList();
 	        for (Rant rant : rants) {
 	            if (!rant.isNsfw()) {
