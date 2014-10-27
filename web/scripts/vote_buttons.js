@@ -1,5 +1,6 @@
 function support_push(track_votes , rant_ID){
 	support_power(rant_ID);
+	play_sound('sounds/cash_register.mp3');
 	var initImg = "up_button_2.png";
 	var pushImg = "up_button_1.png";
 	var currImg = track_votes[0].attr('src').substring(7);
@@ -7,11 +8,13 @@ function support_push(track_votes , rant_ID){
 		track_votes[0].attr('src','images/' + pushImg);
 		track_votes[1].css('opacity','0.3');
 		track_votes[0].css('opacity','1.0');
+		text_animation(-1 , 1);
 	}
 	else{
 		track_votes[0].attr('src','images/' + initImg);
 		track_votes[0].css('opacity','1.0');
 		track_votes[1].css('opacity','1.0');
+		text_animation(1 , -1);
 	}
 	track_votes[1].attr('src','images/down_button_2.png');
 }
@@ -33,11 +36,13 @@ function oppose_push(track_votes , rant_ID){
 		track_votes[1].attr('src','images/' + pushImg);
 		track_votes[0].css('opacity','0.3');
 		track_votes[1].css('opacity','1.0');
+		text_animation(-1 , 1);
 	}
 	else{
 		track_votes[1].attr('src','images/' + initImg);
 		track_votes[1].css('opacity','1.0');
 		track_votes[0].css('opacity','1.0');
+		text_animation(1 , -1);
 	}
 	track_votes[0].attr('src','images/up_button_2.png');
 

@@ -1,0 +1,29 @@
+
+#text_animation{
+    position:absolute;
+    background-color: rgb(215,226,229);
+    border-radius:5px;
+}
+
+.positive_text_animation{
+    color:rgb(52,160,194);
+}
+
+.negative_text_animation{
+    color:red;
+}
+
+
+#bok_text_animation{
+	position:relative;
+	font-family:Lato;
+    font-weight:700;
+    font-size:16pt;
+}
+
+#xp_text_animation{
+    position:relative;
+    font-family:Lato;
+    font-weight:700;
+    font-size:16pt;
+}
