@@ -55,7 +55,7 @@ function create_user_links(){
 	}
 	$('#user_messages_link').append("Messages");
 	$('<li/>',{id: 'edit_user_info'}).appendTo('#user_links');
-	$('#edit_user_info').append("<a id='edit_user_info_link' href='#'>Edit info</a>");
+	$('#edit_user_info').append("<a id='edit_user_info_link' href='user_info.html'>Edit info</a>");
 }
 
 function user_has_new_message(){

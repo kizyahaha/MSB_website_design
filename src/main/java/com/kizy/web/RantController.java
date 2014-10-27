@@ -22,6 +22,7 @@ import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.SimpleRant;
 import com.kizy.data.user.User;
 import com.kizy.filter.AliveFilter;
+import com.kizy.filter.NsfwFilter;
 import com.kizy.filter.BirthSort;
 import com.kizy.filter.Filter;
 import com.kizy.filter.LevelFilter;
@@ -44,6 +45,7 @@ public class RantController {
         FILTERS.put("level", new LevelFilter());
         FILTERS.put("power", new PowerSort());
         FILTERS.put("birthDate", new BirthSort());
+        FILTERS.put("nsfw",  new NsfwFilter());
     }
 
     @RequestMapping(value = "/add")
@@ -64,8 +66,9 @@ public class RantController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public String listRants(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString,
-                               @RequestParam(value = "pageNum", required = true) int pageNum) throws IOException {
+    public String listRants(HttpServletRequest request,
+    						@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString,
+                            @RequestParam(value = "pageNum", required = true) int pageNum) throws IOException {
         if (pageNum < 0) {
             throw new IllegalArgumentException("Cannot request non-positive page number.");
         }
@@ -81,8 +84,7 @@ public class RantController {
     }
 
     public List<Rant> filterRants(String appliedFiltersString) throws IOException{
-    	List<Rant> allRants = DatabaseUtils.getRants();
-        List<Rant> filteredRants = allRants;
+        List<Rant> filteredRants = DatabaseUtils.getRants();
         if (appliedFiltersString != null) {
             @SuppressWarnings("unchecked")
             Map<String, String> appliedFilters = Serializers.getMapper().readValue(appliedFiltersString, Map.class);
@@ -181,7 +183,7 @@ public class RantController {
     public String getPower(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
         User user = WebResources.currentLoggedInUser(request);
-        if (!isOwner(user, rant)) {
+        if (user == null || !isOwner(user, rant)) {
             return "";
         }
         return Integer.toString(rant.getRantPower());

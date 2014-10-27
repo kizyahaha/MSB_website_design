@@ -41,6 +41,7 @@ public class DatabaseUtils {
     private static final int USER_EMAIL_PART = 3;
     private static final int USER_CREATION_PART = 4;
     private static final int USER_RANTS_PART = 5;
+    private static final int USER_NSFW_PREFERENCE_PART = 6;
 
     private static final int RANT_ID_PART = 0;
     private static final int RANT_NSFW_PART = 1;
@@ -90,7 +91,8 @@ public class DatabaseUtils {
                user.getPassword() + LINE_DELIMITER +
                user.getEmail() + LINE_DELIMITER +
                user.getCreationDate().toString() +
-               (user.getOwnedRantIds().isEmpty() ? "" : LINE_DELIMITER + formatUserRants(user));
+               (user.getOwnedRantIds().isEmpty() ? "" : LINE_DELIMITER + formatUserRants(user)) + LINE_DELIMITER +
+               user.getNsfwPreference();
     }
 
     private static String formatUserRants(User user) {
@@ -302,7 +304,8 @@ public class DatabaseUtils {
                               new DateTime(parts[USER_CREATION_PART]),
                               parseRants(parts[USER_RANTS_PART]),
                               getUserUpvotes(userId),
-                              getUserDownVotes(userId));
+                              getUserDownVotes(userId),
+                              new Integer(parts[USER_NSFW_PREFERENCE_PART]));
     }
 
     private static Collection<Long> parseRants(String rantsString) {

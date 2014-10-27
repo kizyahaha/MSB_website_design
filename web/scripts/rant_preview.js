@@ -133,7 +133,7 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 	$(preview_ID).find('.rant_preview_power').text(get_rant_power(rant_data.id));
 	$(preview_ID).find('.rant_preview_birth').text('Created ' + translate_date(rant_data.birth));
 	$(preview_ID).find('.rant_preview_death').text('Died ' + translate_date(rant_data.death));
-	if (rant_data.nsfw && is_list){
+	if (rant_data.nsfw && is_list && logged_user.nsfwPreference == 2){
 		$(preview_ID).find('.rant_preview_content').text('NSFW');
 		$(preview_ID).find('.rant_preview_content').addClass('rant_preview_NSFW_content');
 		$(preview_ID + ' .rant_preview_content_fade').hide();
