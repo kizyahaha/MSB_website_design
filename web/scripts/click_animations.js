@@ -20,7 +20,7 @@ function text_animation(boks , xp){
 	}
 	$("#text_animation").css("top", mouseY - 60);
     $("#text_animation").css("left", mouseX);
-	$('#text_animation').fadeOut(1500, function(){ $('#text_animation').remove();});
+	$('#text_animation').animate({top:mouseY-90, left:mouseX+20, opacity:0}, 1500, "linear", function(){ $('#text_animation').remove();});
 }
 
 function create_bok_text_animation(boks){

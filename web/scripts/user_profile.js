@@ -6,12 +6,6 @@ function create_user_profile(){
         data: {id: get_profile_id() }, // if you comment this line out, it will just get the currently logged in user
         success: function(gotData) {
             data = $.parseJSON(gotData);
-			if (data.id == logged_user.id){
-				is_owner = true;
-			}
-			else{
-				is_owner = false;
-			}
             create_user_banner(data);
             create_user_tabs(data);
 			update_user_tabs(0);
@@ -37,7 +31,7 @@ function get_profile_id(){
 
 function create_user_banner(user_data){
 	$('<div/>',{id: 'user_banner'}).appendTo('body');
-	if (is_owner){
+	if (user_data.id == logged_user.id){
 		create_user_links();
 	}
 	create_user_profile_pic(user_data); // NOT IMPLEMENTED ON THE BACKEND YET
