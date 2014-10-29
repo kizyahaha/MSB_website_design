@@ -7,8 +7,10 @@ function support_push(track_votes , rant_ID){
 		track_votes[0].attr('src','images/' + pushImg);
 		track_votes[1].css('opacity','0.3');
 		if (track_votes[0].css('opacity') == 1){
-			text_animation(-1 , 1);
-			play_sound('sounds/cash_register.mp3');
+			if (logged_user.animationsPreference)
+				text_animation(-1 , 1);
+			if (logged_user.soundsPreference)
+				play_sound('sounds/cash_register.mp3');
 		}
 		track_votes[0].css('opacity','1.0');
 	}
@@ -37,8 +39,10 @@ function oppose_push(track_votes , rant_ID){
 		track_votes[1].attr('src','images/' + pushImg);
 		track_votes[0].css('opacity','0.3');
 		if (track_votes[1].css('opacity') == 1) {
-			text_animation(-1 , 1);
-			play_sound('sounds/cash_register.mp3');
+			if (logged_user.animationsPreference)
+				text_animation(-1 , 1);
+			if (logged_user.soundsPreference)
+				play_sound('sounds/cash_register.mp3');
 		}
 		track_votes[1].css('opacity','1.0');
 	}

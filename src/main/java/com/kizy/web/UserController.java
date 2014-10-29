@@ -113,10 +113,18 @@ public class UserController {
     @RequestMapping(value = "/setPreferences")
     @ResponseBody
     public void setUserPreferences(HttpServletRequest request,
-    								@RequestParam("nsfwPreference") int nsfwPreference) throws IOException {
+    								@RequestParam("nsfwPreference") int nsfwPreference,
+    								@RequestParam("soundsPreference") int soundsPreference,
+    								@RequestParam("animationsPreference") int animationsPreference) throws IOException {
     	User user = WebResources.currentLoggedInUser(request);
     	if (user.getNsfwPreference() != nsfwPreference){
     		user.setNsfwPreference(nsfwPreference);
+    	}
+    	if (user.getSoundsPreference() != soundsPreference){
+    		user.setSoundsPreference(soundsPreference);
+    	}
+    	if (user.getAnimationsPreference() != animationsPreference){
+    		user.setAnimationsPreference(animationsPreference);
     	}
     	DatabaseUtils.modifyUser(user.getUserId(), user);
     }

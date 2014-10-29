@@ -106,10 +106,10 @@ function update_user_tab_content(user_tab_num){
 			create_my_rants_content();
 			break;
 		case 1:
-			create_my_activity_content(data);
+			create_my_activity_content();
 			break;
 		case 2:
-			create_my_items_content(data);
+			create_my_items_content();
 			break;
 		default:
 			break;
@@ -155,7 +155,7 @@ function update_contender_sizes(){
 */
 
 //eventually move once we create my activity
-function create_my_activity_content(logged_user){
+function create_my_activity_content(){
 	$('<div/>',{id:'my_activity_space'}).appendTo('#user_content_space');
 	document.getElementById('my_activity_space').style.display = 'none';
 }

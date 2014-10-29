@@ -33,5 +33,13 @@ public interface User {
     int getNsfwPreference();
     
     void setNsfwPreference(int preference);
+    
+    int getSoundsPreference();
+    
+    void setSoundsPreference(int preference);
+    
+    int getAnimationsPreference();
+    
+    void setAnimationsPreference(int preference);
 
 }

@@ -19,6 +19,8 @@ public class SimpleUser implements User {
     private Collection<Long> upvotes;
     private Collection<Long> downvotes;
     private int nsfwPreference;
+    private int soundsPreference;
+    private int animationsPreference;
 
     private final Collection<Long> rantIds;
 
@@ -28,7 +30,7 @@ public class SimpleUser implements User {
                       @JsonProperty("password") String password,
                       @JsonProperty("email") String email) {
         this(id, username, password, email, DateTime.now(), Sets.<Long>newConcurrentHashSet(),
-             Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet(), 0);
+             Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet(), 0, 1, 1);
     }
 
     @JsonCreator
@@ -40,7 +42,9 @@ public class SimpleUser implements User {
                       @JsonProperty("rants") Collection<Long> rants,
                       @JsonProperty("upvotes") Collection<Long> upvotes,
                       @JsonProperty("downvotes") Collection<Long> downvotes,
-                      @JsonProperty("nsfwPrerence") int nsfwPreference) {
+                      @JsonProperty("nsfwPreference") int nsfwPreference,
+                      @JsonProperty("soundsPreference") int soundsPreference,
+                      @JsonProperty("animationsPreference") int animationsPreference) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -50,6 +54,8 @@ public class SimpleUser implements User {
         this.upvotes = upvotes;
         this.downvotes = downvotes;
         this.nsfwPreference = nsfwPreference;
+        this.soundsPreference = soundsPreference;
+        this.animationsPreference = animationsPreference;
     }
 
     @Override
@@ -207,6 +213,28 @@ public class SimpleUser implements User {
     @Override
     public void setNsfwPreference (int preference) {
         nsfwPreference = preference;
+    }
+    
+    @Override
+    @JsonProperty("soundsPreference")
+    public int getSoundsPreference() {
+        return soundsPreference;
+    }
+    
+    @Override
+    public void setSoundsPreference (int preference) {
+        soundsPreference = preference;
+    }
+    
+    @Override
+    @JsonProperty("animationsPreference")
+    public int getAnimationsPreference() {
+        return animationsPreference;
+    }
+    
+    @Override
+    public void setAnimationsPreference (int preference) {
+        animationsPreference = preference;
     }
 
 }

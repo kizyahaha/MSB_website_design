@@ -1,0 +1,60 @@
+/**********************user info tabs***************************/
+
+#user_info_tabs {
+    position: relative;
+    margin-top:30px;
+    width:98%;
+    margin-left:auto;
+    margin-right:auto;
+    list-style: none;
+    padding:0;
+    text-align:left;
+}
+#user_info_tabs .current_tab{
+    display: inline;
+    margin: 0 2px 0 0;
+    background: rgb(12,120,154);
+    border-radius:7px;
+    padding:10px 0.75em 40px 1em;
+    font-size: 20px;
+}
+#user_info_tabs .other_tab{
+    display: inline;
+    margin: 0 2px 0 0;
+    background: rgb(52,160,194);
+    border-radius:7px;
+    padding:10px 0.75em 15px 1em;
+    font-size: 20px;
+}
+#user_info_tabs li.other_tab:hover {
+    background: rgb(62,170,204);
+    cursor:pointer;
+}
+#user_info_tabs li {
+    font-family:Lato;
+    font-size:20px;
+    color: white;
+}
+
+
+/**********************user info***************************/
+
+
+#user_info_content_space{
+    position:relative;
+    top: 0px;
+    width:98%;
+    /*height:1350px;*/
+    margin-left:auto;
+    margin-right:auto;
+    background-color: rgb(12,120,154);
+    border-radius:20px;
+}
+
+#user_preferences_space{
+    position:absolute;
+    left:20px;
+    right:20px;
+    /*bottom:20px;*/
+    top:20px;
+}
