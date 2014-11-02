@@ -121,8 +121,8 @@ function update_my_profile_content_size(){
 	var my_rants = document.getElementById('my_rants_space');
 	if (my_rants){
 		$('#my_rants_space').css('minHeight', 100 );
-		$('#my_rants_space').css('maxHeight', 1050 );
-		$('#user_content_space').css('height',$('#my_rants_space').height() + 170);
+		//$('#my_rants_space').css('maxHeight', 1150 );
+		$('#user_content_space').css('height',$('#my_rants_space').height() + 220);
 	}
 	var my_items = document.getElementById('my_items_space');
 	if (my_items){
