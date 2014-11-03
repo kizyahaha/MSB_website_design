@@ -41,5 +41,7 @@ public interface User {
     int getAnimationsPreference();
     
     void setAnimationsPreference(int preference);
+    
+    void setEmail(String new_email);
 
 }

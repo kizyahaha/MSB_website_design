@@ -92,7 +92,7 @@ function create_user_preferences_submit_button(){
 function user_preferences_submit(){
 	$.ajax({
 		type: "POST",
-		url: "/api/users/setPreferences",
+		url: "/api/users/updateUser",
 		data: {nsfwPreference: $('#NSFW_options_dropdown').val(), 
 				soundsPreference:$('#Sounds_options_dropdown').val(), 
 				animationsPreference:$('#Animations_options_dropdown').val()},

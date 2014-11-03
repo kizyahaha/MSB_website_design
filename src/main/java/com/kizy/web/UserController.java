@@ -110,21 +110,26 @@ public class UserController {
         return user;
     }
     
-    @RequestMapping(value = "/setPreferences")
+    @RequestMapping(value = "/updateUser")
     @ResponseBody
     public void setUserPreferences(HttpServletRequest request,
-    								@RequestParam("nsfwPreference") int nsfwPreference,
-    								@RequestParam("soundsPreference") int soundsPreference,
-    								@RequestParam("animationsPreference") int animationsPreference) throws IOException {
+    								@RequestParam(value = "nsfwPreference", required = false) Integer nsfwPreference,
+    								@RequestParam(value = "soundsPreference", required = false) Integer soundsPreference,
+    								@RequestParam(value = "animationsPreference", required = false) Integer animationsPreference,
+    								@RequestParam(value = "email", required = false) String new_email) throws IOException {
     	User user = WebResources.currentLoggedInUser(request);
-    	if (user.getNsfwPreference() != nsfwPreference){
+    	if (nsfwPreference != null){
     		user.setNsfwPreference(nsfwPreference);
     	}
-    	if (user.getSoundsPreference() != soundsPreference){
+    	if (soundsPreference != null){
     		user.setSoundsPreference(soundsPreference);
     	}
-    	if (user.getAnimationsPreference() != animationsPreference){
+    	if (animationsPreference != null){
     		user.setAnimationsPreference(animationsPreference);
+    	}
+    	//TODO: We need to have an email confirmation and check for duplicates in users
+    	if (new_email != null){
+    		user.setEmail(new_email);
     	}
     	DatabaseUtils.modifyUser(user.getUserId(), user);
     }

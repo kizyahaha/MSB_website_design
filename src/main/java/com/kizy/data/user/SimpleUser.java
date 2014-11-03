@@ -13,8 +13,8 @@ public class SimpleUser implements User {
 
     private final long id;
     private final String username;
-    private final String password;
-    private final String email;
+    private String password;
+    private String email;
     private final DateTime date;
     private Collection<Long> upvotes;
     private Collection<Long> downvotes;
@@ -235,6 +235,11 @@ public class SimpleUser implements User {
     @Override
     public void setAnimationsPreference (int preference) {
         animationsPreference = preference;
+    }
+    
+    @Override
+    public void setEmail (String new_email) {
+        email = new_email;
     }
 
 }
