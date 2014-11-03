@@ -5,7 +5,6 @@ import java.util.Collection;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Sets;
 
@@ -119,7 +118,7 @@ public class SimpleRant implements Rant {
     }
 
     @Override
-    @JsonIgnore
+    @JsonProperty("power")
     public int getRantPower() {
         return power;
     }
@@ -141,13 +140,13 @@ public class SimpleRant implements Rant {
     }
 
     @Override
-    @JsonIgnore
+    @JsonProperty("upvotes")
     public Collection<Long> getUpvoteIds() {
         return upvotes;
     }
 
     @Override
-    @JsonIgnore
+    @JsonProperty("downvotes")
     public Collection<Long> getDownvoteIds() {
         return downvotes;
     }

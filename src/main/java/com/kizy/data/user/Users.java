@@ -1,5 +1,8 @@
 package com.kizy.data.user;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.kizy.data.Serializers;
+
 
 public class Users {
 
@@ -7,6 +10,10 @@ public class Users {
 
     private Users() {
         // no instantiation
+    }
+
+    public static JsonNode serialize(User user, boolean isOwner) {
+        return Serializers.valueToTree(user);
     }
 
 }

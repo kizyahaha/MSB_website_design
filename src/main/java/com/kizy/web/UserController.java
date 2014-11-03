@@ -69,7 +69,7 @@ public class UserController {
                               @RequestParam(value = "username", required = false) String username)
             throws IOException {
         User user = optionalUser(id, username, request, response);
-        return Serializers.valueToTree(user).toString();
+        return Users.serialize(user, true).toString();
     }
 
     @RequestMapping(value = "/votes")
@@ -109,7 +109,7 @@ public class UserController {
         }
         return user;
     }
-    
+
     @RequestMapping(value = "/updateUser")
     @ResponseBody
     public void setUserPreferences(HttpServletRequest request,

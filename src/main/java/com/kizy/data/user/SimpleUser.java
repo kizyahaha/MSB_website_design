@@ -71,7 +71,7 @@ public class SimpleUser implements User {
     }
 
     @Override
-    @JsonIgnore
+    @JsonProperty("email")
     public String getEmail() {
         return email;
     }
@@ -100,13 +100,13 @@ public class SimpleUser implements User {
     }
 
     @Override
-    @JsonIgnore
+    @JsonProperty("upvotes")
     public Collection<Long> getUpvoteIds() {
         return upvotes;
     }
 
     @Override
-    @JsonIgnore
+    @JsonProperty("downvotes")
     public Collection<Long> getDownvoteIds() {
         return downvotes;
     }
@@ -203,35 +203,35 @@ public class SimpleUser implements User {
         }
         return true;
     }
-    
+
     @Override
     @JsonProperty("nsfwPreference")
     public int getNsfwPreference() {
         return nsfwPreference;
     }
-    
+
     @Override
     public void setNsfwPreference (int preference) {
         nsfwPreference = preference;
     }
-    
+
     @Override
     @JsonProperty("soundsPreference")
     public int getSoundsPreference() {
         return soundsPreference;
     }
-    
+
     @Override
     public void setSoundsPreference (int preference) {
         soundsPreference = preference;
     }
-    
+
     @Override
     @JsonProperty("animationsPreference")
     public int getAnimationsPreference() {
         return animationsPreference;
     }
-    
+
     @Override
     public void setAnimationsPreference (int preference) {
         animationsPreference = preference;

@@ -19,13 +19,14 @@ import com.google.common.collect.Maps;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Serializers;
 import com.kizy.data.rant.Rant;
+import com.kizy.data.rant.Rants;
 import com.kizy.data.rant.SimpleRant;
 import com.kizy.data.user.User;
 import com.kizy.filter.AliveFilter;
-import com.kizy.filter.NsfwFilter;
 import com.kizy.filter.BirthSort;
 import com.kizy.filter.Filter;
 import com.kizy.filter.LevelFilter;
+import com.kizy.filter.NsfwFilter;
 import com.kizy.filter.PowerSort;
 import com.kizy.filter.UsernameFilter;
 import com.kizy.pagination.Page;
@@ -80,7 +81,7 @@ public class RantController {
         int numPages = (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE);
         List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
         Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
-        return  Serializers.valueToTree(page).toString();
+        return  Pages.serialize(page).toString();
     }
 
     public List<Rant> filterRants(String appliedFiltersString) throws IOException{
@@ -111,7 +112,8 @@ public class RantController {
     @RequestMapping(value = "/winner")
     @ResponseBody
     public String getLevelWinnerRant(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
-    	return Serializers.valueToTree(DatabaseUtils.findRantById(getLevelWinnerId(appliedFiltersString))).toString();
+    	long winnerId = getLevelWinnerId(appliedFiltersString);
+        return getRantData(winnerId);
     }
 
     public long getLevelWinnerId(String appliedFiltersString) throws IOException{
@@ -137,7 +139,8 @@ public class RantController {
     @RequestMapping(value = "/rantData")
     @ResponseBody
     public String getRantData(@RequestParam("id") long id) throws IOException {
-        return Serializers.valueToTree(DatabaseUtils.findRantById(id)).toString();
+        Rant rant = DatabaseUtils.findRantById(id);
+        return Rants.serialize(rant, true).toString();
     }
 
     @RequestMapping(value = "/upvote")
