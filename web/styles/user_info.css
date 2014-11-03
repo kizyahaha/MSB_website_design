@@ -44,17 +44,9 @@
     position:relative;
     top: 0px;
     width:98%;
-    /*height:1350px;*/
+    /*height:450px;*/
     margin-left:auto;
     margin-right:auto;
     background-color: rgb(12,120,154);
     border-radius:20px;
-}
-
-#user_preferences_space{
-    position:absolute;
-    left:20px;
-    right:20px;
-    /*bottom:20px;*/
-    top:20px;
 }

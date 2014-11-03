@@ -1,3 +1,36 @@
+
+function create_user_preferences_content(){
+	$('<div/>',{id:'user_preferences_space'}).appendTo('#user_info_content_space');
+	var options = [];
+	options = get_preference_options('nsfw');
+	create_preference_select('NSFW', options, 'dropdown');
+	options = get_preference_options('sound');
+	create_preference_select('Sounds', options, 'dropdown');
+	options = get_preference_options('animations');
+	create_preference_select('Animations', options, 'dropdown');
+}
+
+function get_preference_options(preference_name){
+	var options = [];
+	if (preference_name == 'nsfw'){
+		options[0] = "No, thanks.  Do not show me any NSFW content!";
+		options[1] = "Bring it.  Show me all NSFW content!";
+		options[2] = "Warn me about NSFW content.";
+		return options;
+	}
+	if (preference_name == 'sound'){
+		options[0] = "No, sounds are annoying.  Do not play any sounds.";
+		options[1] = "Yes, sounds enhance the user experience.  Please play sounds.";
+		return options;
+	}
+	if (preference_name == 'animations'){
+		options[0] = "No, animations are annoying too.  Do not show any animations.";
+		options[1] = "Yes, animations enhance the user experience even more and provide useful information.  Please show animations.";
+		return options;
+	}
+	return options;
+}
+
 function create_preference_select(preference_name, options, select_type){
 	var num = 0;
 	var ID = 'user_preference'+num;
