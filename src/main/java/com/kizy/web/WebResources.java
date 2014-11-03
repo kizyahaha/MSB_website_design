@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.google.common.collect.Sets;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.user.User;
+import com.kizy.data.user.Users;
 
 public class WebResources {
 
@@ -45,8 +46,7 @@ public class WebResources {
                 }
             }
         }
-
-        return null;
+        return Users.DUMMY_USER;
     }
 
 }

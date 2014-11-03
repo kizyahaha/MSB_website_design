@@ -9,8 +9,9 @@ function create_rant_preview(is_list , parent , num , author_id){
 		create_rant_preview_left_side(ID);
 	}
 	create_rant_preview_right_side(ID);
-	/*if (logged_user.id == -1){
-		no_log_rant_preview_display(ID);
+	
+	/*if (true){
+		owner_rant_preview_display(ID);
 	}*/
 	if (logged_user.id == author_id){
 		owner_rant_preview_display(ID);
@@ -131,6 +132,7 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 	$(preview_ID).find('.rant_preview_level').text(rant_data.level);
 		$(preview_ID).find('.rant_preview_level').attr('href',get_rant_preview_level_link(rant_data));
 	$(preview_ID).find('.rant_preview_power').text(get_rant_power(rant_data.id));
+	//$(preview_ID).find('.rant_preview_power').text(rant_data.power);
 	$(preview_ID).find('.rant_preview_birth').text('Created ' + translate_date(rant_data.birth));
 	$(preview_ID).find('.rant_preview_death').text('Died ' + translate_date(rant_data.death));
 	if (rant_data.nsfw && is_list && logged_user.nsfwPreference == 2){

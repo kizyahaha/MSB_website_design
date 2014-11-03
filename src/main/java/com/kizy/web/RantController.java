@@ -56,13 +56,15 @@ public class RantController {
                         @RequestParam("title") String title,
                         @RequestParam("contents") String contents) {
         User owner = WebResources.currentLoggedInUser(request);
-        Rant rant = new SimpleRant(countingId.incrementAndGet(), nsfw, title, contents, owner.getUserId(), owner.getUsername());
-        owner.addRant(rant.getRantId());
-        try {
-            DatabaseUtils.writeRant(rant);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        if (owner.getUserId() != -1) {
+	        Rant rant = new SimpleRant(countingId.incrementAndGet(), nsfw, title, contents, owner.getUserId(), owner.getUsername());
+	        owner.addRant(rant.getRantId());
+	        try {
+	            DatabaseUtils.writeRant(rant);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
     }
 
     @RequestMapping(value = "/list")
@@ -152,9 +154,11 @@ public class RantController {
         Rant rant = DatabaseUtils.findRantById(id);
         if (rant.isAlive()) {
             User user = WebResources.currentLoggedInUser(request);
-            rant.upvote(user.getUserId());
-            user.upvote(rant.getRantId());
-            DatabaseUtils.upvote(user.getUserId(), rant.getRantId());
+            if (user.getUserId() != -1) {
+	            rant.upvote(user.getUserId());
+	            user.upvote(rant.getRantId());
+	            DatabaseUtils.upvote(user.getUserId(), rant.getRantId());
+            }
         }
     }
 
@@ -164,9 +168,11 @@ public class RantController {
         Rant rant = DatabaseUtils.findRantById(id);
         if (rant.isAlive()) {
             User user = WebResources.currentLoggedInUser(request);
-            rant.downvote(user.getUserId());
-            user.downvote(rant.getRantId());
-            DatabaseUtils.downvote(user.getUserId(), rant.getRantId());
+            if (user.getUserId() != -1) {
+	            rant.downvote(user.getUserId());
+	            user.downvote(rant.getRantId());
+	            DatabaseUtils.downvote(user.getUserId(), rant.getRantId());
+            }
         }
     }
 
@@ -189,7 +195,7 @@ public class RantController {
     public String getPower(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
         User user = WebResources.currentLoggedInUser(request);
-        if (user == null || !isOwner(user, rant)) {
+        if (!isOwner(user, rant)) {
             return "";
         }
         return Integer.toString(rant.getRantPower());

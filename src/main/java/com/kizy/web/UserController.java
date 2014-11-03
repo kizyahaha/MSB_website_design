@@ -81,7 +81,7 @@ public class UserController {
     public String getVotes(HttpServletRequest request) throws IOException {
         User user = WebResources.currentLoggedInUser(request);
         Map<String, Collection<Long>> votes = Maps.newHashMap();
-        if (user == null) {
+        if (user.getUserId() == -1) {
             votes.put("upvotes", Collections.<Long>emptyList());
             votes.put("downvotes", Collections.<Long>emptyList());
         } else {
@@ -122,20 +122,22 @@ public class UserController {
     								@RequestParam(value = "animationsPreference", required = false) Integer animationsPreference,
     								@RequestParam(value = "email", required = false) String new_email) throws IOException {
     	User user = WebResources.currentLoggedInUser(request);
-    	if (nsfwPreference != null){
-    		user.setNsfwPreference(nsfwPreference);
+    	if (user.getUserId() != -1) {
+	    	if (nsfwPreference != null){
+	    		user.setNsfwPreference(nsfwPreference);
+	    	}
+	    	if (soundsPreference != null){
+	    		user.setSoundsPreference(soundsPreference);
+	    	}
+	    	if (animationsPreference != null){
+	    		user.setAnimationsPreference(animationsPreference);
+	    	}
+	    	//TODO: We need to have an email confirmation and check for duplicates in users
+	    	if (new_email != null){
+	    		user.setEmail(new_email);
+	    	}
+	    	DatabaseUtils.modifyUser(user.getUserId(), user);
     	}
-    	if (soundsPreference != null){
-    		user.setSoundsPreference(soundsPreference);
-    	}
-    	if (animationsPreference != null){
-    		user.setAnimationsPreference(animationsPreference);
-    	}
-    	//TODO: We need to have an email confirmation and check for duplicates in users
-    	if (new_email != null){
-    		user.setEmail(new_email);
-    	}
-    	DatabaseUtils.modifyUser(user.getUserId(), user);
     }
 
 }

@@ -1,12 +1,12 @@
-1~~~~~false~~~~~Test~~~~~Hello World!~~~~~name~~~~~2014-06-08T12:45:18.736-05:00~~~~~2014-09-26T21:14:33.946-05:00~~~~~351~~~~~10-Minutely
+1~~~~~false~~~~~Test~~~~~Hello World!~~~~~name~~~~~2014-06-08T12:45:18.736-05:00~~~~~2014-11-03T11:49:55.235-06:00~~~~~352~~~~~10-Minutely
 2~~~~~true~~~~~Title~~~~~Contents~~~~~Queen_of_Equestria~~~~~2014-06-08T10:46:18.736-07:00~~~~~2014-08-25T02:23:08.753-07:00~~~~~4563~~~~~Hourly
 3~~~~~true~~~~~This is a title~~~~~These are contents.~~~~~Queen_of_Equestria~~~~~2014-06-08T10:47:18.736-07:00~~~~~2014-08-25T02:22:11.963-07:00~~~~~7866~~~~~10-Minutely
 4~~~~~true~~~~~This is a title~~~~~These are contents.~~~~~Queen_of_Equestria~~~~~2014-06-08T10:49:18.736-07:00~~~~~2014-08-25T02:22:12.565-07:00~~~~~3246~~~~~Minutely
-5~~~~~true~~~~~test~~~~~test~~~~~Queen_of_Equestria~~~~~2014-06-08T12:50:18.736-05:00~~~~~2014-11-02T22:07:34.538-06:00~~~~~644~~~~~Daily
-6~~~~~true~~~~~test~~~~~test~~~~~Queen_of_Equestria~~~~~2014-06-08T12:52:18.736-05:00~~~~~2014-11-02T22:07:35.000-06:00~~~~~75~~~~~Daily
+5~~~~~true~~~~~test~~~~~test~~~~~Queen_of_Equestria~~~~~2014-06-08T12:50:18.736-05:00~~~~~2014-11-03T10:46:35.985-06:00~~~~~644~~~~~Daily
+6~~~~~true~~~~~test~~~~~test~~~~~Queen_of_Equestria~~~~~2014-06-08T12:52:18.736-05:00~~~~~2014-11-03T10:46:40.024-06:00~~~~~75~~~~~Daily
 7~~~~~true~~~~~test2~~~~~test2~~~~~Queen_of_Equestria~~~~~2014-06-08T12:55:18.736-05:00~~~~~2014-10-27T17:02:37.158-05:00~~~~~2355~~~~~Daily
 8~~~~~true~~~~~here~~~~~and here~~~~~Queen_of_Equestria~~~~~2014-06-08T12:56:18.736-05:00~~~~~2014-10-27T17:00:48.394-05:00~~~~~3795~~~~~Daily
-9~~~~~true~~~~~Jeremy...~~~~~He's dumb.~~~~~Queen_of_Equestria~~~~~2014-06-08T12:59:18.736-05:00~~~~~2014-10-27T17:00:43.858-05:00~~~~~939~~~~~Daily
+9~~~~~true~~~~~Jeremy...~~~~~He's dumb.~~~~~Queen_of_Equestria~~~~~2014-06-08T12:59:18.736-05:00~~~~~2014-11-03T11:50:39.503-06:00~~~~~938~~~~~Daily
 10~~~~~false~~~~~sfw~~~~~not checking nsfw flag~~~~~kizy~~~~~2014-06-14T03:17:02.864-05:00~~~~~2014-10-27T16:38:22.273-05:00~~~~~9188~~~~~Daily
 11~~~~~false~~~~~The title~~~~~The rant.~~~~~Queen_of_Equestria~~~~~2014-06-14T08:38:07.052-05:00~~~~~2014-10-27T22:31:52.244-05:00~~~~~295~~~~~Daily
 12~~~~~false~~~~~Thanks Bill~~~~~For Nothing~~~~~Queen_of_Equestria~~~~~2014-06-16T22:59:48.423-05:00~~~~~2014-10-27T22:31:37.669-05:00~~~~~7237~~~~~Daily
@@ -24,5 +24,5 @@
 24~~~~~false~~~~~Gay humor~~~~~http://extrafabulouscomics.com/comic/160/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:34:34.799-05:00~~~~~2014-09-25T12:34:34.799-05:00~~~~~100~~~~~Minutely
 25~~~~~false~~~~~Even drier humor~~~~~http://extrafabulouscomics.com/comic/167/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:37:01.217-05:00~~~~~2014-09-25T12:37:01.217-05:00~~~~~100~~~~~Minutely
 26~~~~~false~~~~~Also much funny~~~~~http://extrafabulouscomics.com/comic/182/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:39:34.584-05:00~~~~~2014-09-25T12:39:34.584-05:00~~~~~100~~~~~Minutely
-27~~~~~false~~~~~Clearly just wasting time at work~~~~~http://threewordphrase.com/moulting.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:42:44.072-05:00~~~~~2014-09-25T12:42:44.072-05:00~~~~~100~~~~~Minutely
+27~~~~~false~~~~~Clearly just wasting time at work~~~~~http://threewordphrase.com/moulting.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:42:44.072-05:00~~~~~2014-11-03T08:08:15.302-06:00~~~~~101~~~~~Minutely
 28~~~~~false~~~~~Tiny fingers~~~~~http://threewordphrase.com/supertiny.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:46:00.585-05:00~~~~~2014-10-27T22:34:46.978-05:00~~~~~101~~~~~Minutely
