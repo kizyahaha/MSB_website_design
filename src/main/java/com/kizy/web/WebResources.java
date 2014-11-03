@@ -15,8 +15,11 @@ public class WebResources {
     public static final Set<String> IMAGE_EXTENSIONS =
             Sets.newHashSet("png", "jpg", "jpeg", "gif");
 
-    public static final Set<String> TEST_EXTENSIONS =
+    public static final Set<String> TEXT_EXTENSIONS =
             Sets.newHashSet("js", "css", "html");
+
+    public static final Set<String> AUDIO_EXTENSIONS =
+            Sets.newHashSet("mp3", "wav");
 
     public static final String MY_SOAP_BOX_USERID = "MY_SOAP_BOX_USERID";
 

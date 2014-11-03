@@ -99,8 +99,9 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
     }
 
     private static boolean isContent(String extension) {
-        return WebResources.TEST_EXTENSIONS.contains(extension) ||
-               WebResources.IMAGE_EXTENSIONS.contains(extension);
+        return WebResources.TEXT_EXTENSIONS.contains(extension) ||
+               WebResources.IMAGE_EXTENSIONS.contains(extension) ||
+               WebResources.AUDIO_EXTENSIONS.contains(extension);
     }
 
     private static void outputShim(HttpServletRequest request, HttpServletResponse response, String path, String body) throws IOException {
