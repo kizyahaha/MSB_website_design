@@ -69,7 +69,11 @@ public class UserController {
                               @RequestParam(value = "username", required = false) String username)
             throws IOException {
         User user = optionalUser(id, username, request, response);
-        return Users.serialize(user, true).toString();
+        boolean isOwner = false;
+        if (user.getUserId() == WebResources.currentLoggedInUser(request).getUserId()) {
+            isOwner = true;
+        }
+        return Serializers.valueToTree(Users.serialize(user, isOwner)).toString();
     }
 
     @RequestMapping(value = "/votes")

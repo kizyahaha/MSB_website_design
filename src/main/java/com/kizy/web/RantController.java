@@ -111,9 +111,11 @@ public class RantController {
 
     @RequestMapping(value = "/winner")
     @ResponseBody
-    public String getLevelWinnerRant(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
+    public String getLevelWinnerRant(HttpServletRequest request,
+                                     @RequestParam(value = "appliedFilters", required = false) String appliedFiltersString)
+                                             throws IOException {
     	long winnerId = getLevelWinnerId(appliedFiltersString);
-        return getRantData(winnerId);
+        return getRantData(request, winnerId);
     }
 
     public long getLevelWinnerId(String appliedFiltersString) throws IOException{
@@ -138,9 +140,10 @@ public class RantController {
 
     @RequestMapping(value = "/rantData")
     @ResponseBody
-    public String getRantData(@RequestParam("id") long id) throws IOException {
+    public String getRantData(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
-        return Rants.serialize(rant, true).toString();
+        boolean isOwner = isOwner(WebResources.currentLoggedInUser(request), rant);
+        return Serializers.valueToTree(Rants.serialize(rant, isOwner)).toString();
     }
 
     @RequestMapping(value = "/upvote")
