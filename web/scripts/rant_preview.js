@@ -266,7 +266,6 @@ function preview_rant_display(rant_ID){
 	$(rant_ID + ' .rant_preview_content_line').css('overflow','hidden');
 	$(rant_ID + ' .rant_preview_right_side').css('margin-left','70px');
 	$(rant_ID + ' .rant_preview_actions_line').css('margin-top','5px');
-	$('.rant_preview').css('margin-bottom','40px');
 }
 
 function detailed_rant_display(rant_ID){

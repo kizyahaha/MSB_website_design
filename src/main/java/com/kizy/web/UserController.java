@@ -116,7 +116,7 @@ public class UserController {
 
     @RequestMapping(value = "/updateUser")
     @ResponseBody
-    public void setUserPreferences(HttpServletRequest request,
+    public void updateUser(HttpServletRequest request,
     								@RequestParam(value = "nsfwPreference", required = false) Integer nsfwPreference,
     								@RequestParam(value = "soundsPreference", required = false) Integer soundsPreference,
     								@RequestParam(value = "animationsPreference", required = false) Integer animationsPreference,
