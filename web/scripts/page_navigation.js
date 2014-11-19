@@ -169,10 +169,16 @@ function page_navigate(navigator , navigated_space , num_pages){
 	history.pushState({user_tab_num:0, page_num:desired_page}, '', '');
 	if (navigated_space == '#contenders'){
 		update_contenders(desired_page);
+		goToByScroll('contender_title');
 	}
 	else if (navigated_space == '#my_rants_space'){
 		get_my_rants();
+		goToByScroll('user_tabs');
 	}
+}
+
+function goToByScroll(id){
+    $('html,body').animate({scrollTop: $("#"+id).offset().top},'slow');
 }
 
 function validate_jump_to_input(num_pages){
