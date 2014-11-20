@@ -76,7 +76,8 @@
     background-color:rgb(12,120,154);
     position:fixed;
     top:25%;
-    width:100%;
+    left:0;
+    right:0;
     box-sizing:border-box;
     padding-left: 25%;
     padding-right: 25%;
@@ -88,7 +89,7 @@
 }
 
 .login_signup_prompt_height{
-	height:175px;
+	height:250px;
 }
 
 #login_space{
@@ -146,4 +147,20 @@
 
 #prompt_signup_space a{
     color:rgb(52,52,52);
+}
+
+#login_signup_close{
+	position:absolute;
+	bottom:0;
+	left:0;
+    background-color:rgb(52,52,52);
+    border:solid 1px rgb(52,52,52);
+    font-family:Lato;
+    color:white;
+    font-size: 20px;
+    width:100%;
+}
+#login_signup_close:hover{
+    border-color:white;
+    cursor:pointer
 }

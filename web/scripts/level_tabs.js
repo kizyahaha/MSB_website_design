@@ -7,7 +7,7 @@ function create_tabs(){
 	create_ten_minutely();
 	create_minutely();
 	create_submit_rant_tab();
-	create_submit_pointer();
+	//create_submit_pointer();
 	update_tabs();
 }
 

@@ -99,6 +99,7 @@ function create_login_signup(){
 	$('<div/>',{id:'prompt_signup_space'}).appendTo('#login_signup_background');
 	create_login();
 	create_signup();
+	create_login_signup_close_button();
 }
 
 function create_login(){
@@ -180,4 +181,9 @@ function create_signup(){
 	$("#signup_prompt").append("Not a member?<br/>Not a problem!<br>");
 	$('<a/>',{id:'signup_link', text:'Sign up now for free!'}).appendTo('#signup_prompt');
 	$('#signup_link').attr('href','javascript:launch_user_signup();');
+}
+
+function create_login_signup_close_button(){
+	$('<div/>',{id:'login_signup_close' , text:'CLOSE'}).appendTo('#login_signup_background');
+	$('#login_signup_close').click(function(){$('#login_modal_blur_background').remove();  $('#login_signup_background').remove();});
 }

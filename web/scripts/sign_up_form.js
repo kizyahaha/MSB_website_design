@@ -12,6 +12,7 @@ function launch_user_signup(){
 	//create_captcha();
 	create_terms_checkbox();
 	create_submit_button();
+	create_login_signup_close_button();
 }
 
 function create_terms_checkbox(){
@@ -139,6 +140,7 @@ function create_signup_success(){
 	$('#login_signup_background').removeClass('signup_height').addClass('signup_success_height');
 	create_signup_success_message();
 	create_signup_success_image();
+	create_login_signup_close_button();
 }
 
 function create_signup_success_message(){
