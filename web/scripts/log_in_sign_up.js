@@ -164,7 +164,7 @@ function log_in(form){;
 			$('#submit_rant_button').click( function(){rant_submit(this.form)} );
 		},
 		error: function(msg) {
-		    document.getElementById('login_error_message').style.display = 'initial';
+		    document.getElementById('log_in_error_message').style.display = 'initial';
 		}
 	});
 }
