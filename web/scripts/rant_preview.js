@@ -95,8 +95,10 @@ function create_rant_preview_vote_button_functionality(preview_ID , rant_ID){
 	track_votes[0] = $(preview_ID + ' .rant_preview_support_button_image');
 	track_votes[1] = $(preview_ID + ' .rant_preview_oppose_button_image');
 	if (logged_user.id == -1){
-		track_votes[0].click( function(){window.document.location.href = 'log_in_sign_up.html'} );
-		track_votes[1].click( function(){window.document.location.href = 'log_in_sign_up.html'} );
+		//track_votes[0].click( function(){window.document.location.href = 'log_in_sign_up.html'} );
+		//track_votes[1].click( function(){window.document.location.href = 'log_in_sign_up.html'} );
+		track_votes[0].click( function(){launch_login_modal();} );
+		track_votes[1].click( function(){launch_login_modal();} );
 	}
 	else{
 		track_votes[0].click( function(){support_push(track_votes , rant_ID);} );

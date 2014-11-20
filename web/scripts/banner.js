@@ -84,6 +84,8 @@ function create_banner_links(){
 	a_2.href = '#';
 	a_2.textContent = 'Archives';
 	li_2.appendChild(a_2);
+	a_3.id = 'banner_log_in_link';
+	a_4.id = 'banner_log_out_link';
 	if (logged_user.id != -1){
 		a_3.href = 'user_profile.html?u=' + logged_user.id;
 		a_3.textContent = 'My profile';
@@ -91,8 +93,9 @@ function create_banner_links(){
 		a_4.textContent = 'Log out';
 	}
 	else{
-		a_3.id = 'banner_log_in_link';
-		a_3.href = 'log_in_sign_up.html';
+		//a_3.href = 'log_in_sign_up.html';
+		a_3.href = 'javascript:launch_login_modal();';
+		//$('#banner_log_in_link').click(function(){alert('here');  launch_login_modal(); return false; });
 		a_3.textContent = 'Log in/Sign up';
 	}
 	li_3.appendChild(a_3);

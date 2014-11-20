@@ -1,8 +1,8 @@
-
-
-function create_sign_up_form(){
-	$('<div/>',{id: 'sign_up_form_space'}).appendTo('body');
-	$('<form/>',{name:'sign_up_form' , id: 'sign_up_form'}).appendTo('#sign_up_form_space');
+function launch_user_signup(){
+	$('#login_signup_background').empty();
+	$('#login_signup_background').removeClass('login_signup_prompt_height').addClass('signup_height');
+	$('<div/>',{id:'signup_space'}).appendTo('#login_signup_background');
+	$('<form/>',{name:'signup_form' , id: 'signup_form'}).appendTo('#signup_space');
 	create_email_entry();
 	//create_DOB_entry(); //For filtering NSFW or maybe gifts/abilities on birthday
 	create_username_entry();
@@ -15,81 +15,77 @@ function create_sign_up_form(){
 }
 
 function create_terms_checkbox(){
-	$('<br/>').appendTo('#sign_up_form');
-	$('<input/>',{name:'terms_of_use' , type:'checkbox'}).appendTo('#sign_up_form');
-	$("#sign_up_form").append("<span class='checkbox_text'> I have read and agree to the <a href='#'>Terms of Use </a></span>");
-	$('<div/>',{id: 'no_read_terms' , text:'*Please agree to the Terms of Use.'}).appendTo('#sign_up_form');
+	$('<br/>').appendTo('#signup_form');
+	$('<input/>',{name:'terms_of_use' , type:'checkbox'}).appendTo('#signup_form');
+	$("#signup_form").append("<span class='checkbox_text'> I have read and agree to the <a href='#'>Terms of Use </a></span>");
+	$('<div/>',{id: 'no_read_terms' , text:'*Please agree to the Terms of Use.'}).appendTo('#signup_form');
 	document.getElementById('no_read_terms').style.display = 'none';
-	$('<br/>').appendTo('#sign_up_form');
-	$('<div/>',{id: 'sign_up_info_missing' , text:'*Please complete all required fields.'}).appendTo('#sign_up_form');
-	document.getElementById('sign_up_info_missing').style.display = 'none';
+	$('<br/>').appendTo('#signup_form');
+	$('<div/>',{id: 'signup_info_missing' , text:'*Please complete all required fields.'}).appendTo('#signup_form');
+	document.getElementById('signup_info_missing').style.display = 'none';
 }
 
 function create_submit_button(){
-	$('<br/>').appendTo('#sign_up_form');
-	$('<input/>',{id:'submit_button' , type:'button' , value:'Submit'}).appendTo('#sign_up_form');
+	$('<br/>').appendTo('#signup_form');
+	$('<input/>',{id:'submit_button' , type:'button' , value:'Submit'}).appendTo('#signup_form');
 	$('#submit_button').click( function(){submit(this.form);} );
 }
 
 function submit(form){
-	if (check_valid_input(form)){
-		//alert($('#sign_up_form').serialize());
-		
-		/*$.ajax({
+	if (check_valid_input(form)){		
+		$.ajax({
 			type: 'POST',
 			url: '/api/users/add',
-			data: $('#sign_up_form').serialize(),
+			data: $('#signup_form').serialize(),
 			success: function(msg) {
-				window.document.location.href = 'sign_up_success.html';
+				create_signup_success();
 			},
 			error: function(msg) {
 				alert("Woops.  The submission failed.  Contact your local support.");
 			}
-		});*/
-		$.post( '/api/users/add' , $('#sign_up_form').serialize() );
-		window.document.location.href = 'sign_up_success.html';
+		});
 	}
 }
 
 function ask_visibility(str){
-	$('<input/>',{type:'checkbox'}).appendTo('#sign_up_form');
-	$('<span/>',{addClass: 'checkbox_text' , id:'checkbox_text'}).appendTo('#sign_up_form');
+	$('<input/>',{type:'checkbox'}).appendTo('#signup_form');
+	$('<span/>',{addClass: 'checkbox_text' , id:'checkbox_text'}).appendTo('#signup_form');
 	document.getElementById('checkbox_text').textContent = 'Allow members to see my ' + str;
-	$('<br/>').appendTo('#sign_up_form');
+	$('<br/>').appendTo('#signup_form');
 }
 
 function create_email_entry(){
-	$('<label/>',{id: 'email_label' , text: '*Enter e-mail:'}).appendTo('#sign_up_form');
-	$('<input/>',{name:'email' , addClass:'text_entry' , placeholder: 'email@email.com' , type:'email' , autocomplete:'on'}).appendTo('#sign_up_form');
-	$('<br/>').appendTo('#sign_up_form');
+	$('<label/>',{id: 'email_label' , text: '*Enter e-mail:'}).appendTo('#signup_form');
+	$('<input/>',{name:'email' , addClass:'text_entry' , placeholder: 'email@email.com' , type:'email' , autocomplete:'on'}).appendTo('#signup_form');
+	$('<br/>').appendTo('#signup_form');
 }
 
 function create_DOB_entry(){
-	$('<label/>',{id: 'DOB_label' , text: 'Enter birth date:'}).appendTo('#sign_up_form');
-	$('<input/>',{name:'DOB' , id:'DOB' , type:'date'}).appendTo('#sign_up_form');
-	$('<br/>').appendTo('#sign_up_form');
+	$('<label/>',{id: 'DOB_label' , text: 'Enter birth date:'}).appendTo('#signup_form');
+	$('<input/>',{name:'DOB' , id:'DOB' , type:'date'}).appendTo('#signup_form');
+	$('<br/>').appendTo('#signup_form');
 	ask_visibility('birth date');
 }
 
 function create_username_entry(){
-	$('<label/>',{id: 'username_label' , text: '*Create username:'}).appendTo('#sign_up_form');
-	$('<input/>',{name:'username' , addClass:'text_entry' , placeholder: 'username' , type:'text' , autocomplete:'off'}).appendTo('#sign_up_form');
-	$('<br/>').appendTo('#sign_up_form');
-	$('<div/>',{id: 'username_taken' , text:'*Sorry, that username already exists.'}).appendTo('#sign_up_form');
+	$('<label/>',{id: 'username_label' , text: '*Create username:'}).appendTo('#signup_form');
+	$('<input/>',{name:'username' , addClass:'text_entry' , placeholder: 'username' , type:'text' , autocomplete:'off'}).appendTo('#signup_form');
+	$('<br/>').appendTo('#signup_form');
+	$('<div/>',{id: 'username_taken' , text:'*Sorry, that username already exists.'}).appendTo('#signup_form');
 	document.getElementById('username_taken').style.display = 'none';
 }
 
 function create_password_entry(){
-	$('<label/>',{id: 'password_label' , text: '*Create password:'}).appendTo('#sign_up_form');
-	$('<input/>',{name:'password' , addClass:'text_entry' , placeholder: 'password' , type:'password'}).appendTo('#sign_up_form');
-	$('<br/>').appendTo('#sign_up_form');
+	$('<label/>',{id: 'password_label' , text: '*Create password:'}).appendTo('#signup_form');
+	$('<input/>',{name:'password' , addClass:'text_entry' , placeholder: 'password' , type:'password'}).appendTo('#signup_form');
+	$('<br/>').appendTo('#signup_form');
 }
 
 function create_password_confirm(){
-	$('<label/>',{id: 'password_confirm' , text: '*Confirm password:'}).appendTo('#sign_up_form');
-	$('<input/>',{name:'password_confirm' , addClass:'text_entry' , placeholder: 'retype password' , type:'password'}).appendTo('#sign_up_form');
-	$('<br/>').appendTo('#sign_up_form');
-	$('<div/>',{id: 'passwords_no_matchy' , text:"*These passwords don't match"}).appendTo('#sign_up_form');
+	$('<label/>',{id: 'password_confirm' , text: '*Confirm password:'}).appendTo('#signup_form');
+	$('<input/>',{name:'password_confirm' , addClass:'text_entry' , placeholder: 'retype password' , type:'password'}).appendTo('#signup_form');
+	$('<br/>').appendTo('#signup_form');
+	$('<div/>',{id: 'passwords_no_matchy' , text:"*These passwords don't match"}).appendTo('#signup_form');
 	document.getElementById('passwords_no_matchy').style.display = 'none';
 }
 
@@ -108,12 +104,12 @@ function check_valid_input(form){
 }
 
 function check_all_filled(form){
-	document.getElementById('sign_up_info_missing').style.display = 'none';
+	document.getElementById('signup_info_missing').style.display = 'none';
 	if (form.username.value.length == 0 
 	|| form.password.value.length == 0
 	|| form.password_confirm.value.length == 0
 	|| form.email.value.length == 0){
-		document.getElementById('sign_up_info_missing').style.display = 'initial';
+		document.getElementById('signup_info_missing').style.display = 'initial';
 		return false;
 	}
 	return true;
@@ -136,4 +132,19 @@ function check_read_terms(form){
 		return false;
 	}
 	return true;
+}
+
+function create_signup_success(){
+	$('#login_signup_background').empty();
+	$('#login_signup_background').removeClass('signup_height').addClass('signup_success_height');
+	create_signup_success_message();
+	create_signup_success_image();
+}
+
+function create_signup_success_message(){
+	$("#login_signup_background").append("<div id='signup_success_message'><span style='color:white'>Congrats and thank you!</span><br/>A confirmation link has been e-mailed to you.</div>");
+}
+
+function create_signup_success_image(){
+	$("#login_signup_background").append("<img id='signup_success_img' src='images/character_4.png' width='230' alt='signup_success_image'>");
 }

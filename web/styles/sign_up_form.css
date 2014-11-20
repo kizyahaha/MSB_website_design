@@ -1,12 +1,17 @@
-#sign_up_form_space{
-	position:relative;
-	width:100%;
-	margin-bottom:50px;
-	margin-top:50px;
-	text-align:right;
+.signup_height{
+    height:220px;
+}
+.signup_success_height{
+    height:350px;
 }
 
-#sign_up_form{
+#signup_space{
+    position:absolute;
+    width:50%;
+    text-align:center;
+}
+
+#signup_form{
 	width:350px;
 	font-family:Lato;
 	color:rgb(52,52,52);
@@ -23,13 +28,13 @@
 	text-align:center;
 }
 
-#sign_up_form label{
+#signup_form label{
 	display:inline-block;
 	width:190px;
     text-align: right;
 }
 
-#sign_up_form div{
+#signup_form div{
 	font-family:Lato;
 	color:red;
 	font-weight:300;
@@ -48,7 +53,7 @@
 	text-align:center;
 }
 
-#sign_up_form a{
+#signup_form a{
 	color:white;
 }
 
@@ -56,4 +61,21 @@
 	color:rgb(52,52,52);
 	text-align:center;
 	font-size:14px;
+}
+
+#signup_success_message{
+    position:relative;
+    width:100%;
+    /*margin-top:100px;*/
+    text-align:center;
+    font-family:Lato;
+    color:rgb(52,52,52);
+    font-weight:700;
+    font-size:25px;
+}
+
+#signup_success_img{
+    display:block;
+    margin:0 auto;
+    margin-bottom:100px;
 }

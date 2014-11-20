@@ -22,7 +22,7 @@ function log_off_user(){
         data: {id: -1},
         success: function(data) {
             logged_user = $.parseJSON(data);
-			window.document.location.href = 'daily.html';
+			//window.document.location.href = 'daily.html';
         },
 		error: function(name,status) {
 			window.document.location.href = "error_page.html";
@@ -33,12 +33,17 @@ function log_off_user(){
 		type: 'POST',
 		url: '/api/login/logout',
 		success: function(msg) {
-		    window.document.location.href = 'daily.html';
+		    //window.document.location.href = 'daily.html';
+			$('#banner_log_in_link').text('Log in/Sign up');
+			$('#banner_log_in_link').attr('href','javascript:launch_login_modal();');
+			$('#banner_log_out_link').text('');
+			$('#banner_log_out_link').attr('href','#');
 		},
 		error: function(name,status) {
 			window.document.location.href = "error_page.html";
 		}
 	});
+	//logged_user = get_user();
 }
 
 function translate_date(date){

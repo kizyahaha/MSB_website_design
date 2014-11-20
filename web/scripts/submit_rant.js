@@ -38,7 +38,12 @@ function create_NSFW_checkbox(){
 
 function create_submit_rant_button(){
 	$('<input/>',{id:'submit_rant_button' , type:'button' , value:'Submit'}).appendTo('#submit_rant_inputs');
-	$('#submit_rant_button').click( function(){rant_submit(this.form);} );
+	if (logged_user.id == -1){
+		$('#submit_rant_button').click(function(){launch_login_modal()});
+	}
+	else{
+		$('#submit_rant_button').click( function(){rant_submit(this.form)} );
+	}
 	$(window).keypress(function (e) {
 		var key = e.which;
 		if(key == 13){
@@ -50,8 +55,6 @@ function create_submit_rant_button(){
 
 function rant_submit(form){
 	if (check_rant_filled(form)){
-		//alert($('#rant_submission_form').serialize());
-		
 		$.ajax({
 			type: "POST",
 			url: "/api/rants/add",

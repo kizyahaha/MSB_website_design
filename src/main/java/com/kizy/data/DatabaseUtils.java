@@ -40,10 +40,10 @@ public class DatabaseUtils {
     private static final int USER_PASSWORD_PART = 2;
     private static final int USER_EMAIL_PART = 3;
     private static final int USER_CREATION_PART = 4;
-    private static final int USER_RANTS_PART = 5;
-    private static final int USER_NSFW_PREFERENCE_PART = 6;
-    private static final int USER_SOUNDS_PREFERENCE_PART = 7;
-    private static final int USER_ANIMATIONS_PREFERENCE_PART = 8;
+    private static final int USER_NSFW_PREFERENCE_PART = 5;
+    private static final int USER_SOUNDS_PREFERENCE_PART = 6;
+    private static final int USER_ANIMATIONS_PREFERENCE_PART = 7;
+    private static final int USER_RANTS_PART = 8;
 
     private static final int RANT_ID_PART = 0;
     private static final int RANT_NSFW_PART = 1;
