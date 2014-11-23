@@ -27,6 +27,9 @@ public class DatabaseUtils {
     private static final String RANTS_FILENAME = "data" + File.separator + "rants.txt";
     private static final File RANTS_FILE = new File(RANTS_FILENAME);
 
+    private static final String USER_RANTS_FILENAME = "data" + File.separator + "user_rants.txt";
+    private static final File USER_RANTS_FILE = new File(USER_RANTS_FILENAME);
+
     private static final String UPVOTES_FILENAME = "data" + File.separator + "upvotes.txt";
     private static final File UPVOTES_FILE = new File(UPVOTES_FILENAME);
 
@@ -43,7 +46,6 @@ public class DatabaseUtils {
     private static final int USER_NSFW_PREFERENCE_PART = 5;
     private static final int USER_SOUNDS_PREFERENCE_PART = 6;
     private static final int USER_ANIMATIONS_PREFERENCE_PART = 7;
-    private static final int USER_RANTS_PART = 8;
 
     private static final int RANT_ID_PART = 0;
     private static final int RANT_NSFW_PART = 1;
@@ -58,6 +60,9 @@ public class DatabaseUtils {
     private static final int VOTE_USER_PART = 0;
     private static final int VOTE_RANT_PART = 1;
 
+    private static final int USER_RANT_USER_PART = 0;
+    private static final int USER_RANT_RANT_PART = 1;
+
     private DatabaseUtils() {
         // no instantiation
     }
@@ -67,20 +72,7 @@ public class DatabaseUtils {
     }
 
     private static void addRantToOwner(Rant rant) throws IOException {
-        StringBuilder newContents = new StringBuilder();
-        long userId = rant.getOwnerId();
-        for (String line : readUsers()) {
-            newContents.append(line);
-            String[] userString = splitLine(line);
-            if (userId == Long.parseLong(userString[USER_ID_PART])) {
-                if (userString.length > USER_RANTS_PART) {
-                    newContents.append(",");
-                }
-                newContents.append(rant.getRantId());
-            }
-            newContents.append("\n");
-        }
-        Files.write(newContents, USERS_FILE, Charsets.UTF_8);
+        append(USER_RANTS_FILE, rant.getOwnerId() + LINE_DELIMITER + rant.getRantId() + "\n");
     }
 
     public static void writeUser(User user) throws IOException {
@@ -92,19 +84,10 @@ public class DatabaseUtils {
                user.getUsername() + LINE_DELIMITER +
                user.getPassword() + LINE_DELIMITER +
                user.getEmail() + LINE_DELIMITER +
-               user.getCreationDate().toString() +
-               (user.getOwnedRantIds().isEmpty() ? "" : LINE_DELIMITER + formatUserRants(user)) + LINE_DELIMITER +
+               user.getCreationDate().toString() + LINE_DELIMITER +
                user.getNsfwPreference() + LINE_DELIMITER +
                user.getSoundsPreference() + LINE_DELIMITER +
                user.getAnimationsPreference();
-    }
-
-    private static String formatUserRants(User user) {
-        StringBuilder rants = new StringBuilder();
-        for (Long rantId : user.getOwnedRantIds()) {
-            rants.append("," + rantId.toString());
-        }
-        return rants.substring(1);
     }
 
     public static void modifyUser(long oldUserId, User newUser) throws IOException {
@@ -246,6 +229,10 @@ public class DatabaseUtils {
         return readFile(DOWNVOTES_FILE);
     }
 
+    private static List<String> readUserRants() throws IOException {
+        return readFile(USER_RANTS_FILE);
+    }
+
     public static User readUser(String username, String password) throws IOException {
         return findUser(0L, username, password, "", EnumSet.of(UserMatchComponent.USERNAME, UserMatchComponent.PASSWORD));
     }
@@ -306,7 +293,7 @@ public class DatabaseUtils {
                               parts[USER_PASSWORD_PART],
                               parts[USER_EMAIL_PART],
                               new DateTime(parts[USER_CREATION_PART]),
-                              parseRants(parts[USER_RANTS_PART]),
+                              getUserRantIds(userId),
                               getUserUpvotes(userId),
                               getUserDownVotes(userId),
                               new Integer(parts[USER_NSFW_PREFERENCE_PART]),
@@ -314,10 +301,13 @@ public class DatabaseUtils {
                               new Integer(parts[USER_ANIMATIONS_PREFERENCE_PART]));
     }
 
-    private static Collection<Long> parseRants(String rantsString) {
+    private static Collection<Long> getUserRantIds(long userId) throws IOException {
         Collection<Long> rants = Sets.newConcurrentHashSet();
-        for (String rantId : rantsString.split(",")) {
-            rants.add(Long.parseLong(rantId));
+        for (String line : readUserRants()) {
+            String[] parts = splitLine(line);
+            if (Long.parseLong(parts[USER_RANT_USER_PART]) == userId) {
+                rants.add(Long.parseLong(parts[USER_RANT_RANT_PART]));
+            }
         }
         return rants;
     }
