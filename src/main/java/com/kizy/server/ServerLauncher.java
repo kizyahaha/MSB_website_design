@@ -3,6 +3,9 @@ package com.kizy.server;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
@@ -26,6 +29,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
+import com.kizy.server.executors.RantDecayExecutor;
 import com.kizy.server.filters.CharacterEncodingFilter;
 import com.kizy.server.prefs.ApplicationContext;
 
@@ -34,12 +38,16 @@ public class ServerLauncher {
     private static final int PORT = 9876;
     private static final int MAX_THREADS = 100;
 
+    private static final int EXECUTOR_START_MILLISECOND_DELAY = 1 * 1000 * 60; // 1 minute
+    private static final int EXECUTOR_MILLISECOND_PERIOD = 3 * 1000 * 60; // 3 minutes
+
     private static final String URL_BASE = "";
     private static final String RESOURCE_BASE = "web";
 
     public static void main(String[] args) throws Exception {
         Server server = createServer();
         server.start();
+        runExecutors();
         System.out.println("Server started on port " + PORT);
     }
 
@@ -108,4 +116,8 @@ public class ServerLauncher {
         handler.addServletWithMapping(holder, pathSpec);
     }
 
+    private static void runExecutors() {
+        ScheduledExecutorService pool = Executors.newScheduledThreadPool(MAX_THREADS);
+        pool.scheduleAtFixedRate(new RantDecayExecutor(), EXECUTOR_START_MILLISECOND_DELAY, EXECUTOR_MILLISECOND_PERIOD, TimeUnit.MILLISECONDS);
+    }
 }
