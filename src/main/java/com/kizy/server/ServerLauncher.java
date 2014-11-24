@@ -30,6 +30,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 
 import com.kizy.server.executors.RantDecayExecutor;
+import com.kizy.server.executors.RantPromotionExecutor;
 import com.kizy.server.filters.CharacterEncodingFilter;
 import com.kizy.server.prefs.ApplicationContext;
 
@@ -38,8 +39,9 @@ public class ServerLauncher {
     private static final int PORT = 9876;
     private static final int MAX_THREADS = 100;
 
-    private static final int EXECUTOR_START_MILLISECOND_DELAY = 1 * 1000 * 60; // 1 minute
-    private static final int EXECUTOR_MILLISECOND_PERIOD = 3 * 1000 * 60; // 3 minutes
+    private static final int ALL_EXECUTOR_START_MILLISECOND_DELAY = 1 * 1000 * 60; // 1 minute
+    private static final int DECAY_EXECUTOR_MILLISECOND_PERIOD = 3 * 1000 * 60; // 3 minutes
+    private static final int PROMOTION_EXECUTOR_MILLISECOND_PERIOD = 1 * 1000 * 60; // 1 minute
 
     private static final String URL_BASE = "";
     private static final String RESOURCE_BASE = "web";
@@ -118,6 +120,7 @@ public class ServerLauncher {
 
     private static void runExecutors() {
         ScheduledExecutorService pool = Executors.newScheduledThreadPool(MAX_THREADS);
-        pool.scheduleAtFixedRate(new RantDecayExecutor(), EXECUTOR_START_MILLISECOND_DELAY, EXECUTOR_MILLISECOND_PERIOD, TimeUnit.MILLISECONDS);
+        pool.scheduleAtFixedRate(new RantDecayExecutor(), ALL_EXECUTOR_START_MILLISECOND_DELAY, DECAY_EXECUTOR_MILLISECOND_PERIOD, TimeUnit.MILLISECONDS);
+        pool.scheduleAtFixedRate(new RantPromotionExecutor(), ALL_EXECUTOR_START_MILLISECOND_DELAY, PROMOTION_EXECUTOR_MILLISECOND_PERIOD, TimeUnit.MILLISECONDS);
     }
 }

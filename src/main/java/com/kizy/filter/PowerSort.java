@@ -20,7 +20,7 @@ public class PowerSort implements Filter {
                 return rant1.getRantPower() - rant2.getRantPower();
             }
         }, arg);
-        Collections.sort(sortedRants , powerComparator);
+        Collections.sort(sortedRants, powerComparator);
         return sortedRants;
     }
 }

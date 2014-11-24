@@ -1,15 +1,15 @@
 package com.kizy.data.rant;
 
-public enum RantGranularity {
-    DAILY("daily", 0),
-    HOURLY("hourly", 1),
-    TEN_MINUTELY("ten_minutely", 2),
-    MINUTELY("minutely", 3);
+public enum RantLevel {
+    DAILY("Daily", 0),
+    HOURLY("Hourly", 1),
+    TEN_MINUTELY("10-Minutely", 2),
+    MINUTELY("Minutely", 3);
 
     public String displayName;
     public int tabNumber;
 
-    private RantGranularity(String displayName, int tabNumber) {
+    private RantLevel(String displayName, int tabNumber) {
         this.displayName = displayName;
         this.tabNumber = tabNumber;
     }
@@ -27,8 +27,8 @@ public enum RantGranularity {
         return "TAB[Tab Name: " + displayName + ", Tab Number: " + tabNumber + "]";
     }
 
-    public static RantGranularity fromName(String name) {
-        for (RantGranularity possible : values()) {
+    public static RantLevel fromName(String name) {
+        for (RantLevel possible : values()) {
             if (possible.getDisplayName().equalsIgnoreCase(name)) {
                 return possible;
             }
@@ -37,8 +37,8 @@ public enum RantGranularity {
         return null;
     }
 
-    public static RantGranularity fromNumber(int number) {
-        for (RantGranularity possible : values()) {
+    public static RantLevel fromNumber(int number) {
+        for (RantLevel possible : values()) {
             if (possible.getTabNumber() == number) {
                 return possible;
             }

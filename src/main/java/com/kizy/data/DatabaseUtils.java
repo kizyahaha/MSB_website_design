@@ -9,12 +9,15 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
 import com.kizy.data.rant.Rant;
+import com.kizy.data.rant.RantLevel;
 import com.kizy.data.rant.SimpleRant;
 import com.kizy.data.user.SimpleUser;
 import com.kizy.data.user.User;
@@ -259,6 +262,24 @@ public class DatabaseUtils {
 
     public static Rant findRantByOwnerName(String owner) throws IOException {
         return findRant(0L, false, null, owner, EnumSet.of(RantMatchComponent.OWNER));
+    }
+
+    public static List<Rant> findRantsByLevel(final RantLevel level) throws IOException {
+        return FluentIterable.from(readRants()).filter(new Predicate<String>() {
+            @Override
+            public boolean apply(String line) {
+                return splitLine(line)[RANT_LEVEL_PART].equalsIgnoreCase(level.getDisplayName());
+            }
+        }).transform(new Function<String, Rant>() {
+            @Override
+            public Rant apply(String line) {
+                try {
+                    return parseRant(line);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }).toList();
     }
 
     private static User findUser(long matchId, String matchUsername, String matchPassword, String matchEmail, EnumSet<UserMatchComponent> set) throws IOException {

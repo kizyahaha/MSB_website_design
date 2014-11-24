@@ -30,7 +30,7 @@ public class SimpleRant implements Rant {
                       @JsonProperty("owner") long owner,
                       @JsonProperty("ownername") String ownername) {
         this(id, nsfw, title, contents, owner, ownername, DateTime.now(), null, Rants.STARTING_POWER,
-             "Minutely", Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet());
+             RantLevel.MINUTELY.getDisplayName(), Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet());
     }
 
     @JsonCreator
