@@ -1,6 +1,6 @@
 function create_my_items_content(){
 	$('<div/>',{id:'my_items_space'}).appendTo('#user_content_space');
-	document.getElementById('my_items_space').style.display = 'none';
+	//document.getElementById('my_items_space').style.display = 'none';
 	for (var i in tot_cost_per_item){
 		tot_cost_per_item[i] = 0;
 	}
