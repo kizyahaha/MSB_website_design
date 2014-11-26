@@ -67,9 +67,10 @@ function update_winner_rant(){
         url: '/api/rants/winner',
 		data: {appliedFilters: '{"level":"'+get_level_string()+'"}'},
         success: function(gotData) {
-            winner = $.parseJSON(gotData);			
-			var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);
-			populate_rant_preview(false, winner_ID, 0, 1, winner);			
+            winner = $.parseJSON(gotData);
+			display_winner_rant(winner);
+			//var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);
+			//populate_rant_preview(false, winner_ID, 0, 1, winner);			
 			update_winner_headline(get_level_index());
 			update_character(get_level_index());
 			update_countdown(get_level_index());
@@ -80,6 +81,20 @@ function update_winner_rant(){
             window.document.location.href = "error_page.html";
         }
     });
+}
+
+function display_winner_rant(winner){
+	if (winner.nsfw && logged_user.nsfwPreference == 0){
+		$('#rant_bubble').text('Sorry, the current winning rant is NSFW! Sign in and/or change your preferences to view NSFW rants.');
+	}
+	else if (winner.nsfw && logged_user.nsfwPreference == 2){
+		var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);
+		populate_rant_preview(true, winner_ID, 0, 1, winner);
+	}
+	else{
+		var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);
+		populate_rant_preview(false, winner_ID, 0, 1, winner);
+	}
 }
 
 function update_winner_headline(level){
