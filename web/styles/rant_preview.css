@@ -110,3 +110,53 @@
 .rant_preview_oppose_button:hover{
 	cursor:pointer;
 }
+
+#nsfw_warning_background{
+    background-color:rgb(12,120,154);
+    position:fixed;
+    top:25%;
+    left:0;
+    right:0;
+    box-sizing:border-box;
+    padding-left: 15%;
+    padding-right: 15%;
+    text-align:center;
+    font-family:Lato;
+    color:rgb(52,52,52);
+    font-size: 30px;
+    border: solid rgb(12,120,154) 20px;
+}
+
+#nsfw_warning_text{
+	text-align:center;
+    font-family:Lato;
+    width:100%;
+    height:30px;
+}
+
+#nsfw_warning_img{
+    display:block;
+    margin:0 auto;
+    margin-bottom:50px;
+}
+
+.nsfw_warning_button{
+    position:absolute;
+    bottom:0;
+    background-color:rgb(52,52,52);
+    border:solid 1px rgb(52,52,52);
+    font-family:Lato;
+    color:white;
+    font-size: 20px;
+    width:48%;
+}
+.nsfw_warning_button:hover{
+    border-color:white;
+    cursor:pointer
+}
+#nsfw_warning_close{
+    left:0;
+}
+#nsfw_warning_proceed{
+    right:0;
+}

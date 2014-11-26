@@ -125,7 +125,12 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 			$(preview_ID).find('.rant_preview_title_link').attr('href',rant_data.contents);
 		}
 		else{
-			$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
+			if (rant_data.nsfw && logged_user.nsfwPreference == 2){
+				$(preview_ID).find('.rant_preview_title_link').attr('href','javascript:launch_nsfw_warning_modal(' + rant_data.id + ')');
+			}
+			else{
+				$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
+			}
 		}
 	$(preview_ID).find('.rant_preview_author_link').text(rant_data.ownername);
 		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html?u=' + rant_data.owner);
@@ -277,4 +282,28 @@ function detailed_rant_display(rant_ID){
 	$(rant_ID + ' .rant_preview_actions_line').css('margin-right','auto');
 }
 
+/**********************************************************************************************************/
 
+function launch_nsfw_warning_modal(rant_id){
+	create_modal_blur_background('nsfw_warning_modal_blur_background');
+	$('<div/>',{id:'nsfw_warning_background' , text:'This rant is NSFW!  Are you over 18 and wish to proceed?'}).appendTo('body');
+	//create_nsfw_warning_text();
+	create_nsfw_warning_mascot();
+	create_nsfw_warning_buttons(rant_id);
+}
+
+function create_nsfw_warning_text(){
+	$('<div/>',{id:'nsfw_warning_text'}).appendTo('nsfw_warning_background');
+	$('#nsfw_warning_text').text('This rant is NSFW!  Are you over 18 and wish to proceed?');
+}
+
+function create_nsfw_warning_mascot(){
+	$("#nsfw_warning_background").append("<img id='nsfw_warning_img' src='images/character_19.png' width='200' alt='nsfw_warning_image'>");
+}
+
+function create_nsfw_warning_buttons(rant_id){
+	$('<div/>',{id:'nsfw_warning_close' , addClass:'nsfw_warning_button' , text:'No thanks'}).appendTo('#nsfw_warning_background');
+	$('#nsfw_warning_close').click(function(){$('#nsfw_warning_modal_blur_background').remove();  $('#nsfw_warning_background').remove();});
+	$('<div/>',{id:'nsfw_warning_proceed' , addClass:'nsfw_warning_button' , text:'Proceed'}).appendTo('#nsfw_warning_background');
+	$('#nsfw_warning_proceed').click(function(){window.document.location.href = 'rant_view.html?r=' + rant_id;});
+}
