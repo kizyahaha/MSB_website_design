@@ -9,7 +9,7 @@ import com.kizy.data.rant.Rant;
 
 public class Pages {
 
-    public static final int RANTS_PER_PAGE = 6;
+    public static final int RANTS_PER_PAGE = 10;
 
     private Pages() {
         // no instantiation

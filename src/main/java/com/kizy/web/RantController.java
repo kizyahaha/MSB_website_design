@@ -32,6 +32,7 @@ import com.kizy.filter.UsernameFilter;
 import com.kizy.pagination.Page;
 import com.kizy.pagination.Pages;
 import com.kizy.pagination.SimplePage;
+import com.kizy.server.executors.*;
 
 @Controller
 @RequestMapping(value = "/rants", method = RequestMethod.POST)
@@ -116,13 +117,8 @@ public class RantController {
     public String getLevelWinnerRant(HttpServletRequest request,
                                      @RequestParam(value = "appliedFilters", required = false) String appliedFiltersString)
                                              throws IOException {
-    	long winnerId = getLevelWinnerId(appliedFiltersString);
-        return getRantData(request, winnerId);
-    }
-
-    public long getLevelWinnerId(String appliedFiltersString) throws IOException{
     	List<Rant> levelRants = filterRants(appliedFiltersString);
-    	return levelRants.get(0).getRantId();
+        return getRantData(request, RantPromotionExecutor.getWinner(levelRants).getRantId());
     }
 
     /**

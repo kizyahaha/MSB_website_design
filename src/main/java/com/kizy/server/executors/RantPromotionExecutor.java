@@ -54,7 +54,7 @@ public class RantPromotionExecutor implements Runnable {
         }
     }
 
-    private static Rant getWinner(List<Rant> contenders) {
+    public static Rant getWinner(List<Rant> contenders) {
         if (contenders.isEmpty()) {
             return null;
         }
