@@ -126,3 +126,24 @@ $(document).mousemove(function(e) {
     mouseX = e.pageX;
     mouseY = e.pageY;
 }).mouseover();
+
+
+function onload_manager(func) {
+	//alert(document.body.scrollTop);
+    // assign any pre-defined functions on 'window.onload' to a variable
+    var current_onload = window.onload;
+    // if there is not any function hooked to it
+    if (typeof window.onload != 'function') {
+        // you can hook your function with it
+        window.onload = func();
+    } else {     // someone already hooked a function
+        window.onload = function () {
+			alert('here');
+            // call the function hooked already
+            current_onload();
+            // call your awesome function
+            func();
+        }
+    }
+}
+

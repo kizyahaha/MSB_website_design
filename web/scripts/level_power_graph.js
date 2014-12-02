@@ -76,7 +76,7 @@ function do_contender_power_graph(powers){
 			dashboard.bind(rank_slider, chart);
 			dashboard.draw(data);
 		}
-		window.onload = draw_contender_power_graph();
+		onload_manager(draw_contender_power_graph);
 		
 		var resizeTimer;
 		$(window).resize(function() {

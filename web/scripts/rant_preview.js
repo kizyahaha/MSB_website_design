@@ -286,7 +286,7 @@ function detailed_rant_display(rant_ID){
 
 function launch_nsfw_warning_modal(rant_id){
 	create_modal_blur_background('nsfw_warning_modal_blur_background');
-	$('<div/>',{id:'nsfw_warning_background' , text:'This rant is NSFW!  Are you over 18 and wish to proceed?'}).appendTo('body');
+	$('<div/>',{id:'nsfw_warning_background' , text:'This rant is tagged as NSFW!  Are you over 18 and wish to proceed?'}).appendTo('body');
 	//create_nsfw_warning_text();
 	create_nsfw_warning_mascot();
 	create_nsfw_warning_buttons(rant_id);

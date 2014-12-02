@@ -74,8 +74,8 @@ function update_winner_rant(){
 			update_winner_headline(get_level_index());
 			update_character(get_level_index());
 			update_countdown(get_level_index());
-			update_rant_sizes();
-			window.onload = function(){update_rant_sizes();};
+			//update_rant_sizes();
+			onload_manager(update_rant_sizes);
         },
         error: function(name,status) {
             window.document.location.href = "error_page.html";
@@ -85,7 +85,7 @@ function update_winner_rant(){
 
 function display_winner_rant(winner){
 	if (winner.nsfw && logged_user.nsfwPreference == 0){
-		$('#rant_bubble').text('Sorry, the current winning rant is NSFW! Sign in and/or change your preferences to view NSFW rants.');
+		$('#rant_bubble').text('Sorry, the current winning rant is tagged as NSFW! Sign in and/or change your preferences to view NSFW rants.');
 	}
 	else if (winner.nsfw && logged_user.nsfwPreference == 2){
 		var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);

@@ -1,4 +1,4 @@
-//window.onload = create_banner;
+
 
 function create_banner(){
 	create_banner_background();

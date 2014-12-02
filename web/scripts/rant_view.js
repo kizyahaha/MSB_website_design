@@ -88,7 +88,7 @@ function create_detailed_rant_power_graph(){
 			dashboard.bind(detailed_rank_slider, detailed_chart);
 			dashboard.draw(detailed_data);
 		}
-		window.onload = draw_detailed_power_graph();
+		onload_manager(draw_detailed_power_graph);
 		
 		var resizeTimer;
 		$(window).resize(function() {
