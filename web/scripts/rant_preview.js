@@ -125,11 +125,9 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 			$(preview_ID).find('.rant_preview_title_link').attr('href',rant_data.contents);
 		}
 		else{
+			$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
 			if (rant_data.nsfw && logged_user.nsfwPreference == 2){
-				$(preview_ID).find('.rant_preview_title_link').attr('href','javascript:launch_nsfw_warning_modal(' + rant_data.id + ')');
-			}
-			else{
-				$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
+				$(preview_ID).find('.rant_preview_title_link').attr('onclick','launch_nsfw_warning_modal('+rant_data.id+'); return false;');
 			}
 		}
 	$(preview_ID).find('.rant_preview_author_link').text(rant_data.ownername);

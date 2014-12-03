@@ -26,6 +26,9 @@
 	font-size:20px;
 	color:rgb(52,52,52);
 }
+.rant_preview_title_link:visited{
+    color:rgb(150,150,150);
+}
 .rant_preview_author_link{
 	padding-left:30px;
 	color:rgb(12,120,154);

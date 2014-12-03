@@ -2,11 +2,11 @@
 2~~~~~true~~~~~Title~~~~~Contents~~~~~Queen_of_Equestria~~~~~2014-06-08T10:46:18.736-07:00~~~~~2014-08-25T02:23:08.753-07:00~~~~~4574~~~~~Hourly
 3~~~~~true~~~~~This is a title~~~~~These are contents.~~~~~Queen_of_Equestria~~~~~2014-06-08T10:47:18.736-07:00~~~~~2014-08-25T02:22:11.963-07:00~~~~~166~~~~~10-Minutely
 4~~~~~true~~~~~This is a title~~~~~These are contents.~~~~~Queen_of_Equestria~~~~~2014-06-08T10:49:18.736-07:00~~~~~2014-08-25T02:22:12.565-07:00~~~~~3246~~~~~Minutely
-5~~~~~true~~~~~test~~~~~test~~~~~Queen_of_Equestria~~~~~2014-06-08T12:50:18.736-05:00~~~~~2014-11-09T21:41:50.081-06:00~~~~~644~~~~~Daily
+5~~~~~true~~~~~test~~~~~test~~~~~Queen_of_Equestria~~~~~2014-06-08T12:50:18.736-05:00~~~~~2014-11-29T23:48:55.601-06:00~~~~~644~~~~~Daily
 6~~~~~true~~~~~test~~~~~test~~~~~Queen_of_Equestria~~~~~2014-06-08T12:52:18.736-05:00~~~~~2014-11-03T10:46:40.024-06:00~~~~~75~~~~~Daily
 7~~~~~true~~~~~test2~~~~~test2~~~~~Queen_of_Equestria~~~~~2014-06-08T12:55:18.736-05:00~~~~~2014-10-27T17:02:37.158-05:00~~~~~2355~~~~~Daily
 8~~~~~true~~~~~here~~~~~and here~~~~~Queen_of_Equestria~~~~~2014-06-08T12:56:18.736-05:00~~~~~2014-10-27T17:00:48.394-05:00~~~~~3795~~~~~Daily
-9~~~~~true~~~~~Jeremy...~~~~~He's dumb.~~~~~Queen_of_Equestria~~~~~2014-06-08T12:59:18.736-05:00~~~~~2014-11-03T11:50:39.503-06:00~~~~~938~~~~~Daily
+9~~~~~true~~~~~Jeremy...~~~~~He's dumb.~~~~~Queen_of_Equestria~~~~~2014-06-08T12:59:18.736-05:00~~~~~2014-11-26T12:10:40.673-06:00~~~~~938~~~~~Daily
 10~~~~~false~~~~~sfw~~~~~not checking nsfw flag~~~~~kizy~~~~~2014-06-14T03:17:02.864-05:00~~~~~2014-10-27T16:38:22.273-05:00~~~~~7188~~~~~Daily
 11~~~~~false~~~~~The title~~~~~The rant.~~~~~Queen_of_Equestria~~~~~2014-06-14T08:38:07.052-05:00~~~~~2014-10-27T22:31:52.244-05:00~~~~~295~~~~~Daily
 12~~~~~false~~~~~Thanks Bill~~~~~For Nothing~~~~~Queen_of_Equestria~~~~~2014-06-16T22:59:48.423-05:00~~~~~2014-10-27T22:31:37.669-05:00~~~~~7237~~~~~Daily
@@ -27,6 +27,9 @@
 27~~~~~false~~~~~Clearly just wasting time at work~~~~~http://threewordphrase.com/moulting.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:42:44.072-05:00~~~~~2014-11-03T08:08:15.302-06:00~~~~~101~~~~~Minutely
 28~~~~~false~~~~~Tiny fingers~~~~~http://threewordphrase.com/supertiny.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:46:00.585-05:00~~~~~2014-10-27T22:34:46.978-05:00~~~~~101~~~~~Minutely
 29~~~~~false~~~~~ranty rant~~~~~rant~~~~~Queen_of_Equestria~~~~~2014-11-20T09:14:02.715-06:00~~~~~2014-11-20T09:14:02.716-06:00~~~~~100~~~~~Minutely
-30~~~~~false~~~~~Another rant~~~~~Here's a rant~~~~~Queen_of_Equestria~~~~~2014-11-20T09:15:46.974-06:00~~~~~2014-11-20T09:15:46.975-06:00~~~~~100~~~~~Minutely
+30~~~~~false~~~~~Another rant~~~~~Here's a rant~~~~~Queen_of_Equestria~~~~~2014-11-20T09:15:46.974-06:00~~~~~2014-11-28T10:34:36.370-06:00~~~~~100~~~~~Minutely
 31~~~~~false~~~~~af asf~~~~~af adf ~~~~~Queen_of_Equestria~~~~~2014-11-20T09:18:46.833-06:00~~~~~2014-11-20T09:18:46.833-06:00~~~~~100~~~~~Minutely
 32~~~~~false~~~~~new style rant~~~~~now we have a new file!~~~~~kizy~~~~~2014-11-23T06:21:59.465-08:00~~~~~2014-11-23T06:21:59.465-08:00~~~~~100~~~~~Minutely
+33~~~~~true~~~~~Making an unvisited NSFW rant~~~~~weiner~~~~~Queen_of_Equestria~~~~~2014-12-02T22:05:53.639-06:00~~~~~2014-12-02T22:05:53.639-06:00~~~~~100~~~~~Minutely
+34~~~~~true~~~~~NSFW again~~~~~lots of weiners~~~~~Queen_of_Equestria~~~~~2014-12-02T22:07:39.099-06:00~~~~~2014-12-02T22:07:39.099-06:00~~~~~100~~~~~Minutely
+35~~~~~true~~~~~NSFW~~~~~weiner city~~~~~Queen_of_Equestria~~~~~2014-12-02T22:10:33.479-06:00~~~~~2014-12-02T22:10:33.479-06:00~~~~~100~~~~~Minutely
