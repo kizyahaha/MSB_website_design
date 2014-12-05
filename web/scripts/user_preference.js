@@ -49,7 +49,7 @@ function create_preference_name(name, preference_id){
 
 function create_preference_options(options_holder_id, options, type, preference_id){
 	$('<div/>',{addClass:'user_preference_options', id:options_holder_id}).appendTo(preference_id);
-	//Hella broke.  And not really convenient for getting info to the back end.  But would maybe look nicer.
+	//Hella broke.  And not really convenient for getting info to the back end.  But would look nicer.
 	/*if (type == 'radio'){
 		$('<form/>',{id:options_holder_id+'_form'}).appendTo('#' + options_holder_id);
 		for (i=0 ; i<options.length ; i++){
