@@ -22,6 +22,7 @@ function create_rant_preview(is_list , parent , num , author_id){
 	if (!is_list){
 		detailed_rant_display(ID);
 	}
+	//alert($(ID).height());
 	return ID;
 }
 
@@ -37,6 +38,7 @@ function create_rant_preview_right_side(preview_ID){
 	create_rant_preview_owner_info_line(preview_ID);
 	create_rant_preview_content_line(preview_ID);
 	create_rant_preview_actions_line(preview_ID);
+	//alert($(preview_ID).height());
 }
 
 function create_rant_preview_title_line(preview_ID){
@@ -119,6 +121,7 @@ function create_use_item_button_functionality(preview_ID , rant_ID){
 /**********************************************************************************************************/
 
 function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, rant_data){
+	//alert($(preview_ID).height());
 	$(preview_ID).find('.rant_preview_number').text( (first_list_num+list_num+1) + '.' );
 	$(preview_ID).find('.rant_preview_title_link').text(rant_data.title);
 		if (is_url(rant_data.contents)){

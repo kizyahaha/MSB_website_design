@@ -12,6 +12,9 @@ function create_user_profile(){
             create_user_tab_content_space();
 			update_user_tab_content(0);
 			create_footer();
+			some_stupid_fucking_bullshit_workaround_for_a_god_damn_chrome_popstate_onload_bug();
+			onload_manager(update_my_profile_content_size);
+			//alert('my_rants_space height = ' + $('#my_rants_space').height());
         },
         error: function(name,status) {
             window.document.location.href = "error_page.html";
@@ -118,11 +121,12 @@ function update_user_tab_content(user_tab_num){
 }
 
 function update_my_profile_content_size(){
+	setTimeout(function(){
 	var my_rants = document.getElementById('my_rants_space');
 	if (my_rants){
-		$('#my_rants_space').css('minHeight', 100 );
+		$('#my_rants_space').css('minHeight', 40 );
 		//$('#my_rants_space').css('maxHeight', 1150 );
-		$('#user_content_space').css('height',$('#my_rants_space').height() + 220);
+		$('#user_content_space').css('height',$('#my_rants_space').height() + 250);
 	}
 	var my_items = document.getElementById('my_items_space');
 	if (my_items){
@@ -142,6 +146,7 @@ function update_my_profile_content_size(){
 		$('#my_items_space').height( item_height );
 		$('#user_content_space').height( item_height + 0);
 	}
+	},500);
 }
 /*
 function update_contender_sizes(){

@@ -3,7 +3,7 @@
 	position:absolute;
 	width:100%;
 	text-align:center;
-	margin-top:10px;
+	margin-top:40px;
 	height:40px;
 	font-family:Lato;
 	font-weight:700;
@@ -24,16 +24,16 @@
 	position:absolute;
 	left:20px;
 	right:20px;
-	top:60px;
+	top:100px;
 	background-color: rgb(215,226,229);
 	border-radius:20px;
 	border:solid 10px rgb(215,226,229);
 	/*overflow:auto;*/
-	overflow:hidden;
+	/*overflow:hidden;*/
 }
 #my_rants_navigation_table{
 	position:absolute;
-	bottom:10px;
+	bottom:40px;
 	width:100%;
 	font-family:Lato;
 	color:rgb(52,52,52);

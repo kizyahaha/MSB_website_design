@@ -131,11 +131,14 @@ function get_my_rants(){
 }
 
 function display_my_rants(first_rant_num , rants){
+	//alert('First - ' + $('#my_rants_space').height());
 	var num_my_rants = rants.length;
 	for (i=0 ; i<num_my_rants ; i++){
 		var rant_ID = create_rant_preview(true , 'my_rants_space' , i , rants[i].owner);
 		populate_rant_preview(true , rant_ID , i , first_rant_num , rants[i]);
+		//alert('preview'+i+' height = ' + $(rant_ID).height());
 	}
+	//alert('Then - ' + $('#my_rants_space').height());
 }
 
 function create_my_rants_navigation(){

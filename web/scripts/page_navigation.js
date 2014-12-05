@@ -162,7 +162,7 @@ function page_navigate(navigator , navigated_space , num_pages){
 		desired_page = num_pages;
 	}
 	else{
-		alert("Sorry, that's not a valid navigator");
+		desired_page = current_page;
 	}
 	
 	$(navigated_space).empty();
