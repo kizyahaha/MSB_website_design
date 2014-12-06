@@ -123,7 +123,7 @@ function update_character(level){
 
 function get_character(level){
 	var character = document.getElementById('character');
-	switch(level){
+	/*switch(level){
 		case 0:
 			character.src = "images/character_1.png";
 			break;
@@ -138,7 +138,8 @@ function get_character(level){
 			break;
 		default:
 			break;
-	}
+	}*/
+	character.src = "images/character_1.png"
 }
 
 function update_countdown(level){

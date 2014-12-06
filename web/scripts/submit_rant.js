@@ -25,7 +25,7 @@ function create_rant_for_submit(){
 
 function create_submit_rant_inputs(){
 	$('<div/>',{id: 'submit_rant_inputs'}).appendTo('#rant_submission_form');
-	create_mascot_select();
+	//create_mascot_select();
 	create_NSFW_checkbox();
 	create_submit_rant_button();
 }
