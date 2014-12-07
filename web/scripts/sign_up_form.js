@@ -18,7 +18,7 @@ function launch_user_signup(){
 function create_terms_checkbox(){
 	$('<br/>').appendTo('#signup_form');
 	$('<input/>',{name:'terms_of_use' , type:'checkbox'}).appendTo('#signup_form');
-	$("#signup_form").append("<span class='checkbox_text'> I have read and agree to the <a href='#'>Terms of Use </a></span>");
+	$("#signup_form").append("<span class='checkbox_text'> I have read and agree to the <a href='terms_of_use.html' target='_blank'>Terms of Use </a></span>");
 	$('<div/>',{id: 'no_read_terms' , text:'*Please agree to the Terms of Use.'}).appendTo('#signup_form');
 	document.getElementById('no_read_terms').style.display = 'none';
 	$('<br/>').appendTo('#signup_form');
