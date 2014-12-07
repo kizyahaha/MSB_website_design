@@ -121,14 +121,14 @@ function create_use_item_button_functionality(preview_ID , rant_ID){
 function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, rant_data){
 	$(preview_ID).find('.rant_preview_number').text( (first_list_num+list_num+1) + '.' );
 	$(preview_ID).find('.rant_preview_title_link').text(rant_data.title);
-		if (is_url(rant_data.contents)){
+		if (is_url(rant_data.contents) && (rant_data.owner != logged_user.id)){
 			$(preview_ID).find('.rant_preview_title_link').attr('href',rant_data.contents);
 		}
 		else{
 			$(preview_ID).find('.rant_preview_title_link').attr('href','rant_view.html?r=' + rant_data.id);
-			if (rant_data.nsfw && logged_user.nsfwPreference == 2){
-				$(preview_ID).find('.rant_preview_title_link').attr('onclick','launch_nsfw_warning_modal('+rant_data.id+'); return false;');
-			}
+		}
+		if (rant_data.nsfw && logged_user.nsfwPreference == 2){
+			$(preview_ID).find('.rant_preview_title_link').attr('onclick','launch_nsfw_warning_modal('+rant_data.id+'); return false;');
 		}
 	$(preview_ID).find('.rant_preview_author_link').text(rant_data.ownername);
 		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html?u=' + rant_data.owner);
@@ -283,25 +283,36 @@ function detailed_rant_display(rant_ID){
 /**********************************************************************************************************/
 
 function launch_nsfw_warning_modal(rant_id){
-	create_modal_blur_background('nsfw_warning_modal_blur_background');
-	$('<div/>',{id:'nsfw_warning_background' , text:'This rant is tagged as NSFW!  Are you over 18 and wish to proceed?'}).appendTo('body');
-	//create_nsfw_warning_text();
-	create_nsfw_warning_mascot();
-	create_nsfw_warning_buttons(rant_id);
-}
-
-function create_nsfw_warning_text(){
-	$('<div/>',{id:'nsfw_warning_text'}).appendTo('nsfw_warning_background');
-	$('#nsfw_warning_text').text('This rant is NSFW!  Are you over 18 and wish to proceed?');
+	$.ajax({
+		async: false,
+        type: 'POST',
+        url: '/api/rants/rantData',
+        data: {id: rant_id },
+        success: function(gotData) {
+            rant_data = $.parseJSON(gotData);
+			create_modal_blur_background('nsfw_warning_modal_blur_background');
+			$('<div/>',{id:'nsfw_warning_background' , text:'This rant is tagged as NSFW!  Are you over 18 and wish to proceed?'}).appendTo('body');
+			create_nsfw_warning_mascot();
+			create_nsfw_warning_buttons(rant_data);
+        },
+        error: function(name,status) {
+            window.document.location.href = "error_page.html";
+        }
+    });
 }
 
 function create_nsfw_warning_mascot(){
 	$("#nsfw_warning_background").append("<img id='nsfw_warning_img' src='images/character_19.png' width='200' alt='nsfw_warning_image'>");
 }
 
-function create_nsfw_warning_buttons(rant_id){
+function create_nsfw_warning_buttons(rant_data){
 	$('<div/>',{id:'nsfw_warning_close' , addClass:'nsfw_warning_button' , text:'No thanks'}).appendTo('#nsfw_warning_background');
 	$('#nsfw_warning_close').click(function(){$('#nsfw_warning_modal_blur_background').remove();  $('#nsfw_warning_background').remove();});
 	$('<div/>',{id:'nsfw_warning_proceed' , addClass:'nsfw_warning_button' , text:'Proceed'}).appendTo('#nsfw_warning_background');
-	$('#nsfw_warning_proceed').click(function(){window.document.location.href = 'rant_view.html?r=' + rant_id;});
+	if (is_url(rant_data.contents) && (rant_data.owner != logged_user.id)){
+		$('#nsfw_warning_proceed').click(function(){window.document.location.href = rant_data.contents});
+	}
+	else{
+		$('#nsfw_warning_proceed').click(function(){window.document.location.href = 'rant_view.html?r=' + rant_data.id;});
+	}
 }
