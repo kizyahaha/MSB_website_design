@@ -118,7 +118,7 @@ function get_level_string(){
 }
 
 function is_url(text){
-	return /(https?:\/\/[^\s]+)/g.test(text); //this is a really bad regex!
+	return validator.isURL(text);
 }
 
 var mouseX, mouseY;

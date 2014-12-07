@@ -34,3 +34,4 @@
 34~~~~~true~~~~~NSFW again~~~~~lots of weiners~~~~~Queen_of_Equestria~~~~~2014-12-02T22:07:39.099-06:00~~~~~2014-12-02T22:07:39.099-06:00~~~~~100~~~~~Minutely
 35~~~~~true~~~~~NSFW~~~~~weiner city~~~~~Queen_of_Equestria~~~~~2014-12-02T22:10:33.479-06:00~~~~~2014-12-02T22:10:33.479-06:00~~~~~100~~~~~Minutely
 36~~~~~true~~~~~The funny just kinda sneaks up on you~~~~~http://threewordphrase.com/owowah.htm~~~~~Queen_of_Equestria~~~~~2014-12-06T23:47:39.340-06:00~~~~~2014-12-06T23:47:39.341-06:00~~~~~100~~~~~Minutely
+37~~~~~true~~~~~Mario~~~~~http://www.pbfcomics.com/213/~~~~~Queen_of_Equestria~~~~~2014-12-07T01:14:55.198-06:00~~~~~2014-12-07T01:14:55.198-06:00~~~~~100~~~~~Minutely

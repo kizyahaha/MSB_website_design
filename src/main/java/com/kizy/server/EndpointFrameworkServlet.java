@@ -59,6 +59,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
     private static final List<String> scripts = ImmutableList.of("jquery-1.11.1.min.js",
     															 "underscore-1.7.0.js",
     															 "backbone-1.1.2.js",
+    															 "validator-3.22.2.js",
                                                                  "google_charts.js",
                                                                  "utility.js",
                                                                  "global_vars.js",

@@ -59,6 +59,9 @@ function create_email_entry(){
 	$('<label/>',{id: 'email_label' , text: '*Enter e-mail:'}).appendTo('#signup_form');
 	$('<input/>',{name:'email' , addClass:'text_entry' , placeholder: 'email@email.com' , type:'email' , autocomplete:'on'}).appendTo('#signup_form');
 	$('<br/>').appendTo('#signup_form');
+	$('<div/>',{id: 'invalid_email' , text:"*This email is invalid"}).appendTo('#signup_form');
+	$('<br/>').appendTo('#invalid_email');
+	document.getElementById('invalid_email').style.display = 'none';
 }
 
 function create_DOB_entry(){
@@ -73,6 +76,7 @@ function create_username_entry(){
 	$('<input/>',{name:'username' , addClass:'text_entry' , placeholder: 'username' , type:'text' , autocomplete:'off'}).appendTo('#signup_form');
 	$('<br/>').appendTo('#signup_form');
 	$('<div/>',{id: 'username_taken' , text:'*Sorry, that username already exists.'}).appendTo('#signup_form');
+	$('<br/>').appendTo('#username_taken');
 	document.getElementById('username_taken').style.display = 'none';
 }
 
@@ -97,8 +101,8 @@ function check_valid_input(form){
 	var pwd_match = check_password_match(form);
 	//var name_avail = check_username_available(form);
 	var all_filled = check_all_filled(form);
-	//var valid_email = check_email_validity(form);
-	if (pwd_match && read_terms && all_filled){
+	var valid_email = check_email_validity(form);
+	if (pwd_match && read_terms && all_filled && valid_email){
 		return true;
 	}
 	return false;
@@ -115,6 +119,15 @@ function check_all_filled(form){
 	}
 	return true;
 		
+}
+
+function check_email_validity(form){
+	document.getElementById('invalid_email').style.display = 'none';
+	if (!validator.isEmail(form.email.value)){
+		document.getElementById('invalid_email').style.display = 'initial';
+		return false;
+	}
+	return true;
 }
 
 function check_password_match(form){
