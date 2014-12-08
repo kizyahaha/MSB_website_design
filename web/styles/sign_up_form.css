@@ -7,6 +7,10 @@
 
 #signup_space{
     position:absolute;
+    display:block;
+    left:0;
+    right:0;
+    margin:auto;
     width:50%;
     text-align:center;
 }

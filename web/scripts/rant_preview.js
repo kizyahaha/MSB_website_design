@@ -109,7 +109,7 @@ function create_rant_preview_vote_button_functionality(preview_ID , rant_ID){
 function create_use_item_button_functionality(preview_ID , rant_ID){
 	use_item_button = $(preview_ID + ' .rant_preview_use_item_button');
 	if (logged_user.id == -1){
-		use_item_button.click( function(){window.document.location.href = 'log_in_sign_up.html'} );
+		use_item_button.click( function(){launch_login_modal();} );
 	}
 	else{
 		//use_item_button.click( function(){} );
