@@ -13,25 +13,25 @@ body{
 	font-size:40px;
 	width:100%;
 	text-align:center;
-	position:fixed;
-	top:25%;
+	position:absolute;
+	top:200px;
 }
 
 #noscript_logo{
 	display:block;
-    position:fixed;
+    position:absolute;
     left:0;
     right:0;
     margin:auto;
-    top:58%;
+    top:525px;
 	width:150px;
 }
 
 #noscript_character{
-	position:fixed;
+	position:absolute;
     left:0;
     right:0;
     margin:auto;
-    top:33%;
+    top:350px;
 	width:200px;
 }
