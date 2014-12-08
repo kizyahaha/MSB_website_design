@@ -1,6 +1,37 @@
-body{background-color:rgb(52,160,194)}
+body{
+	background-color:rgb(52,160,194);
+}
 
 .username{
 	color:rgb(12,120,154);
 	text-decoration:none;
+}
+
+#noscript_message{
+	color:rgb(52,52,52);
+	font-family:Lato;
+	font-size:40px;
+	width:100%;
+	text-align:center;
+	position:fixed;
+	top:25%;
+}
+
+#noscript_logo{
+	display:block;
+    position:fixed;
+    left:0;
+    right:0;
+    margin:auto;
+    top:58%;
+	width:150px;
+}
+
+#noscript_character{
+	position:fixed;
+    left:0;
+    right:0;
+    margin:auto;
+    top:33%;
+	width:200px;
 }

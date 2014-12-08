@@ -127,6 +127,11 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         out.println("</head>");
         out.println("<body>");
         out.println(Strings.isNullOrEmpty(body) ? getBodyShim(parseTabNumber(path)) : body);
+        out.println("<noscript>");
+        out.println("<div id=\"noscript_message\">This entire site is written in javascript.  Please enable it!</div>");
+        out.println("<img id=\"noscript_logo\" src=\"images/SoapBox2.png\"></img>");
+        out.println("<img id=\"noscript_character\" src=\"images/character_20.png\"></img>");
+        out.println("</noscript>");
         out.println("</body>");
         out.println("</html>");
     }
