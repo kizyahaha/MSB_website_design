@@ -39,21 +39,29 @@ public class UserController {
     public String addUser(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         @RequestParam("email") String email) {
+    	String code = "";
+    	boolean valid = true;
         try {
-            if (isValid(username, password, email)) {
-            	if (DatabaseUtils.findUserByEmail(email) != null){
-            		return Serializers.valueToTree(-2).toString();
-            	}
-            	if (DatabaseUtils.findUserByName(username) != null){
-            		return Serializers.valueToTree(-1).toString();
-            	}
-                DatabaseUtils.writeUser(new SimpleUser(currentId.incrementAndGet(), username, password, email));
-                return Serializers.valueToTree(1).toString();
+            if (!isValid(username, password, email)) {
+            	code = code + "B";
+            	valid = false;
             }
+        	if (DatabaseUtils.findUserByEmail(email) != null){
+        		code = code + "C";
+        		valid = false;
+        	}
+        	if (DatabaseUtils.findUserByName(username) != null){
+        		code = code + "D";
+        		valid = false;
+        	}
+        	if (valid){
+                DatabaseUtils.writeUser(new SimpleUser(currentId.incrementAndGet(), username, password, email));
+                code = code + "A";
+        	}
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Serializers.valueToTree(0).toString();
+        return Serializers.valueToTree(code).toString();
     }
 
     private boolean isValid(String username, String password, String email) throws IOException {
@@ -138,11 +146,15 @@ public class UserController {
 	    	if (animationsPreference != null){
 	    		user.setAnimationsPreference(animationsPreference);
 	    	}
-	    	//TODO: We need to have an email confirmation and check for duplicates in users
+	    	//TODO: We need to have a check for duplicates (and email confirmation?)
 	    	if (new_email != null){
+	    		if (DatabaseUtils.findUserByEmail(new_email) != null){
+	    			//return error code for duplicate emails
+	    		}
 	    		user.setEmail(new_email);
 	    	}
 	    	DatabaseUtils.modifyUser(user.getUserId(), user);
+	    	//return success code
     	}
     }
 

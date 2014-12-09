@@ -41,18 +41,18 @@ function submit(form){
 			url: '/api/users/add',
 			data: $('#signup_form').serialize(),
 			success: function(msg) {
-				val = $.parseJSON(msg);
-				if (val == '1'){
+				code = $.parseJSON(msg);
+				if (code.indexOf('A') != -1){
 					create_signup_success();
 				}
-				if (val == '-1'){
-					document.getElementById('username_taken').style.display = 'initial';
+				if (code.indexOf('B') != -1){
+					document.getElementById('invalid_input').style.display = 'initial';
 				}
-				if (val == '-2'){
+				if (code.indexOf('C') != -1){
 					document.getElementById('used_email').style.display = 'initial';
 				}
-				if (val == '0'){
-					document.getElementById('invalid_input').style.display = 'initial';
+				if (code.indexOf('D') != -1){
+					document.getElementById('username_taken').style.display = 'initial';
 				}
 			},
 			error: function(msg) {
