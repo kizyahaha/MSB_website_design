@@ -19,11 +19,13 @@ function create_terms_checkbox(){
 	$('<br/>').appendTo('#signup_form');
 	$('<input/>',{name:'terms_of_use' , type:'checkbox'}).appendTo('#signup_form');
 	$("#signup_form").append("<span class='checkbox_text'> I have read and agree to the <a href='terms_of_use.html' target='_blank'>Terms of Use </a></span>");
-	$('<div/>',{id: 'no_read_terms' , text:'*Please agree to the Terms of Use.'}).appendTo('#signup_form');
+	$('<div/>',{id: 'no_read_terms' , text:'Please agree to the Terms of Use'}).appendTo('#signup_form');
 	document.getElementById('no_read_terms').style.display = 'none';
 	$('<br/>').appendTo('#signup_form');
-	$('<div/>',{id: 'signup_info_missing' , text:'*Please complete all required fields.'}).appendTo('#signup_form');
+	$('<div/>',{id: 'signup_info_missing' , text:'Please complete all required fields'}).appendTo('#signup_form');
 	document.getElementById('signup_info_missing').style.display = 'none';
+	$('<div/>',{id: 'invalid_input' , text:'Some of your input is invalid'}).appendTo('#signup_form');
+	document.getElementById('invalid_input').style.display = 'none';
 }
 
 function create_submit_button(){
@@ -39,10 +41,22 @@ function submit(form){
 			url: '/api/users/add',
 			data: $('#signup_form').serialize(),
 			success: function(msg) {
-				create_signup_success();
+				val = $.parseJSON(msg);
+				if (val == '1'){
+					create_signup_success();
+				}
+				if (val == '-1'){
+					document.getElementById('username_taken').style.display = 'initial';
+				}
+				if (val == '-2'){
+					document.getElementById('used_email').style.display = 'initial';
+				}
+				if (val == '0'){
+					document.getElementById('invalid_input').style.display = 'initial';
+				}
 			},
 			error: function(msg) {
-				alert("Woops.  The submission failed.  Contact your local support.");
+				window.document.location.href = "error_page.html";
 			}
 		});
 	}
@@ -59,9 +73,12 @@ function create_email_entry(){
 	$('<label/>',{id: 'email_label' , text: '*Enter e-mail:'}).appendTo('#signup_form');
 	$('<input/>',{name:'email' , addClass:'text_entry' , placeholder: 'email@email.com' , type:'email' , autocomplete:'on'}).appendTo('#signup_form');
 	$('<br/>').appendTo('#signup_form');
-	$('<div/>',{id: 'invalid_email' , text:"*This email is invalid"}).appendTo('#signup_form');
+	$('<div/>',{id: 'invalid_email' , text:"This is not a valid email"}).appendTo('#signup_form');
 	$('<br/>').appendTo('#invalid_email');
+	$('<div/>',{id: 'used_email' , text:"This email is already in use"}).appendTo('#signup_form');
+	$('<br/>').appendTo('#used_email');
 	document.getElementById('invalid_email').style.display = 'none';
+	document.getElementById('used_email').style.display = 'none';
 }
 
 function create_DOB_entry(){
@@ -75,7 +92,7 @@ function create_username_entry(){
 	$('<label/>',{id: 'username_label' , text: '*Create username:'}).appendTo('#signup_form');
 	$('<input/>',{name:'username' , addClass:'text_entry' , placeholder: 'username' , type:'text' , autocomplete:'off'}).appendTo('#signup_form');
 	$('<br/>').appendTo('#signup_form');
-	$('<div/>',{id: 'username_taken' , text:'*Sorry, that username already exists.'}).appendTo('#signup_form');
+	$('<div/>',{id: 'username_taken' , text:'Sorry, that username already exists'}).appendTo('#signup_form');
 	$('<br/>').appendTo('#username_taken');
 	document.getElementById('username_taken').style.display = 'none';
 }
@@ -90,16 +107,18 @@ function create_password_confirm(){
 	$('<label/>',{id: 'password_confirm' , text: '*Confirm password:'}).appendTo('#signup_form');
 	$('<input/>',{name:'password_confirm' , addClass:'text_entry' , placeholder: 'retype password' , type:'password'}).appendTo('#signup_form');
 	$('<br/>').appendTo('#signup_form');
-	$('<div/>',{id: 'passwords_no_matchy' , text:"*These passwords don't match"}).appendTo('#signup_form');
+	$('<div/>',{id: 'passwords_no_matchy' , text:"These passwords do not match"}).appendTo('#signup_form');
 	document.getElementById('passwords_no_matchy').style.display = 'none';
 }
 
 function check_valid_input(form){
+	document.getElementById('used_email').style.display = 'none';
+	document.getElementById('username_taken').style.display = 'none';
+	document.getElementById('invalid_input').style.display = 'none';
 	//var captcha = check_captcha();
 	var read_terms = check_read_terms(form);
 	//var strength = check_password_strength(form);
 	var pwd_match = check_password_match(form);
-	//var name_avail = check_username_available(form);
 	var all_filled = check_all_filled(form);
 	var valid_email = check_email_validity(form);
 	if (pwd_match && read_terms && all_filled && valid_email){

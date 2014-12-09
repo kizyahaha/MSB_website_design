@@ -36,24 +36,30 @@ public class UserController {
 
     @RequestMapping(value = "/add")
     @ResponseBody
-    public void addUser(@RequestParam("username") String username,
+    public String addUser(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         @RequestParam("email") String email) {
         try {
             if (isValid(username, password, email)) {
-                DatabaseUtils.writeUser(new SimpleUser(currentId.incrementAndGet(), username,
-                        password, email));
+            	if (DatabaseUtils.findUserByEmail(email) != null){
+            		return Serializers.valueToTree(-2).toString();
+            	}
+            	if (DatabaseUtils.findUserByName(username) != null){
+            		return Serializers.valueToTree(-1).toString();
+            	}
+                DatabaseUtils.writeUser(new SimpleUser(currentId.incrementAndGet(), username, password, email));
+                return Serializers.valueToTree(1).toString();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return Serializers.valueToTree(0).toString();
     }
 
     private boolean isValid(String username, String password, String email) throws IOException {
-        // no values are null and username and email are not already used
+        // no values are null
         return !Strings.isNullOrEmpty(password) && !Strings.isNullOrEmpty(username)
-                && !Strings.isNullOrEmpty(email) && DatabaseUtils.findUserByName(username) == null
-                && DatabaseUtils.findUserByEmail(email) == null;
+                && !Strings.isNullOrEmpty(email);
     }
 
     @RequestMapping(value = "/listAll")
