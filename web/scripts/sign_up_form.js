@@ -42,16 +42,16 @@ function submit(form){
 			data: $('#signup_form').serialize(),
 			success: function(msg) {
 				code = $.parseJSON(msg);
-				if (code.indexOf('A') != -1){
+				if (code == 0){
 					create_signup_success();
 				}
-				if (code.indexOf('B') != -1){
+				if (code & (1 << 0)){
 					document.getElementById('invalid_input').style.display = 'initial';
 				}
-				if (code.indexOf('C') != -1){
+				if (code & (1 << 1)){
 					document.getElementById('used_email').style.display = 'initial';
 				}
-				if (code.indexOf('D') != -1){
+				if (code & (1 << 2)){
 					document.getElementById('username_taken').style.display = 'initial';
 				}
 			},

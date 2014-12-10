@@ -39,29 +39,24 @@ public class UserController {
     public String addUser(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         @RequestParam("email") String email) {
-    	String code = "";
-    	boolean valid = true;
+    	int error = 0;
         try {
             if (!isValid(username, password, email)) {
-            	code = code + "B";
-            	valid = false;
+            	error = error|1;
             }
         	if (DatabaseUtils.findUserByEmail(email) != null){
-        		code = code + "C";
-        		valid = false;
+        		error = error|2;
         	}
         	if (DatabaseUtils.findUserByName(username) != null){
-        		code = code + "D";
-        		valid = false;
+        		error = error|4;
         	}
-        	if (valid){
+        	if (error == 0){
                 DatabaseUtils.writeUser(new SimpleUser(currentId.incrementAndGet(), username, password, email));
-                code = code + "A";
         	}
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Serializers.valueToTree(code).toString();
+        return Serializers.valueToTree(error).toString();
     }
 
     private boolean isValid(String username, String password, String email) throws IOException {
@@ -130,12 +125,13 @@ public class UserController {
 
     @RequestMapping(value = "/updateUser")
     @ResponseBody
-    public void updateUser(HttpServletRequest request,
+    public String updateUser(HttpServletRequest request,
     								@RequestParam(value = "nsfwPreference", required = false) Integer nsfwPreference,
     								@RequestParam(value = "soundsPreference", required = false) Integer soundsPreference,
     								@RequestParam(value = "animationsPreference", required = false) Integer animationsPreference,
     								@RequestParam(value = "email", required = false) String new_email) throws IOException {
     	User user = WebResources.currentLoggedInUser(request);
+    	int code = 0;
     	if (user.getUserId() != -1) {
 	    	if (nsfwPreference != null){
 	    		user.setNsfwPreference(nsfwPreference);
@@ -146,16 +142,19 @@ public class UserController {
 	    	if (animationsPreference != null){
 	    		user.setAnimationsPreference(animationsPreference);
 	    	}
-	    	//TODO: We need to have a check for duplicates (and email confirmation?)
+	    	//TODO: We need email confirmation before change
 	    	if (new_email != null){
 	    		if (DatabaseUtils.findUserByEmail(new_email) != null){
-	    			//return error code for duplicate emails
+	    			code = code|1;
 	    		}
-	    		user.setEmail(new_email);
+	    		else {
+	    			code = code|2;
+	    			user.setEmail(new_email);
+	    		}
 	    	}
 	    	DatabaseUtils.modifyUser(user.getUserId(), user);
-	    	//return success code
     	}
+    	return Serializers.valueToTree(code).toString();
     }
 
 }

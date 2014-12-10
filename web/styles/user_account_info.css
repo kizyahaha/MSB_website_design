@@ -52,3 +52,44 @@
 #account_email_input{
 	width:500px;
 }
+
+.input_error{
+	display:block;
+	font-family:Lato;
+    color:red;
+    font-weight:300;
+    font-size:16px;
+}
+
+#email_reset_success_background{
+    background-color:rgb(12,120,154);
+    position:fixed;
+    top:25%;
+    left:5%;
+    right:5%;
+    box-sizing:border-box;
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align:center;
+    font-family:Lato;
+    color:rgb(52,52,52);
+    font-size: 30px;
+    border: solid rgb(12,120,154) 10px;
+    padding-bottom:30px;
+}
+
+#email_reset_success_close{
+    position:absolute;
+    bottom:0;
+    left:0;
+    background-color:rgb(52,52,52);
+    border:solid 1px rgb(52,52,52);
+    font-family:Lato;
+    color:white;
+    font-size: 20px;
+    width:100%;
+}
+#email_reset_success_close:hover{
+    border-color:white;
+    cursor:pointer
+}
