@@ -46,6 +46,10 @@ function create_rant_preview_title_line(preview_ID){
 		$('<a/>',{addClass:'rant_preview_title_link'}).appendTo(preview_ID + ' .rant_preview_title');
 	$('<td/>',{addClass:'rant_preview_author'}).appendTo(preview_ID + ' .rant_preview_title_row');
 		$('<a/>',{addClass:'rant_preview_author_link'}).appendTo(preview_ID + ' .rant_preview_author');
+	$('<tr/>',{addClass:'rant_preview_NSFW_tag_row'}).appendTo(preview_ID + ' .rant_preview_title_line');
+	$('<td/>',{addClass:'rant_preview_NSFW_tag', text:'NSFW'}).appendTo(preview_ID + ' .rant_preview_NSFW_tag_row');
+	$(preview_ID + ' .rant_preview_NSFW_tag_row').hide();
+	
 }
 
 function create_rant_preview_dates_line(preview_ID){
@@ -95,8 +99,6 @@ function create_rant_preview_vote_button_functionality(preview_ID , rant_ID){
 	track_votes[0] = $(preview_ID + ' .rant_preview_support_button_image');
 	track_votes[1] = $(preview_ID + ' .rant_preview_oppose_button_image');
 	if (logged_user.id == -1){
-		//track_votes[0].click( function(){window.document.location.href = 'log_in_sign_up.html'} );
-		//track_votes[1].click( function(){window.document.location.href = 'log_in_sign_up.html'} );
 		track_votes[0].click( function(){launch_login_modal();} );
 		track_votes[1].click( function(){launch_login_modal();} );
 	}
@@ -133,6 +135,9 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 	$(preview_ID).find('.rant_preview_author_link').text(rant_data.ownername);
 		$(preview_ID).find('.rant_preview_author_link').attr('href','user_profile.html?u=' + rant_data.owner);
 		$(preview_ID).find('.rant_preview_author').css('width',(rant_data.ownername.length)*10+'px');
+	if (rant_data.nsfw){
+		$(preview_ID + ' .rant_preview_NSFW_tag_row').show();
+	}
 	$(preview_ID).find('.rant_preview_rank').text(get_rant_rank(first_list_num+list_num+1));	
 	$(preview_ID).find('.rant_preview_level').text(rant_data.level);
 		$(preview_ID).find('.rant_preview_level').attr('href',get_rant_preview_level_link(rant_data));
@@ -141,9 +146,7 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 	$(preview_ID).find('.rant_preview_birth').text('Created ' + translate_date(rant_data.birth));
 	$(preview_ID).find('.rant_preview_death').text('Died ' + translate_date(rant_data.death));
 	if (rant_data.nsfw && is_list && logged_user.nsfwPreference == 2){
-		$(preview_ID).find('.rant_preview_content').text('NSFW');
-		$(preview_ID).find('.rant_preview_content').addClass('rant_preview_NSFW_content');
-		$(preview_ID + ' .rant_preview_content_fade').hide();
+		$(preview_ID + ' .rant_preview_content_line').hide();
 	}
 	else{
 		$(preview_ID).find('.rant_preview_content').text(rant_data.contents);
@@ -270,7 +273,7 @@ function preview_rant_display(rant_ID){
 	$(rant_ID + ' .rant_preview_content_line').css('max-height','80px');
 	$(rant_ID + ' .rant_preview_content_line').css('overflow','hidden');
 	$(rant_ID + ' .rant_preview_right_side').css('margin-left','70px');
-	$(rant_ID + ' .rant_preview_actions_line').css('margin-top','5px');
+	$(rant_ID + ' .rant_preview_actions_line').css('margin-top','10px');
 }
 
 function detailed_rant_display(rant_ID){
