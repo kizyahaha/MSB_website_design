@@ -25,7 +25,7 @@
 25~~~~~false~~~~~Even drier humor~~~~~http://extrafabulouscomics.com/comic/167/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:37:01.217-05:00~~~~~2014-09-25T12:37:01.217-05:00~~~~~100~~~~~Minutely
 26~~~~~false~~~~~Also much funny~~~~~http://extrafabulouscomics.com/comic/182/~~~~~Queen_of_Equestria~~~~~2014-09-25T12:39:34.584-05:00~~~~~2014-09-25T12:39:34.584-05:00~~~~~100~~~~~Minutely
 27~~~~~false~~~~~Clearly just wasting time at work~~~~~http://threewordphrase.com/moulting.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:42:44.072-05:00~~~~~2014-11-03T08:08:15.302-06:00~~~~~101~~~~~Minutely
-28~~~~~false~~~~~Tiny fingers~~~~~http://threewordphrase.com/supertiny.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:46:00.585-05:00~~~~~2014-10-27T22:34:46.978-05:00~~~~~101~~~~~Minutely
+28~~~~~false~~~~~Tiny fingers~~~~~http://threewordphrase.com/supertiny.htm~~~~~Queen_of_Equestria~~~~~2014-09-25T12:46:00.585-05:00~~~~~2014-12-11T13:18:46.667-06:00~~~~~101~~~~~Minutely
 29~~~~~false~~~~~ranty rant~~~~~rant~~~~~Queen_of_Equestria~~~~~2014-11-20T09:14:02.715-06:00~~~~~2014-11-20T09:14:02.716-06:00~~~~~100~~~~~Minutely
 30~~~~~false~~~~~Another rant~~~~~Here's a rant~~~~~Queen_of_Equestria~~~~~2014-11-20T09:15:46.974-06:00~~~~~2014-11-28T10:34:36.370-06:00~~~~~100~~~~~Minutely
 31~~~~~false~~~~~af asf~~~~~af adf ~~~~~Queen_of_Equestria~~~~~2014-11-20T09:18:46.833-06:00~~~~~2014-11-20T09:18:46.833-06:00~~~~~100~~~~~Minutely

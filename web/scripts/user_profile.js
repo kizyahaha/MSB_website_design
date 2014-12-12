@@ -158,9 +158,3 @@ function update_contender_sizes(){
 	});
 }
 */
-
-//eventually move once we create my activity
-function create_my_activity_content(){
-	$('<div/>',{id:'my_activity_space'}).appendTo('#user_content_space');
-	document.getElementById('my_activity_space').style.display = 'none';
-}

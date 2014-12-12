@@ -1,0 +1,38 @@
+#my_activity_space{
+    position:absolute;
+    left:20px;
+    right:20px;
+    top:100px;
+    bottom:150px;
+    background-color: rgb(215,226,229);
+    border-radius:20px;
+    padding:20px;
+    text-align:center;
+}
+
+#my_activity_categories_table{
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:30px;
+}
+
+.my_activity_category {
+	font-family:Lato;
+	font-weight:700;
+	font-size:20px;
+	text-align:center;
+}
+
+.current_my_category{
+    color:white;
+}
+
+.other_my_category{
+    color:rgb(52,52,52);
+}
+
+.other_my_category:hover{
+	cursor:pointer;
+    color:rgb(85,85,85);
+    text-decoration:underline;
+}
