@@ -120,6 +120,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
         out.println("<title>MySoapBox</title>");
         out.println("<link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>");
         out.println("<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>");
+        out.println("<script src='http://js.nicedit.com/nicEdit-latest.js' type='text/javascript'></script>");
         for (String style : styles) {
             out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"styles/" + style + "\">");
         }

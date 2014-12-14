@@ -48,15 +48,22 @@
 	font-weight:700;
 	margin-top:100px;
 }
+#rant_input_area{
+    font-family:Lato;
+    font-size:18px;
+    font-weight:100;
+    background-color:white;
+    color:rgb(52,52,52);
+    border:0;
+    width:100%;
+    border:solid white 5px;
+    box-sizing:border-box;
+    padding-left:1px;
+    padding-right:1px;
+    border-radius:5px;
+}
 #rant_input{
-	font-family:Lato;
-	font-size:18px;
-	color:rgb(52,52,52);
-	padding-left:10px;
-	padding-right:10px;
-	border:0;
 	width:100%;
-	border-radius:5px;
 }
 #rant_missing{
 	font-family:Lato;

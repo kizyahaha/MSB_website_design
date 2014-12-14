@@ -5,6 +5,9 @@ function create_rant_submission(logged_user){
 	create_title_for_submit();
 	create_rant_for_submit();
 	create_submit_rant_inputs();
+	bkLib.onDomLoaded(function() {
+        new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html','link']}).panelInstance('rant_input');
+	});
 }
 
 function create_title_for_submit(){
@@ -16,10 +19,11 @@ function create_title_for_submit(){
 
 function create_rant_for_submit(){
 	$('#rant_submission_form').append("<div id='rant_for_submit'>Rant:<br/></div>");
-	$('<textarea/>',{name:'contents' , id:'rant_input' , type:'text'}).appendTo('#rant_for_submit');
+	$('<div/>',{id: 'rant_input_area'}).appendTo('#rant_for_submit');
+	$('<textarea/>',{name:'contents' , id:'rant_input' , type:'text'}).appendTo('#rant_input_area');
 	document.getElementById('rant_input').rows=12;
 	//CKEDITOR.replace('rant_input');
-	$('<div/>',{id: 'rant_missing' , text:"*Please provide some rant content"}).appendTo('#rant_for_submit');
+	$('<div/>',{id: 'rant_missing' , text:"*Please provide some rant content"}).appendTo('#rant_input_area');
 	document.getElementById('rant_missing').style.display = 'none';
 }
 
@@ -54,6 +58,7 @@ function create_submit_rant_button(){
 }
 
 function rant_submit(form){
+	nicEditor_to_rant_input();
 	if (check_rant_filled(form)){
 		$.ajax({
 			type: "POST",
@@ -68,6 +73,10 @@ function rant_submit(form){
 		});
 		//$.post( '/api/rants/add' , $('#rant_submission_form').serialize());
 	}
+}
+
+function nicEditor_to_rant_input(){
+	document.getElementById('rant_input').value = nicEditors.findEditor('rant_input').getContent();
 }
 
 function check_rant_filled(form){

@@ -149,7 +149,7 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 		$(preview_ID + ' .rant_preview_content_line').hide();
 	}
 	else{
-		$(preview_ID).find('.rant_preview_content').text(rant_data.contents);
+		$(preview_ID).find('.rant_preview_content').append(rant_data.contents);
 	}
 	
 	draw_downvote(rant_data, preview_ID);
