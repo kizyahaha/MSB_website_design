@@ -6,7 +6,7 @@ function create_rant_submission(logged_user){
 	create_rant_for_submit();
 	create_submit_rant_inputs();
 	bkLib.onDomLoaded(function() {
-        new nicEditor({buttonList : ['fontSize','bold','italic','underline','strikeThrough','subscript','superscript','html','link']}).panelInstance('rant_input');
+        new nicEditor({buttonList:['fontSize','bold','italic','underline','strikethrough','subscript','superscript','html','link']}).panelInstance('rant_input');
 	});
 }
 

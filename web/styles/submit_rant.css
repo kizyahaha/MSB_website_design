@@ -62,11 +62,24 @@
     padding-right:1px;
     border-radius:5px;
 }
+
+
+#rant_input_area > div{
+	width:100% !important;
+}
 #rant_input{
 	width:100%;
 }
+.nicEdit-main{
+	height:270px;
+	overflow:scroll !important;
+	width:100% !important;
+	margin:0px !important;
+	box-sizing:border-box;
+    padding:5px;
+}
+
 #rant_missing{
-	font-family:Lato;
 	font-size:16px;
 	color:red;
 	padding-left:10px;
