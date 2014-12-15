@@ -19,6 +19,7 @@ import com.google.common.collect.Maps;
 import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Serializers;
 import com.kizy.data.rant.Rant;
+import com.kizy.data.rant.RantLevel;
 import com.kizy.data.rant.Rants;
 import com.kizy.data.rant.SimpleRant;
 import com.kizy.data.user.User;
@@ -32,7 +33,6 @@ import com.kizy.filter.UsernameFilter;
 import com.kizy.pagination.Page;
 import com.kizy.pagination.Pages;
 import com.kizy.pagination.SimplePage;
-import com.kizy.server.executors.*;
 
 @Controller
 @RequestMapping(value = "/rants", method = RequestMethod.POST)
@@ -112,15 +112,6 @@ public class RantController {
     	return  Serializers.valueToTree(rantPowers).toString();
     }
 
-    @RequestMapping(value = "/winner")
-    @ResponseBody
-    public String getLevelWinnerRant(HttpServletRequest request,
-                                     @RequestParam(value = "appliedFilters", required = false) String appliedFiltersString)
-                                             throws IOException {
-    	List<Rant> levelRants = filterRants(appliedFiltersString);
-        return getRantData(request, RantPromotionExecutor.getWinner(levelRants).getRantId());
-    }
-
     /**
      * KEEP FOREVER
      *
@@ -195,6 +186,13 @@ public class RantController {
             return "";
         }
         return Integer.toString(rant.getRantPower());
+    }
+
+    @RequestMapping(value = "/winner")
+    @ResponseBody
+    public String getWinner(HttpServletRequest request, @RequestParam("level") String level) throws IOException {
+        long winnerId = DatabaseUtils.getLatestWinnerId(RantLevel.fromName(level));
+        return getRantData(request, winnerId);
     }
 
     private boolean isOwner(User user, Rant rant) {

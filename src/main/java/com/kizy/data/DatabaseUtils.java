@@ -3,6 +3,7 @@ package com.kizy.data;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -39,6 +40,9 @@ public class DatabaseUtils {
     private static final String DOWNVOTES_FILENAME = "data" + File.separator + "downvotes.txt";
     private static final File DOWNVOTES_FILE = new File(DOWNVOTES_FILENAME);
 
+    private static final String WINNERS_FILENAME = "data" + File.separator + "winners.txt";
+    private static final File WINNERS_FILE = new File(WINNERS_FILENAME);
+
     private static final String LINE_DELIMITER = "~~~~~";
 
     private static final int USER_ID_PART = 0;
@@ -65,6 +69,10 @@ public class DatabaseUtils {
 
     private static final int USER_RANT_USER_PART = 0;
     private static final int USER_RANT_RANT_PART = 1;
+
+    private static final int WINNER_TIME_PART = 0;
+    private static final int WINNER_RANT_ID_PART = 1;
+    private static final int WINNER_LEVEL_PART = 2;
 
     private DatabaseUtils() {
         // no instantiation
@@ -196,11 +204,21 @@ public class DatabaseUtils {
         return didRemove;
     }
 
+    public static void writeWinner(DateTime date, long rantId, RantLevel level) throws IOException {
+        append(WINNERS_FILE, formatWinner(date, rantId, level) + "\n");
+    }
+
+    private static String formatWinner(DateTime date, long rantId, RantLevel level) {
+        return date.toString() + LINE_DELIMITER +
+               rantId + LINE_DELIMITER +
+               level.getDisplayName();
+    }
+
     private static List<String> readFile(File file) throws IOException {
         return Files.readLines(file, Charsets.UTF_8);
     }
 
-    private static List<String> readUsers() throws IOException {
+    public static List<String> readUsers() throws IOException {
         return readFile(USERS_FILE);
     }
 
@@ -212,7 +230,7 @@ public class DatabaseUtils {
         return users;
     }
 
-    private static List<String> readRants() throws IOException {
+    public static List<String> readRants() throws IOException {
         return readFile(RANTS_FILE);
     }
 
@@ -232,7 +250,11 @@ public class DatabaseUtils {
         return readFile(DOWNVOTES_FILE);
     }
 
-    private static List<String> readUserRants() throws IOException {
+    public static List<String> readWinners() throws IOException {
+        return readFile(WINNERS_FILE);
+    }
+
+    public static List<String> readUserRants() throws IOException {
         return readFile(USER_RANTS_FILE);
     }
 
@@ -280,6 +302,28 @@ public class DatabaseUtils {
                 }
             }
         }).toList();
+    }
+
+    public static long getLatestWinnerId(String level) throws IOException {
+        return getLatestWinnerId(RantLevel.fromName(level));
+    }
+
+    public static long getLatestWinnerId(final RantLevel level) throws IOException {
+        final String levelString = level.getDisplayName();
+        String latestWinner = FluentIterable.from(readWinners()).filter(new Predicate<String>() {
+            @Override
+            public boolean apply(String input) {
+                return splitLine(input)[WINNER_LEVEL_PART].equalsIgnoreCase(levelString);
+            }
+        }).toSortedList(new Comparator<String>() {
+            @Override
+            public int compare(String first, String second) {
+                DateTime firstDate = new DateTime(splitLine(first)[WINNER_TIME_PART]);
+                DateTime secondDate = new DateTime(splitLine(second)[WINNER_TIME_PART]);
+                return firstDate.compareTo(secondDate);
+            }
+        }).iterator().next();
+        return Long.parseLong(splitLine(latestWinner)[WINNER_RANT_ID_PART]);
     }
 
     private static User findUser(long matchId, String matchUsername, String matchPassword, String matchEmail, EnumSet<UserMatchComponent> set) throws IOException {
