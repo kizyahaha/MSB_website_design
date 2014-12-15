@@ -158,6 +158,15 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 	create_use_item_button_functionality(preview_ID , rant_data.id);
 }
 
+function urlify(text) {
+    var urlRegex = /(https?:\/\/[^\s]+)/g; //this is a really bad regex
+    return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '">' + url + '</a>';
+    })
+    // or alternatively
+    // return text.replace(urlRegex, '<a href="$1">$1</a>')
+}
+
 function draw_downvote(rant_data, preview_ID){
     $.ajax({
         type: 'POST',
