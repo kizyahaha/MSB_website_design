@@ -149,7 +149,7 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 		$(preview_ID + ' .rant_preview_content_line').hide();
 	}
 	else{
-		$(preview_ID).find('.rant_preview_content').append(rant_data.contents);
+		$(preview_ID).find('.rant_preview_content').append(urlify(rant_data.contents));
 	}
 	
 	draw_downvote(rant_data, preview_ID);
@@ -159,7 +159,8 @@ function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, 
 }
 
 function urlify(text) {
-    var urlRegex = /(https?:\/\/[^\s]+)/g; //this is a really bad regex
+    //var urlRegex = /(https?:\/\/[^\s]+)/g; //this is a really bad regex
+	var urlRegex = /(([a-z]+:\/\/)?(([a-z0-9\-]+\.)+([a-z]{2}|aero|arpa|biz|com|coop|edu|gov|info|int|jobs|mil|museum|name|nato|net|org|pro|travel|local|internal))(:[0-9]{1,5})?(\/[a-z0-9_\-\.~]+)*(\/([a-z0-9_\-\.]*)(\?[a-z0-9+_\-\.%=&amp;]*)?)?(#[a-zA-Z0-9!$&'()*+.=-_~:@/?]*)?)(\s+|$)/gi;
     return text.replace(urlRegex, function(url) {
         return '<a href="' + url + '">' + url + '</a>';
     })
