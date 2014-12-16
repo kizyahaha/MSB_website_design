@@ -65,7 +65,7 @@ function update_winner_rant(){
 	$.ajax({
         type: 'POST',
         url: '/api/rants/winner',
-		data: {appliedFilters: '{"level":"'+get_level_string()+'"}'},
+		data: {level:get_level_string()},
         success: function(gotData) {
             winner = $.parseJSON(gotData);
 			display_winner_rant(winner);
@@ -77,7 +77,7 @@ function update_winner_rant(){
 			//update_rant_sizes();
 			onload_manager(update_rant_sizes);
         },
-        error: function(name,status) {
+        error: function(gotData) {
             window.document.location.href = "error_page.html";
         }
     });

@@ -50,7 +50,7 @@ public class RantPromotionExecutor implements Runnable {
         try {
             List<Rant> rants = DatabaseUtils.findRantsByLevel(level);
             Rant winner = getWinner(rants);
-            System.out.println("New " + level.getDisplayName() + " winner: " + winner);
+            //System.out.println("New " + level.getDisplayName() + " winner: " + winner);
             // Not actually changing it because we don't have enough inflow yet, but this is probably where it would go
             DatabaseUtils.writeWinner(DateTime.now(), winner.getRantId(), level);
         } catch (IOException e) {
