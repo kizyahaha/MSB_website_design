@@ -101,5 +101,7 @@ function create_signup(){
 
 function create_login_signup_close_button(){
 	$('<div/>',{id:'login_signup_close' , text:'CLOSE'}).appendTo('#login_signup_background');
-	$('#login_signup_close').click(function(){$('#login_modal_blur_background').remove();  $('#login_signup_background').remove();});
+	$('#login_signup_close').click(function(){$('#login_modal_blur_background').remove();
+												$('#login_signup_background').remove();
+												$(window).unbind("keypress");});
 }

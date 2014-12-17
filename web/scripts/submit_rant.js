@@ -48,12 +48,16 @@ function create_submit_rant_button(){
 	else{
 		$('#submit_rant_button').click( function(){rant_submit(this.form)} );
 	}
-	$(window).keypress(function (e) {
-		var key = e.which;
-		if(key == 13){
+	var isCtrl = false;
+	$(document).keydown(function (e){
+		if (e.which == 17) isCtrl = true;
+		if (isCtrl && e.which == 13){
 			$('#submit_rant_button').click();
-			return false;  
+			return false;
 		}
+	});
+	$(document).keyup(function (e){
+		if (e.which == 17) isCtrl = false;
 	});
 }
 

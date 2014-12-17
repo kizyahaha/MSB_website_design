@@ -42,3 +42,4 @@
 42~~~~~false~~~~~hack test~~~~~&lt;script&gt;alert('hacked')&lt;/script&gt;~~~~~Queen_of_Equestria~~~~~2014-12-14T23:48:07.900-06:00~~~~~2014-12-14T23:48:07.901-06:00~~~~~100~~~~~Minutely
 43~~~~~false~~~~~auto link detection test~~~~~I don't think this will automatically recognize http://stackoverflow.com as a link, but Imma try anyway~~~~~Queen_of_Equestria~~~~~2014-12-15T00:24:53.496-06:00~~~~~2014-12-15T00:24:53.497-06:00~~~~~100~~~~~Minutely
 44~~~~~false~~~~~A link rant submitted by user kizy~~~~~http://threewordphrase.com/sadcomic.htm~~~~~kizy~~~~~2014-12-15T00:35:31.659-06:00~~~~~2014-12-15T00:35:31.659-06:00~~~~~100~~~~~Minutely
+45~~~~~false~~~~~Testing ctrl + enter~~~~~Here goes....<div><br></div><div>So far so good....</div><div><br></div><div><br></div><div><br></div>~~~~~kizy~~~~~2014-12-17T01:31:01.058-06:00~~~~~2014-12-17T01:31:01.058-06:00~~~~~100~~~~~Minutely

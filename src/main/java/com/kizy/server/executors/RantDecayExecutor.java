@@ -12,8 +12,8 @@ public class RantDecayExecutor implements Runnable {
 
     @Override
     public void run() {
-        long start, end;
-        start = System.currentTimeMillis();
+        //long start, end;
+        //start = System.currentTimeMillis();
         System.out.print("Decaying rants");
         try {
             List<Rant> rants = DatabaseUtils.getRants();
@@ -29,8 +29,8 @@ public class RantDecayExecutor implements Runnable {
             System.err.println("Could not read rants!");
             e.printStackTrace();
         }
-        end = System.currentTimeMillis();
-        System.out.println("Time for decay: " + (end - start) + "ms");
+        //end = System.currentTimeMillis();
+        //System.out.println("Time for decay: " + (end - start) + "ms");
     }
 
 }
