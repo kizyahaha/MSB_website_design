@@ -14,7 +14,7 @@ public class RantDecayExecutor implements Runnable {
     public void run() {
         //long start, end;
         //start = System.currentTimeMillis();
-        System.out.print("Decaying rants");
+        //System.out.print("Decaying rants");
         try {
             List<Rant> rants = DatabaseUtils.getRants();
             for (Rant rant : rants) {

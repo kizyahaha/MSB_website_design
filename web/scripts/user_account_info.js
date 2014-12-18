@@ -1,16 +1,16 @@
 function create_user_account_info_content(){
 	$('<div/>',{id:'user_account_info_space'}).appendTo('#user_info_content_space');
-	create_account_email_input();
+	create_change_email_input();
 }
 
-function create_account_email_input(){
+function create_change_email_input(){
 	$('<div/>',{addClass:'user_account_info', id:'account_email'}).appendTo('#user_account_info_space');
 	$('<div/>',{addClass:'user_account_info_name', text:'Email'}).appendTo('#account_email');
-	$('<input/>',{addClass:'user_account_info_input', id:'account_email_input' , placeholder:logged_user.email}).appendTo('#account_email');
+	$('<input/>',{addClass:'user_account_info_input', id:'change_email_input' , placeholder:logged_user.email}).appendTo('#account_email');
 	$('<div/>',{id: 'used_email' , addClass:'input_error' , text:"This email is already in use"}).appendTo('#account_email');
-	$('<div/>',{id: 'invalid_email' , addClass:'input_error' , text:"This is not a valid email"}).appendTo('#account_email');
+	$('<div/>',{id: 'invalid_change_email' , addClass:'input_error' , text:"This is not a valid email"}).appendTo('#account_email');
 	document.getElementById('used_email').style.display = 'none';
-	document.getElementById('invalid_email').style.display = 'none';
+	document.getElementById('invalid_change_email').style.display = 'none';
 }
 
 function create_user_account_info_submit_button(){
@@ -26,11 +26,11 @@ function create_user_account_info_submit_button(){
 }
 
 function user_account_info_submit(){
-	if (check_valid_input()){
+	if (check_valid_change_account_info_input()){
 		$.ajax({
 			type: "POST",
 			url: "/api/users/updateUser",
-			data: {email: $('#account_email_input').val()},
+			data: {email: $('#change_email_input').val()},
 			success: function(msg) {
 				//window.document.location.href = "daily.html";
 				code = $.parseJSON(msg);
@@ -48,19 +48,19 @@ function user_account_info_submit(){
 	}
 }
 
-function check_valid_input(){
+function check_valid_change_account_info_input(){
 	document.getElementById('used_email').style.display = 'none';
-	var valid_email = check_email_validity();
+	var valid_email = check_change_email_validity();
 	if (valid_email){
 		return true;
 	}
 	return false;
 }
 
-function check_email_validity(){
-	document.getElementById('invalid_email').style.display = 'none';
-	if (!validator.isEmail($('#account_email_input').val())){
-		document.getElementById('invalid_email').style.display = 'block';
+function check_change_email_validity(){
+	document.getElementById('invalid_change_email').style.display = 'none';
+	if (!validator.isEmail($('#change_email_input').val())){
+		document.getElementById('invalid_change_email').style.display = 'block';
 		return false;
 	}
 	return true;

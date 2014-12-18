@@ -117,7 +117,7 @@ function get_my_rants(){
         type: 'POST',
 		async: false,
         url: '/api/rants/list',
-		data: {appliedFilters: '{"username":"'+get_user_username()+'", "alive":"'+get_status_filter()+'", "level":"'+get_level_filter()+'", "birthDate":"'+get_age_order()+'", "power":"'+get_power_order()+'"}', pageNum:window.history.state.page_num},
+		data: {appliedFilters: '{"username":"'+get_user_username()+'", "nsfw":"'+logged_user.nsfwPreference+'", "alive":"'+get_status_filter()+'", "level":"'+get_level_filter()+'", "birthDate":"'+get_age_order()+'", "power":"'+get_power_order()+'"}', pageNum:window.history.state.page_num},
         success: function(gotData) {
             rants = $.parseJSON(gotData);
             display_my_rants(rants.firstRantNum , rants.rantsOnPage);

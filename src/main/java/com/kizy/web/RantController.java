@@ -81,7 +81,7 @@ public class RantController {
             return Serializers.valueToTree(filteredRants).toString();
         }
         int firstRantNum = (pageNum-1) * Pages.RANTS_PER_PAGE;
-        int numPages = (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE);
+        int numPages = Math.max( 1 , (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE) );
         List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
         Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
         return  Pages.serialize(page).toString();
