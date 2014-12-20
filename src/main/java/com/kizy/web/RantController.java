@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Maps;
-import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Serializers;
+import com.kizy.data.database.DatabaseUtils;
 import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.RantLevel;
 import com.kizy.data.rant.Rants;

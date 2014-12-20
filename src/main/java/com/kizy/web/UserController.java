@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
-import com.kizy.data.DatabaseUtils;
 import com.kizy.data.Serializers;
+import com.kizy.data.database.DatabaseUtils;
 import com.kizy.data.user.SimpleUser;
 import com.kizy.data.user.User;
 import com.kizy.data.user.Users;
@@ -59,7 +59,7 @@ public class UserController {
         return Serializers.valueToTree(error).toString();
     }
 
-    private boolean isValid(String username, String password, String email) throws IOException {
+    private boolean isValid(String username, String password, String email) {
         // no values are null
         return !Strings.isNullOrEmpty(password) && !Strings.isNullOrEmpty(username)
                 && !Strings.isNullOrEmpty(email);
@@ -87,7 +87,7 @@ public class UserController {
 
     @RequestMapping(value = "/votes")
     @ResponseBody
-    public String getVotes(HttpServletRequest request) throws IOException {
+    public String getVotes(HttpServletRequest request) {
         User user = WebResources.currentLoggedInUser(request);
         Map<String, Collection<Long>> votes = Maps.newHashMap();
         if (user.getUserId() == -1) {

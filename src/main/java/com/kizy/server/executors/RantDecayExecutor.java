@@ -3,7 +3,7 @@ package com.kizy.server.executors;
 import java.io.IOException;
 import java.util.List;
 
-import com.kizy.data.DatabaseUtils;
+import com.kizy.data.database.DatabaseUtils;
 import com.kizy.data.rant.Rant;
 
 public class RantDecayExecutor implements Runnable {

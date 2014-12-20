@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
-import com.kizy.data.DatabaseUtils;
+import com.kizy.data.database.DatabaseUtils;
 import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.RantLevel;
 

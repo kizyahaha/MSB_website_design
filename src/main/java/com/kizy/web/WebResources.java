@@ -7,7 +7,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.common.collect.Sets;
-import com.kizy.data.DatabaseUtils;
+import com.kizy.data.database.DatabaseUtils;
 import com.kizy.data.user.User;
 import com.kizy.data.user.Users;
 

@@ -1,4 +1,4 @@
-package com.kizy.data;
+package com.kizy.data.database;
 
 import java.io.File;
 import java.io.IOException;
