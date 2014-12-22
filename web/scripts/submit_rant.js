@@ -1,5 +1,6 @@
 
 function create_rant_submission(logged_user){
+	confirm_leave_page = false;
 	$('<div/>',{id:'submit_rant_container'}).appendTo('body');
 	$('<form/>',{name:'rant_submission_form' , id:'rant_submission_form'}).appendTo('#submit_rant_container');
 	create_title_for_submit();
@@ -7,7 +8,9 @@ function create_rant_submission(logged_user){
 	create_submit_rant_inputs();
 	bkLib.onDomLoaded(function() {
         new nicEditor({buttonList:['fontSize','bold','italic','underline','strikethrough','subscript','superscript','html','link']}).panelInstance('rant_input');
+		$("div.nicEdit-main").keyup(function () {confirm_leave_page = true;});
 	});
+	$(window).on('beforeunload',function(){if (confirm_leave_page){return 'You have unsaved rant data.'}});
 }
 
 function create_title_for_submit(){
@@ -62,6 +65,7 @@ function create_submit_rant_button(){
 }
 
 function rant_submit(form){
+	confirm_leave_page = false;
 	nicEditor_to_rant_input();
 	if (check_rant_filled(form)){
 		$.ajax({
