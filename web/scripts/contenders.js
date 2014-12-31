@@ -125,7 +125,7 @@ function get_contenders(page_num, contenderSortNum){
 		$.ajax({
 			type: 'POST',
 			url: '/api/rants/list',
-			data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'", "power":"descending"}' , pageNum:page_num},
+			//data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'", "power":"descending"}' , pageNum:page_num},
 			success: function(gotData) {
 				rants = $.parseJSON(gotData);
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);

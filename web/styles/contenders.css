@@ -68,5 +68,5 @@
 
 .other_contender_sort:hover{
 	cursor:pointer;
-    color:rgb(85,85,85);
+    text-decoration:underline;
 }
