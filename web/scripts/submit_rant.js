@@ -10,7 +10,7 @@ function create_rant_submission(logged_user){
         new nicEditor({buttonList:['fontSize','bold','italic','underline','strikethrough','subscript','superscript','html','link']}).panelInstance('rant_input');
 		$("div.nicEdit-main").keyup(function () {confirm_leave_page = true;});
 	});
-	$(window).on('beforeunload',function(){if (confirm_leave_page){return 'You have unsaved rant data.'}});
+	$(window).on('beforeunload',function(){if (confirm_leave_page){return "It looks like you were making a rant but haven't submitted it.  If you leave this page, it will be lost."}});
 }
 
 function create_title_for_submit(){

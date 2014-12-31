@@ -4,11 +4,13 @@ function create_contender_space(){
 	contender_space.id = 'contender_space';
 	document.body.appendChild(contender_space);
 	create_contender_title();
+	create_contender_sorts();
 	create_contenders();
 	create_power_graph();
 	some_stupid_fucking_bullshit_workaround_for_a_god_damn_chrome_popstate_onload_bug();
 	window.addEventListener('popstate', function(event) {
-		update_contenders(event.state.page_num)
+		update_contender_sorts(event.state.contender_sort_num);
+		update_contenders(event.state.page_num, event.state.contender_sort_num);
 	});
 }
 
@@ -50,8 +52,53 @@ function create_contender_title(){
 			break;
 	}
 	document.getElementById('contender_space').appendChild(contender_title);
-	$('#contender_title').append("<a href='FAQ.html#FAQ9' , style='color:rgb(52,52,52); font-size:14px;'><br/>in no particular order</a>");
 }
+
+function create_contender_sorts(){
+	$('<table/>',{id:'contender_sorts_table'}).appendTo('#contender_title');
+	$('<tr/>',{id:'contender_sorts_row'}).appendTo('#contender_sorts_table');
+	$('<td/>',{text:'Sort by...'}).appendTo('#contender_sorts_row');
+	add_contender_sort('Power');
+	add_contender_sort('Trending');
+	add_contender_sort('New');
+}
+
+function add_contender_sort(sort){
+	var num_sorts = $('#contender_sorts_row').children('td').length;
+	ID= 'contender_sort' + num_sorts;
+	$('<td/>',{id:ID}).appendTo('#contender_sorts_row');
+	if (window.history.state){
+		status_class = check_current_status(num_sorts);
+	}
+	else if (num_sorts == 1){
+		status_class = 'current_contender_sort';
+	}
+	else{
+		status_class = 'other_contender_sort';
+	}
+	$('<div/>',{addClass:status_class + ' contender_sort' , id:ID + '_text' , text:sort}).appendTo('#' + ID);
+	$('#' + ID + '_text').click(function(){contender_sort_click(num_sorts);});
+}
+
+function check_current_status(num_sorts){
+	if (num_sorts == window.history.state.contender_sort_num)
+		return 'current_contender_sort';
+	else
+		return 'other_contender_sort';
+}
+
+function contender_sort_click(contenderSortNum){
+	history.pushState({page_num:1 , contender_sort_num:contenderSortNum}, '', '');
+	update_contender_sorts(contenderSortNum);
+	update_contenders(1, contenderSortNum);
+}
+
+function update_contender_sorts(contenderSortNum){
+	$('.current_contender_sort').attr('class','other_contender_sort');
+	ID = '#contender_sort' + contenderSortNum + '_text';
+	$(ID).attr('class','current_contender_sort');
+}
+
 
 function create_contenders(){
 	var contenders = document.createElement('div');
@@ -59,36 +106,68 @@ function create_contenders(){
 	document.getElementById('contender_space').appendChild(contenders);
 	create_contender_navigation();
 	if (window.history.state){
-		update_contenders(window.history.state.page_num);
-		history.replaceState({page_num:window.history.state.page_num}, '', '');
+		update_contenders(window.history.state.page_num, window.history.state.contender_sort_num);
+		history.replaceState({page_num:window.history.state.page_num, contender_sort_num:window.history.state.contender_sort_num}, '', '');
 	}
 	else{
-		update_contenders(1);
-		history.replaceState({page_num:1}, '', '');
+		update_contenders(1, 1);
+		history.replaceState({page_num:1, contender_sort_num:1}, '', '');
 	}
 }
 
-function update_contenders(pageNum){
+function update_contenders(pageNum, contenderSortNum){
 	$('#contenders').empty();
-	get_contenders(pageNum);
+	get_contenders(pageNum, contenderSortNum);
 }
 
-function get_contenders(page_num){
-    $.ajax({
-        type: 'POST',
-        url: '/api/rants/list',
-		data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'"}' , pageNum:page_num},
-        success: function(gotData) {
-            rants = $.parseJSON(gotData);
-            display_contenders(rants.firstRantNum , rants.rantsOnPage);
-			update_contender_navigation(rants.numPages);
-        },
-        error: function(name,status) {
-            window.document.location.href = "error_page.html";
-        }
-    });
+function get_contenders(page_num, contenderSortNum){
+	if (contenderSortNum == 1){
+		$.ajax({
+			type: 'POST',
+			url: '/api/rants/list',
+			data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'", "power":"descending"}' , pageNum:page_num},
+			success: function(gotData) {
+				rants = $.parseJSON(gotData);
+				display_contenders(rants.firstRantNum , rants.rantsOnPage);
+				update_contender_navigation(rants.numPages);
+			},
+			error: function(name,status) {
+				window.document.location.href = "error_page.html";
+			}
+		});
+	}
+	else if (contenderSortNum == 2){
+		$.ajax({
+			type: 'POST',
+			url: '/api/rants/list',
+			data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'"}' , pageNum:page_num},
+			success: function(gotData) {
+				rants = $.parseJSON(gotData);
+				display_contenders(rants.firstRantNum , rants.rantsOnPage);
+				update_contender_navigation(rants.numPages);
+			},
+			error: function(name,status) {
+				window.document.location.href = "error_page.html";
+			}
+		});
+	}
+	else if (contenderSortNum == 3){
+		$.ajax({
+			type: 'POST',
+			url: '/api/rants/list',
+			data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'", "birthDate":"descending"}' , pageNum:page_num},
+			success: function(gotData) {
+				rants = $.parseJSON(gotData);
+				display_contenders(rants.firstRantNum , rants.rantsOnPage);
+				update_contender_navigation(rants.numPages);
+			},
+			error: function(name,status) {
+				window.document.location.href = "error_page.html";
+			}
+		});
+	}
 }
-//data: {appliedFilters: '{"username":"'+get_user_username()+'", "alive":"'+get_status_filter()+'", "level":"'+get_level_filter()+'", "birthDate":"'+get_age_order()+'", "power":"'+get_power_order()+'"}', pageNum:window.history.state.page_num},
+//data: {appliedFilters: '{"username":"'+get_user_username()+'", "nsfw":"'+logged_user.nsfwPreference+'", "alive":"'+get_status_filter()+'", "level":"'+get_level_filter()+'", "birthDate":"'+get_age_order()+'", "power":"'+get_power_order()+'"}', pageNum:window.history.state.page_num},
 
 function display_contenders(first_rant_num , rants){
 	var num_contenders2 = rants.length;
@@ -100,11 +179,11 @@ function display_contenders(first_rant_num , rants){
 }
 
 function update_contender_sizes(){
-	setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+650);}, 250);
+	setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+700);}, 250);
 	var resizeTimer;
 	$(window).resize(function() {
 		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+650);}, 250);
+		resizeTimer = setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+700);}, 250);
 	});
 }
 
