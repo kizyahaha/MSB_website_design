@@ -30,11 +30,12 @@ function create_my_items_tab(){
 	$('#my_items').click(function(){user_tab_click(2);});
 }
 
-function update_user_tabs(user_tab_num){
+function update_user_tabs(){
 	$('#my_rants').attr('class','other_tab');
 	$('#my_activity').attr('class','other_tab');
 	$('#my_items').attr('class','other_tab');
-	switch(user_tab_num){
+	userTabNum = window.history.state.user_tab_num;
+	switch(userTabNum){
 		case 0:
 			$('#my_rants').attr('class','current_tab');
 			break;
@@ -50,7 +51,21 @@ function update_user_tabs(user_tab_num){
 }
 
 function user_tab_click(userTabNum){
-	history.pushState({user_tab_num:userTabNum, page_num:window.history.state.page_num}, '', '')
-	update_user_tabs(userTabNum);
-	update_user_tab_content(userTabNum);	
+	id = '#my_rants';
+	if (userTabNum ==1){
+		id = '#my_activity';
+	}
+	else if (userTabNum == 2){
+		id = '#my_items';
+	}
+	if ( $(id).hasClass('current_tab') )
+		return;
+	history.pushState({user_tab_num:userTabNum,
+						page_num:1,
+						user_rants_status:0,
+						user_rants_level:0,
+						user_rants_sort:0,
+						user_activity_cat:0}, '', '')
+	update_user_tabs();
+	update_user_tab_content();	
 }

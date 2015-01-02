@@ -8,9 +8,9 @@ function create_user_profile(){
             data = $.parseJSON(gotData);
             create_user_banner(data);
             create_user_tabs(data);
-			update_user_tabs(0);
-            create_user_tab_content_space();
-			update_user_tab_content(0);
+			create_user_tab_content_space();
+			update_user_tabs();
+			update_user_tab_content();
 			create_footer();
 			some_stupid_fucking_bullshit_workaround_for_a_god_damn_chrome_popstate_onload_bug();
 			onload_manager(update_my_profile_content_size);
@@ -21,8 +21,8 @@ function create_user_profile(){
         }
     });
 	window.addEventListener('popstate', function(event) {
-		update_user_tabs(event.state.user_tab_num);
-		update_user_tab_content(event.state.user_tab_num);
+		update_user_tabs();
+		update_user_tab_content();
 	});
 }
 
@@ -95,16 +95,27 @@ function create_trophy_case(user_data){
 function create_user_tab_content_space(){
 	$('<div/>',{id:'user_content_space'}).appendTo('body');
 	if (window.history.state){
-		history.replaceState({user_tab_num:window.history.state.user_tab_num, page_num:window.history.state.page_num}, '', '');
+		history.replaceState({user_tab_num:window.history.state.user_tab_num,
+								page_num:window.history.state.page_num,
+								user_rants_status:window.history.state.user_rants_status,
+								user_rants_level:window.history.state.user_rants_level,
+								user_rants_sort:window.history.state.user_rants_sort,
+								user_activity_cat:window.history.state.user_activity_cat,}, '', '');
 	}
 	else{
-		history.replaceState({user_tab_num:0, page_num:1}, '', '');
+		history.replaceState({user_tab_num:0,
+								page_num:1,
+								user_rants_status:0,
+								user_rants_level:0,
+								user_rants_sort:0,
+								user_activity_cat:0}, '', '');
 	}
 }
 
-function update_user_tab_content(user_tab_num){
+function update_user_tab_content(){
+	userTabNum = window.history.state.user_tab_num;
 	$('#user_content_space').empty();
-	switch (user_tab_num){
+	switch (userTabNum){
 		case 0:
 			create_my_rants_content();
 			break;

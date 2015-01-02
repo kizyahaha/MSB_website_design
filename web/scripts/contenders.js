@@ -88,6 +88,8 @@ function check_current_status(num_sorts){
 }
 
 function contender_sort_click(contenderSortNum){
+	if ( $('#contender_sort' + contenderSortNum + '_text').hasClass('current_contender_sort') )
+		return;
 	history.pushState({page_num:1 , contender_sort_num:contenderSortNum}, '', '');
 	update_contender_sorts(contenderSortNum);
 	update_contenders(1, contenderSortNum);

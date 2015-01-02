@@ -166,9 +166,14 @@ function page_navigate(navigator , navigated_space , num_pages){
 	}
 	
 	$(navigated_space).empty();
-	history.pushState({user_tab_num:0, page_num:desired_page, contender_sort_num:window.history.state.contender_sort_num}, '', '');
+	history.pushState({user_tab_num:0,
+						page_num:desired_page,
+						user_rants_status:window.history.state.user_rants_status,
+						user_rants_level:window.history.state.user_rants_level,
+						user_rants_sort:window.history.state.user_rants_sort,
+						user_activity_cat:window.history.state.user_activity_cat,
+						contender_sort_num:window.history.state.contender_sort_num}, '', '');			
 	if (navigated_space == '#contenders'){
-		alert(window.history.state.contender_sort_num);
 		update_contenders(desired_page, window.history.state.contender_sort_num);
 		goToByScroll('contender_title');
 	}
