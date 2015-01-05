@@ -147,3 +147,12 @@ function onload_manager(func) {
     }
 }
 
+function set_default_state(){
+	history.pushState({user_tab_num:0,
+							contender_sort_num:1,
+							page_num:1,
+							user_rants_status:0,
+							user_rants_level:0,
+							user_rants_sort:0,
+							user_activity_cat:0}, '', '');
+}

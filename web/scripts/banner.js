@@ -19,27 +19,17 @@ function create_banner_background(){
 	// Some people claim using innerHTML is faster.
 }
 
-function create_banner_text(){
-	var banner_text_link = document.createElement('a');
-	banner_text_link.id = 'banner_text';
-	banner_text_link.href = 'daily';
-	var banner_text_img = document.createElement('img');
-	banner_text_img.alt = 'MSB';
-	banner_text_img.src = "images/MySoapBox_2.png";
-	banner_text_link.appendChild(banner_text_img);
-	document.getElementById('banner_background').appendChild(banner_text_link);
+function create_banner_text(){	
+	$('<img/>',{src:"images/MySoapBox_2.png", id:"banner_text"}).appendTo('#banner_background');
+	$('#banner_text').click(function(){home_click();});
+}
+
+function home_click(){
+	set_default_state();
+	window.document.location.assign("daily");
 }
 
 function create_banner_logos(){
-	/*var banner_logo = document.createElement('img');
-	banner_logo.alt = 'logo';
-	banner_logo.src = "images/SoapBox1.png";
-	banner_logo.width=130;
-	banner_logo.id = 'banner_logo_left';
-	document.getElementById('banner_background').appendChild(banner_logo);
-	banner_logo.id = 'banner_logo_right';
-	document.getElementById('banner_background').appendChild(banner_logo);*/
-
 	var banner_logo_left = document.createElement('img');
 	banner_logo_left.alt = 'logo';
 	banner_logo_left.src = "images/SoapBox1.png";
@@ -87,15 +77,13 @@ function create_banner_links(){
 	a_3.id = 'banner_log_in_link';
 	a_4.id = 'banner_log_out_link';
 	if (logged_user.id != -1){
-		a_3.href = 'user_profile.html?u=' + logged_user.id;
+		a_3.href = 'javascript:my_profile_click();';
 		a_3.textContent = 'My profile';
 		a_4.href = 'javascript:log_off_user();';
 		a_4.textContent = 'Log out';
 	}
 	else{
-		//a_3.href = 'log_in_sign_up.html';
 		a_3.href = 'javascript:launch_login_modal();';
-		//$('#banner_log_in_link').click(function(){alert('here');  launch_login_modal(); return false; });
 		a_3.textContent = 'Log in/Sign up';
 	}
 	li_3.appendChild(a_3);
@@ -106,4 +94,9 @@ function create_banner_links(){
 	banner_links.appendChild(li_4);
 	
 	document.getElementById('banner_background').appendChild(banner_links);
+}
+
+function my_profile_click(){
+	set_default_state();
+	window.document.location.assign('user_profile.html?u=' + logged_user.id);
 }

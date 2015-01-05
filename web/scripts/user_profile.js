@@ -100,7 +100,7 @@ function create_user_tab_content_space(){
 								user_rants_status:window.history.state.user_rants_status,
 								user_rants_level:window.history.state.user_rants_level,
 								user_rants_sort:window.history.state.user_rants_sort,
-								user_activity_cat:window.history.state.user_activity_cat,}, '', '');
+								user_activity_cat:window.history.state.user_activity_cat}, '', '');
 	}
 	else{
 		history.replaceState({user_tab_num:0,
