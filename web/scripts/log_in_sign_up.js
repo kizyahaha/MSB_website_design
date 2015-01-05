@@ -63,7 +63,7 @@ function create_log_in_button(){
 	});
 }
 
-function log_in(form){;	
+function log_in(form){	
 	$.ajax({
 		type: 'POST',
 		async: false,

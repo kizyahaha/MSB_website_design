@@ -23,11 +23,15 @@ public class LoginController {
     @ResponseBody
     public void login(HttpServletResponse response,
                       @RequestParam("username_accept") String username,
-                      @RequestParam("password_accept") String password) throws IOException {
+                      @RequestParam("password_accept") String password,
+                      @RequestParam(value = "stay_logged_in", defaultValue = "false") boolean stayLogged) throws IOException {
         User user = DatabaseUtils.readUser(username, password);
         if (user != null) {
             Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERID, Long.toString(user.getUserId()));
             cookie.setPath("/");
+            if (stayLogged) {
+                cookie.setMaxAge(2000000000);
+            }
             response.addCookie(cookie);
         } else {
             response.setStatus(HttpStatus.FORBIDDEN.value());
