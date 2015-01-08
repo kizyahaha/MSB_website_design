@@ -122,7 +122,17 @@ function create_use_item_button_functionality(preview_ID , rant_ID){
 
 function populate_rant_preview(is_list , preview_ID, list_num , first_list_num, rant_data){
 	$(preview_ID).find('.rant_preview_number').text( (first_list_num+list_num+1) + '.' );
-	$(preview_ID).find('.rant_preview_title_link').text(rant_data.title);
+	max_title_length = 300;
+	if (rant_data.title.length > max_title_length && is_list){
+		end_char = max_title_length;
+		while (rant_data.title.charAt(end_char) != ' ' && end_char < max_title_length + 15){
+			end_char++;
+		}
+		$(preview_ID).find('.rant_preview_title_link').text(rant_data.title.substr(0,end_char) + '...');
+	}
+	else{
+		$(preview_ID).find('.rant_preview_title_link').text(rant_data.title);
+	}
 		if (is_url(rant_data.contents) && (rant_data.owner != logged_user.id)){
 			$(preview_ID).find('.rant_preview_title_link').attr('href',rant_data.contents);
 		}

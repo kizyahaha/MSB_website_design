@@ -54,3 +54,4 @@
 54~~~~~false~~~~~Video link test~~~~~https://www.youtube.com/watch?v=lS3Ka8rEf4w~~~~~Queen_of_Equestria~~~~~2014-12-31T03:27:32.343-06:00~~~~~2014-12-31T03:27:32.344-06:00~~~~~100~~~~~Minutely
 55~~~~~false~~~~~Another video link test~~~~~https://www.youtube.com/watch?v=u3RXdj-aGW4~~~~~Queen_of_Equestria~~~~~2014-12-31T03:37:18.103-06:00~~~~~2014-12-31T03:37:18.103-06:00~~~~~100~~~~~Daily
 56~~~~~false~~~~~Testing not logged in submission~~~~~(see title)~~~~~Queen_of_Equestria~~~~~2015-01-05T13:24:52.188-06:00~~~~~2015-01-05T13:24:52.188-06:00~~~~~100~~~~~Daily
+57~~~~~false~~~~~What happens if I paste a picture?~~~~~<img src="http://jumpingpolarbear.files.wordpress.com/2012/11/picture-perfect.jpg">~~~~~Queen_of_Equestria~~~~~2015-01-06T00:22:13.156-06:00~~~~~2015-01-06T00:22:13.157-06:00~~~~~100~~~~~Minutely
