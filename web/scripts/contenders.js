@@ -6,12 +6,20 @@ function create_contender_space(){
 	create_contender_title();
 	create_contender_sorts();
 	create_contenders();
-	create_power_graph();
+	create_power_graph_link();
 	some_stupid_fucking_bullshit_workaround_for_a_god_damn_chrome_popstate_onload_bug();
 	window.addEventListener('popstate', function(event) {
 		update_contender_sorts(event.state.contender_sort_num);
 		update_contenders(event.state.page_num, event.state.contender_sort_num);
 	});
+}
+
+function create_power_graph_link(){
+	$('<div/>',{id:'power_graph_link', text:'Dar be power graphs'}).appendTo('body');
+	$('#power_graph_link').click(function(){window.document.location.assign('level_power_graph.html')});
+	$('#power_graph_link').css('text-align','center');
+	$('#power_graph_link').css('margin-top',50);
+	
 }
 
  function some_stupid_fucking_bullshit_workaround_for_a_god_damn_chrome_popstate_onload_bug(){
@@ -127,7 +135,7 @@ function get_contenders(page_num, contenderSortNum){
 		$.ajax({
 			type: 'POST',
 			url: '/api/rants/list',
-			data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'", "power":"descending"}' , pageNum:page_num},
+			data: {appliedFilters: '{"level":"'+get_level_string(-1)+'", "nsfw":"'+logged_user.nsfwPreference+'", "power":"descending"}' , pageNum:page_num},
 			success: function(gotData) {
 				rants = $.parseJSON(gotData);
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);
@@ -142,7 +150,7 @@ function get_contenders(page_num, contenderSortNum){
 		$.ajax({
 			type: 'POST',
 			url: '/api/rants/list',
-			data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'"}' , pageNum:page_num},
+			data: {appliedFilters: '{"level":"'+get_level_string(-1)+'", "nsfw":"'+logged_user.nsfwPreference+'"}' , pageNum:page_num},
 			success: function(gotData) {
 				rants = $.parseJSON(gotData);
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);
@@ -157,7 +165,7 @@ function get_contenders(page_num, contenderSortNum){
 		$.ajax({
 			type: 'POST',
 			url: '/api/rants/list',
-			data: {appliedFilters: '{"level":"'+get_level_string()+'", "nsfw":"'+logged_user.nsfwPreference+'", "birthDate":"descending"}' , pageNum:page_num},
+			data: {appliedFilters: '{"level":"'+get_level_string(-1)+'", "nsfw":"'+logged_user.nsfwPreference+'", "birthDate":"descending"}' , pageNum:page_num},
 			success: function(gotData) {
 				rants = $.parseJSON(gotData);
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);
@@ -181,7 +189,7 @@ function display_contenders(first_rant_num , rants){
 }
 
 function update_contender_sizes(){
-	setTimeout(function(){$('#contender_space').css('height',$('#contenders').height()+700);}, 250);
+	setTimeout(function(){$('#contender_space').css('height',$('#contenders').height() + 250);}, 250);
 	var resizeTimer;
 	$(window).resize(function() {
 		clearTimeout(resizeTimer);

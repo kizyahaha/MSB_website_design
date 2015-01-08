@@ -106,8 +106,9 @@ function get_level_index(){
 	return 4;
 }
 
-function get_level_string(){
-	level = get_level_index();
+function get_level_string(level){
+	if (level == -1)
+		level = get_level_index();
 	if (level == 0)
 		return 'Daily';
 	else if (level == 1)

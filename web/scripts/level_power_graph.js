@@ -1,31 +1,80 @@
-function create_power_graph(){
+function create_level_power_graph(){
 	google.load('visualization', '1', {'packages':['controls']});
-	$.ajax({
-        type: 'POST',
-        url: '/api/rants/powers',
-		async: false,
-		data: {appliedFilters: '{"level":"' + get_level_string() + '", "power":"descending"}'},
-        success: function(gotData) {
-            powers = $.parseJSON(gotData);
-			$('<div/>',{id:'power_graph'}).appendTo('#contender_space');
-			$('<div/>',{id:'graph'}).appendTo('#power_graph');
-			$('<div/>',{id:'rank_slider'}).appendTo('#power_graph');
-            do_contender_power_graph(powers);
-        },
-        error: function(name,status) {
-            window.document.location.href = "error_page.html";
-        }
-    });
+	$('<div/>',{id:'graph_level_select_space'}).appendTo('body');
+	$('<div/>',{id:'level_graph_space'}).appendTo('body');
+	create_graph_levels();
+	google.setOnLoadCallback(function(){create_power_graph(0)});
+}
+
+function create_graph_levels(){
+	$('<table/>',{id:'graph_levels_table'}).appendTo('#graph_level_select_space');
+	$('<tr/>',{id:'graph_levels_row'}).appendTo('#graph_levels_table');
+	add_graph_level('Daily');
+	add_graph_level('Hourly');
+	add_graph_level('10-Minutely');
+	add_graph_level('Minutely');
+}
+
+function add_graph_level(level){
+	var num_levels = $('#graph_levels_row').children('td').length;
+	ID= 'graph_level' + num_levels;
+	$('<td/>',{id:ID}).appendTo('#graph_levels_row');
+	if (num_levels == 0){
+		status_class = 'current_graph_level';
+	}
+	else{
+		status_class = 'other_graph_level';
+	}
+	$('<div/>',{addClass:status_class + ' graph_level' , id:ID + '_text' , text:level}).appendTo('#' + ID);
+	$('#' + ID + '_text').click(function(){graph_level_click(num_levels);});
+}
+
+function graph_level_click(level_num){
+	if ( $('#graph_level' + level_num + '_text').hasClass('current_graph_level') )
+		return;
+	$(window).unbind('resize.level_power_graph_resize');
+	update_graph_level(level_num);
+	create_power_graph(level_num);
+}
+
+function update_graph_level(level_num){
+	$('.current_graph_level').attr('class','other_graph_level');
+	ID = '#graph_level' + level_num + '_text';
+	$(ID).attr('class','current_graph_level');
+}
+
+
+function create_power_graph(level){
+	$('#level_graph_space').empty();
+	if (typeof google.visualization === 'object'){
+		$.ajax({
+			type: 'POST',
+			url: '/api/rants/powers',
+			async: false,
+			data: {appliedFilters: '{"level":"' + get_level_string(level) + '", "power":"descending"}'},
+			success: function(gotData) {
+				powers = $.parseJSON(gotData);
+				$('<div/>',{id:'power_graph'}).appendTo('#level_graph_space');
+				$('<div/>',{id:'graph'}).appendTo('#power_graph');
+				$('<div/>',{id:'rank_slider'}).appendTo('#power_graph');
+				do_contender_power_graph(powers);
+			},
+			error: function(name,status) {
+				window.document.location.href = "error_page.html";
+			}
+		});
+	}
 }
 
 function do_contender_power_graph(powers){
     // Set a callback to run when the Google Visualization API is loaded.
-    google.setOnLoadCallback(drawDashboard);
+    //google.setOnLoadCallback(drawDashboard);
 	  
     // Callback that creates and populates a data table,
     // instantiates a dashboard, a range slider and a column chart,
     // passes in the data and draws it.
-    function drawDashboard() {
+    //function drawDashboard() {
+	
 		// Create the data table.
         var data = new google.visualization.DataTable();
 		data = get_contender_data(powers);
@@ -79,11 +128,12 @@ function do_contender_power_graph(powers){
 		onload_manager(draw_contender_power_graph);
 		
 		var resizeTimer;
-		$(window).resize(function() {
+		$(window).bind('resize.level_power_graph_resize', level_power_graph_resize);
+		function level_power_graph_resize(){
 			clearTimeout(resizeTimer);
 			resizeTimer = setTimeout(function(){draw_contender_power_graph();}, 250);
-		});
-    }
+		}
+    //}
 }
 
 function get_contender_data(powers){
