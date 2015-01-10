@@ -17,6 +17,9 @@
 	padding:10px 0.75em 40px 1em;
 	font-size: 20px;
 }
+#tabs .current_tab:hover{
+	cursor:default;
+}
 #tabs .other_tab{
 	display: inline;
 	margin: 0 2px 0 0;
