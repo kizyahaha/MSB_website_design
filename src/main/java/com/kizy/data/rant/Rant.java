@@ -25,7 +25,7 @@ public interface Rant {
 
     int getRantPower();
 
-    void changePower(int amount);
+    void changePower(double amount);
 
     boolean isAlive();
 

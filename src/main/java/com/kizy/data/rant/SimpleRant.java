@@ -124,7 +124,7 @@ public class SimpleRant implements Rant {
     }
 
     @Override
-    public void changePower(int amount) {
+    public void changePower(double amount) {
         power += amount;
     }
 
