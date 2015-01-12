@@ -2,7 +2,9 @@ package com.kizy.data.rant;
 
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Maps;
+import com.kizy.data.Serializers;
 import com.kizy.data.user.Users;
 
 public class Rants {
@@ -17,7 +19,7 @@ public class Rants {
         // no instantiation
     }
 
-    public static Map<String, Object> serialize(Rant rant, boolean isOwner) {
+    public static Map<String, Object> filterOwner(Rant rant, boolean isOwner) {
         Map<String, Object> properties = Maps.newHashMap();
         properties.put("id", rant.getRantId());
         properties.put("nsfw", rant.isNsfw());
@@ -34,6 +36,10 @@ public class Rants {
             properties.put("power", rant.getRantPower());
         }
         return properties;
+    }
+
+    public static JsonNode serialize(Rant rant, boolean isOwner) {
+        return Serializers.valueToTree(Rants.filterOwner(rant, isOwner));
     }
 
 }

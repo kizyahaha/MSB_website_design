@@ -84,7 +84,7 @@ public class RantController {
         int numPages = Math.max( 1 , (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE) );
         List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
         Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
-        return  Pages.serialize(page).toString();
+        return  Pages.serialize(page, WebResources.currentLoggedInUser(request)).toString();
     }
 
     public List<Rant> filterRants(String appliedFiltersString) throws IOException{
@@ -132,7 +132,7 @@ public class RantController {
     public String getRantData(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         Rant rant = DatabaseUtils.findRantById(id);
         boolean isOwner = isOwner(WebResources.currentLoggedInUser(request), rant);
-        return Serializers.valueToTree(Rants.serialize(rant, isOwner)).toString();
+        return Rants.serialize(rant, isOwner).toString();
     }
 
     @RequestMapping(value = "/upvote")
