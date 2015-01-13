@@ -4,6 +4,19 @@ function create_my_items_content(){
 	for (var i in tot_cost_per_item){
 		tot_cost_per_item[i] = 0;
 	}
+	Item = Backbone.Model.extend({
+		defaults:{
+			type:'',
+			cost:0,
+			img_src:''
+		},
+        initialize: function(){
+            alert("You have some backbone code in 'My items'");
+        }
+    });
+    
+    var leech = new Item ({type:'attack', cost:100, img_src:'foo'});
+
 	create_bok_count();
 	create_item_category_tabs();
 	create_modal_window();
