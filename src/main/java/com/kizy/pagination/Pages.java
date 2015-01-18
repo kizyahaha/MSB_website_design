@@ -1,15 +1,11 @@
 package com.kizy.pagination;
 
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.kizy.data.Serializers;
 import com.kizy.data.rant.Rant;
-import com.kizy.data.rant.Rants;
-import com.kizy.data.user.User;
 
 public class Pages {
 
@@ -29,21 +25,8 @@ public class Pages {
         return rantsOnPage;
     }
 
-    public static Map<String, Object> filterPage(Page page, User owner) {
-        Map<String, Object> properties = Maps.newHashMap();
-        List<Rant> rants = page.getRantsOnPage();
-        List<Map<String, Object>> filteredRants = Lists.newArrayList();
-        for (Rant rant : rants) {
-            filteredRants.add(Rants.filterOwner(rant, owner.getUserId() == rant.getOwnerId()));
-        }
-        properties.put("rantsOnPage", filteredRants);
-        properties.put("firstRantNum", page.getFirstRantNum());
-        properties.put("numPages", page.getNumPages());
-        return properties;
-    }
-
-    public static JsonNode serialize(Page page, User owner) {
-        return Serializers.valueToTree(filterPage(page, owner));
+    public static JsonNode serialize(Page page) {
+        return Serializers.valueToTree(page);
     }
 
 }

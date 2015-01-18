@@ -20,6 +20,7 @@ import com.google.common.io.Files;
 import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.RantLevel;
 import com.kizy.data.rant.SimpleRant;
+import com.kizy.data.rant.UnownedRant;
 import com.kizy.data.user.SimpleUser;
 import com.kizy.data.user.User;
 
@@ -150,8 +151,8 @@ public class DatabaseUtils {
         Files.write(newContents, RANTS_FILE, Charsets.UTF_8);
     }
 
-    public static void upvote(long userId, long rantId) throws IOException {
-        Rant rant = findRantById(rantId);
+    public static void upvote(User user, long userId, long rantId) throws IOException {
+        Rant rant = findRantById(user, rantId);
         if ( removeDownvote(userId, rantId) ){
             rant.changePower(1);
         }
@@ -169,8 +170,8 @@ public class DatabaseUtils {
         return removeVote(userId, rantId, readUpvotes(), UPVOTES_FILE);
     }
 
-    public static void downvote(long userId, long rantId) throws IOException {
-        Rant rant = findRantById(rantId);
+    public static void downvote(User user, long userId, long rantId) throws IOException {
+        Rant rant = findRantById(user, rantId);
         if ( removeUpvote(userId, rantId) ){
             rant.changePower(-1);
         }
@@ -242,6 +243,14 @@ public class DatabaseUtils {
         return rants;
     }
 
+    public static List<Rant> getRantsAsUser(User user) throws IOException {
+        List<Rant> rants = Lists.newArrayList();
+        for (String line : readRants()) {
+            rants.add(parseRantAsUser(line, user));
+        }
+        return rants;
+    }
+
     public static List<String> readUpvotes() throws IOException {
         return readFile(UPVOTES_FILE);
     }
@@ -274,16 +283,16 @@ public class DatabaseUtils {
         return findUser(0L, "", "", email, EnumSet.of(UserMatchComponent.EMAIL));
     }
 
-    public static Rant findRantById(long id) throws IOException {
-        return findRant(id, false, null, null, EnumSet.of(RantMatchComponent.ID));
+    public static Rant findRantById(User user, long id) throws IOException {
+        return findRant(user, id, false, null, null, EnumSet.of(RantMatchComponent.ID));
     }
 
-    public static Rant findRantByTitle(String title) throws IOException {
-        return findRant(0L, false, title, null, EnumSet.of(RantMatchComponent.TITLE));
+    public static Rant findRantByTitle(User user, String title) throws IOException {
+        return findRant(user, 0L, false, title, null, EnumSet.of(RantMatchComponent.TITLE));
     }
 
-    public static Rant findRantByOwnerName(String owner) throws IOException {
-        return findRant(0L, false, null, owner, EnumSet.of(RantMatchComponent.OWNER));
+    public static Rant findRantByOwnerName(User user, String owner) throws IOException {
+        return findRant(user, 0L, false, null, owner, EnumSet.of(RantMatchComponent.OWNER));
     }
 
     public static List<Rant> findRantsByLevel(final RantLevel level) throws IOException {
@@ -338,7 +347,7 @@ public class DatabaseUtils {
         return parseUser(matches.iterator().next());
     }
 
-    private static Rant findRant(long matchId, boolean matchNsfw, String matchTitle, String matchOwner, EnumSet<RantMatchComponent> set) throws IOException {
+    private static Rant findRant(User user, long matchId, boolean matchNsfw, String matchTitle, String matchOwner, EnumSet<RantMatchComponent> set) throws IOException {
         Iterable<String> matches = RantMatcher.matchOn(matchId, matchNsfw, matchTitle, matchOwner, readRants(), set);
         if (Iterables.size(matches) == 0) {
             return null;
@@ -347,7 +356,7 @@ public class DatabaseUtils {
             throw new IllegalStateException(String.format("Multiple users match '{}' on properties: {}",
                                                           SimpleRant.formatRant(matchTitle, "", matchOwner, matchNsfw), set));
         }
-        return parseRant(matches.iterator().next());
+        return parseRantAsUser(matches.iterator().next(), user);
     }
 
     private static User parseUser(String line) throws IOException {
@@ -380,19 +389,50 @@ public class DatabaseUtils {
     private static Rant parseRant(String line) throws IOException {
         String[] parts = splitLine(line);
         long rantId = Long.parseLong(parts[RANT_ID_PART]);
-        User user = findUserByName(parts[RANT_OWNER_PART]);
+        User owner = findUserByName(parts[RANT_OWNER_PART]);
         return new SimpleRant(rantId,
                               Boolean.parseBoolean(parts[RANT_NSFW_PART]),
                               parts[RANT_TITLE_PART],
                               parts[RANT_CONTENTS_PART],
-                              user.getUserId(),
-                              user.getUsername(),
+                              owner.getUserId(),
+                              owner.getUsername(),
                               new DateTime(parts[RANT_CREATION_PART]),
                               new DateTime(parts[RANT_DEATH_PART]),
                               Integer.parseInt(parts[RANT_POWER_PART]),
                               parts[RANT_LEVEL_PART],
                               getRantUpvotes(rantId),
                               getRantDownVotes(rantId));
+    }
+
+    private static Rant parseRantAsUser(String line, User user) throws IOException {
+        String[] parts = splitLine(line);
+        long rantId = Long.parseLong(parts[RANT_ID_PART]);
+        User owner = findUserByName(parts[RANT_OWNER_PART]);
+        if (owner.equals(user)) {
+            return new SimpleRant(rantId,
+                                  Boolean.parseBoolean(parts[RANT_NSFW_PART]),
+                                  parts[RANT_TITLE_PART],
+                                  parts[RANT_CONTENTS_PART],
+                                  owner.getUserId(),
+                                  owner.getUsername(),
+                                  new DateTime(parts[RANT_CREATION_PART]),
+                                  new DateTime(parts[RANT_DEATH_PART]),
+                                  Integer.parseInt(parts[RANT_POWER_PART]),
+                                  parts[RANT_LEVEL_PART],
+                                  getRantUpvotes(rantId),
+                                  getRantDownVotes(rantId));
+        } else {
+            return new UnownedRant(rantId,
+                                   Boolean.parseBoolean(parts[RANT_NSFW_PART]),
+                                   parts[RANT_TITLE_PART],
+                                   parts[RANT_CONTENTS_PART],
+                                   owner.getUserId(),
+                                   owner.getUsername(),
+                                   new DateTime(parts[RANT_CREATION_PART]),
+                                   new DateTime(parts[RANT_DEATH_PART]),
+                                   Integer.parseInt(parts[RANT_POWER_PART]),
+                                   parts[RANT_LEVEL_PART]);
+        }
     }
 
     private static Collection<Long> getRantUpvotes(long rantId) throws IOException {

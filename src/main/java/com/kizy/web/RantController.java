@@ -76,7 +76,8 @@ public class RantController {
         if (pageNum < 0) {
             throw new IllegalArgumentException("Cannot request non-positive page number.");
         }
-        List<Rant> filteredRants = filterRants(appliedFiltersString);
+        User user = WebResources.currentLoggedInUser(request);
+        List<Rant> filteredRants = filterRants(appliedFiltersString, user);
         if (pageNum == 0){
             return Serializers.valueToTree(filteredRants).toString();
         }
@@ -84,11 +85,16 @@ public class RantController {
         int numPages = Math.max( 1 , (int)Math.ceil((double)filteredRants.size()/Pages.RANTS_PER_PAGE) );
         List<Rant> rantsOnPage = Pages.getRantsOnPage(filteredRants, pageNum);
         Page page = new SimplePage(firstRantNum, numPages, rantsOnPage);
-        return  Pages.serialize(page, WebResources.currentLoggedInUser(request)).toString();
+        return  Pages.serialize(page).toString();
     }
 
-    public List<Rant> filterRants(String appliedFiltersString) throws IOException{
-        List<Rant> filteredRants = DatabaseUtils.getRants();
+    public List<Rant> filterRants(String appliedFiltersString, User user) throws IOException{
+        List<Rant> filteredRants;
+        if (user == null) {
+            filteredRants = DatabaseUtils.getRants();
+        } else {
+            filteredRants = DatabaseUtils.getRantsAsUser(user);
+        }
         if (appliedFiltersString != null) {
             @SuppressWarnings("unchecked")
             Map<String, String> appliedFilters = Serializers.getMapper().readValue(appliedFiltersString, Map.class);
@@ -104,7 +110,7 @@ public class RantController {
     @RequestMapping(value = "/powers")
     @ResponseBody
     public String listAllPowers(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
-    	List<Rant> levelRants = filterRants(appliedFiltersString);
+        List<Rant> levelRants = filterRants(appliedFiltersString, null);
     	List<Integer> rantPowers = new ArrayList<Integer>();
     	for (Rant rant : levelRants){
     		rantPowers.add(rant.getRantPower());
@@ -130,21 +136,21 @@ public class RantController {
     @RequestMapping(value = "/rantData")
     @ResponseBody
     public String getRantData(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
-        Rant rant = DatabaseUtils.findRantById(id);
-        boolean isOwner = isOwner(WebResources.currentLoggedInUser(request), rant);
-        return Rants.serialize(rant, isOwner).toString();
+        User user = WebResources.currentLoggedInUser(request);
+        Rant rant = DatabaseUtils.findRantById(user, id);
+        return Rants.serialize(rant).toString();
     }
 
     @RequestMapping(value = "/upvote")
     @ResponseBody
     public void upvote(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
-        Rant rant = DatabaseUtils.findRantById(id);
+        User user = WebResources.currentLoggedInUser(request);
+        Rant rant = DatabaseUtils.findRantById(user, id);
         if (rant.isAlive()) {
-            User user = WebResources.currentLoggedInUser(request);
             if (user.getUserId() != -1) {
 	            rant.upvote(user.getUserId());
 	            user.upvote(rant.getRantId());
-	            DatabaseUtils.upvote(user.getUserId(), rant.getRantId());
+	            DatabaseUtils.upvote(user, user.getUserId(), rant.getRantId());
             }
         }
     }
@@ -152,13 +158,13 @@ public class RantController {
     @RequestMapping(value = "/downvote")
     @ResponseBody
     public void downvote(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
-        Rant rant = DatabaseUtils.findRantById(id);
+        User user = WebResources.currentLoggedInUser(request);
+        Rant rant = DatabaseUtils.findRantById(user, id);
         if (rant.isAlive()) {
-            User user = WebResources.currentLoggedInUser(request);
             if (user.getUserId() != -1) {
 	            rant.downvote(user.getUserId());
 	            user.downvote(rant.getRantId());
-	            DatabaseUtils.downvote(user.getUserId(), rant.getRantId());
+	            DatabaseUtils.downvote(user, user.getUserId(), rant.getRantId());
             }
         }
     }
@@ -166,26 +172,28 @@ public class RantController {
     @RequestMapping(value = "/votes")
     @ResponseBody
     public String getVotes(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
-        Rant rant = DatabaseUtils.findRantById(id);
         User user = WebResources.currentLoggedInUser(request);
-        if (!isOwner(user, rant)) {
+        Rant rant = DatabaseUtils.findRantById(user, id);
+        Map<String, Collection<Long>> votes = Maps.newHashMap();
+        try {
+            votes.put("upvotes", rant.getUpvoteIds());
+            votes.put("downvotes", rant.getDownvoteIds());
+        } catch (UnsupportedOperationException e) {
             return "";
         }
-        Map<String, Collection<Long>> votes = Maps.newHashMap();
-        votes.put("upvotes", rant.getUpvoteIds());
-        votes.put("downvotes", rant.getDownvoteIds());
         return Serializers.valueToTree(votes).toString();
     }
 
     @RequestMapping(value = "/power")
     @ResponseBody
     public String getPower(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
-        Rant rant = DatabaseUtils.findRantById(id);
         User user = WebResources.currentLoggedInUser(request);
-        if (!isOwner(user, rant)) {
+        Rant rant = DatabaseUtils.findRantById(user, id);
+        try {
+            return Integer.toString(rant.getRantPower());
+        } catch (UnsupportedOperationException e) {
             return "";
         }
-        return Integer.toString(rant.getRantPower());
     }
 
     @RequestMapping(value = "/winner")
@@ -193,10 +201,6 @@ public class RantController {
     public String getWinner(HttpServletRequest request, @RequestParam("level") String level) throws IOException {
         long winnerId = DatabaseUtils.getLatestWinnerId(RantLevel.fromName(level));
         return getRantData(request, winnerId);
-    }
-
-    private boolean isOwner(User user, Rant rant) {
-        return rant.getOwnerId() == user.getUserId();
     }
 
 }
