@@ -68,7 +68,6 @@ function update_winner_rant(){
 		data: {level:get_level_string(-1)},
         success: function(gotData) {
             winner = $.parseJSON(gotData);
-			alert(winner.title);
 			display_winner_rant(winner);
 			//var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);
 			//populate_rant_preview(false, winner_ID, 0, 1, winner);			
