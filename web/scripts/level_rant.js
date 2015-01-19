@@ -65,9 +65,10 @@ function update_winner_rant(){
 	$.ajax({
         type: 'POST',
         url: '/api/rants/winner',
-		data: {level:get_level_string()},
+		data: {level:get_level_string(-1)},
         success: function(gotData) {
             winner = $.parseJSON(gotData);
+			alert(winner.title);
 			display_winner_rant(winner);
 			//var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);
 			//populate_rant_preview(false, winner_ID, 0, 1, winner);			
@@ -88,11 +89,11 @@ function display_winner_rant(winner){
 		$('#rant_bubble').text('Sorry, the current winning rant is tagged as NSFW! Sign in and/or change your preferences to view NSFW rants.');
 	}
 	else if (winner.nsfw && logged_user.nsfwPreference == 2){
-		var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);
+		var winner_ID = create_rant_preview(false, 'rant_bubble', -1, winner.owner);
 		populate_rant_preview(true, winner_ID, 0, 1, winner);
 	}
 	else{
-		var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);
+		var winner_ID = create_rant_preview(false, 'rant_bubble', -1, winner.owner);
 		populate_rant_preview(false, winner_ID, 0, 1, winner);
 	}
 }
