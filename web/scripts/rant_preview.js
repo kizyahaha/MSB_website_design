@@ -259,7 +259,7 @@ function get_rant_preview_level_link(rant_data){
 	return 'minutely.html';
 }
 
-function get_rant_power(rant_id){
+/*function get_rant_power(rant_id){
 	var power = 0;
 	$.ajax({
         type: 'POST',
@@ -274,7 +274,7 @@ function get_rant_power(rant_id){
         }
     });
 	return power;
-}
+}*/
 
 /**********************************************************************************************************/
 

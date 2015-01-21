@@ -184,7 +184,7 @@ public class RantController {
         return Serializers.valueToTree(votes).toString();
     }
 
-    @RequestMapping(value = "/power")
+    /*@RequestMapping(value = "/power")
     @ResponseBody
     public String getPower(HttpServletRequest request, @RequestParam("id") long id) throws IOException {
         User user = WebResources.currentLoggedInUser(request);
@@ -194,7 +194,7 @@ public class RantController {
         } catch (UnsupportedOperationException e) {
             return "";
         }
-    }
+    }*/
 
     @RequestMapping(value = "/winner")
     @ResponseBody
