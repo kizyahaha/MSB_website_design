@@ -34,6 +34,9 @@
 	border:solid 20px rgb(215,226,229);
 	/*overflow:auto;*/
 	/*overflow:hidden;*/
+	font-family:Lato;
+    color:rgb(52,52,52);
+    font-size:16px;
 }
 #contender_navigation_table{
 	position:absolute;

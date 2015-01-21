@@ -67,8 +67,13 @@ function update_winner_rant(){
         url: '/api/rants/winner',
 		data: {level:get_level_string(-1)},
         success: function(gotData) {
-            winner = $.parseJSON(gotData);
-			display_winner_rant(winner);
+			if (!gotData) {
+				$('#rant_bubble').text("There is no winner this time - most likely because there were no contenders.  Submit a rant and you're a shoo-in!");
+			}
+			else {
+				winner = $.parseJSON(gotData);
+				display_winner_rant(winner);
+			}
 			//var winner_ID = create_rant_preview(false, 'rant_bubble', winner.owner.id);
 			//populate_rant_preview(false, winner_ID, 0, 1, winner);			
 			update_winner_headline(get_level_index());

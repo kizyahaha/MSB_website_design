@@ -200,7 +200,10 @@ public class RantController {
     @ResponseBody
     public String getWinner(HttpServletRequest request, @RequestParam("level") String level) throws IOException {
         long winnerId = DatabaseUtils.getLatestWinnerId(RantLevel.fromName(level));
-        return getRantData(request, winnerId);
+        if (winnerId != 0){
+            return getRantData(request, winnerId);
+        }
+        return null;
     }
 
 }

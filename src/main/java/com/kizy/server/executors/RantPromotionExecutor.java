@@ -50,7 +50,12 @@ public class RantPromotionExecutor implements Runnable {
             @SuppressWarnings("unused")
             Rant winner = getWinner(rants);
             // Not actually changing it because we don't have enough inflow yet, but this is probably where it would go
+            if (winner != null){
             //DatabaseUtils.writeWinner(DateTime.now(), winner.getRantId(), level);
+            }
+            else{
+              //DatabaseUtils.writeWinner(DateTime.now(), 0, level);
+            }
         } catch (IOException e) {
             System.err.println("Could not get " + level.getDisplayName() + " rants.");
         }

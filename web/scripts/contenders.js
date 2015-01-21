@@ -140,6 +140,9 @@ function get_contenders(page_num, contenderSortNum){
 				rants = $.parseJSON(gotData);
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);
 				update_contender_navigation(rants.numPages);
+				if (rants.rantsOnPage.length == 0){
+					$('#contenders').text("There does not appear to be any contenders for this level at the moment.  Might be a good time to submit a rant.  You'd be almost guaranteed victory!");
+				}
 			},
 			error: function(name,status) {
 				window.document.location.href = "error_page.html";
@@ -155,6 +158,9 @@ function get_contenders(page_num, contenderSortNum){
 				rants = $.parseJSON(gotData);
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);
 				update_contender_navigation(rants.numPages);
+				if (rants.rantsOnPage.length == 0){
+					$('#contenders').text("There does not appear to be any contenders for this level at the moment.  Might be a good time to submit a rant.  You'd be almost guaranteed victory!");
+				}
 			},
 			error: function(name,status) {
 				window.document.location.href = "error_page.html";
@@ -170,6 +176,9 @@ function get_contenders(page_num, contenderSortNum){
 				rants = $.parseJSON(gotData);
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);
 				update_contender_navigation(rants.numPages);
+				if (rants.rantsOnPage.length == 0){
+					$('#contenders').text("There does not appear to be any contenders for this level at the moment.  Might be a good time to submit a rant.  You'd be almost guaranteed victory!");
+				}
 			},
 			error: function(name,status) {
 				window.document.location.href = "error_page.html";
