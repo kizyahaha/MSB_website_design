@@ -41,7 +41,7 @@ public class UserController {
                         @RequestParam("email") String email) {
     	int error = 0;
         try {
-            if (!isValid(username, password, email)) {
+            if (!isFilled(username, password, email)) {
             	error = error|1;
             }
         	if (DatabaseUtils.findUserByEmail(email) != null){
@@ -49,6 +49,9 @@ public class UserController {
         	}
         	if (DatabaseUtils.findUserByName(username) != null){
         		error = error|4;
+        	}
+        	if (!isUsernameValid(username)){
+        	    error = error|8;
         	}
         	if (error == 0){
                 DatabaseUtils.writeUser(new SimpleUser(currentId.incrementAndGet(), username, password, email));
@@ -59,10 +62,17 @@ public class UserController {
         return Serializers.valueToTree(error).toString();
     }
 
-    private boolean isValid(String username, String password, String email) {
+    private boolean isFilled(String username, String password, String email) {
         // no values are null
         return !Strings.isNullOrEmpty(password) && !Strings.isNullOrEmpty(username)
                 && !Strings.isNullOrEmpty(email);
+    }
+
+    private boolean isUsernameValid(String username) {
+        if(username.matches("\\W")) {
+            return false;
+        }
+        return true;
     }
 
     @RequestMapping(value = "/listAll")

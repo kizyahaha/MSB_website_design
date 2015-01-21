@@ -54,6 +54,9 @@ function submit(form){
 				if (code & (1 << 2)){
 					document.getElementById('username_taken').style.display = 'initial';
 				}
+				if (code & (1 << 3)){
+					document.getElementById('username_invalid').style.display = 'initial';
+				}
 			},
 			error: function(msg) {
 				window.document.location.href = "error_page.html";
@@ -90,11 +93,25 @@ function create_DOB_entry(){
 
 function create_username_entry(){
 	$('<label/>',{id: 'username_label' , text: '*Create username:'}).appendTo('#signup_form');
-	$('<input/>',{name:'username' , addClass:'text_entry' , placeholder: 'username' , type:'text' , autocomplete:'off'}).appendTo('#signup_form');
+	$('<input/>',{name:'username' , id:'username_input', addClass:'text_entry' , placeholder: 'username' , type:'text' , autocomplete:'off'}).appendTo('#signup_form');
 	$('<br/>').appendTo('#signup_form');
 	$('<div/>',{id: 'username_taken' , text:'Sorry, that username already exists'}).appendTo('#signup_form');
 	$('<br/>').appendTo('#username_taken');
+	$('<div/>',{id: 'username_invalid' , text:'Usernames can only contain letters, numbers, and underscores'}).appendTo('#signup_form');
+	$('<br/>').appendTo('#username_invalid');
 	document.getElementById('username_taken').style.display = 'none';
+	document.getElementById('username_invalid').style.display = 'none';
+	$('#username_input').on('input',function(){check_username_validity(this.form);});
+}
+
+function check_username_validity(form){
+	document.getElementById('username_invalid').style.display = 'none';
+	var username = form.username.value
+	if( /\W/.test( username ) ) {
+		document.getElementById('username_invalid').style.display = 'initial';
+		return false;
+	}
+	return true;     
 }
 
 function create_password_entry(){
@@ -121,7 +138,8 @@ function check_valid_input(form){
 	var pwd_match = check_password_match(form);
 	var all_filled = check_all_filled(form);
 	var valid_email = check_email_validity(form);
-	if (pwd_match && read_terms && all_filled && valid_email){
+	var valid_username = check_username_validity(form);
+	if (pwd_match && read_terms && all_filled && valid_email & valid_username){
 		return true;
 	}
 	return false;
