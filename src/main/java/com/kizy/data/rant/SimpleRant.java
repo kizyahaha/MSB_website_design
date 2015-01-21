@@ -17,7 +17,7 @@ public class SimpleRant implements Rant {
     private final long owner;
     private final String ownername;
     private final DateTime birth;
-    private int power;
+    private float power;
     private String level;
     private Collection<Long> upvotes;
     private Collection<Long> downvotes;
@@ -42,7 +42,7 @@ public class SimpleRant implements Rant {
                       @JsonProperty("ownername") String ownername,
                       @JsonProperty("birth") DateTime birth,
                       @JsonProperty("death") DateTime death,
-                      @JsonProperty("power") int power,
+                      @JsonProperty("power") float power,
                       @JsonProperty("level") String level,
                       @JsonProperty("upvotes") Collection<Long> upvotes,
                       @JsonProperty("downvotes") Collection<Long> downvotes) {
@@ -119,7 +119,7 @@ public class SimpleRant implements Rant {
 
     @Override
     @JsonProperty("power")
-    public int getRantPower() {
+    public float getRantPower() {
         return power;
     }
 
@@ -174,14 +174,17 @@ public class SimpleRant implements Rant {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((birth == null) ? 0 : birth.hashCode());
-        result = prime * result + ((contents == null) ? 0 : contents.hashCode());
-        result = prime * result + ((downvotes == null) ? 0 : downvotes.hashCode());
+        result = prime * result
+                + ((contents == null) ? 0 : contents.hashCode());
+        result = prime * result
+                + ((downvotes == null) ? 0 : downvotes.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((level == null) ? 0 : level.hashCode());
         result = prime * result + (nsfw ? 1231 : 1237);
         result = prime * result + (int) (owner ^ (owner >>> 32));
-        result = prime * result + ((ownername == null) ? 0 : ownername.hashCode());
-        result = prime * result + power;
+        result = prime * result
+                + ((ownername == null) ? 0 : ownername.hashCode());
+        result = prime * result + Float.floatToIntBits(power);
         result = prime * result + ((title == null) ? 0 : title.hashCode());
         result = prime * result + ((upvotes == null) ? 0 : upvotes.hashCode());
         return result;
@@ -243,7 +246,7 @@ public class SimpleRant implements Rant {
         } else if (!ownername.equals(other.ownername)) {
             return false;
         }
-        if (power != other.power) {
+        if (Float.floatToIntBits(power) != Float.floatToIntBits(other.power)) {
             return false;
         }
         if (title == null) {

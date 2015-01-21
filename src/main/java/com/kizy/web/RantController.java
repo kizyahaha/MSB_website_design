@@ -111,7 +111,7 @@ public class RantController {
     @ResponseBody
     public String listAllPowers(@RequestParam(value = "appliedFilters", required = false) String appliedFiltersString) throws IOException {
         List<Rant> levelRants = filterRants(appliedFiltersString, null);
-    	List<Integer> rantPowers = new ArrayList<Integer>();
+    	List<Float> rantPowers = new ArrayList<Float>();
     	for (Rant rant : levelRants){
     		rantPowers.add(rant.getRantPower());
     	}
@@ -190,7 +190,7 @@ public class RantController {
         User user = WebResources.currentLoggedInUser(request);
         Rant rant = DatabaseUtils.findRantById(user, id);
         try {
-            return Integer.toString(rant.getRantPower());
+            return Float.toString(rant.getRantPower());
         } catch (UnsupportedOperationException e) {
             return "";
         }

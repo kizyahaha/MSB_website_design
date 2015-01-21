@@ -17,7 +17,7 @@ public class PowerSort implements Filter {
         Comparator<Rant> powerComparator = Filters.signedComparator(new Comparator<Rant>() {
             @Override
             public int compare(Rant rant1, Rant rant2){
-                return rant1.getRantPower() - rant2.getRantPower();
+                return Float.compare(rant1.getRantPower(), rant2.getRantPower());
             }
         }, arg);
         Collections.sort(sortedRants, powerComparator);

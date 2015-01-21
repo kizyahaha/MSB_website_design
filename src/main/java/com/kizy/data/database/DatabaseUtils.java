@@ -398,7 +398,7 @@ public class DatabaseUtils {
                               owner.getUsername(),
                               new DateTime(parts[RANT_CREATION_PART]),
                               new DateTime(parts[RANT_DEATH_PART]),
-                              Integer.parseInt(parts[RANT_POWER_PART]),
+                              Float.parseFloat(parts[RANT_POWER_PART]),
                               parts[RANT_LEVEL_PART],
                               getRantUpvotes(rantId),
                               getRantDownVotes(rantId));
@@ -417,7 +417,7 @@ public class DatabaseUtils {
                                   owner.getUsername(),
                                   new DateTime(parts[RANT_CREATION_PART]),
                                   new DateTime(parts[RANT_DEATH_PART]),
-                                  Integer.parseInt(parts[RANT_POWER_PART]),
+                                  Float.parseFloat(parts[RANT_POWER_PART]),
                                   parts[RANT_LEVEL_PART],
                                   getRantUpvotes(rantId),
                                   getRantDownVotes(rantId));
@@ -430,7 +430,7 @@ public class DatabaseUtils {
                                    owner.getUsername(),
                                    new DateTime(parts[RANT_CREATION_PART]),
                                    new DateTime(parts[RANT_DEATH_PART]),
-                                   Integer.parseInt(parts[RANT_POWER_PART]),
+                                   Float.parseFloat(parts[RANT_POWER_PART]),
                                    parts[RANT_LEVEL_PART]);
         }
     }

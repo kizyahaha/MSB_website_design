@@ -19,14 +19,14 @@ public class UnownedRant extends SimpleRant {
                        @JsonProperty("ownername") String ownername,
                        @JsonProperty("birth") DateTime birth,
                        @JsonProperty("death") DateTime death,
-                       @JsonProperty("power") int power,
+                       @JsonProperty("power") float power,
                        @JsonProperty("level") String level) {
         super(id, nsfw, title, contents, owner, ownername, birth, death, power, level, null, null);
     }
 
     @Override
     @JsonIgnore
-    public int getRantPower() {
+    public float getRantPower() {
         return super.getRantPower();
     }
 

@@ -23,7 +23,7 @@ public interface Rant {
 
     DateTime getDeathDate();
 
-    int getRantPower();
+    float getRantPower();
 
     void changePower(double amount);
 
