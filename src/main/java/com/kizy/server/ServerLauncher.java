@@ -1,5 +1,6 @@
 package com.kizy.server;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,8 @@ public class ServerLauncher {
     private static final int PORT = 9876;
     private static final int MAX_THREADS = 100;
 
-    private static final int ALL_EXECUTOR_START_MILLISECOND_DELAY = 1 * 1000 * 60; // 1 minute
+    //private static final int ALL_EXECUTOR_START_MILLISECOND_DELAY = 1 * 1000 * 60; // 1 minute
+    private static final int ALL_EXECUTOR_START_MILLISECOND_DELAY = 1 * 1000 * 60 - Calendar.getInstance().get(Calendar.SECOND) * 1000; // 1 minute - the current number of seconds past the minute
     private static final int DECAY_EXECUTOR_MILLISECOND_PERIOD = 3 * 1000 * 60; // 3 minutes
     private static final int PROMOTION_EXECUTOR_MILLISECOND_PERIOD = 1 * 1000 * 60; // 1 minute
 
