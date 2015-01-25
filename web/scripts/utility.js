@@ -129,7 +129,7 @@ $(document).mousemove(function(e) {
 }).mouseover();
 
 
-function onload_manager(func) {
+/*function onload_manager(func) {
 	//alert(document.body.scrollTop);
     // assign any pre-defined functions on 'window.onload' to a variable
     var current_onload = window.onload;
@@ -143,6 +143,20 @@ function onload_manager(func) {
             // call the function hooked already
             current_onload();
             // call your awesome function
+            func();
+        }
+    }
+}*/
+function onload_manager(func) {
+    if (typeof window.onload != 'function') {
+        window.onload = func();
+    }
+	else {
+		var cache = window.onload;
+        window.onload = function () {
+			if(cache){
+				cache();
+			}
             func();
         }
     }

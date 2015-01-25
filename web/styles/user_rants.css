@@ -1,9 +1,8 @@
 
 #my_rant_sorts{
-	position:absolute;
 	width:100%;
 	text-align:center;
-	margin-top:40px;
+	padding-top:40px;
 	height:40px;
 	font-family:Lato;
 	font-weight:700;
@@ -21,22 +20,19 @@
 	border-radius:5px;
 }
 #my_rants_space{
-	position:absolute;
-	left:20px;
-	right:20px;
-	top:100px;
+	margin-left:20px;
+	margin-right:20px;
+	margin-top:30px;
 	background-color: rgb(215,226,229);
 	border-radius:20px;
 	border:solid 10px rgb(215,226,229);
-	/*overflow:auto;*/
-	/*overflow:hidden;*/
 }
 #my_rants_navigation_table{
-	position:absolute;
-	bottom:40px;
 	width:100%;
 	font-family:Lato;
 	color:rgb(52,52,52);
 	font-weight:700;
 	font-size:16px;
+	padding-top:20px;
+	padding-bottom:20px;
 }

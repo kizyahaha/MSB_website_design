@@ -199,7 +199,6 @@ function get_my_rants(){
             rants = $.parseJSON(gotData);
             display_my_rants(rants.firstRantNum , rants.rantsOnPage);
 			update_my_rants_navigation(rants.numPages);
-			update_my_profile_content_size();
         },
         error: function(name,status) {
             window.document.location.href = "error_page.html";

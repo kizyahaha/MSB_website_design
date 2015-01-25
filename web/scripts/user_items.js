@@ -39,7 +39,6 @@ function create_item_category_tabs(){
 	create_attack_tab();
 	create_boost_tab();
 	create_total_tab();
-	update_my_profile_content_size();
 }
 
 function create_defense_tab(){
@@ -480,7 +479,6 @@ function toggle_visibility(id){
 	else{
 		el.style.display = 'none';
 	}
-	update_my_profile_content_size();
 	$('#modal_background').height($(document).height());
 }
 

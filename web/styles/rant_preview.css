@@ -1,4 +1,5 @@
 .rant_preview{
+	position:relative;
 	margin-top:0px;
 	margin-bottom:40px;
 	border-radius:20px;
@@ -8,8 +9,8 @@
 }
 .rant_preview_left_side{
 	position:absolute;
-	left:-20px;
-	width:90px;
+	top:10px;
+	width:50px;
 	font-family:Lato;
 	color:rgb(52,52,52);
 	font-size:18px;

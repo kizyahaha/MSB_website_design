@@ -1,7 +1,5 @@
 
 #contender_space{
-	position:relative;
-	top: 0px;
 	width:98%;
 	margin-top:100px;
 	margin-left:auto;
@@ -12,10 +10,9 @@
 	padding:20px;
 }
 #contender_title{
-	position:absolute;
-	top: 15px;
-	left:20px;
-	right:20px;
+	margin-top: 15px;
+	margin-left:20px;
+	margin-right:20px;
 	font-family:Lato;
 	color:rgb(52,52,52);
 	text-align:center;
@@ -23,11 +20,9 @@
 	font-size:30px;
 }
 #contenders{
-	position:absolute;
-	top: 120px;
-	left:20px;
-	right:20px;
-	/*max-height:1050px;*/
+	margin-top: 20px;
+	margin-left:20px;
+	margin-right:20px;
 	min-height:100px;
 	background-color: rgb(215,226,229);
 	border-radius:20px;
@@ -39,11 +34,10 @@
     font-size:16px;
 }
 #contender_navigation_table{
-	position:absolute;
-	bottom:0px;
 	width:100%;
 	font-family:Lato;
 	color:rgb(52,52,52);
+	margin-top:20px;
 	font-weight:700;
 	font-size:16px;
 }

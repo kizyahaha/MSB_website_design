@@ -78,9 +78,7 @@ function update_winner_rant(){
 			//populate_rant_preview(false, winner_ID, 0, 1, winner);			
 			update_winner_headline(get_level_index());
 			update_character(get_level_index());
-			update_countdown(get_level_index());
-			//update_rant_sizes();
-			onload_manager(update_rant_sizes);
+			update_countdown(get_level_index());		
         },
         error: function(gotData) {
             window.document.location.href = "error_page.html";
@@ -194,16 +192,6 @@ function update_countdown(level){
 		default:
 			break;
 	}
-}
-
-function update_rant_sizes(){
-	//Size and position everything based on the size of the rant bubble
-	$('#rant_container').css('height',$('#rant_bubble').height()+190);
-	var resizeTimer;
-	$(window).resize(function() {
-		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(function(){$('#rant_container').css('height',$('#rant_bubble').height()+190);}, 250);
-	});
 }
 
 

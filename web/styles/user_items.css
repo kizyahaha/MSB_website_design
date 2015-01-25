@@ -1,9 +1,8 @@
 #my_items_space{
-	position:absolute;
-	left:20px;
-	right:20px;
-	/*bottom:20px;*/
-	top:20px;
+	margin-left:20px;
+	margin-right:20px;
+	padding-top:20px;
+	padding-bottom:20px;
 }
 #my_boks{
 	text-align:right;

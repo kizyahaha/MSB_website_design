@@ -1,17 +1,17 @@
 #rant_container{
-	position:relative;
-	margin-top:0px;
+	position: relative;
 	width:98%;
+	padding-top:20px;
+	padding-bottom:20px;
 	margin-left:auto;
 	margin-right:auto;
 	background-color: rgb(12,120,154);
 	border-radius:20px;
+	height:auto;
 }
 #winner_headline{
-	position:absolute;
-	top:10px;
-	left:300px;
-	right:20px;
+	margin-left:240px;
+	margin-right:20px;
 	font-family:Lato;
 	color:white;
 	text-align:center;
@@ -20,15 +20,16 @@
 }
 #rant_bubble{
 	text-align:left;
-	position:absolute;
-	top:50px;
-	left:300px;
-	right:20px;
-	max-height:2000px;
+	margin-top:20px;
+	margin-left:240px;
+	margin-right:20px;
+	max-height:1500px;
 	min-height:150px;
 	background-color:rgb(215,226,229);
 	border-radius:50px;
-	border:solid 40px rgb(215,226,229);
+	border-width:40px 40px 0 40px;
+	border-style:solid;
+	border-color:rgb(215,226,229);
 	overflow:auto;
 	font-family:Lato;
 	font-size:16px;
@@ -42,31 +43,28 @@
 	border-top: 40px solid transparent;
 	border-right: 90px solid rgb(215,226,229);
 	border-bottom: 60px solid transparent;
-	left:210px;
-	bottom:140px;
+	margin-left:155px;
+	bottom:120px;
 }
 #character{
 	position:absolute;
 	bottom:50px;
-	left:30px;
+	left:10px;
 	/*z-index:1;*/
 }
 #soapbox{
 	position:absolute;
 	bottom:-35px;
-	left:40px;
+	left:20px;
 	/*z-index:1;*/
 }
 #countdown{
-	position:absolute;
-	bottom:25px;
-	left:300px;
-	right:0px;
+	margin-top:20px;
+	margin-left:240px;
 	color:rgb(52,52,52);
 	font-family:Lato;
 	font-size:30px;
 	text-align:center;
-	line-height:20%;
 }
 
 /****************************************************************************************************/
