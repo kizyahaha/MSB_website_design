@@ -54,10 +54,15 @@ function create_power_graph(level){
 			data: {appliedFilters: '{"level":"' + get_level_string(level) + '", "power":"descending"}'},
 			success: function(gotData) {
 				powers = $.parseJSON(gotData);
-				$('<div/>',{id:'power_graph'}).appendTo('#level_graph_space');
-				$('<div/>',{id:'graph'}).appendTo('#power_graph');
-				$('<div/>',{id:'rank_slider'}).appendTo('#power_graph');
-				do_contender_power_graph(powers);
+				if (powers.length != 0){
+					$('<div/>',{id:'power_graph'}).appendTo('#level_graph_space');
+					$('<div/>',{id:'graph'}).appendTo('#power_graph');
+					$('<div/>',{id:'rank_slider'}).appendTo('#power_graph');
+					do_contender_power_graph(powers);
+				}
+				else{
+					$('#level_graph_space').text("There does not appear to be any contenders for this level at the moment.  Might be a good time to submit a rant.  You'd be almost guaranteed victory!");
+				}
 			},
 			error: function(name,status) {
 				window.document.location.href = "error_page.html";

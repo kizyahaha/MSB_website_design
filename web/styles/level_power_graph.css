@@ -1,5 +1,9 @@
 #level_graph_space{
 	height:400px;
+	font-family:Lato;
+    font-size:20px;
+    text-align:center;
+    color:rgb(52,52,52);
 }
 
 #graph_levels_table{
