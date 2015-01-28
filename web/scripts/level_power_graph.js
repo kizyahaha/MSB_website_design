@@ -61,7 +61,7 @@ function create_power_graph(level){
 					do_contender_power_graph(powers);
 				}
 				else{
-					$('#level_graph_space').text("There does not appear to be any contenders for this level at the moment.  Might be a good time to submit a rant.  You'd be almost guaranteed victory!");
+					no_contender_display('#level_graph_space');
 				}
 			},
 			error: function(name,status) {

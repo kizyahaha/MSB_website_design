@@ -33,6 +33,26 @@
     color:rgb(52,52,52);
     font-size:16px;
 }
+
+#no_contender_message{
+    text-align:center;
+    font-family:Lato;
+    font-size:20px;
+    color:rgb(52,52,52);
+}
+
+#no_contender_protip{
+    text-align:center;
+    font-family:Lato;
+    font-size:16px;
+    font-style:italic;
+    color:rgb(52,52,52);
+}
+
+#no_contender_protip span{
+    font-weight:700;
+}
+
 #contender_navigation_table{
 	width:100%;
 	font-family:Lato;

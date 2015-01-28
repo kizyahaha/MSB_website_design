@@ -27,6 +27,14 @@
 	border-radius:20px;
 	border:solid 10px rgb(215,226,229);
 }
+
+#no_user_rants_message{
+    text-align:center;
+    font-family:Lato;
+    font-size:20px;
+    color:rgb(52,52,52);
+}
+
 #my_rants_navigation_table{
 	width:100%;
 	font-family:Lato;

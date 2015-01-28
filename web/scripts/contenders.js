@@ -141,7 +141,7 @@ function get_contenders(page_num, contenderSortNum){
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);
 				update_contender_navigation(rants.numPages);
 				if (rants.rantsOnPage.length == 0){
-					$('#contenders').text("There does not appear to be any contenders for this level at the moment.  Might be a good time to submit a rant.  You'd be almost guaranteed victory!");
+					no_contender_display('#contenders');
 				}
 			},
 			error: function(name,status) {
@@ -159,7 +159,7 @@ function get_contenders(page_num, contenderSortNum){
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);
 				update_contender_navigation(rants.numPages);
 				if (rants.rantsOnPage.length == 0){
-					$('#contenders').text("There does not appear to be any contenders for this level at the moment.  Might be a good time to submit a rant.  You'd be almost guaranteed victory!");
+					no_contender_display('#contenders');
 				}
 			},
 			error: function(name,status) {
@@ -177,7 +177,7 @@ function get_contenders(page_num, contenderSortNum){
 				display_contenders(rants.firstRantNum , rants.rantsOnPage);
 				update_contender_navigation(rants.numPages);
 				if (rants.rantsOnPage.length == 0){
-					$('#contenders').text("There does not appear to be any contenders for this level at the moment.  Might be a good time to submit a rant.  You'd be almost guaranteed victory!");
+					no_contender_display('#contenders');
 				}
 			},
 			error: function(name,status) {
@@ -186,7 +186,13 @@ function get_contenders(page_num, contenderSortNum){
 		});
 	}
 }
-//data: {appliedFilters: '{"username":"'+get_user_username()+'", "nsfw":"'+logged_user.nsfwPreference+'", "alive":"'+get_status_filter()+'", "level":"'+get_level_filter()+'", "birthDate":"'+get_age_order()+'", "power":"'+get_power_order()+'"}', pageNum:window.history.state.page_num},
+
+function no_contender_display(parent){
+	$('<p/>', {id:'no_contender_message'}).appendTo(parent);
+	$('#no_contender_message').text("There does not appear to be any contenders for this level at the moment.");
+	$('<p/>', {id:'no_contender_protip'}).appendTo(parent);
+	$('#no_contender_protip').append("(<span>Psst!</span> Might be a good time to submit a rant.  You'd be practically guaranteed victory!)");
+}
 
 function display_contenders(first_rant_num , rants){
 	var num_contenders2 = rants.length;

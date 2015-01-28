@@ -60,12 +60,20 @@ function set_category_click_functionality(id, cat_num){
 function update_my_activity_space(){
 	cat = window.history.state.user_activity_cat;
 	if (cat == 0){
-		$('#my_activity_space').text('You used items and people used items against you.');
+		$('#my_activity_space').text('(you used items and people used items against you)');
+		no_activity_display();
 	}
 	else if (cat == 1){
-		$('#my_activity_space').text('Your rants were born and won and died and stuff.');
+		$('#my_activity_space').text('(your rants were born and won and died and stuff)');
+		no_activity_display();
 	}
 	else{
-		$('#my_activity_space').text('You spent money and donated items or something.');
+		$('#my_activity_space').text('(you spent money and donated items or something)');
+		no_activity_display();
 	}
+}
+
+function no_activity_display(){
+	$('<p/>', {id:'no_activity_message'}).appendTo('#my_activity_space');
+	$('#no_activity_message').text("...Nothing to see here...");
 }

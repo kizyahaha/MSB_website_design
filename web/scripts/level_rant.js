@@ -68,7 +68,7 @@ function update_winner_rant(){
 		data: {level:get_level_string(-1)},
         success: function(gotData) {
 			if (!gotData) {
-				$('#rant_bubble').text("There is no winner this time - most likely because there were no contenders.  Submit a rant and you're a shoo-in!");
+				no_winner_display();
 			}
 			else {
 				winner = $.parseJSON(gotData);
@@ -84,6 +84,16 @@ function update_winner_rant(){
             window.document.location.href = "error_page.html";
         }
     });
+}
+
+function no_winner_display(){
+	$('<p/>', {id:'no_winner_message'}).appendTo('#rant_bubble');
+	$('#no_winner_message').text("There is no winner this time - most likely because there were no contenders.");
+	$('<p/>', {id:'no_winner_protip'}).appendTo('#rant_bubble');
+	$('#no_winner_protip').append("<span>protip:</span> Submit a rant.  You'd be a shoo-in!");
+	//$('<br/><br/><br/>').appendTo('#no_winner_protip');
+	//$('<a/>', {id:'no_winner_link_to_prev', href:'daily.html'}).appendTo('#no_winner_protip');
+	//$('#no_winner_link_to_prev').append("Check out the previous winner");
 }
 
 function display_winner_rant(winner){

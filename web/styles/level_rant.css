@@ -36,6 +36,33 @@
 	color:rgb(52,52,52);
 	/*z-index:1;*/
 }
+
+#no_winner_message{
+    text-align:center;
+    font-family:Lato;
+    font-size:20px;
+    color:rgb(52,52,52);
+}
+
+#no_winner_protip{
+    text-align:center;
+    font-family:Lato;
+    font-size:16px;
+    font-style:italic;
+    color:rgb(52,52,52);
+}
+
+#no_winner_protip span{
+    font-weight:700;
+}
+
+#no_winner_link_to_prev{
+    text-align:center;
+    font-family:Lato;
+    font-style:normal;
+    color:rgb(52,52,52);
+}
+
 #triangle {
 	position:absolute;
 	width: 0;

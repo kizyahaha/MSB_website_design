@@ -36,3 +36,10 @@
     /*text-shadow:0px 0px 1px rgb(52,52,52); /*fakes bolding the font without moving the text!*/
     text-decoration:underline;
 }
+
+#no_activity_message{
+    text-align:center;
+    font-family:Lato;
+    font-size:20px;
+    color:rgb(52,52,52);
+}

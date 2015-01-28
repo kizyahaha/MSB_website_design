@@ -199,11 +199,19 @@ function get_my_rants(){
             rants = $.parseJSON(gotData);
             display_my_rants(rants.firstRantNum , rants.rantsOnPage);
 			update_my_rants_navigation(rants.numPages);
+			if (rants.rantsOnPage.length == 0){
+				no_user_rant_display();
+			}
         },
         error: function(name,status) {
             window.document.location.href = "error_page.html";
         }
     });
+}
+
+function no_user_rant_display(){
+	$('<p/>', {id:'no_user_rants_message'}).appendTo('#my_rants_space');
+	$('#no_user_rants_message').text("There does not appear to be any rants here.");
 }
 
 function display_my_rants(first_rant_num , rants){
