@@ -115,6 +115,7 @@ public class EndpointFrameworkServlet extends FrameworkServlet {
 
     private static void outputShim(HttpServletRequest request, HttpServletResponse response, String path, String body) throws IOException {
         PrintWriter out = response.getWriter();
+        out.println("<!DOCTYPE html>");
         out.println("<html lang=\"en-US\">");
         out.println("<head>");
         out.println("<title>MySoapBox</title>");

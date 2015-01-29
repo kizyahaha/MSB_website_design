@@ -90,6 +90,7 @@ function translate_date(date){
 }
 
 function get_level_index(){
+	//alert(window.location.href);
 	url = window.location.href;
 	if (url.indexOf("daily") >= 0){
 		return 0;

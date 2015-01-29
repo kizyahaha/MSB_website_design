@@ -41,25 +41,24 @@ function create_power_graph_link(){
 }
 
 function create_contender_title(){
-	var contender_title = document.createElement('div');
-	contender_title.id = 'contender_title';
+	$('<div/>',{id:'contender_title'}).appendTo('#contender_space');
 	switch(get_level_index()){
 		case 0:
-			contender_title.innerText = "Contenders for Tomorrow's Title";
+			$('#contender_title').text("Contenders for Tomorrow's Title");
 			break;
 		case 1:
-			contender_title.innerText = "Contenders for the Next 1-Hour Title";
+			$('#contender_title').text("Contenders for the Next 1-Hour Title");
 			break;
 		case 2:
-			contender_title.innerText = "Contenders for the Next 10-Minute Title";
+			$('#contender_title').text("Contenders for the Next 10-Minute Title");
 			break;
 		case 3:
-			contender_title.innerText = "Contenders for the Next 1-Minute Title";
+			$('#contender_title').text("Contenders for the Next 1-Minute Title");
 			break;
 		default:
+			$('#contender_title').text("Something broke");
 			break;
 	}
-	document.getElementById('contender_space').appendChild(contender_title);
 }
 
 function create_contender_sorts(){

@@ -26,8 +26,6 @@ function create_rant_for_submit(){
 	$('<textarea/>',{name:'contents' , id:'rant_input' , type:'text'}).appendTo('#rant_input_area');
 	document.getElementById('rant_input').rows=12;
 	//CKEDITOR.replace('rant_input');
-	$('<div/>',{id: 'rant_missing' , text:"*Please provide some rant content"}).appendTo('#rant_input_area');
-	document.getElementById('rant_missing').style.display = 'none';
 }
 
 function create_submit_rant_inputs(){
@@ -89,13 +87,8 @@ function nicEditor_to_rant_input(){
 
 function check_rant_filled(form){
 	document.getElementById('title_missing').style.display = 'none';
-	document.getElementById('rant_missing').style.display = 'none';
 	if (form.title_input.value.length == 0){
-		document.getElementById('title_missing').style.display = 'initial';
-		return false;
-	}
-	if (form.rant_input.value.length == 0){
-		document.getElementById('rant_missing').style.display = 'initial';
+		document.getElementById('title_missing').style.display = 'block';
 		return false;
 	}
 	return true;

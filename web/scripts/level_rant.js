@@ -111,19 +111,18 @@ function display_winner_rant(winner){
 }
 
 function update_winner_headline(level){
-	var winner_headline = document.getElementById('winner_headline');
 	switch(level){
 		case 0:
-			winner_headline.innerText = "Today's Top Rant";
+			$('#winner_headline').text("Today's Top Rant");
 			break;
 		case 1:
-			winner_headline.innerText = "Hour's Top Rant";
+			$('#winner_headline').text("Hour's Top Rant");
 			break;
 		case 2:
-			winner_headline.innerText = "Ten's Top Rant";
+			$('#winner_headline').text("Ten's Top Rant");
 			break;
 		case 3:
-			winner_headline.innerText = "Minute's Top Rant";
+			$('#winner_headline').text("Minute's Top Rant");
 			break;
 		default:
 			break;

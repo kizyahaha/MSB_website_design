@@ -72,19 +72,12 @@
 }
 .nicEdit-main{
 	height:270px;
-	overflow:scroll !important;
+	overflow-y:scroll !important;
 	width:100% !important;
 	margin:0px !important;
 	box-sizing:border-box;
     padding:5px;
-}
-
-#rant_missing{
-	font-size:16px;
-	color:red;
-	padding-left:10px;
-	padding-right:10px;
-	width:100%;
+    word-wrap:break-word;
 }
 
 #submit_rant_inputs{

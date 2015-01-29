@@ -46,16 +46,16 @@ function submit(form){
 					create_signup_success();
 				}
 				if (code & (1 << 0)){
-					document.getElementById('invalid_input').style.display = 'initial';
+					document.getElementById('invalid_input').style.display = 'block';
 				}
 				if (code & (1 << 1)){
-					document.getElementById('used_email').style.display = 'initial';
+					document.getElementById('used_email').style.display = 'block';
 				}
 				if (code & (1 << 2)){
-					document.getElementById('username_taken').style.display = 'initial';
+					document.getElementById('username_taken').style.display = 'block';
 				}
 				if (code & (1 << 3)){
-					document.getElementById('username_invalid').style.display = 'initial';
+					document.getElementById('username_invalid').style.display = 'block';
 				}
 			},
 			error: function(msg) {
@@ -108,7 +108,7 @@ function check_username_validity(form){
 	document.getElementById('username_invalid').style.display = 'none';
 	var username = form.username.value
 	if( /\W/.test( username ) ) {
-		document.getElementById('username_invalid').style.display = 'initial';
+		document.getElementById('username_invalid').style.display = 'block';
 		return false;
 	}
 	return true;     
@@ -151,7 +151,7 @@ function check_all_filled(form){
 	|| form.password.value.length == 0
 	|| form.password_confirm.value.length == 0
 	|| form.email.value.length == 0){
-		document.getElementById('signup_info_missing').style.display = 'initial';
+		document.getElementById('signup_info_missing').style.display = 'block';
 		return false;
 	}
 	return true;
@@ -161,7 +161,7 @@ function check_all_filled(form){
 function check_email_validity(form){
 	document.getElementById('invalid_email').style.display = 'none';
 	if (!validator.isEmail(form.email.value)){
-		document.getElementById('invalid_email').style.display = 'initial';
+		document.getElementById('invalid_email').style.display = 'block';
 		return false;
 	}
 	return true;
@@ -170,7 +170,7 @@ function check_email_validity(form){
 function check_password_match(form){
 	document.getElementById('passwords_no_matchy').style.display = 'none';
 	if (form.password.value != form.password_confirm.value){
-		document.getElementById('passwords_no_matchy').style.display = 'initial';
+		document.getElementById('passwords_no_matchy').style.display = 'block';
 		return false;
 	}
 	return true;
@@ -179,7 +179,7 @@ function check_password_match(form){
 function check_read_terms(form){
 	document.getElementById('no_read_terms').style.display = 'none';
 	if (!form.terms_of_use.checked){
-		document.getElementById('no_read_terms').style.display = 'initial';
+		document.getElementById('no_read_terms').style.display = 'block';
 		return false;
 	}
 	return true;
