@@ -9,7 +9,6 @@ function create_detailed_rant(){
         success: function(gotData) {
 			$('<div/>',{id:'detailed_rant_container'}).appendTo('body');
 			$('<div/>',{id:'detailed_rant_space'}).appendTo('#detailed_rant_container');
-			$("#detailed_rant_space").css({ "border-width": "20px 20px 20px 20px" });
             data = $.parseJSON(gotData);
 			display_detailed_rant(data);
 			if (data.owner == logged_user.id){
@@ -32,16 +31,6 @@ function get_rant_id(){
 function display_detailed_rant(rant_info){
 	var detailed_rant_ID = create_rant_preview(false , 'detailed_rant_space' , 0 , rant_info.owner);
 	populate_rant_preview(false , detailed_rant_ID , 0 , 1 , rant_info);
-	update_detailed_rant_sizes();
-}
-
-function update_detailed_rant_sizes(){
-	setTimeout(function(){$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+450);}, 250);
-	var resizeTimer;
-	$(window).resize(function() {
-		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout(function(){$('#detailed_rant_container').css('height',$('#detailed_rant_space').height()+450);}, 250);
-	});
 }
 
 function create_detailed_rant_power_graph(){
