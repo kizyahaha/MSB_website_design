@@ -172,3 +172,12 @@ function set_default_state(){
 							user_rants_sort:0,
 							user_activity_cat:0}, '', '');
 }
+
+function make_sobox_button(ID, Class, parent, Text){
+	if (ID.length) {
+		$('<div/>',{id:ID, addClass:'sobox_button', text:Text}).appendTo('#' + parent);
+	}
+	else if (Class.length) {
+		$('<div/>',{addClass:'sobox_button ' + Class, text:Text}).appendTo(parent);
+	}
+}

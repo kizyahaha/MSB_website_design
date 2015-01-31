@@ -86,8 +86,8 @@ function create_rant_preview_actions_line(preview_ID){
 	$('<tr/>',{addClass:'rant_preview_action_row'}).appendTo(preview_ID + ' .rant_preview_actions_line');
 	$('<td/>',{addClass:'rant_preview_oppose_button'}).appendTo(preview_ID + ' .rant_preview_action_row');
 		$('<img/>',{addClass:'rant_preview_oppose_button_image'}).appendTo(preview_ID + ' .rant_preview_oppose_button');
-	$('<td/>',{addClass:'rant_preview_use_item'}).appendTo(preview_ID + ' .rant_preview_action_row');	
-		$('<div/>',{addClass:'rant_preview_use_item_button', text:'Apply item'}).appendTo(preview_ID + ' .rant_preview_use_item');
+	$('<td/>',{addClass:'rant_preview_use_item'}).appendTo(preview_ID + ' .rant_preview_action_row');
+		make_sobox_button('', 'rant_preview_use_item_button', preview_ID + ' .rant_preview_use_item', 'Apply item');
 	$('<td/>',{addClass:'rant_preview_support_button'}).appendTo(preview_ID + ' .rant_preview_action_row');
 		$('<img/>',{addClass:'rant_preview_support_button_image'}).appendTo(preview_ID + ' .rant_preview_support_button');
 }

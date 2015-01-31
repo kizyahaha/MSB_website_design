@@ -94,11 +94,8 @@
 	margin-right:50px;
 }
 #submit_rant_button{
-	font-family:Lato;
-	color:rgb(52,52,52);
-	font-weight:700;
-	font-size:15px;
-	text-align:center;
+    width:100px;
+    float:right;
 }
 
 

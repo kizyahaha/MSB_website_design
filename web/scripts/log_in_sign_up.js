@@ -52,7 +52,7 @@ function create_stay_logged_in(){
 }
 
 function create_log_in_button(){
-	$('<input/>',{id:'login_button' , type:'button' , value:'Log in'}).appendTo('#login_form');
+	make_sobox_button('login_button', '', 'login_form', 'Log in');
 	$('#login_button').click( function(){log_in(this.form);} );
 	$(window).keypress(function (e) {
 		var key = e.which;
@@ -64,6 +64,7 @@ function create_log_in_button(){
 }
 
 function log_in(form){	
+	
 	$.ajax({
 		type: 'POST',
 		async: false,
@@ -78,7 +79,7 @@ function log_in(form){
 			$('#banner_log_out_link').text('Log out');
 			$('#banner_log_out_link').attr('href','javascript:log_off_user();');
 			$('#submit_rant_button').unbind('click');
-			$('#submit_rant_button').click( function(){rant_submit(this.form)} );
+			$('#submit_rant_button').click( function(){rant_submit()} );
 		},
 		error: function(msg) {
 		    document.getElementById('log_in_error_message').style.display = 'block';
@@ -100,8 +101,10 @@ function create_signup(){
 }
 
 function create_login_signup_close_button(){
-	$('<div/>',{id:'login_signup_close' , text:'CLOSE'}).appendTo('#login_signup_background');
+	make_sobox_button('login_signup_close', '', 'login_signup_background', 'CLOSE');
 	$('#login_signup_close').click(function(){$('#login_modal_blur_background').remove();
 												$('#login_signup_background').remove();
-												$(window).unbind("keypress");});
+												$(window).unbind("keypress");
+											}
+									);
 }

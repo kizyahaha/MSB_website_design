@@ -42,12 +42,13 @@ function create_NSFW_checkbox(){
 }
 
 function create_submit_rant_button(){
-	$('<input/>',{id:'submit_rant_button' , type:'button' , value:'Submit'}).appendTo('#submit_rant_inputs');
+	make_sobox_button('submit_rant_button', '', 'submit_rant_inputs', 'Submit');
+	//$('<input/>',{id:'submit_rant_button' , type:'button' , value:'Submit'}).appendTo('#submit_rant_inputs');
 	if (logged_user.id == -1){
 		$('#submit_rant_button').click(function(){launch_login_modal()});
 	}
 	else{
-		$('#submit_rant_button').click( function(){rant_submit(this.form)} );
+		$('#submit_rant_button').click( function(){rant_submit()} );
 	}
 	var isCtrl = false;
 	$(document).keydown(function (e){
@@ -62,10 +63,10 @@ function create_submit_rant_button(){
 	});
 }
 
-function rant_submit(form){
+function rant_submit(){
 	confirm_leave_page = false;
 	nicEditor_to_rant_input();
-	if (check_rant_filled(form)){
+	if (check_rant_filled()){
 		$.ajax({
 			type: "POST",
 			url: "/api/rants/add",
@@ -85,9 +86,9 @@ function nicEditor_to_rant_input(){
 	document.getElementById('rant_input').value = nicEditors.findEditor('rant_input').getContent();
 }
 
-function check_rant_filled(form){
+function check_rant_filled(){
 	document.getElementById('title_missing').style.display = 'none';
-	if (form.title_input.value.length == 0){
+	if ($('#title_input').val().length == 0){
 		document.getElementById('title_missing').style.display = 'block';
 		return false;
 	}

@@ -1,0 +1,24 @@
+.sobox_button{
+	background-color:rgb(52,52,52);
+    box-shadow: 0 5px 5px rgb(32,32,32);
+    font-family:Lato;
+    color:white;
+    font-size: 20px;
+    text-align:center;
+    box-sizing:border-box;
+    padding:3px;
+    border-radius:5px;
+}
+
+.sobox_button:hover{
+    background-color:rgb(62,62,62);
+    cursor:pointer
+}
+
+.sobox_button:active{
+	box-shadow: 0 1px 1px rgb(32,32,32);
+	-webkit-transform: translate(0, 3px);
+    -moz-transform: translate(0, 3px);
+    -o-transform: translate(0, 3px);
+    transform: translate(0, 3px);
+}
