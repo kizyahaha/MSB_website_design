@@ -32,6 +32,13 @@ function create_submit_button(){
 	$('<br/>').appendTo('#signup_form');
 	make_sobox_button('submit_button', '', 'signup_form', 'Submit');
 	$('#submit_button').click( function(){submit();} );
+	$(window).keypress(function (e) {
+		var key = e.which;
+		if(key == 13){
+			$('#submit_button').click();
+			return false;  
+		}
+	});
 }
 
 function submit(){

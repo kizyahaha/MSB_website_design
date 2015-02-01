@@ -53,7 +53,7 @@ function create_stay_logged_in(){
 
 function create_log_in_button(){
 	make_sobox_button('login_button', '', 'login_form', 'Log in');
-	$('#login_button').click( function(){log_in(this.form);} );
+	$('#login_button').click( function(){log_in();} );
 	$(window).keypress(function (e) {
 		var key = e.which;
 		if(key == 13){
@@ -63,7 +63,7 @@ function create_log_in_button(){
 	});
 }
 
-function log_in(form){	
+function log_in(){	
 	
 	$.ajax({
 		type: 'POST',
