@@ -43,7 +43,6 @@ function create_NSFW_checkbox(){
 
 function create_submit_rant_button(){
 	make_sobox_button('submit_rant_button', '', 'submit_rant_inputs', 'Submit');
-	//$('<input/>',{id:'submit_rant_button' , type:'button' , value:'Submit'}).appendTo('#submit_rant_inputs');
 	if (logged_user.id == -1){
 		$('#submit_rant_button').click(function(){launch_login_modal()});
 	}

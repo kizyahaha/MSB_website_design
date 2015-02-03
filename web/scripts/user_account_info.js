@@ -14,7 +14,7 @@ function create_change_email_input(){
 }
 
 function create_user_account_info_submit_button(){
-	$('<div/>',{id:'submit_account_info_button' , text:'Save account info'}).appendTo('#user_account_info_space');
+	make_sobox_button('submit_account_info_button', '', 'user_account_info_space', 'Save account info');
 	$('#submit_account_info_button').click(function(){user_account_info_submit();});
 	$(window).keypress(function (e) {
 		var key = e.which;
@@ -77,10 +77,9 @@ function create_email_reset_success_message(){
 	$('<div/>',{id:'email_reset_success_message'}).appendTo('#email_reset_success_background');
 	$("#email_reset_success_message").append("<p>A confirmation link has been sent to your newly requested email address.</p>");
 	$("#email_reset_success_message").append("<p>Please follow it to complete the change of your email address.</p>");
-	//$("#email_reset_success_background").append("<div id='email_reset_success_message'><span style='color:white'>A confirmation link has been sent to your newly requested email address.</span><br/>Please follow it to complete the change of your email address.</div>");
 }
 
 function create_email_reset_success_close_button(){
-	$('<div/>',{id:'email_reset_success_close' , text:'CLOSE'}).appendTo('#email_reset_success_background');
+	make_sobox_button('email_reset_success_close', '', 'email_reset_success_background', 'CLOSE');
 	$('#email_reset_success_close').click(function(){$('#email_reset_success_modal_blur_background').remove();  $('#email_reset_success_background').remove();});
 }

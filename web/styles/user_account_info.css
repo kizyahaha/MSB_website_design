@@ -1,9 +1,8 @@
 #user_account_info_space{
-    position:absolute;
-    left:20px;
-    right:20px;
-    /*bottom:20px;*/
-    top:20px;
+    margin-left:20px;
+    margin-right:20px;
+    padding-top:20px;
+    padding-bottom:40px;
 }
 
 .user_account_info{
@@ -29,24 +28,9 @@
 }
 
 #submit_account_info_button{
-    font-family:Lato;
-    color:white;
-    background-color:rgb(52,52,52);
-    font-size:20px;
-    text-align:center;
-    border-radius:5px;
-    border:solid rgb(12,120,154) 2px;
-    font-weight:700;
-    padding:5px 10px 5px 10px;
-    margin-top:100px;
-    width:300px;
+    width:250px;
     margin-left:auto;
     margin-right:auto;
-}
-
-#submit_account_info_button:hover{
-    border-color:white;
-    cursor:pointer;
 }
 
 #change_email_input{
@@ -75,21 +59,11 @@
     color:rgb(52,52,52);
     font-size: 30px;
     border: solid rgb(12,120,154) 10px;
-    padding-bottom:30px;
+    border-radius:20px;
 }
 
 #email_reset_success_close{
-    position:absolute;
-    bottom:0;
-    left:0;
-    background-color:rgb(52,52,52);
-    border:solid 1px rgb(52,52,52);
-    font-family:Lato;
-    color:white;
-    font-size: 20px;
+    margin-top:20px;
+    margin-bottom:20px;
     width:100%;
-}
-#email_reset_success_close:hover{
-    border-color:white;
-    cursor:pointer
 }

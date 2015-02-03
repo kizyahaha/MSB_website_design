@@ -41,12 +41,10 @@
 
 
 #user_info_content_space{
-    position:relative;
-    top: 0px;
     width:98%;
-    /*height:450px;*/
     margin-left:auto;
     margin-right:auto;
+    height:auto;
     background-color: rgb(12,120,154);
     border-radius:20px;
 }

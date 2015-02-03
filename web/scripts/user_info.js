@@ -9,7 +9,6 @@ function create_edit_user_info(){
 			update_user_info_tabs(0);
 			create_user_info_tab_content_space();
 			update_user_info_tab_content(0);
-			//create_submit_user_info_button();
 			create_footer();
         },
         error: function(name,status) {
@@ -73,17 +72,5 @@ function update_user_info_tab_content(user_info_tab_num){
 			break;
 		default:
 			break;
-	}
-	update_user_info_content_size();
-}
-
-function update_user_info_content_size(){
-	var user_preferences = document.getElementById('user_preferences_space');
-	var user_account_info = document.getElementById('user_account_info_space');
-	if (user_preferences){
-		$('#user_info_content_space').css('height',430);
-	}
-	if (user_account_info){
-		$('#user_info_content_space').css('height',265);
 	}
 }

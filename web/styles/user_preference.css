@@ -1,9 +1,8 @@
 #user_preferences_space{
-    position:absolute;
-    left:20px;
-    right:20px;
-    /*bottom:20px;*/
-    top:20px;
+    margin-left:20px;
+    margin-right:20px;
+    padding-top:20px;
+    padding-bottom:40px;
 }
 
 .user_preference{
@@ -26,30 +25,21 @@
 	border-radius:5px;
 }
 
-.user_preference_dropdown{
-    font-family:Lato;
-    color:rgb(52,52,52);
-    font-size:18px;
-    border-radius:5px;
-}
 
 #submit_preferences_button{
-	font-family:Lato;
-	color:white;
-    background-color:rgb(52,52,52);
-    font-size:20px;
-    text-align:center;
-    border-radius:5px;
-    border:solid rgb(12,120,154) 2px;
-    font-weight:700;
-    padding:5px 10px 5px 10px;
-    margin-top:100px;
-    width:300px;
+    width:250px;
     margin-left:auto;
     margin-right:auto;
+    margin-top:60px;
 }
 
-#submit_preferences_button:hover{
-    border-color:white;
-    cursor:pointer;
+.preference_options{
+	font-family:Lato;
+    color:rgb(52,52,52);
+    font-size:18px;
+    display: inline;
+    margin-left: 10px;
+}
+.selected_preference_option{
+    color:white;
 }
