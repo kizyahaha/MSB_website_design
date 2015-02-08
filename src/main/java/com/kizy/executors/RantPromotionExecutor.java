@@ -1,4 +1,4 @@
-package com.kizy.server.executors;
+package com.kizy.executors;
 
 import java.io.IOException;
 import java.util.Calendar;

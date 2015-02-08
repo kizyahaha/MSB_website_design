@@ -6,7 +6,9 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.kizy.data.item.Item;
 
 public class SimpleRant implements Rant {
 
@@ -21,6 +23,8 @@ public class SimpleRant implements Rant {
     private String level;
     private Collection<Long> upvotes;
     private Collection<Long> downvotes;
+    private float voteMultiplier;
+    private Collection<Item> appliedItems;
 
     @JsonCreator
     public SimpleRant(@JsonProperty("id") long id,
@@ -29,8 +33,10 @@ public class SimpleRant implements Rant {
                       @JsonProperty("contents") String contents,
                       @JsonProperty("owner") long owner,
                       @JsonProperty("ownername") String ownername) {
-        this(id, nsfw, title, contents, owner, ownername, DateTime.now(), null, Rants.STARTING_POWER,
-             RantLevel.MINUTELY.getDisplayName(), Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet());
+        this(id, nsfw, title, contents, owner, ownername, DateTime.now(), null,
+             Rants.STARTING_POWER, RantLevel.MINUTELY.getDisplayName(),
+             Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet(),
+             1, Lists.<Item>newArrayList());
     }
 
     @JsonCreator
@@ -45,7 +51,9 @@ public class SimpleRant implements Rant {
                       @JsonProperty("power") float power,
                       @JsonProperty("level") String level,
                       @JsonProperty("upvotes") Collection<Long> upvotes,
-                      @JsonProperty("downvotes") Collection<Long> downvotes) {
+                      @JsonProperty("downvotes") Collection<Long> downvotes,
+                      @JsonProperty("multiplier") float multiplier,
+                      @JsonProperty("items") Collection<Item> items) {
         this.id = id;
         this.nsfw = nsfw;
         this.title = title;
@@ -57,11 +65,12 @@ public class SimpleRant implements Rant {
         this.level = level;
         this.upvotes = upvotes;
         this.downvotes = downvotes;
+        this.voteMultiplier = multiplier;
     }
 
     @Override
     @JsonProperty("id")
-    public long getRantId() {
+    public long getId() {
         return id;
     }
 
@@ -170,23 +179,48 @@ public class SimpleRant implements Rant {
     }
 
     @Override
+    public float getVoteMultiplier() {
+        return voteMultiplier;
+    }
+
+    @Override
+    public void setVoteMultiplier(float multiplier) {
+        voteMultiplier = multiplier;
+    }
+
+    @Override
+    @JsonProperty("appliedItems")
+    public Collection<Item> getAppliedItems() {
+        return appliedItems;
+    }
+
+    @Override
+    public void applyItem(Item item) {
+        appliedItems.add(item);
+    }
+
+    @Override
+    public void expireItem(Item item) {
+        appliedItems.remove(item);
+    }
+
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((appliedItems == null) ? 0 : appliedItems.hashCode());
         result = prime * result + ((birth == null) ? 0 : birth.hashCode());
-        result = prime * result
-                + ((contents == null) ? 0 : contents.hashCode());
-        result = prime * result
-                + ((downvotes == null) ? 0 : downvotes.hashCode());
+        result = prime * result + ((contents == null) ? 0 : contents.hashCode());
+        result = prime * result + ((downvotes == null) ? 0 : downvotes.hashCode());
         result = prime * result + (int) (id ^ (id >>> 32));
         result = prime * result + ((level == null) ? 0 : level.hashCode());
         result = prime * result + (nsfw ? 1231 : 1237);
         result = prime * result + (int) (owner ^ (owner >>> 32));
-        result = prime * result
-                + ((ownername == null) ? 0 : ownername.hashCode());
+        result = prime * result + ((ownername == null) ? 0 : ownername.hashCode());
         result = prime * result + Float.floatToIntBits(power);
         result = prime * result + ((title == null) ? 0 : title.hashCode());
         result = prime * result + ((upvotes == null) ? 0 : upvotes.hashCode());
+        result = prime * result + Float.floatToIntBits(voteMultiplier);
         return result;
     }
 
@@ -202,6 +236,13 @@ public class SimpleRant implements Rant {
             return false;
         }
         SimpleRant other = (SimpleRant) obj;
+        if (appliedItems == null) {
+            if (other.appliedItems != null) {
+                return false;
+            }
+        } else if (!appliedItems.equals(other.appliedItems)) {
+            return false;
+        }
         if (birth == null) {
             if (other.birth != null) {
                 return false;
@@ -261,6 +302,9 @@ public class SimpleRant implements Rant {
                 return false;
             }
         } else if (!upvotes.equals(other.upvotes)) {
+            return false;
+        }
+        if (Float.floatToIntBits(voteMultiplier) != Float.floatToIntBits(other.voteMultiplier)) {
             return false;
         }
         return true;

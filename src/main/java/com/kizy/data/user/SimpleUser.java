@@ -1,13 +1,16 @@
 package com.kizy.data.user;
 
 import java.util.Collection;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.kizy.data.item.Item;
 
 public class SimpleUser implements User {
 
@@ -21,6 +24,7 @@ public class SimpleUser implements User {
     private int nsfwPreference;
     private int soundsPreference;
     private int animationsPreference;
+    private Map<Item, Integer> items;
 
     private final Collection<Long> rantIds;
 
@@ -30,7 +34,8 @@ public class SimpleUser implements User {
                       @JsonProperty("password") String password,
                       @JsonProperty("email") String email) {
         this(id, username, password, email, DateTime.now(), Sets.<Long>newConcurrentHashSet(),
-             Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet(), 0, 1, 1);
+             Sets.<Long>newConcurrentHashSet(), Sets.<Long>newConcurrentHashSet(),
+             0, 1, 1, Maps.<Item, Integer>newHashMap());
     }
 
     @JsonCreator
@@ -44,7 +49,8 @@ public class SimpleUser implements User {
                       @JsonProperty("downvotes") Collection<Long> downvotes,
                       @JsonProperty("nsfwPreference") int nsfwPreference,
                       @JsonProperty("soundsPreference") int soundsPreference,
-                      @JsonProperty("animationsPreference") int animationsPreference) {
+                      @JsonProperty("animationsPreference") int animationsPreference,
+                      @JsonProperty("items") Map<Item, Integer> items) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -56,11 +62,12 @@ public class SimpleUser implements User {
         this.nsfwPreference = nsfwPreference;
         this.soundsPreference = soundsPreference;
         this.animationsPreference = animationsPreference;
+        this.items = items;
     }
 
     @Override
     @JsonProperty("id")
-    public long getUserId() {
+    public long getId() {
         return id;
     }
 
@@ -233,13 +240,43 @@ public class SimpleUser implements User {
     }
 
     @Override
-    public void setAnimationsPreference (int preference) {
+    public void setAnimationsPreference(int preference) {
         animationsPreference = preference;
     }
-    
+
     @Override
-    public void setEmail (String new_email) {
-        email = new_email;
+    public void setEmail(String newEmail) {
+        email = newEmail;
+    }
+
+    @Override
+    @JsonProperty("items")
+    public Map<Item, Integer> getOwnedItems() {
+        return items;
+    }
+
+    @Override
+    public void buyItem(Item item) {
+        Integer count = items.get(item);
+        if (count == null) {
+            count = 0;
+        }
+        items.put(item, count + 1);
+    }
+
+    @Override
+    public boolean hasItem(Item item) {
+        return items.containsKey(item);
+    }
+
+    @Override
+    public void expendItem(Item item) {
+        Integer count = items.get(item);
+        if (count == null || count.intValue() == 1) {
+            items.remove(item);
+        } else {
+            items.put(item, count - 1);
+        }
     }
 
 }

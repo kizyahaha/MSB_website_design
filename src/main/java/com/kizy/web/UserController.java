@@ -20,6 +20,8 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.kizy.data.Serializers;
 import com.kizy.data.database.DatabaseUtils;
+import com.kizy.data.item.Item;
+import com.kizy.data.item.ItemType;
 import com.kizy.data.user.SimpleUser;
 import com.kizy.data.user.User;
 import com.kizy.data.user.Users;
@@ -39,23 +41,23 @@ public class UserController {
     public String addUser(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         @RequestParam("email") String email) {
-    	int error = 0;
+        int error = 0;
         try {
             if (!isFilled(username, password, email)) {
-            	error = error|1;
+                error = error|1;
             }
-        	if (DatabaseUtils.findUserByEmail(email) != null){
-        		error = error|2;
-        	}
-        	if (DatabaseUtils.findUserByName(username) != null){
-        		error = error|4;
-        	}
-        	if (!isUsernameValid(username)){
-        	    error = error|8;
-        	}
-        	if (error == 0){
+            if (DatabaseUtils.findUserByEmail(email) != null){
+                error = error|2;
+            }
+            if (DatabaseUtils.findUserByName(username) != null){
+                error = error|4;
+            }
+            if (!isUsernameValid(username)){
+                error = error|8;
+            }
+            if (error == 0){
                 DatabaseUtils.writeUser(new SimpleUser(currentId.incrementAndGet(), username, password, email));
-        	}
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +91,7 @@ public class UserController {
             throws IOException {
         User user = optionalUser(id, username, request, response);
         boolean isOwner = false;
-        if (user.getUserId() == WebResources.currentLoggedInUser(request).getUserId()) {
+        if (user.getId() == WebResources.currentLoggedInUser(request).getId()) {
             isOwner = true;
         }
         return Serializers.valueToTree(Users.serialize(user, isOwner)).toString();
@@ -100,7 +102,7 @@ public class UserController {
     public String getVotes(HttpServletRequest request) {
         User user = WebResources.currentLoggedInUser(request);
         Map<String, Collection<Long>> votes = Maps.newHashMap();
-        if (user.getUserId() == -1) {
+        if (user.getId() == -1) {
             votes.put("upvotes", Collections.<Long>emptyList());
             votes.put("downvotes", Collections.<Long>emptyList());
         } else {
@@ -121,7 +123,7 @@ public class UserController {
         } else {
             User byId = DatabaseUtils.findUserById(id);
             User byName = DatabaseUtils.findUserByName(username);
-            if (byId.getUserId() != byName.getUserId()) {
+            if (byId.getId() != byName.getId()) {
                 response.setStatus(HttpStatus.CONFLICT.value());
             } else {
                 user = byId;
@@ -136,35 +138,83 @@ public class UserController {
     @RequestMapping(value = "/updateUser")
     @ResponseBody
     public String updateUser(HttpServletRequest request,
-    								@RequestParam(value = "nsfwPreference", required = false) Integer nsfwPreference,
-    								@RequestParam(value = "soundsPreference", required = false) Integer soundsPreference,
-    								@RequestParam(value = "animationsPreference", required = false) Integer animationsPreference,
-    								@RequestParam(value = "email", required = false) String new_email) throws IOException {
-    	User user = WebResources.currentLoggedInUser(request);
-    	int code = 0;
-    	if (user.getUserId() != -1) {
-	    	if (nsfwPreference != null){
-	    		user.setNsfwPreference(nsfwPreference);
-	    	}
-	    	if (soundsPreference != null){
-	    		user.setSoundsPreference(soundsPreference);
-	    	}
-	    	if (animationsPreference != null){
-	    		user.setAnimationsPreference(animationsPreference);
-	    	}
-	    	//TODO: We need email confirmation before change
-	    	if (new_email != null){
-	    		if (DatabaseUtils.findUserByEmail(new_email) != null){
-	    			code = code|1;
-	    		}
-	    		else {
-	    			code = code|2;
-	    			user.setEmail(new_email);
-	    		}
-	    	}
-	    	DatabaseUtils.modifyUser(user.getUserId(), user);
-    	}
-    	return Serializers.valueToTree(code).toString();
+                                    @RequestParam(value = "nsfwPreference", required = false) Integer nsfwPreference,
+                                    @RequestParam(value = "soundsPreference", required = false) Integer soundsPreference,
+                                    @RequestParam(value = "animationsPreference", required = false) Integer animationsPreference,
+                                    @RequestParam(value = "email", required = false) String new_email) throws IOException {
+        User user = WebResources.currentLoggedInUser(request);
+        int code = 0;
+        if (user.getId() != -1) {
+            if (nsfwPreference != null){
+                user.setNsfwPreference(nsfwPreference);
+            }
+            if (soundsPreference != null){
+                user.setSoundsPreference(soundsPreference);
+            }
+            if (animationsPreference != null){
+                user.setAnimationsPreference(animationsPreference);
+            }
+            //TODO: We need email confirmation before change
+            if (new_email != null){
+                if (DatabaseUtils.findUserByEmail(new_email) != null){
+                    code = code|1;
+                }
+                else {
+                    code = code|2;
+                    user.setEmail(new_email);
+                }
+            }
+            DatabaseUtils.modifyUser(user.getId(), user);
+        }
+        return Serializers.valueToTree(code).toString();
+    }
+
+    @RequestMapping(value = "/buyItem")
+    @ResponseBody
+    public void buyItem(HttpServletRequest request,
+                        @RequestParam(value = "itemId", required = false) Long itemId,
+                        @RequestParam(value = "itemName", required = false) String itemName) throws IOException {
+        User user = WebResources.currentLoggedInUser(request);
+        Item item;
+        if (itemId == null) {
+            if (itemName == null) {
+                throw new IllegalArgumentException("Need one of item id or item name to be applied.");
+            }
+            item = ItemType.byName(itemName);
+        } else {
+            item = ItemType.byId(itemId);
+        }
+        buyItem(user, item);
+    }
+
+    private void buyItem(User user, Item item) throws IOException {
+        user.buyItem(item);
+        DatabaseUtils.buyItem(user, item);
+    }
+
+    @RequestMapping(value = "/sellItem")
+    @ResponseBody
+    public void sellItem(HttpServletRequest request,
+                        @RequestParam(value = "itemId", required = false) Long itemId,
+                        @RequestParam(value = "itemName", required = false) String itemName) throws IOException {
+        User user = WebResources.currentLoggedInUser(request);
+        Item item;
+        if (itemId == null) {
+            if (itemName == null) {
+                throw new IllegalArgumentException("Need one of item id or item name to be applied.");
+            }
+            item = ItemType.byName(itemName);
+        } else {
+            item = ItemType.byId(itemId);
+        }
+        sellItem(user, item);
+    }
+
+    private void sellItem(User user, Item item) throws IOException {
+        if (user.hasItem(item)) {
+            user.expendItem(item);
+            DatabaseUtils.sellItem(user, item);
+        }
     }
 
 }

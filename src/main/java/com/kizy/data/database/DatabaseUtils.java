@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 
@@ -15,8 +16,11 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.io.Files;
+import com.kizy.data.item.Item;
+import com.kizy.data.item.ItemType;
 import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.RantLevel;
 import com.kizy.data.rant.SimpleRant;
@@ -44,6 +48,12 @@ public class DatabaseUtils {
     private static final String WINNERS_FILENAME = "data" + File.separator + "winners.txt";
     private static final File WINNERS_FILE = new File(WINNERS_FILENAME);
 
+    private static final String APPLIED_ITEMS_FILENAME = "data" + File.separator + "applied_items.txt";
+    private static final File APPLIED_ITEMS_FILE = new File(APPLIED_ITEMS_FILENAME);
+
+    private static final String USER_ITEMS_FILENAME = "data" + File.separator + "user_items.txt";
+    private static final File USER_ITEMS_FILE = new File(USER_ITEMS_FILENAME);
+
     private static final String LINE_DELIMITER = "~~~~~";
 
     private static final int USER_ID_PART = 0;
@@ -64,6 +74,7 @@ public class DatabaseUtils {
     private static final int RANT_DEATH_PART = 6;
     private static final int RANT_POWER_PART = 7;
     private static final int RANT_LEVEL_PART = 8;
+    private static final int RANT_MULTIPLIER_PART = 9;
 
     private static final int VOTE_USER_PART = 0;
     private static final int VOTE_RANT_PART = 1;
@@ -75,6 +86,14 @@ public class DatabaseUtils {
     private static final int WINNER_RANT_ID_PART = 1;
     private static final int WINNER_LEVEL_PART = 2;
 
+    private static final int APPLIED_ITEMS_RANT_PART = 0;
+    private static final int APPLIED_ITEMS_ITEM_PART = 1;
+    private static final int APPLIED_ITEMS_USER_PART = 2;
+
+    private static final int USER_ITEMS_USER_PART = 0;
+    private static final int USER_ITEMS_ITEM_PART = 1;
+    private static final int USER_ITEMS_COUNT_PART = 2;
+
     private DatabaseUtils() {
         // no instantiation
     }
@@ -84,7 +103,7 @@ public class DatabaseUtils {
     }
 
     private static void addRantToOwner(Rant rant) throws IOException {
-        append(USER_RANTS_FILE, rant.getOwnerId() + LINE_DELIMITER + rant.getRantId() + "\n");
+        append(USER_RANTS_FILE, rant.getOwnerId() + LINE_DELIMITER + rant.getId() + "\n");
     }
 
     public static void writeUser(User user) throws IOException {
@@ -92,7 +111,7 @@ public class DatabaseUtils {
     }
 
     private static String formatUser(User user) {
-        return user.getUserId() + LINE_DELIMITER +
+        return user.getId() + LINE_DELIMITER +
                user.getUsername() + LINE_DELIMITER +
                user.getPassword() + LINE_DELIMITER +
                user.getEmail() + LINE_DELIMITER +
@@ -103,7 +122,7 @@ public class DatabaseUtils {
     }
 
     public static void modifyUser(long oldUserId, User newUser) throws IOException {
-        if (oldUserId != newUser.getUserId()) {
+        if (oldUserId != newUser.getId()) {
             throw new IllegalArgumentException("Cannot change user id.");
         }
         StringBuilder newContents = new StringBuilder();
@@ -124,7 +143,7 @@ public class DatabaseUtils {
     }
 
     private static String formatRant(Rant rant) {
-        return rant.getRantId() + LINE_DELIMITER +
+        return rant.getId() + LINE_DELIMITER +
                rant.isNsfw() + LINE_DELIMITER +
                rant.getTitle() + LINE_DELIMITER +
                rant.getContents() + LINE_DELIMITER +
@@ -136,7 +155,7 @@ public class DatabaseUtils {
     }
 
     public static void modifyRant(long oldRantId, Rant newRant) throws IOException {
-        if (oldRantId != newRant.getRantId()) {
+        if (oldRantId != newRant.getId()) {
             throw new IllegalArgumentException("Cannot change rant id.");
         }
         StringBuilder newContents = new StringBuilder();
@@ -154,44 +173,44 @@ public class DatabaseUtils {
     public static void upvote(User user, long userId, long rantId) throws IOException {
         Rant rant = findRantById(user, rantId);
         if ( removeDownvote(userId, rantId) ){
-            rant.changePower(1);
+            rant.changePower(rant.getVoteMultiplier());
         }
         if ( removeUpvote(userId, rantId) ){
-            rant.changePower(-1);
+            rant.changePower(-rant.getVoteMultiplier());
         }
         else {
-            rant.changePower(1);
+            rant.changePower(rant.getVoteMultiplier());
             append(UPVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
         }
         modifyRant(rantId, rant);
     }
 
-    public static Boolean removeUpvote(long userId, long rantId) throws IOException {
+    public static boolean removeUpvote(long userId, long rantId) throws IOException {
         return removeVote(userId, rantId, readUpvotes(), UPVOTES_FILE);
     }
 
     public static void downvote(User user, long userId, long rantId) throws IOException {
         Rant rant = findRantById(user, rantId);
         if ( removeUpvote(userId, rantId) ){
-            rant.changePower(-1);
+            rant.changePower(-rant.getVoteMultiplier());
         }
         if ( removeDownvote(userId, rantId) ){
-            rant.changePower(1);
+            rant.changePower(rant.getVoteMultiplier());
         }
         else {
-            rant.changePower(-1);
+            rant.changePower(-rant.getVoteMultiplier());
             append(DOWNVOTES_FILE, userId + LINE_DELIMITER + rantId + "\n");
         }
         modifyRant(rantId, rant);
     }
 
-    public static Boolean removeDownvote(long userId, long rantId) throws IOException {
+    public static boolean removeDownvote(long userId, long rantId) throws IOException {
         return removeVote(userId, rantId, readDownvotes(), DOWNVOTES_FILE);
     }
 
-    private static Boolean removeVote(long userId, long rantId, List<String> lines, File file) throws IOException {
+    private static boolean removeVote(long userId, long rantId, List<String> lines, File file) throws IOException {
         StringBuilder newContents = new StringBuilder();
-        Boolean didRemove = false;
+        boolean didRemove = false;
         for (String line : lines) {
             Long[] vote = parseVote(line);
             if (vote[VOTE_USER_PART] != userId || vote[VOTE_RANT_PART] != rantId) {
@@ -213,6 +232,68 @@ public class DatabaseUtils {
         return date.toString() + LINE_DELIMITER +
                rantId + LINE_DELIMITER +
                level.getDisplayName();
+    }
+
+    public static void applyItem(Rant rant, Item item, User user) throws IOException {
+        append(APPLIED_ITEMS_FILE, rant.getId() + LINE_DELIMITER +
+                                   item.getId() + LINE_DELIMITER +
+                                   user.getId() + "\n");
+        modifyUserItem(user.getId(), item.getId(), false, readUserItems(), USER_ITEMS_FILE);
+    }
+
+    public static void expireItem(Rant rant, Item item) throws IOException {
+        removeItem(rant.getId(), item.getId(), readAppliedItems(), APPLIED_ITEMS_FILE);
+    }
+
+    private static boolean removeItem(long rantId, long itemId, List<String> lines, File file) throws IOException {
+        StringBuilder newContents = new StringBuilder();
+        boolean didRemove = false;
+        for (String line : lines) {
+            Long[] appliedItem = parseAppliedItem(line);
+            if (didRemove || appliedItem[APPLIED_ITEMS_RANT_PART] != rantId || appliedItem[APPLIED_ITEMS_ITEM_PART] != itemId) {
+                newContents.append(line + "\n");
+            } else {
+                didRemove = true;
+            }
+        }
+        Files.write(newContents, file, Charsets.UTF_8);
+        return didRemove;
+    }
+
+    public static void buyItem(User user, Item item) throws IOException {
+        modifyUserItem(user.getId(), item.getId(), true, readUserItems(), USER_ITEMS_FILE);
+    }
+
+    public static void sellItem(User user, Item item) throws IOException {
+        modifyUserItem(user.getId(), item.getId(), false, readUserItems(), USER_ITEMS_FILE);
+    }
+
+    private static void modifyUserItem(long userId, long itemId, boolean increase, List<String> lines, File file) throws IOException {
+        StringBuilder newContents = new StringBuilder();
+        boolean found = false;
+        for (String line : lines) {
+            Long[] userItem = parseUserItem(line);
+            if (userItem[USER_ITEMS_USER_PART] != userId || userItem[USER_ITEMS_ITEM_PART] != itemId) {
+                newContents.append(line + "\n");
+            } else {
+                found = true;
+                long newCount = increase ? userItem[USER_ITEMS_COUNT_PART] + 1 : userItem[USER_ITEMS_COUNT_PART] - 1;
+                if (newCount > 0) {
+                    String replacement = userItem[USER_ITEMS_USER_PART] + LINE_DELIMITER +
+                                         userItem[USER_ITEMS_ITEM_PART] + LINE_DELIMITER +
+                                         newCount + "\n";
+                    newContents.append(replacement);
+                }
+
+            }
+        }
+        if (!found) {
+            append(file, userId + LINE_DELIMITER +
+                         itemId + LINE_DELIMITER +
+                         1 + "\n");
+        } else {
+            Files.write(newContents, file, Charsets.UTF_8);
+        }
     }
 
     private static List<String> readFile(File file) throws IOException {
@@ -265,6 +346,14 @@ public class DatabaseUtils {
 
     public static List<String> readUserRants() throws IOException {
         return readFile(USER_RANTS_FILE);
+    }
+
+    public static List<String> readAppliedItems() throws IOException {
+        return readFile(APPLIED_ITEMS_FILE);
+    }
+
+    public static List<String> readUserItems() throws IOException {
+        return readFile(USER_ITEMS_FILE);
     }
 
     public static User readUser(String username, String password) throws IOException {
@@ -372,7 +461,8 @@ public class DatabaseUtils {
                               getUserDownVotes(userId),
                               new Integer(parts[USER_NSFW_PREFERENCE_PART]),
                               new Integer(parts[USER_SOUNDS_PREFERENCE_PART]),
-                              new Integer(parts[USER_ANIMATIONS_PREFERENCE_PART]));
+                              new Integer(parts[USER_ANIMATIONS_PREFERENCE_PART]),
+                              getUserItems(userId));
     }
 
     private static Collection<Long> getUserRantIds(long userId) throws IOException {
@@ -394,14 +484,16 @@ public class DatabaseUtils {
                               Boolean.parseBoolean(parts[RANT_NSFW_PART]),
                               parts[RANT_TITLE_PART],
                               parts[RANT_CONTENTS_PART],
-                              owner.getUserId(),
+                              owner.getId(),
                               owner.getUsername(),
                               new DateTime(parts[RANT_CREATION_PART]),
                               new DateTime(parts[RANT_DEATH_PART]),
                               Float.parseFloat(parts[RANT_POWER_PART]),
                               parts[RANT_LEVEL_PART],
                               getRantUpvotes(rantId),
-                              getRantDownVotes(rantId));
+                              getRantDownVotes(rantId),
+                              Float.parseFloat(parts[RANT_MULTIPLIER_PART]),
+                              getAppliedItems(rantId));
     }
 
     private static Rant parseRantAsUser(String line, User user) throws IOException {
@@ -413,25 +505,28 @@ public class DatabaseUtils {
                                   Boolean.parseBoolean(parts[RANT_NSFW_PART]),
                                   parts[RANT_TITLE_PART],
                                   parts[RANT_CONTENTS_PART],
-                                  owner.getUserId(),
+                                  owner.getId(),
                                   owner.getUsername(),
                                   new DateTime(parts[RANT_CREATION_PART]),
                                   new DateTime(parts[RANT_DEATH_PART]),
                                   Float.parseFloat(parts[RANT_POWER_PART]),
                                   parts[RANT_LEVEL_PART],
                                   getRantUpvotes(rantId),
-                                  getRantDownVotes(rantId));
+                                  getRantDownVotes(rantId),
+                                  Float.parseFloat(parts[RANT_MULTIPLIER_PART]),
+                                  getAppliedItems(rantId));
         } else {
             return new UnownedRant(rantId,
                                    Boolean.parseBoolean(parts[RANT_NSFW_PART]),
                                    parts[RANT_TITLE_PART],
                                    parts[RANT_CONTENTS_PART],
-                                   owner.getUserId(),
+                                   owner.getId(),
                                    owner.getUsername(),
                                    new DateTime(parts[RANT_CREATION_PART]),
                                    new DateTime(parts[RANT_DEATH_PART]),
                                    Float.parseFloat(parts[RANT_POWER_PART]),
-                                   parts[RANT_LEVEL_PART]);
+                                   parts[RANT_LEVEL_PART],
+                                   Float.parseFloat(parts[RANT_MULTIPLIER_PART]));
         }
     }
 
@@ -473,6 +568,38 @@ public class DatabaseUtils {
     private static Long[] parseVote(String line) {
         String[] parts = splitLine(line);
         return new Long[] { Long.parseLong(parts[VOTE_USER_PART]), Long.parseLong(parts[VOTE_RANT_PART]) };
+    }
+
+    private static Collection<Item> getAppliedItems(long rantId) throws IOException {
+        Collection<Item> appliedItems = Sets.newConcurrentHashSet();
+        for (String line : readAppliedItems()) {
+            Long[] appliedItem = parseAppliedItem(line);
+            if (appliedItem[APPLIED_ITEMS_RANT_PART] == rantId) {
+                appliedItems.add(ItemType.byId(appliedItem[APPLIED_ITEMS_ITEM_PART]));
+            }
+        }
+        return appliedItems;
+    }
+
+    private static Long[] parseAppliedItem(String line) {
+        String[] parts = splitLine(line);
+        return new Long[] {Long.parseLong(parts[APPLIED_ITEMS_ITEM_PART]), Long.parseLong(parts[APPLIED_ITEMS_ITEM_PART]), Long.parseLong(parts[APPLIED_ITEMS_USER_PART])};
+    }
+
+    private static Map<Item, Integer> getUserItems(long userId) throws IOException {
+        Map<Item, Integer> items = Maps.newHashMap();
+        for (String line : readUserItems()) {
+            Long[] userItem = parseUserItem(line);
+            if (userItem[USER_ITEMS_USER_PART] == userId) {
+                items.put(ItemType.byId(userItem[USER_ITEMS_ITEM_PART]), userItem[USER_ITEMS_COUNT_PART].intValue());
+            }
+        }
+        return items;
+    }
+
+    private static Long[] parseUserItem(String line) {
+        String[] parts = splitLine(line);
+        return new Long[] {Long.parseLong(parts[USER_ITEMS_USER_PART]), Long.parseLong(parts[USER_ITEMS_ITEM_PART]), Long.parseLong(parts[USER_ITEMS_COUNT_PART])};
     }
 
     private static String[] splitLine(String line) {

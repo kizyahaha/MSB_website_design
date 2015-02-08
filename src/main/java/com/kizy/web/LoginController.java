@@ -27,7 +27,7 @@ public class LoginController {
                       @RequestParam(value = "stay_logged_in", defaultValue = "false") boolean stayLogged) throws IOException {
         User user = DatabaseUtils.readUser(username, password);
         if (user != null) {
-            Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERID, Long.toString(user.getUserId()));
+            Cookie cookie = new Cookie(WebResources.MY_SOAP_BOX_USERID, Long.toString(user.getId()));
             cookie.setPath("/");
             if (stayLogged) {
                 cookie.setMaxAge(2000000000);

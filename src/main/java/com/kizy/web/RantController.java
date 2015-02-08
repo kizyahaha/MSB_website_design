@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Timer;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.common.collect.Maps;
 import com.kizy.data.Serializers;
 import com.kizy.data.database.DatabaseUtils;
+import com.kizy.data.item.ExpireItemTask;
+import com.kizy.data.item.Item;
+import com.kizy.data.item.ItemType;
 import com.kizy.data.rant.Rant;
 import com.kizy.data.rant.RantLevel;
 import com.kizy.data.rant.Rants;
@@ -57,9 +61,9 @@ public class RantController {
                         @RequestParam("title") String title,
                         @RequestParam("contents") String contents) {
         User owner = WebResources.currentLoggedInUser(request);
-        if (owner.getUserId() != -1) {
-	        Rant rant = new SimpleRant(countingId.incrementAndGet(), nsfw, title, contents, owner.getUserId(), owner.getUsername());
-	        owner.addRant(rant.getRantId());
+        if (owner.getId() != -1) {
+	        Rant rant = new SimpleRant(countingId.incrementAndGet(), nsfw, title, contents, owner.getId(), owner.getUsername());
+	        owner.addRant(rant.getId());
 	        try {
 	            DatabaseUtils.writeRant(rant);
 	        } catch (IOException e) {
@@ -147,10 +151,10 @@ public class RantController {
         User user = WebResources.currentLoggedInUser(request);
         Rant rant = DatabaseUtils.findRantById(user, id);
         if (rant.isAlive()) {
-            if (user.getUserId() != -1) {
-	            rant.upvote(user.getUserId());
-	            user.upvote(rant.getRantId());
-	            DatabaseUtils.upvote(user, user.getUserId(), rant.getRantId());
+            if (user.getId() != -1) {
+	            rant.upvote(user.getId());
+	            user.upvote(rant.getId());
+	            DatabaseUtils.upvote(user, user.getId(), rant.getId());
             }
         }
     }
@@ -161,10 +165,10 @@ public class RantController {
         User user = WebResources.currentLoggedInUser(request);
         Rant rant = DatabaseUtils.findRantById(user, id);
         if (rant.isAlive()) {
-            if (user.getUserId() != -1) {
-	            rant.downvote(user.getUserId());
-	            user.downvote(rant.getRantId());
-	            DatabaseUtils.downvote(user, user.getUserId(), rant.getRantId());
+            if (user.getId() != -1) {
+	            rant.downvote(user.getId());
+	            user.downvote(rant.getId());
+	            DatabaseUtils.downvote(user, user.getId(), rant.getId());
             }
         }
     }
@@ -204,6 +208,35 @@ public class RantController {
             return getRantData(request, winnerId);
         }
         return null;
+    }
+
+    @RequestMapping(value = "/applyItem")
+    @ResponseBody
+    public void applyItem(HttpServletRequest request,
+                          @RequestParam("rantId") long rantId,
+                          @RequestParam(value = "itemId", required = false) Long itemId,
+                          @RequestParam(value = "itemName", required = false) String itemName) throws IOException {
+        User user = WebResources.currentLoggedInUser(request);
+        Rant rant = DatabaseUtils.findRantById(user, rantId);
+        Item item;
+        if (itemId == null) {
+            if (itemName == null) {
+                throw new IllegalArgumentException("Need one of item id or item name to be applied.");
+            }
+            item = ItemType.byName(itemName);
+        } else {
+            item = ItemType.byId(itemId);
+        }
+        applyItem(user, rant, item);
+    }
+
+    private void applyItem(User user, Rant rant, Item item) throws IOException {
+        DatabaseUtils.applyItem(rant, item, user);
+        user.expendItem(item);
+        rant.applyItem(item);
+
+        Timer timer = new Timer(true);
+        timer.schedule(new ExpireItemTask(item, rant), item.getDurationMillis());
     }
 
 }

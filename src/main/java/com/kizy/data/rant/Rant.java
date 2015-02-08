@@ -4,10 +4,11 @@ import java.util.Collection;
 
 import org.joda.time.DateTime;
 
+import com.kizy.data.Identifiable;
+import com.kizy.data.item.Item;
 
-public interface Rant {
 
-    long getRantId();
+public interface Rant extends Identifiable {
 
     boolean isNsfw();
 
@@ -40,5 +41,15 @@ public interface Rant {
     void downvote(Long userId);
 
     void unvote(Long userId);
+
+    float getVoteMultiplier();
+
+    void setVoteMultiplier(float multiplier);
+
+    Collection<Item> getAppliedItems();
+
+    void applyItem(Item item);
+
+    void expireItem(Item item);
 
 }

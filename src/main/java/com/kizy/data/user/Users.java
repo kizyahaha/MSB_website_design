@@ -14,7 +14,7 @@ public class Users {
 
     public static Map<String, Object> serialize(User user, boolean isOwner) {
         Map<String, Object> properties = Maps.newHashMap();
-        properties.put("id", user.getUserId());
+        properties.put("id", user.getId());
         properties.put("username", user.getUsername());
         properties.put("date", user.getCreationDate());
         properties.put("rants", user.getOwnedRantIds());
